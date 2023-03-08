@@ -58,13 +58,12 @@ const settings = {
 
 const OwlSlider = () => {
     function NextArrow(props:any) {
-        const { className, style, onClick } = props;
+        const { className, style } = props;
         return (
             <div
                 className={className}
                 style={{
                     ...style,
-
                     right: 0,
                     backgroundImage:"linear-gradient(270deg, #fff, #fff 31%, hsla(0, 0%, 100%, 0))",
                     top:0,
@@ -102,16 +101,10 @@ const OwlSlider = () => {
                          prevArrow={<PrevArrow />}
                          {...settings}>
                     <div className={"mx-8 "}>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={""}/>
+                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
                     </div>
                     <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" />
-                    </div>
-                    <div>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg" />
-                    </div>
-                    <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" />
+                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" alt={"slider"} />
                     </div>
                     <div>
                         <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
@@ -120,10 +113,16 @@ const OwlSlider = () => {
                         <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" />
                     </div>
                     <div>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg" />
+                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
                     </div>
                     <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" />
+                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" alt={"slider"} />
+                    </div>
+                    <div>
+                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
+                    </div>
+                    <div>
+                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" alt={"slider"} />
                     </div>
                 </Slider>
             </div>
