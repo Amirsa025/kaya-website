@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Image from 'next/image'
 const JobSeeker = () => {
     return (
         <section className={"border  border-gray-100 lg:pt-[162px]"}>
@@ -13,25 +13,44 @@ const JobSeeker = () => {
                     </div>
                     <div className={"py-[44.5px] space-y-6 text-[15px]"}>
                         <div className={"flex items-center gap-4"}>
-                            <img src="/images/Star.svg" alt=""/>
+                            <Image
+                                src="/images/Star.svg"  alt={"Star"}
+                                width={40}
+                                height={40}
+                            />
                             <span>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
                         </div>
                         <div className={"flex items-center gap-4 "}>
-                            <img src="/images/Click.svg" alt=""/>
+                            <Image
+                                src="/images/Click.svg"
+                                alt={"Click"}
+                                width={40}
+                                height={40}
+                            />
                             <span>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
                         </div>
                         <div className={"flex items-center gap-4 "}>
-                            <img src="/images/List.svg" alt=""/>
+                            <Image
+                                src="/images/List.svg"
+                                alt={"List"}
+                                width={40}
+                                height={40}
+                            />
                             <span>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
                         </div>
                         <div className={"flex items-center gap-4"}>
-                            <img src="/images/Connect.svg" alt=""/>
+                            <Image
+                                src="/images/Connect.svg"
+                                alt={"Connect"}
+                                width={40}
+                                height={40}
+                            />
                             <span>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
@@ -43,7 +62,12 @@ const JobSeeker = () => {
                     </div>
                 </div>
                 <div className={"flex  flex flex-col lg:flex-row"}>
-                    <img src="/images/img-min-p-800.png" alt=""/>
+                    <Image
+                        src="/images/img-min-p-800.png"
+                        alt={"photo-1"}
+                        width={900}
+                        height={900}
+                    />
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 
 import React from "react";
-
+import Image from 'next/image'
 // @ts-ignore
 import Slider from "react-slick";
 
@@ -84,7 +84,7 @@ const OwlSlider = () => {
                 className={className}
                 style={{
                     ...style,
-                    backgroundImage:"linear-gradient(89deg, #fff, #fff 31%, hsla(0, 0%, 100%, 0));",
+                    backgroundImage:"linear-gradient(89deg, #fff, #fff 31%, hsla(0, 0%, 100%, 0))",
                     left: 0,
                     top:0,
                     zIndex:100,
@@ -101,28 +101,60 @@ const OwlSlider = () => {
                          prevArrow={<PrevArrow />}
                          {...settings}>
                     <div className={"mx-8 "}>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
+                        <Image
+                            src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}
+                            width={200}
+                            height={200}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" alt={"slider"} />
+                        <Image
+                            src="/images/636dd759d7128746107e6310_Vector-3.svg"  alt={"slider"}
+                            width={100}
+                            height={100}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
+                        <Image
+                            src="/images/636dd759d7128746107e6310_Vector-3.svg"  alt={"slider"}
+                            width={100}
+                            height={100}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" />
+                        <Image
+                            src="/images/636dd759d7128746107e6310_Vector-3.svg"  alt={"slider"}
+                            width={100}
+                            height={100}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
+                        <Image
+                            src="/images/636dd759d7128746107e6310_Vector-3.svg"  alt={"slider"}
+                            width={100}
+                            height={100}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" alt={"slider"} />
+                        <Image
+                            src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}
+                            width={200}
+                            height={200}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d712872b6c7e62ad_g3707.svg"  alt={"slider"}/>
+                        <Image
+                            src="/images/636dd759d71287f1797e6321_Vector-4.svg"  alt={"slider"}
+                            width={200}
+                            height={200}
+                        />
                     </div>
                     <div>
-                        <img src="/images/636dd759d71287f1797e6321_Vector-4.svg" alt={"slider"} />
+                        <Image
+                            src="/images/636dd759d7128746107e6310_Vector-3.svg"  alt={"slider"}
+                            width={100}
+                            height={100}
+                        />
                     </div>
                 </Slider>
             </div>

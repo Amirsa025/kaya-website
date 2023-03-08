@@ -1,17 +1,21 @@
 import * as React from 'react';
 import { useState } from 'react'
 
-export default () => {
+
+
+ const Header= () => {
 
     const [state, setState] = useState(false)
 
-    // Replace javascript:void(0) path with your path
+
+
     const navigation = [
         { title: "تماس با ما ", path: "#" },
         { title: "پروژه ها", path: "#" },
         { title: "خانه", path: "#" },
 
     ]
+
 
 
     return (
@@ -79,4 +83,4 @@ export default () => {
     )
 }
 
-
+export default Header
