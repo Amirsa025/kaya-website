@@ -7,6 +7,7 @@ import ScrollSilder from "@/app/utils/slider/slider";
 import JobSeeker from "@/app/components/HomePage/JobSeeker";
 import NeedTalent from "@/app/components/HomePage/NeedTalent";
 import Ourusers from "@/app/components/HomePage/ourusers";
+import GetFeatured from "@/app/components/HomePage/GetFeatured";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,13 +22,14 @@ export default function Home() {
         <link rel="icon" href="/images/Asset.png" />
       </Head>
       <div>
-            <KayaTalent/>
-            <LoginSignUP/>
-            <Figures/>
-            <ScrollSilder/>
-            <JobSeeker/>
+          <KayaTalent/>
+          <LoginSignUP/>
+          <Figures/>
+          <ScrollSilder/>
+          <JobSeeker/>
           <NeedTalent/>
           <Ourusers/>
+          <GetFeatured/>
       </div>
     </>
   )
