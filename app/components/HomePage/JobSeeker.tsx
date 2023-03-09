@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image'
 const JobSeeker = () => {
     return (
-        <section className={"border  border-gray-100 lg:pt-[162px]"}>
+        <section className={"border-t  border-gray-100 lg:pt-[162px]"}>
             <div className={"container-app flex flex-col-reverse lg:grid lg:grid-cols-2"}>
                 <div>
                     <div className={"mb-[2rem]"}>
@@ -18,7 +18,7 @@ const JobSeeker = () => {
                                 width={40}
                                 height={40}
                             />
-                            <span>
+                            <span  className={"text-[14px] text-justify leading-6"}>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
                         </div>
@@ -29,7 +29,7 @@ const JobSeeker = () => {
                                 width={40}
                                 height={40}
                             />
-                            <span>
+                            <span  className={"text-[14px] text-justify leading-6"}>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
                         </div>
@@ -51,7 +51,7 @@ const JobSeeker = () => {
                                 width={40}
                                 height={40}
                             />
-                            <span>
+                            <span  className={"text-[14px] text-justify leading-6"}>
                             مشاغل منحصر به فرد در استارت آپ ها و شرکت های فناوری که در هیچ جای دیگری نمی توانید پیدا کنید
                         </span>
                         </div>
@@ -61,12 +61,12 @@ const JobSeeker = () => {
                         <a href="#" className={"px-4 py-2 text-[15px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd] "}>ثبت نام کن </a>
                     </div>
                 </div>
-                <div className={"flex  flex flex-col lg:flex-row"}>
+                <div className={"flex  flex items-center justify-end flex-col lg:flex-row"}>
                     <Image
                         src="/images/img-min-p-800.png"
                         alt={"photo-1"}
-                        width={900}
-                        height={900}
+                        width={400}
+                        height={400}
                     />
                 </div>
             </div>
