@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const GetFeatured = () => {
     return (
-        <div className={"container-app pt-[5rem]"}>
+        <section className={"container-app pt-[5rem]"}>
                 <div className={"border-t border-gray-300 pt-[5rem] grid grid-cols-1 lg:flex lg:flex-col xl:grid xl:grid-cols-2 gap-6 mb-4"}>
                         <div className={"flex flex-col-reverse border border-gray-300 rounded-md lg:grid lg:grid-cols-2"}>
                                 <div className={"pt-24 px-4"}>
@@ -56,7 +56,7 @@ const GetFeatured = () => {
                         </div>
                     </div>
                 </div>
-        </div>
+        </section>
     );
 };
 

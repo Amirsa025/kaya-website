@@ -1,11 +1,14 @@
 import React from 'react';
+import Link from "next/link";
 
 const MainLogin = () => {
     return (
         <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}>
             {/*logo*/}
             <div className={"flex items-center pt-1 w-16 h-8"}>
-                <img src="/images/Asset.png" alt="logo"/>
+                <Link href={"/"}>
+                    <img src="/images/Asset.png" alt="logo"/>
+                </Link>
             </div>
                 <div>
                     <h1 className={"text-4xl font-bold text-[1rem]"}>ورود کاربران </h1>
@@ -25,7 +28,9 @@ const MainLogin = () => {
                             </div>
                             <div>
                                 <span className={"text-[14px]"}>هنوز ثبت نام نکردید ؟ </span>
-                                <a href="#" className={"hover:text-[#3078ca] font-bold w-12 h-12 border-b-2 border-transparent hover:border-b-[#3078ca] py-2 "}>ثبت نام </a>
+                                <Link href={"/register"} legacyBehavior>
+                                    <a href="#" className={"hover:text-[#3078ca] font-bold w-12 h-12 border-b-2 border-transparent hover:border-b-[#3078ca] py-2 "}>ثبت نام </a>
+                                </Link>
                             </div>
                     </form>
                 </div>

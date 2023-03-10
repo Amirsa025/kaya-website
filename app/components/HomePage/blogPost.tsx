@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const BlogPost = () => {
     return (
-        <div className={"container-app pt-[5rem]"}>
+        <section className={"container-app pt-[5rem]"}>
             <div className={"border-t border-gray-300 flex flex-col "}>
                     <div className={"flex items-center justify-between py-[80px]"}>
                     {/*    title and more post*/}
@@ -175,7 +175,7 @@ const BlogPost = () => {
 
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

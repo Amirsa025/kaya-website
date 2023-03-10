@@ -3,7 +3,7 @@ import React from 'react';
 const Figures = () => {
     return (
         <>
-           <div className={"container-app"}>
+           <section className={"container-app"}>
                 {/*Desktop and tablet*/}
                 <div className={"hidden md:grid grid-cols-3 border-t border-gray-300 "}>
                     <div className={"border-l border-gray-300"}>
@@ -42,7 +42,7 @@ const Figures = () => {
                         </div>
                     </div>
                </div>
-           </div>
+           </section>
 
         </>
     );

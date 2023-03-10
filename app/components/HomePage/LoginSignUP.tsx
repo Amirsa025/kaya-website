@@ -2,7 +2,7 @@ import React from 'react';
 
 const LoginSignUp = () => {
     return (
-        <div className={"container-app py-[2.25rem]"}>
+        <section className={"container-app py-[2.25rem]"}>
             {/*Desktop and tablet */}
             <div className={"w-full flex  border rounded-sm border-gray-300 flex flex-col   "}>
                 <div className={"flex flex-col md:flex-row"}>
@@ -52,7 +52,7 @@ const LoginSignUp = () => {
                 </a>
             </div>
 
-        </div>
+        </section>
     );
 };
 
