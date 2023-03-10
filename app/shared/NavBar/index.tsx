@@ -1,23 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react'
+import {navigation} from "@/app/constant/MockData";
+import Link from "next/link";
 
 
 
  const Header= () => {
-
     const [state, setState] = useState(false)
-
-
-
-    const navigation = [
-        { title: "تماس با ما ", path: "#" },
-        { title: "پروژه ها", path: "#" },
-        { title: "خانه", path: "#" },
-
-    ]
-
-
-
     return (
         <nav className="container-app bg-white w-full ">
             <div className="md:flex items-center justify-between px-4 md:border-b">
@@ -74,8 +63,13 @@ import { useState } from 'react'
                             </div>
                         </div>
                         <div className="hidden md:flex items-center justify-around gap-8 ">
+
+                            <Link href="/login" legacyBehavior>
                                 <button className={"w-[90px] h-[40px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>ورود</button>
+                            </Link>
+                            <Link href={"/register"} legacyBehavior>
                                 <button className={"w-[90px] h-[40px] bg-black text-white rounded-md hover:bg-[#143fcd]"}>ثبت نام </button>
+                            </Link>
                         </div>
                     </div>
             </div>

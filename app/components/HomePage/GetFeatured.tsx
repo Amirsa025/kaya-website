@@ -14,10 +14,10 @@ const GetFeatured = () => {
                                         <h4>ارزش خودتو بدون</h4>
                                     </div>
                                     <div className={""}>
-                                        <p className={"text-justify text-[0.9rem] leading-6"}>ما داده ها را داریم. بر اساس عنوان شغل، صنعت و اندازه شرکت تحقیق کنید تا محدوده حقوق خود را بیابید و آماده شوید تا مذاکرات خود را به نتیجه برسانید.</p>
+                                        <p className={" text-[0.9rem] leading-6"}>ما داده ها را داریم. بر اساس عنوان شغل، صنعت و اندازه شرکت تحقیق کنید تا محدوده حقوق خود را بیابید و آماده شوید تا مذاکرات خود را به نتیجه برسانید.</p>
                                     </div>
-                                        <div className={"py-6"}>
-                                            <a href="#" className={"px-4 py-2 text-[15px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>یادگیری بیشتر </a>
+                                        <div className={"pt-7 pb-16"}>
+                                            <a href="#" className={"px-4 py-2 text-[15px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>محاسبه دستمزد </a>
                                         </div>
                                 </div>
                             <div className={"bg-[#eaebff] flex items-center justify-center"}>
@@ -39,16 +39,16 @@ const GetFeatured = () => {
                                 <h4>ارزش خودتو بدون</h4>
                             </div>
                             <div className={""}>
-                                <p className={"text-justify text-[0.9rem] leading-6"}>ما داده ها را داریم. بر اساس عنوان شغل، صنعت و اندازه شرکت تحقیق کنید تا محدوده حقوق خود را بیابید و آماده شوید تا مذاکرات خود را به نتیجه برسانید.</p>
+                                <p className={" text-[0.9rem] leading-6"}>ما داده ها را داریم. بر اساس عنوان شغل، صنعت و اندازه شرکت تحقیق کنید تا محدوده حقوق خود را بیابید و آماده شوید تا مذاکرات خود را به نتیجه برسانید.</p>
                             </div>
-                            <div className={"py-6"}>
+                            <div className={"pt-7 pb-16"}>
                                 <a href="#" className={"px-4 py-2 text-[15px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>یادگیری بیشتر </a>
                             </div>
                         </div>
-                        <div className={"bg-[#eaebff] flex items-center justify-center"}>
+                        <div className={"bg-[#ffede5] flex items-center justify-center"}>
                             <span className={"sr-only"}>image for box</span>
                             <Image
-                                src="/images/Calculator 1.png"
+                                src="/images/Featured.png"
                                 alt={"Quotes"}
                                 width={400}
                                 height={300}

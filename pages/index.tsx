@@ -8,20 +8,22 @@ import JobSeeker from "@/app/components/HomePage/JobSeeker";
 import NeedTalent from "@/app/components/HomePage/NeedTalent";
 import Ourusers from "@/app/components/HomePage/ourusers";
 import GetFeatured from "@/app/components/HomePage/GetFeatured";
+import BlogPost from "@/app/components/HomePage/blogPost";
+import Footer from "@/app/shared/footer/footer";
+import Header from "@/app/shared/NavBar";
+import React from "react";
+import BannerTop from "@/app/components/banner-content";
+import Heading from "@/app/components/Heading";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>کایا | صفحه اصلی</title>
-        <meta charSet="UTF-8"/>
-        <meta name="description" content="Kaya app"  />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/Asset.png" />
-      </Head>
+        <Heading page={"صفحه اصلی"} titlesite={" کایا"}/>
       <div>
+          <BannerTop/>
+          <Header/>
           <KayaTalent/>
           <LoginSignUP/>
           <Figures/>
@@ -30,6 +32,8 @@ export default function Home() {
           <NeedTalent/>
           <Ourusers/>
           <GetFeatured/>
+          <BlogPost/>
+          <Footer/>
       </div>
     </>
   )
