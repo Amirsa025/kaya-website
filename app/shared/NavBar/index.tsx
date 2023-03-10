@@ -58,8 +58,12 @@ import Link from "next/link";
 
                             </ul>
                             <div className="flex md:hidden items-center py-6 gap-8">
-                                <button className={"w-[90px] h-[40px]  border rounded-md"}>ورود</button>
-                                <button className={"w-[90px] h-[40px] bg-black text-white rounded-md"}>ثبت نام </button>
+                                <Link href={"/register"} legacyBehavior>
+                                    <button className={"w-[90px] h-[40px] bg-black text-white rounded-md"}>ثبت نام </button>
+                                </Link>
+                                <Link href={"/register"} legacyBehavior>
+                                    <button className={"w-[90px] h-[40px]  border rounded-md"}>ورود</button>
+                                </Link>
                             </div>
                         </div>
                         <div className="hidden md:flex items-center justify-around gap-8 ">
