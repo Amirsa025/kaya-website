@@ -133,9 +133,6 @@ const NeedTalent = () => {
                     </div>
                 </div>
             </div>
-
-
-
         </section>
     );
 };
