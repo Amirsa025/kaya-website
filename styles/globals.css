@@ -64,7 +64,8 @@
     }
     body {
         direction: rtl;
-        font-family: "IRANSans",sans-serif;
+        /*font-family: "IRANSans",sans-serif;*/
+        font-family: 'IRANSans-web',sans-serif;
     }
     .fontMain {
         @apply font-main
