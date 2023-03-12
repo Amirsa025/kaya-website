@@ -1,10 +1,6 @@
-import * as React from 'react';
-import { useState } from 'react'
+import  React ,{ useState } from 'react';
 import {navigation} from "@/app/constant/MockData";
 import Link from "next/link";
-
-
-
  const Header= () => {
     const [state, setState] = useState(false)
     return (
