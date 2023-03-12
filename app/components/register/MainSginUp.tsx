@@ -2,9 +2,16 @@ import React, {useState} from 'react';
 import Link from "next/link";
 import {useFormik} from "formik";
 import * as yup from 'yup';
+import callApi from "@/app/helper/callApi";
+import Cookies from "universal-cookie";
+import Router from "next/router";
+import {storeToken} from "@/app/helper/auth";
+
 
 const MainSginup = () => {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
+    const cookie = new Cookies()
+
     let phonenumberPattern = /^0?9[0-9]{9}$/
     let passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
     const SginupSchema: any = yup.object().shape({
@@ -20,8 +27,22 @@ const MainSginup = () => {
             password: ''
         },
         validationSchema: SginupSchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values:any) => {
+             const responseData= await callApi().post('/users/sign_up',{
+                    phone_number:values.phoneNumber,
+                    password :values.password
+                },)
+                if(responseData.status===200 && responseData.data.phone_verified===false){
+                    storeToken(responseData?.data?.token)
+                    localStorage.setItem("verify",responseData?.data?.phone_verified)
+                    await Router.replace('/verify-phone');
+                }
+                if(responseData.data.code===1001 && responseData.data.status===400){
+                    return alert('در وارد کردن url  دقت فرمایید.')
+                }
+                if (responseData.data.status===400 && responseData.data.code===1002 && responseData.data.phone_verified===true){
+                    return alert('این کاربر قبلا ثبت نام کرده است .')
+                }
         },
     });
 
@@ -48,13 +69,13 @@ const MainSginup = () => {
                         <input
                             id="phoneNumber"
                             name="phoneNumber"
-                            type="number"
+                            type="text"
                             onChange={Myformik.handleChange}
                             value={Myformik.values.phoneNumber}
                             className={"overflow-hidden w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"تلفن همراه خود را وارد کنید..."}/>
-                        {Myformik.touched.phoneNumber && Boolean(Myformik.errors.phoneNumber)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.phoneNumber}</p>
+                               {Myformik.touched.phoneNumber && Boolean(Myformik.errors.phoneNumber)}
+                                <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.phoneNumber}</p>
                     </div>
                     <div className={"relative"}>
                         <input
@@ -71,9 +92,9 @@ const MainSginup = () => {
                         <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
                     </div>
 
-                    <div className={""}>
+                    <div className={"cursor-pointer"}>
                         <button
-                            className={"w-full h-[40px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd]"}>مرحله
+                            className={"cursor-pointer  w-full h-[40px]  border rounded-md bg-black text-white rounded-lg hover:bg-[#143fcd] "}>مرحله
                             بعد
                         </button>
                     </div>

@@ -2,9 +2,10 @@
 import React from 'react';
 import Image from "next/image";
 
+
 const AsideVerifyPhone = () =>
 {
-    //aaaa
+
     return (
         <>
             <div className={"flex flex-row-reverse lg:flex-col justify-between lg:h-screen"}>
