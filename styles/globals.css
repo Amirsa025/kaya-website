@@ -125,7 +125,12 @@
     .slick-slide img {
         margin: auto;
     }
-
+    .toastBody {
+        font-family: 'IRANSans-web',sans-serif;
+        color: #ffffff; /* #10171D */
+        font-size: 0.7rem !important;
+        text-align: right;
+    }
 }
 
 @tailwind utilities

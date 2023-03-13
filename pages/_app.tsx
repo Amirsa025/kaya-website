@@ -7,6 +7,8 @@ import Container from "@/app/components/layout/Container";
 import 'remixicon/fonts/remixicon.css'
 import React, {ReactElement, ReactNode} from "react";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {NextPage} from "next";
 import {
     Hydrate,
@@ -28,6 +30,7 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
             <QueryClientProvider client={queryClient}>
                 <Hydrate state={pageProps.dehydratedState}>
                     <Component {...pageProps} />
+                    <ToastContainer  bodyClassName="toastBody" />
                 </Hydrate>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>

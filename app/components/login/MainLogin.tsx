@@ -4,16 +4,26 @@ import {useFormik} from "formik";
 import * as yup from 'yup';
 import callApi from "@/app/helper/callApi";
 import Router from "next/router";
-import Cookies from "universal-cookie";
 import {storeToken} from "@/app/helper/auth";
 import {NextPageWithLayout} from "@/pages/_app";
-import UserPanelAdmin from "@/app/components/User-panel-admin";
-import GuestLayout from "@/app/components/gusetLayout";
+import {useMutation} from "@tanstack/react-query";
+import {toast} from "react-toastify";
+import {ClipLoader} from "react-spinners";
 
+const useLogin = () => {
+    return useMutation((formPayload:void) => {
+        return callApi().post('/users/sign_in',{
+              //@ts-ignore
+            phone_number:formPayload?.loginNumber,
+             //@ts-ignore
+            password :formPayload?.password
+        })
+    });
+};
 const MainLogin:NextPageWithLayout = () => {
-
+    const { mutate ,isSuccess,isError,isLoading } = useLogin();
     const [isRevealPwd, setIsRevealPwd] = useState(false);
-    const cookie = new Cookies()
+
     let phonenumberPatterns = /^0?9[0-9]{9}$/
     let passwordPattern =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
     const SginINSchema: any = yup.object().shape({
@@ -31,15 +41,38 @@ const MainLogin:NextPageWithLayout = () => {
         validationSchema: SginINSchema,
         onSubmit:
             async (values:any) => {
-            const responseData= await callApi().post('/users/sign_in',{
-                phone_number:values.loginNumber,
-                password :values.password
-            },)
-            //    satus 200
-                if(responseData.status===200 && responseData.data.phone_verified===true){
-                      await  Router.replace('/user-panel')
-                    storeToken(responseData?.data?.token)
-                }
+                mutate(values, {
+                    onSuccess:  (res) => {
+                        if(res.status===200 && res.data.phone_verified===true){
+                            setTimeout(async()=>  await  Router.replace('/user-panel'),3000)
+                            toast.success('شما باموفقیت  وارد شدید', {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "colored",
+                            });
+                            storeToken(res?.data?.token)
+                        }
+                    },
+                    onError: (response) => {
+                        toast.error('با خطا مواجه شدید لطفا دوباره امتحان کنید.', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                        });
+                        console.log(response);
+                    }
+                });
+
         },
     });
 
@@ -57,6 +90,8 @@ const MainLogin:NextPageWithLayout = () => {
             </div>
             {/*form */}
             <div className={"w-full"}>
+                {isSuccess && <p className="center-items text-[12px] py-2  text-green-500">با موفقیت وارد شدید!</p>}
+                {isError && <p className="center-items text-[12px] py-2 text-red-500">در ورود با خطا مواجه شدید</p>}
                 <form onSubmit={Myformik.handleSubmit} className={"flex flex-col space-y-4 "}>
                     <div>
                         <input
@@ -90,7 +125,10 @@ const MainLogin:NextPageWithLayout = () => {
                     </a>
                     <div className={""}>
                         <button type={"submit"}
-                            className={"w-full h-[40px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd]"}>ورود
+                            className={"w-full h-[40px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd]"}>
+                                    ورود    {isLoading && <div className="px-4 flex center-items">
+                                <ClipLoader size={20}  color="#fffff" />
+                            </div>}
                         </button>
                     </div>
                     <div>
