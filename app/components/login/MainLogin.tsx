@@ -8,8 +8,11 @@ import {NextPageWithLayout} from "@/pages/_app";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
 import {SginINSchema} from "@/app/components/login/vaildation";
+import {cookies} from "next/headers";
+import Cookies from "universal-cookie";
 const MainLogin: NextPageWithLayout = () => {
     const {mutate, isSuccess, isError, isLoading} = useLogin();
+    const cookies = new Cookies()
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const[disable ,setDisable] =useState(false)
     const Myformik = useFormik({
@@ -36,6 +39,7 @@ const MainLogin: NextPageWithLayout = () => {
                                 theme: "colored",
                             });
                             storeToken(res?.data?.token,'token')
+                                cookies.remove('sginUP')
                         }
                     },
                     onError: (response) => {

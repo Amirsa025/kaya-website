@@ -11,7 +11,7 @@ const UserPanelPage:NextPageWithLayout = () => {
     },[])
     if(loading) return <div>loading...</div>
     const cookie = new Cookies()
-    if(!cookie.get('token')){
+    if(!cookie.get('token') && !cookie.get('sginUP')){
         Router.replace('/').then()
         return <></>
     }

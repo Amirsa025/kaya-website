@@ -41,8 +41,9 @@ const MainVerify = () => {
 
                     setTimeout(async()=>{
                         setDisable(true)
-                        cookie.remove('sginUP')
-                        await Router.replace('/login')
+                        // cookie.remove('sginUP')
+                        await Router.replace('/user-panel')
+
                     },3000)
                 }
                 if(responseData.data.message==="Forbidden" && responseData.status===401){
