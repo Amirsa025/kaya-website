@@ -1,21 +1,21 @@
 import {useFormik} from "formik";
-import React from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
-import * as yup from "yup";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import Router from "next/router";
+import {codeVerifySchema} from "@/app/components/verify-phone/vaildation";
+import {toast} from "react-toastify";
 
 const MainVerify = () => {
     const cookie = new Cookies()
-    const ACCESS_TOKEN = cookie.get('token')
-    const codeVerifySchema: any = yup.object().shape({
-        codeVerify: yup.string().required('لطفا کد تایید را وارد کنید.')
-    });
+    const[disable ,setDisable] =useState(false)
+    const ACCESS_TOKEN = cookie.get('sginUP')
     const Myformik = useFormik({
         initialValues: {
             codeVerify: '',
         },
+
         validationSchema: codeVerifySchema,
         onSubmit: async (values) => {
             try {
@@ -28,13 +28,47 @@ const MainVerify = () => {
                 })
                 console.log(responseData.data)
                 if(responseData.status===200 && responseData.data.phone_verified===true){
-                    await Router.replace('/user-panel')
+                    toast.success('احراز هویت شما باموفقیت  انجام شد!', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+
+                    setTimeout(async()=>{
+                        setDisable(true)
+                        cookie.remove('sginUP')
+                        await Router.replace('/login')
+                    },3000)
                 }
-                if(responseData.data.message==="Forbidden"){
-                    alert("این کاربر احراز هویت شده است.")
+                if(responseData.data.message==="Forbidden" && responseData.status===401){
+                    toast.error(' خطایی به وجود آمده است.', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
                 }
-            }catch (error){
-                console.log(error)
+            }catch (error:any){
+                console.log(error.message)
+                toast.error(' خطایی به وجود آمده است.', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
             }
         },
     });
@@ -66,7 +100,7 @@ const MainVerify = () => {
                             <p className="text-red-500 pt-1 text-[12px] text-right font-light">{Myformik.errors.codeVerify}</p>
                         </div>
                             <div>
-                                <button className={"w-full h-[40px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd]"}>ورود</button>
+                                <button disabled={disable} className={`w-full h-[40px]  border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>ورود</button>
                             </div>
                     </form>
                 </div>

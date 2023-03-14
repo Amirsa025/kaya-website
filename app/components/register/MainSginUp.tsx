@@ -1,48 +1,60 @@
 import React, {useState} from 'react';
 import Link from "next/link";
 import {useFormik} from "formik";
-import * as yup from 'yup';
-import callApi from "@/app/helper/callApi";
-import Cookies from "universal-cookie";
 import Router from "next/router";
-import {storeToken} from "@/app/helper/auth";
-
+import {storeToken, useSginUp} from "@/app/helper/auth";
+import {SginupSchema} from "@/app/components/register/vaildation";
+import {toast} from "react-toastify";
+import {ClipLoader} from "react-spinners";
 
 const MainSginup = () => {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
-    const cookie = new Cookies()
-
-    let phonenumberPattern = /^0?9[0-9]{9}$/
-    let passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
-    const SginupSchema: any = yup.object().shape({
-        phoneNumber: yup.string().required('لطفاشماره همراه خود را وارد کنید').min(4, 'لطفا در در وارد کردن تلفن همراه  خود دقت کنید')
-            .matches(phonenumberPattern, 'لطفا شماره تلفن خود را به درستی وارد کنید. '),
-        password: yup.string().required('لطفا در رمز خود را وارد کنید.').min(8, 'لطفا در در وارد کردن رمز عبور خود دقت کنید')
-            .matches(passwordPattern, 'رمز عبور براساس حروف کوچیک و حروف بزرگ و اعداد می باشد. ')
-    });
-
+    const {mutate,isError,isSuccess, isLoading} = useSginUp()
+    const[disable ,setDisable] =useState(false)
     const Myformik = useFormik({
         initialValues: {
             phoneNumber:'',
             password: ''
         },
         validationSchema: SginupSchema,
-        onSubmit: async (values:any) => {
-             const responseData= await callApi().post('/users/sign_up',{
-                    phone_number:values.phoneNumber,
-                    password :values.password
-                },)
-                if(responseData.status===200 && responseData.data.phone_verified===false){
-                    storeToken(responseData?.data?.token)
-                    localStorage.setItem("verify",responseData?.data?.phone_verified)
-                    await Router.replace('/verify-phone');
-                }
-                if(responseData.data.code===1001 && responseData.data.status===400){
-                    return alert('در وارد کردن url  دقت فرمایید.')
-                }
-                if (responseData.data.status===400 && responseData.data.code===1002 && responseData.data.phone_verified===true){
-                    return alert('این کاربر قبلا ثبت نام کرده است .')
-                }
+        onSubmit: (values:any) => {
+           mutate(values,{
+                onSuccess :async(responseData:any)=>{
+                    if(responseData.status===200 && responseData.data.phone_verified===false){
+                       setTimeout(async ()=>{
+                           setDisable(true)
+                           storeToken(responseData?.data?.token,'sginUP')
+                           await Router.replace('/verify-phone')},2000)
+                    }
+                },
+               onError :(err:any)=>{
+                    console.log(err)
+                   if(err.data.code===1001 && err.data.status===401){
+                       toast.error('در وارد کردن url  دقت فرمایید.', {
+                           position: "top-right",
+                           autoClose: 5000,
+                           hideProgressBar: false,
+                           closeOnClick: true,
+                           pauseOnHover: true,
+                           draggable: true,
+                           progress: undefined,
+                           theme: "colored",
+                       });
+                   }
+                   if (err.data.status===400 && err.data.code===1002 && err.data.phone_verified===true){
+                       toast.error('در وارد کردن url  دقت فرمایید.', {
+                           position: "top-right",
+                           autoClose: 5000,
+                           hideProgressBar: false,
+                           closeOnClick: true,
+                           pauseOnHover: true,
+                           draggable: true,
+                           progress: undefined,
+                           theme: "colored",
+                       });
+                   }
+               }
+           })
         },
     });
 
@@ -64,6 +76,10 @@ const MainSginup = () => {
 
             {/*form */}
             <div className={"w-full"}>
+                {isSuccess &&
+                    <p className="center-items text-[12px] py-2  text-green-500">تبریک !!! مراحل را ادامه دهید!</p>}
+                {isError &&
+                    <p className="center-items text-[11px] py-3 text-red-500"> شماره اشتباه است یا کاربر وجود دارد لطفا مجددا امتحان کنید.</p>}
                 <form onSubmit={Myformik.handleSubmit} className={"flex flex-col space-y-4 "}>
                     <div>
                         <input
@@ -92,10 +108,19 @@ const MainSginup = () => {
                         <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
                     </div>
 
-                    <div className={"cursor-pointer"}>
+                    <div className={"cursor-pointer "}>
                         <button
-                            className={"cursor-pointer  w-full h-[40px]  border rounded-md bg-black text-white rounded-lg hover:bg-[#143fcd] "}>مرحله
-                            بعد
+                            type={"submit"}
+                            disabled={disable}
+                            className={`w-full h-[40px] flex items-center justify-center gap-4  border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>
+
+                            <span>مرحله بعد</span>
+                            {
+                                isLoading &&
+                                <div className="flex items-center justify-center ">
+                                    <ClipLoader size={20} color="#fffff"/>
+                                </div>
+                            }
                         </button>
                     </div>
                     <div>
