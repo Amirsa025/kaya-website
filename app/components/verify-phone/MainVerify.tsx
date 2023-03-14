@@ -57,6 +57,7 @@ const MainVerify = () => {
                         progress: undefined,
                         theme: "colored",
                     });
+
                 }
             }catch (error:any){
                 console.log(error.message)
@@ -70,6 +71,7 @@ const MainVerify = () => {
                     progress: undefined,
                     theme: "colored",
                 });
+                setTimeout(async ()=> await Router.replace('/'),2000)
             }
         },
     });

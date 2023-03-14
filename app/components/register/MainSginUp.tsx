@@ -6,9 +6,11 @@ import {storeToken, useSginUp} from "@/app/helper/auth";
 import {SginupSchema} from "@/app/components/register/vaildation";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
+import Cookies from "universal-cookie";
 
 const MainSginup = () => {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
+   const cookie = new Cookies()
     const {mutate,isError,isSuccess, isLoading} = useSginUp()
     const[disable ,setDisable] =useState(false)
     const Myformik = useFormik({
@@ -24,6 +26,7 @@ const MainSginup = () => {
                        setTimeout(async ()=>{
                            setDisable(true)
                            storeToken(responseData?.data?.token,'sginUP')
+                           cookie.remove('token')
                            await Router.replace('/verify-phone')},2000)
                     }
                 },
