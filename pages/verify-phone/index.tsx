@@ -5,13 +5,16 @@ import MainVerify from "@/app/components/verify-phone/MainVerify";
 import UserPanelAdmin from "@/app/components/User-panel-admin";
 import Cookies from "universal-cookie";
 import Router, {useRouter} from "next/router";
+import {ClipLoader} from "react-spinners";
 const VerifyPhone = () => {
 
     const [loadings,setloading] = useState(true)
     useEffect(()=>{
         setTimeout(()=>setloading(false),1000)
     },[])
-    if(loadings) return <div>loading...</div>
+    if(loadings) return <div className={"card h-screen flex items-center justify-center"}>
+        <ClipLoader size={100} color="#fffff"/>
+    </div>
     const cookie = new Cookies()
     if(!cookie.get('sginUP')){
         Router.replace('/').then()

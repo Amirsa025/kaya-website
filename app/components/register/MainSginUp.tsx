@@ -33,7 +33,7 @@ const MainSginup = () => {
                onError :(err:any)=>{
                     console.log(err)
                    if(err.data.code===1001 && err.data.status===401){
-                       toast.error('در وارد کردن url  دقت فرمایید.', {
+                       toast.error(`${err.message}`, {
                            position: "top-right",
                            autoClose: 5000,
                            hideProgressBar: false,
@@ -44,8 +44,8 @@ const MainSginup = () => {
                            theme: "colored",
                        });
                    }
-                   if (err.data.status===400 && err.data.code===1002 && err.data.phone_verified===true){
-                       toast.error('در وارد کردن url  دقت فرمایید.', {
+                   if (err.data.status===401 && err.data.code===1002 && err.data.phone_verified===true){
+                       toast.error(`${err.message}`, {
                            position: "top-right",
                            autoClose: 5000,
                            hideProgressBar: false,

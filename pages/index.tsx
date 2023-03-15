@@ -10,21 +10,39 @@ import Ourusers from "@/app/components/HomePage/ourusers";
 import GetFeatured from "@/app/components/HomePage/GetFeatured";
 import BlogPost from "@/app/components/HomePage/blogPost";
 import Footer from "@/app/shared/footer/footer";
-import Header from "@/app/shared/NavBar";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import BannerTop from "@/app/components/banner-content";
 import Heading from "@/app/components/Heading";
+import Header from "@/app/shared/NavBar";
+import {DotLoader} from "react-spinners";
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    const [loading,setloading] = useState(true)
+    useEffect(()=>{
+        setTimeout(()=>setloading(false),100)
+    },[])
+    if(loading) return <div className={" h-screen flex items-center justify-center"}>
+        <Heading page={"پنل کاربری "} titlesite={" کایا"}/>
+        <div className={"flex flex-col items-center justify-center "}>
+            <DotLoader
+                color="#36d7b7"
+                size={150}
+            />
+        </div>
+    </div>
+
   return (
     <>
         <Heading page={"صفحه اصلی"} titlesite={" کایا"}/>
       <div>
-          <BannerTop/>
+            <div className={"hidden md:block"}>
+                <BannerTop/>
+            </div>
           <Header/>
-          <KayaTalent/>
+            <div className={"pt-32 md:pt-0"}>
+                <KayaTalent/>
+            </div>
           <LoginSignUP/>
           <Figures/>
           <ScrollSilder/>

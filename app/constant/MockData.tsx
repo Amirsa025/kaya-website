@@ -8,6 +8,5 @@ export  const ourCourse = [
 export const navigation = [
     { title: "تماس با ما ", path: "#" },
     { title: "پروژه ها", path: "#" },
-    { title: "خانه", path: "#" },
-
+    { title: "خانه", path: "/" },
 ]

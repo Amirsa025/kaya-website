@@ -42,8 +42,8 @@ const MainLogin: NextPageWithLayout = () => {
                                 cookies.remove('sginUP')
                         }
                     },
-                    onError: (response) => {
-                        toast.error('با خطا مواجه شدید لطفا دوباره امتحان کنید.', {
+                    onError: (response:any) => {
+                        toast.error(`${response.message}`, {
                             position: "top-right",
                             autoClose: 5000,
                             hideProgressBar: false,
@@ -53,7 +53,7 @@ const MainLogin: NextPageWithLayout = () => {
                             progress: undefined,
                             theme: "colored",
                         });
-                        console.log(response);
+                        console.log(response.message);
                     }
                 });
 
@@ -116,7 +116,7 @@ const MainLogin: NextPageWithLayout = () => {
                         <button
                             type={"submit"}
                             disabled={disable}
-                            className={`w-full h-[40px] flex items-center justify-center border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>
+                            className={`w-full h-[40px] gap-4 flex items-center justify-center border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>
 
                             <span>ورود</span>
                             {
