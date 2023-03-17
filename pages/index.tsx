@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
+
 import KayaTalent from "@/app/components/HomePage/KayaTalent";
 import LoginSignUP from "@/app/components/HomePage/LoginSignUP";
 import Figures from "@/app/components/HomePage/figures";

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const LoginSignUp = () => {
     return (
@@ -48,7 +49,9 @@ const LoginSignUp = () => {
                 </div>
                 <a href={"#"} className={"text-[14px] text-gray-500 font-light"}>
                     <span>از قبل حساب کاربری دارید؟</span>
-                    <span className={"px-1 underline"}>وارد شوید</span>
+                    <Link href={'/login'}>
+                        <span className={"px-1 underline"}>وارد شوید</span>
+                    </Link>
                 </a>
             </div>
 

@@ -5,8 +5,8 @@ const KayaTalent = () => {
     return (
         <>
             <section className={"container-app md:grid flex flex-col-reverse gap-y-4 md:grid-cols-2 md:pt-[155px] "}>
-                <div>
-                    <h1 className={"text-[20px] lg:font-bold lg:text-[2.5rem] text-black mb-20"}>
+                <div className={"lg:pt-[7rem]"}>
+                    <h1 className={"text-[20px] font-bold lg:text-[2.5rem] text-black mb-20"}>
                         کایا لیستی از استعداد ها را به خوبی پیدا می کند
                     </h1>
                     <div>
@@ -22,9 +22,9 @@ const KayaTalent = () => {
                             بیشتر</a>
                     </div>
                 </div>
-                <div className={"mx-auto w-full"}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1690 1640" width="1890"
-                         height="1840" preserveAspectRatio="xMidYMid meet"
+                <div className={" w-full h-screen"}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1690 1640" width="1800"
+                         height="1800" preserveAspectRatio="xMidYMid meet"
                          className={"w-full h-full  transMovemt"}>
                         <defs>
                             <clipPath id="__lottie_element_2">

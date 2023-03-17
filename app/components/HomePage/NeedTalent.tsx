@@ -62,11 +62,11 @@ const NeedTalent = () => {
                     </div>
                 </div>
                 <div>
-                    <div className={" flex items-center justify-end"}>
+                    <div className={"flex   items-center justify-center md:justify-end lg:justify-center"}>
                         <Image
                             src="/images/min-p-500.png" alt={"Star"}
-                            width={400}
-                            height={400}
+                            width={500}
+                            height={500}
                         />
                     </div>
                 </div>
@@ -76,8 +76,8 @@ const NeedTalent = () => {
                 <div className={"max-w-full flex items-center justify-center"}>
                     <Image
                         src="/images/min-p-500.png" alt={"Star"}
-                        width={600}
-                        height={600}
+                        width={800}
+                        height={800}
                     />
                 </div>
                 <div className={"pb-[29px]"}>
