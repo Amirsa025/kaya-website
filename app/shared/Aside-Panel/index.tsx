@@ -13,11 +13,10 @@ const AsidePanel = () => {
                     {
                         UserNavigation.map((item)=>{
                             return (
-                                <Link href={item.path} legacyBehavior key={item.id} className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center"}>
-                                    <div
-                                        >
-                                        <div className={"w-full flex items-center justify-center pt-2"} >
-                                            <a  href={item.path} className={router.pathname == item.path ? "block w-20 h-12 flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
+                                <Link href={item.path} legacyBehavior key={item.id} className={"w-20 h-12  flex items-center justify-center"}>
+                                    <div className={""}>
+                                        <div className={"  w-20 h-12  hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer  w-full flex items-center justify-center "} >
+                                            <a  href={item.path} className={router.pathname == item.path ? "block w-20 h-12  flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
                                                 <i className={`${item.icon} text-[1.5rem]`}></i>
                                             </a>
                                         </div>
@@ -36,8 +35,8 @@ const AsidePanel = () => {
                                 return (
                                     <Link href={item.path} key={item.id} legacyBehavior>
                                         <div
-                                            className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center"}>
-                                            <div className={"w-full flex items-center justify-center pt-2 "} >
+                                            className={" flex items-center justify-center"}>
+                                            <div className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center  "} >
                                                 <a href="" className={router.pathname == item.path ? "block w-20 h-12 flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
                                                     <i className={`${item.icon} text-[1.5rem]`}></i>
                                                 </a>

@@ -11,8 +11,6 @@ const Project: NextPageWithLayout = () => {
                     <div className={"w-full flex flex-col  md:py-6 lg:px-4"}>
                         {/*paginagin*/}
                         <ProjectList/>
-                        <ProjectList/>
-                        <ProjectList/>
                     </div>
                 </div>
             </div>
