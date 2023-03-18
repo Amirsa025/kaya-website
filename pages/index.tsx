@@ -22,7 +22,7 @@ export default function Home() {
         setTimeout(()=>setloading(false),100)
     },[])
     if(loading) return <div className={" h-screen flex items-center justify-center"}>
-        <Heading page={"پنل کاربری "} titlesite={" کایا"}/>
+        <Heading page={"خانه"} titlesite={" کایا"}/>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader
                 color="#36d7b7"
