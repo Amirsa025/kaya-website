@@ -13,17 +13,16 @@ const AsidePanel = () => {
                     {
                         UserNavigation.map((item)=>{
                             return (
-                                <div key={item.id} className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center"}>
+                                <Link href={item.path} legacyBehavior key={item.id} className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center"}>
                                     <div
                                         >
-                                        <Link href={item.path} className={"w-full flex items-center justify-center pt-2"} legacyBehavior>
+                                        <div className={"w-full flex items-center justify-center pt-2"} >
                                             <a  href={item.path} className={router.pathname == item.path ? "block w-20 h-12 flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
                                                 <i className={`${item.icon} text-[1.5rem]`}></i>
-
                                             </a>
-                                        </Link>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             )
                         })
                     }
@@ -35,16 +34,16 @@ const AsidePanel = () => {
                         {
                             UserNavigation.map((item)=>{
                                 return (
-                                    <div key={item.id}>
+                                    <Link href={item.path} key={item.id} legacyBehavior>
                                         <div
                                             className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center"}>
-                                            <Link href={item.path} className={"w-full flex items-center justify-center pt-2 "} legacyBehavior>
+                                            <div className={"w-full flex items-center justify-center pt-2 "} >
                                                 <a href="" className={router.pathname == item.path ? "block w-20 h-12 flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
                                                     <i className={`${item.icon} text-[1.5rem]`}></i>
                                                 </a>
-                                            </Link>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 )
                             })
                         }
