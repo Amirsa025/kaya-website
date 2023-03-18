@@ -2,15 +2,19 @@ import React from 'react';
 
 const ProjectList = () => {
     return (
-        <div className={" w-full flex flex-col md:flex-row px-2 md:py-2  md:border-t   hover:bg-gray-50"}>
-            <div className={" md:flex-1  mx-2 py-2   "}>
-                <div className={"flex items-center gap-4"}>
-                    <a href={"#"}>
-                        <span className={"font-bold text-[1rem]"}>رونویسی عمومی</span>
-                    </a>
+        <section className={" w-full flex flex-col md:flex-row px-2 md:py-2  md:border-t   hover:bg-gray-50"}>
+            <div className={" md:flex-1  md:mx-2 py-2   "}>
+                <div className={"flex items-center md:gap-4 gap-2"}>
+                    <div>
+                        <a href={"#"}>
+                            <span className={"font-bold text-[0.81rem]"}>رونویسی عمومی</span>
+                        </a>
+                    </div>
+                    <div>
                     <span
                         className={"pt-1 text-[8px] sm:text-[10px] text-gray-700 font-medium"}>۶ روز مهلت </span>
-                    <div className={"pt-2  flex  items-center gap-4 text-green-600  text-[0.8rem]"}>
+                    </div>
+                    <div className={"flex  items-center gap-4 text-green-600  text-[0.8rem]"}>
                         <i className="ri-wallet-fill text-[1.5rem]"></i>
                         <span className={"pt-1"}>تایید شده </span>
                     </div>
@@ -77,7 +81,7 @@ const ProjectList = () => {
                     </div>
 
             </div>
-        </div>
+        </section>
     );
 };
 
