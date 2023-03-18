@@ -8,7 +8,7 @@ const Project: NextPageWithLayout = () => {
         <div className={""}>
             <div className={""}>
                 <div className={"flex  md:flex-1 border rounded-md "}>
-                    <div className={"w-full flex flex-col  py-6  px-[1.25rem] "}>
+                    <div className={"w-full flex flex-col  py-6  "}>
                         {/*paginagin*/}
                         <ProjectList/>
                         <ProjectList/>

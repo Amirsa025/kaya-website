@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProjectList = () => {
     return (
-        <div className={" w-full flex flex-col md:flex-row py-6 md:py-2 border-t  md:px-[1.25rem] hover:bg-gray-50"}>
+        <div className={" w-full flex flex-col md:flex-row py-6 md:py-2 border-b md:border-b-0 md:border-t   hover:bg-gray-50"}>
             <div className={" md:flex-1  mx-2 py-2 "}>
                 <div className={"flex items-center gap-4"}>
                     <a href={"#"}>

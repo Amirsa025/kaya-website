@@ -22,7 +22,7 @@ const KayaTalent = () => {
                             بیشتر</a>
                     </div>
                 </div>
-                <div className={" w-full h-screen"}>
+                <div className={" w-full"}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1690 1640" width="1800"
                          height="1800" preserveAspectRatio="xMidYMid meet"
                          className={"w-full h-full  transMovemt"}>
