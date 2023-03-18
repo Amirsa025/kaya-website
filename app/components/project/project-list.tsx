@@ -9,7 +9,7 @@ const ProjectList = () => {
                         <span className={"font-bold text-[1rem]"}>رونویسی عمومی</span>
                     </a>
                     <span
-                        className={"pt-1 text-[10px] text-gray-700 font-medium"}>۶ روز مهلت </span>
+                        className={"pt-1 text-[8px] sm:text-[10px] text-gray-700 font-medium"}>۶ روز مهلت </span>
                     <div className={"pt-2  flex  items-center gap-4 text-green-600  text-[0.8rem]"}>
                         <i className="ri-wallet-fill text-[1.5rem]"></i>
                         <span className={"pt-1"}>تایید شده </span>
