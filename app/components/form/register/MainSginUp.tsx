@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useFormik} from "formik";
 import Router from "next/router";
 import {storeToken, useSginUp} from "@/app/helper/auth";
-import {SginupSchema} from "@/app/components/register/vaildation";
+import {SginupSchema} from "@/app/components/form/register/vaildation";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
 import Cookies from "universal-cookie";
@@ -129,7 +129,7 @@ const MainSginup = () => {
                     <div>
                         <span className={"text-[14px]"}>ورود کاربران ؟ </span>
                         <Link href={"/login"} legacyBehavior>
-                            <a href="#"
+                            <a href="@/app/components/form/register/MainSginUp#"
                                className={"hover:text-[#3078ca] font-bold w-12 h-12 border-b-2 border-transparent hover:border-b-[#3078ca] py-2 "}>وارد
                                 شدن </a>
                         </Link>

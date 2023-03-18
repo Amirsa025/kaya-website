@@ -10,8 +10,8 @@ import GetFeatured from "@/app/components/HomePage/GetFeatured";
 import BlogPost from "@/app/components/HomePage/blogPost";
 import Footer from "@/app/shared/footer/footer";
 import React, {useEffect, useState} from "react";
-import BannerTop from "@/app/components/banner-content";
-import Heading from "@/app/components/Heading";
+import BannerTop from "@/app/shared/banner-content";
+import Heading from "@/app/shared/Heading";
 import Header from "@/app/shared/NavBar";
 import {DotLoader} from "react-spinners";
 

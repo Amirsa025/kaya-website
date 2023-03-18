@@ -1,9 +1,9 @@
 import React from 'react';
-import Heading from "@/app/components/Heading";
-import AsideLogin from "@/app/components/login/AsideLogin";
-import MainLogin from "@/app/components/login/MainLogin";
+import Heading from "@/app/shared/Heading";
+import AsideLogin from "@/app/components/form/login/AsideLogin";
+import MainLogin from "@/app/components/form/login/MainLogin";
 import {NextPageWithLayout} from "@/pages/_app";
-import GuestLayout from "@/app/components/gusetLayout";
+import GuestLayout from "@/app/components/layout/gusetLayout";
 import Cookies from "universal-cookie";
 import {useRouter} from "next/navigation";
 

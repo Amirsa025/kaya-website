@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import Heading from "@/app/components/Heading";
-import AsideVerifyPhone from "@/app/components/verify-phone/AsideVerifyPhone";
-import MainVerify from "@/app/components/verify-phone/MainVerify";
+import Heading from "@/app/shared/Heading";
+import AsideVerifyPhone from "@/app/components/form/verify-phone/AsideVerifyPhone";
+import MainVerify from "@/app/components/form/verify-phone/MainVerify";
 import Cookies from "universal-cookie";
 import Router, {useRouter} from "next/router";
 import {ClipLoader, DotLoader} from "react-spinners";

@@ -1,5 +1,5 @@
 import React, {ReactNode, useEffect, useState} from 'react';
-import Heading from "@/app/components/Heading";
+import Heading from "@/app/shared/Heading";
 import {DotLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 import Router from "next/router";

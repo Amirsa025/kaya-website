@@ -7,7 +7,7 @@ import {storeToken, useLogin} from "@/app/helper/auth";
 import {NextPageWithLayout} from "@/pages/_app";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
-import {SginINSchema} from "@/app/components/login/vaildation";
+import {SginINSchema} from "@/app/components/form/login/vaildation";
 import Cookies from "universal-cookie";
 const MainLogin: NextPageWithLayout = () => {
     const {mutate, isSuccess, isError, isLoading} = useLogin();
@@ -106,7 +106,7 @@ const MainLogin: NextPageWithLayout = () => {
                         {Myformik.touched.password && Boolean(Myformik.errors.password)}
                         <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
                     </div>
-                    <a href="#">
+                    <a href="@/app/components/form/login/MainLogin#">
                         <span
                             className={"text-[14px] hover:text-[#3078ca] w-12 h-12 border-2 border-transparent hover:border-b-[#3078ca] py-2"}>فراموشی رمز ؟ </span>
                     </a>
@@ -128,7 +128,7 @@ const MainLogin: NextPageWithLayout = () => {
                     <div>
                         <span className={"text-[14px]"}>هنوز ثبت نام نکردید ؟ </span>
                         <Link href={"/register"} legacyBehavior>
-                            <a href="#"
+                            <a href="@/app/components/form/login/MainLogin#"
                                className={"hover:text-[#3078ca] font-bold w-12 h-12 border-b-2 border-transparent hover:border-b-[#3078ca] py-2 "}>ثبت
                                 نام </a>
                         </Link>
