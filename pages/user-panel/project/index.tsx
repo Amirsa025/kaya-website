@@ -1,6 +1,6 @@
 import React from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
-import UserPanelAdmin from "@/app/components/User-panel-admin";
+import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 import ProjectList from "@/app/components/project/project-list";
 import UserPanelPage from "@/pages/user-panel";
 const Project: NextPageWithLayout = () => {

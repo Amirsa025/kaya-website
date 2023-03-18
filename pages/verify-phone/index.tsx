@@ -5,7 +5,7 @@ import MainVerify from "@/app/components/verify-phone/MainVerify";
 import Cookies from "universal-cookie";
 import Router, {useRouter} from "next/router";
 import {ClipLoader, DotLoader} from "react-spinners";
-import VerifyUserPanel from "@/app/components/verify-user-panel";
+import VerifyUserPanel from "@/app/components/layout/verify-user-panel";
 const VerifyPhone = () => {
     const [loadings,setloading] = useState(true)
     useEffect(()=>{
