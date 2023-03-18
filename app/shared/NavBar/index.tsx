@@ -5,15 +5,31 @@ import Cookies from "universal-cookie";
  const Header= () => {
      const [state, setState] = useState(false)
      const cookie = new Cookies()
+     const logout = ()=>{
+            if(cookie.get('sginUP')){
+                cookie.remove('sginUP')
+                window.location.reload()
+            }
+         if(cookie.get('token')){
+             cookie.remove('token')
+             window.location.reload()
+         }
+
+     }
+
      let userAdmin;
      if (cookie.get('token') || cookie.get('sginUP')) {
-         userAdmin = <div>
+         userAdmin = <div className={"flex items-center gap-5"}>
              <Link href="/user-panel" legacyBehavior>
                  <button
                      className={"w-[90px] h-[40px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>پنل
                      کاربری
                  </button>
              </Link>
+             <button
+                 className={" w-[90px] h-[40px]  border rounded-md hover:bg-red-400 hover:border-red-600 hover:text-white text-[14px]"}
+                 onClick={()=>logout()}>خروج
+             </button>
          </div>
      } else {
          userAdmin = <div className="flex items-center justify-around gap-8 ">

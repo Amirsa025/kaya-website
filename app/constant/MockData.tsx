@@ -10,3 +10,7 @@ export const navigation = [
     { title: "پروژه ها", path: "#" },
     { title: "خانه", path: "/" },
 ]
+export const UserNavigation = [
+    { id:"1",icon: "ri-home-3-line", path: "/user-panel" },
+    { id:"2",icon: "ri-user-line ", path: "/user-panel/project" },
+]

@@ -105,6 +105,9 @@
             height: 40px;
             border: 2px solid transparent;
     }
+    .hover_link {
+        @apply  hover:border-b hover:border-blue-400 hover:py-1 cursor-pointer
+    }
     .hover_Me:hover{
         border-bottom: 2px solid #143fcd;
         -webkit-transition: all 500ms linear;
