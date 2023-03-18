@@ -30,7 +30,18 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
             <QueryClientProvider client={queryClient}>
                 <Hydrate state={pageProps.dehydratedState}>
                     <Component {...pageProps} />
-                    <ToastContainer  bodyClassName="toastBody" />
+                    <ToastContainer
+                        bodyClassName="toastBody"
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
                 </Hydrate>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>

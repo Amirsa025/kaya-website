@@ -7,9 +7,6 @@ import { DotLoader} from "react-spinners";
 import Heading from "@/app/components/Heading";
 import Header from "@/app/shared/NavBar";
 
-
-
-
 const UserPanelPage:NextPageWithLayout = () => {
     const [loading,setloading] = useState(true)
     useEffect(()=>{

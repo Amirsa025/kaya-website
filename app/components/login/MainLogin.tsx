@@ -8,7 +8,6 @@ import {NextPageWithLayout} from "@/pages/_app";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
 import {SginINSchema} from "@/app/components/login/vaildation";
-import {cookies} from "next/headers";
 import Cookies from "universal-cookie";
 const MainLogin: NextPageWithLayout = () => {
     const {mutate, isSuccess, isError, isLoading} = useLogin();
@@ -30,7 +29,7 @@ const MainLogin: NextPageWithLayout = () => {
                             setTimeout(async () => await Router.replace('/user-panel'), 3000)
                             toast.success('شما باموفقیت  وارد شدید', {
                                 position: "top-right",
-                                autoClose: 5000,
+                                autoClose: 3000,
                                 hideProgressBar: false,
                                 closeOnClick: true,
                                 pauseOnHover: true,
@@ -45,7 +44,7 @@ const MainLogin: NextPageWithLayout = () => {
                     onError: (response:any) => {
                         toast.error(`${response.message}`, {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 3000,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -53,7 +52,6 @@ const MainLogin: NextPageWithLayout = () => {
                             progress: undefined,
                             theme: "colored",
                         });
-                        console.log(response.message);
                     }
                 });
 

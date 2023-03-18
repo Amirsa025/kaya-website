@@ -8,7 +8,7 @@ import Cookies from "universal-cookie";
      let userAdmin;
      if (cookie.get('token') || cookie.get('sginUP')) {
          userAdmin = <div>
-             <Link href="/login" legacyBehavior>
+             <Link href="/user-panel" legacyBehavior>
                  <button
                      className={"w-[90px] h-[40px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>پنل
                      کاربری
