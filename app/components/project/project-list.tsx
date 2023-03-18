@@ -2,8 +2,8 @@ import React from 'react';
 
 const ProjectList = () => {
     return (
-        <div className={" w-full flex flex-col md:flex-row py-6 md:py-2 border-b md:border-b-0 md:border-t   hover:bg-gray-50"}>
-            <div className={" md:flex-1  mx-2 py-2 "}>
+        <div className={" w-full flex flex-col md:flex-row px-2 md:py-2  md:border-t   hover:bg-gray-50"}>
+            <div className={" md:flex-1  mx-2 py-2   "}>
                 <div className={"flex items-center gap-4"}>
                     <a href={"#"}>
                         <span className={"font-bold text-[1rem]"}>رونویسی عمومی</span>
@@ -43,23 +43,26 @@ const ProjectList = () => {
                     </div>
                 </div>
             </div>
-            <div className={" md:w-1/3 lg:w-1/3 px-8 md:px-4 py-4 space-y-4  border-t md:border-t-0 md:border-r"}>
-                <div className={"flex items-center gap-2"}>
-                    <span className={"block text-[12px] font-bold"}>قیمت پروژه:</span>
-                    <span className={"block text-[13px] font-bold"}>150  تومان </span>
-                </div>
-                <div className={"flex items-center gap-2"}>
-                    <span className={"block text-[12px] font-bold"}>لینک پروژه</span>
-                </div>
-                <div className={"flex items-center gap-2"}>
-                    <span className={"block text-[13px] font-bold"}>کشور:</span>
-                    <div>
-                        <span className={"text-[12px] text-blue-400 hover_link"}>ایران</span>
+            <div className={" md:w-1/3 lg:w-1/3 px-4   py-4 space-y-4  border-t md:border-t-0 "}>
+                    <div className={"md:border-r md:px-6"}>
+                        <div className={"flex items-center gap-2"}>
+                            <span className={"block text-[12px] font-bold"}>قیمت پروژه:</span>
+                            <span className={"block text-[13px] font-bold"}>150  تومان </span>
+                        </div>
+                        <div className={"flex items-center gap-2"}>
+                            <span className={"block text-[12px] font-bold"}>لینک پروژه</span>
+                        </div>
+                        <div className={"flex items-center gap-2"}>
+                            <span className={"block text-[13px] font-bold"}>کشور:</span>
+                            <div>
+                                <span className={"text-[12px] text-blue-400 hover_link"}>ایران</span>
+                            </div>
+                        </div>
+                        <div className={"flex items-center gap-2 py-[24px]"}>
+                            <button className={"block text-[13px] font-bold bg-green-500 px-4 py-2 md:px-3 lg:px-4 text-white"}>ارسال درخواست </button>
+                        </div>
                     </div>
-                </div>
-                <div className={"flex items-center gap-2 py-[24px]"}>
-                    <button className={"block text-[13px] font-bold bg-green-500 px-4 py-2 md:px-3 lg:px-4 text-white"}>ارسال درخواست </button>
-                </div>
+
             </div>
         </div>
     );
