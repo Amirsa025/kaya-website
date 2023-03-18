@@ -16,7 +16,7 @@ const ProjectList = () => {
                     </div>
                 </div>
                 <div className={"py-[1.563rem] text-[13px]"}>
-                    <p className={"text-gray-700 font-normal "}>من متوجه پروفایل شما شدم و می خواهم
+                    <p className={"text-gray-700 font-normal text-[11px] md:text-[13px] leading-8 "}>من متوجه پروفایل شما شدم و می خواهم
                         پروژه خود را به شما ارائه دهم. ما می توانیم در مورد هر جزئیاتی در چت صحبت
                         کنیم.
 
@@ -25,10 +25,23 @@ const ProjectList = () => {
 
                     </p>
                 </div>
-                <div className={"grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 "}>
+                <div className={"grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-y-2"}>
                     <div>
                         <span className={"text-[12px] text-blue-400 hover_link"}>توسعه اجایل</span>
                     </div>
+                    <div>
+                        <span className={"text-[12px] text-blue-400 hover_link"}>توسعه اجایل</span>
+                    </div>
+                    <div>
+                        <span className={"text-[12px] text-blue-400 hover_link"}>توسعه اجایل</span>
+                    </div>
+                    <div>
+                        <span className={"text-[12px] text-blue-400 hover_link"}>توسعه اجایل</span>
+                    </div>
+                    <div>
+                        <span className={" text-[12px] text-blue-400 hover_link"}>توسعه اجایل</span>
+                    </div>
+
                     <div>
                         <span className={"text-[12px] text-blue-400 hover_link"}>توسعه اجایل</span>
                     </div>
@@ -43,8 +56,8 @@ const ProjectList = () => {
                     </div>
                 </div>
             </div>
-            <div className={" md:w-1/3 lg:w-1/3 px-4   py-4 space-y-4  border-t md:border-t-0 "}>
-                    <div className={"md:border-r md:px-6"}>
+            <div className={"md:border-r   md:w-1/3 lg:w-1/3 px-4   py-4 space-y-4  border-t md:border-t-0 "}>
+                    <div className={"space-y-6"}>
                         <div className={"flex items-center gap-2"}>
                             <span className={"block text-[12px] font-bold"}>قیمت پروژه:</span>
                             <span className={"block text-[13px] font-bold"}>150  تومان </span>
