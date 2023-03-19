@@ -22,7 +22,7 @@ import Cookies from "universal-cookie";
          userAdmin = <div className={"flex items-center gap-5"}>
              <Link href="/user-panel" legacyBehavior>
                  <button
-                     className={"w-[90px] h-[40px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>پنل
+                     className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>پنل
                      کاربری
                  </button>
              </Link>

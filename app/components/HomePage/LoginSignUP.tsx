@@ -17,7 +17,7 @@ const LoginSignUp = () => {
                     <div className={"center-item flex-col md:flex-row"}>
                         <span className={"text-8 text-gray-500"}>یا</span>
                         <div className={"px-[1.56rem] py-[1.56rem] w-full md:w-[250px]"}>
-                            <a href={"#"}
+                            <Link href={"/login"}
                                className={"h-[48px] flex items-center justify-center border border-gray-300 hover:text-indigo-600  p-[8px] transition-all duration-300   rounded-md hover:bg-[#eaebff] hover:border-indigo-600 text-[1rem]"}>
                                 <div className={"flex justify-center space-x-2 gap-4"}>
                                     <span> ورود با </span>
@@ -37,7 +37,7 @@ const LoginSignUp = () => {
                                               fill="#34A853"></path>
                                     </svg>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -47,9 +47,9 @@ const LoginSignUp = () => {
                 <div className={"text-[14px] text-gray-500 font-normal"}>
                     <p>برای پیدا کردن درآمد دلاری به <a href={"#"} className={"underline"}>کایا</a> سربزنید.</p>
                 </div>
-                <a href={"#"} className={"text-[14px] text-gray-500 font-light"}>
+                <a href={'/login'} className={"text-[14px] text-gray-500 font-light"} >
                     <span>از قبل حساب کاربری دارید؟</span>
-                    <Link href={'/login'}>
+                    <Link href={'/login'} legacyBehavior>
                         <span className={"px-1 underline"}>وارد شوید</span>
                     </Link>
                 </a>

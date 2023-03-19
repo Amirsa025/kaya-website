@@ -5,7 +5,7 @@ import callApi from "@/app/helper/callApi";
      const cookies = new Cookies();
      cookies.set(`${tokenName}`,token,{
          path:"/",
-         maxAge:1200,
+         maxAge:12000,
          secure:true,
          sameSite:'lax'
      })
