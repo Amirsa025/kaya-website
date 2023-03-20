@@ -8,15 +8,15 @@ interface ProjectProps {
 const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
 
     return (
-        <section className={"px-2 md:py-2"}>
+        <section className={" px-2 md:py-2"}>
             {
                 projectItem?.data?.projects.map((item: any) => {
                     return (
                         <div
-                            className={" w-full flex flex-col-reverse md:flex-row px-2 md:py-2  md:border-t  hover:bg-gray-50"}
+                            className={" w-full flex flex-col-reverse md:flex-row px-2 md:py-2  md:border-t border-b md:border-b-0  hover:bg-gray-50"}
                             key={item.project_id}>
                             <div
-                                className={"md:border-l direction-ltr  md:w-1/3 lg:w-1/3 px-4   py-4 space-y-4  border-t md:border-t-0 "}>
+                                className={"md:border-l  direction-ltr  md:w-1/3 lg:w-1/3 px-4   py-4 space-y-4  border-t md:border-t-0 "}>
                                 <div className={"space-y-6 "}>
                                     <div className={"flex items-center gap-2"}>
                                         {}
@@ -68,9 +68,9 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                                 </div>
 
                             </div>
-                            <div className={" md:flex-1  md:mx-2 py-2 direction-ltr  "}>
+                            <div className={" md:flex-1  md:mx-2 py-2 md:direction-ltr  "}>
                                 <div
-                                    className={"flex md:items-center  items-end md:justify-between md:flex-row flex-col-reverse"}>
+                                    className={"flex md:flex-wrap md:items-center  items-end md:justify-between md:flex-row flex-col-reverse"}>
                                     <div>
                                         <span
                                             className={"text-[12px] font-light"}>{item.submit_date}</span>
@@ -95,11 +95,11 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                                     </div>
 
                                 </div>
-                                <div className={"py-[1.563rem] text-[13px] flex flex-wrap"}>
-                                    <p className={"  text-gray-700 font-normal text-[12px] md:text-[13px] leading-8 text-justify "}>{item.description}</p>
+                                <div className={"py-[1.563rem] text-[13px] flex flex-wrap direction-ltr"}>
+                                    <p className={" text-gray-700 font-normal text-[12px] md:text-[13px] leading-6  "}>{item.description}</p>
                                 </div>
                                 <div
-                                    className={" grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-y-4 py-2 px-4"}>
+                                    className={" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-y-4 py-2 px-4"}>
                                     {
                                         item.jobs.map((job: any) => {
                                             return (

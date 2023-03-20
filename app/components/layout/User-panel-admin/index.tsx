@@ -33,7 +33,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             <Heading page={"پنل کاربر"} titlesite={" کایا"}/>
             <Header/>
             <div
-                className={"container-app flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 "}>
+                className={" flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 "}>
                 <AsidePanel/>
                 <div className={"pb-[7rem]"}>
                     {children}

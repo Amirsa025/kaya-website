@@ -38,8 +38,8 @@ const Project: NextPageWithLayout = () => {
 // @ts-ignore
 
     return (
-        <div className={""}>
-            <div className={""}>
+        <div className={"md:container-app"}>
+            <div className={"mr-4 sm:mx-6 md:mr-0"}>
                 {isLoading ? (
                     <div className={"text-white center-item w-full tex-[12px] h-16 bg-blue-300 rounded-md px-8"}>درحال دریافت اطلاعات از سرور... </div>
                 ) : isError ? (
