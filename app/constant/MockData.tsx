@@ -12,5 +12,5 @@ export const navigation = [
 ]
 export const UserNavigation = [
     { id:"1",icon: "ri-home-3-line", path: "/user-panel" },
-    { id:"2",icon: "ri-user-line ", path: "/user-panel/project" },
+    { id:"2",icon: "ri-file-list-3-line", path: "/user-panel/project" },
 ]
