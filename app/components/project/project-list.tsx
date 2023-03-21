@@ -99,7 +99,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                                     <p className={" text-gray-700 font-normal text-[12px] md:text-[13px] leading-6  "}>{item.description}</p>
                                 </div>
                                 <div
-                                    className={"fk direction-ltr grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-y-4 gap-x-8 lg:gap-x-3 py-2 "}>
+                                    className={" direction-ltr grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-y-4 gap-x-8 lg:gap-x-3 py-2 "}>
                                     {
                                         item.jobs.map((job: any) => {
                                             return (

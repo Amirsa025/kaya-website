@@ -67,6 +67,10 @@ const NeedTalent = () => {
                             src="/images/min-p-500.png" alt={"Star"}
                             width={500}
                             height={500}
+                            className={"opacity-0 transition-opacity"}
+                            onLoadingComplete={(img)=>{
+                                img.classList.remove('opacity-0')
+                            }}
                         />
                     </div>
                 </div>

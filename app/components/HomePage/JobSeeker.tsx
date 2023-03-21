@@ -67,6 +67,10 @@ const JobSeeker = () => {
                         alt={"photo-1"}
                         width={600}
                         height={600}
+                        className={"opacity-0 transition-opacity"}
+                        onLoadingComplete={(img)=>{
+                            img.classList.remove('opacity-0')
+                        }}
                     />
                 </div>
             </div>

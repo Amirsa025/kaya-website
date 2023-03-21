@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 import { UserNavigation} from "@/app/constant/MockData";
+import {Tooltip} from "@mui/material";
 
 const AsidePanel = () => {
     const router = useRouter();
@@ -14,14 +15,18 @@ const AsidePanel = () => {
                         UserNavigation.map((item)=>{
                             return (
                                 <Link href={item.path} legacyBehavior key={item.id} className={"w-20 h-12  flex items-center justify-center"}>
-                                    <div className={""}>
-                                        <div className={"  w-20 h-12  hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer  w-full flex items-center justify-center "} >
-                                            <a  href={item.path} className={router.pathname == item.path ? "block w-20 h-12  flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
-                                                <i className={`${item.icon} text-[1.5rem]`}></i>
-                                            </a>
+                                    <Tooltip title={item.title} placement="left">
+                                        <div className={""}>
+                                            <div className={"w-20 h-12  hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer  w-full flex items-center justify-center "} >
+                                                <a  href={item.path} className={router.pathname == item.path ? "block w-20 h-12  flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
+                                                    <i className={`${item.icon} text-[1.5rem]`}></i>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Tooltip>
+
                                 </Link>
+
                             )
                         })
                     }
@@ -34,14 +39,17 @@ const AsidePanel = () => {
                             UserNavigation.map((item)=>{
                                 return (
                                     <Link href={item.path} key={item.id} legacyBehavior>
-                                        <div
-                                            className={" flex items-center justify-center"}>
-                                            <div className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center  "} >
-                                                <a href="" className={router.pathname == item.path ? "block w-20 h-12 flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
-                                                    <i className={`${item.icon} text-[1.5rem]`}></i>
-                                                </a>
+                                        <Tooltip title={item.title} placement="top">
+                                            <div
+                                                className={" flex items-center justify-center"}>
+                                                <div className={"w-20 h-12 hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer flex items-center justify-center  "} >
+                                                    <a href="" className={router.pathname == item.path ? "block w-20 h-12 flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
+                                                        <i className={`${item.icon} text-[1.5rem]`}></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Tooltip>
+
                                     </Link>
                                 )
                             })
