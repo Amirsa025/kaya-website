@@ -99,6 +99,10 @@ const NeedTalent = () => {
                             alt={"Team"}
                             width={40}
                             height={40}
+                            className={"opacity-0 transition-opacity"}
+                            onLoadingComplete={(img:any)=>{
+                                img.classList.remove('opacity-0')
+                            }}
                         />
                         <span className={"text-[16px] text-black text-justify"}>
                                 <strong>۸ میلیون</strong>  نامزد پاسخگو و آماده راه اندازی، با تمام اطلاعاتی که برای بررسی آنها نیاز دارید

@@ -7,7 +7,7 @@ export  const ourCourse = [
 ]
 export const navigation = [
     { title: "تماس با ما ", path: "#" },
-    { title: "پروژه ها", path: "#" },
+    { title: "پروژه ها", path: "/user-panel/project" },
     { title: "خانه", path: "/" },
 ]
 export const UserNavigation = [

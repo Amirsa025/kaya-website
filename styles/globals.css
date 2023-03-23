@@ -58,6 +58,13 @@
         url('../public/Assets/IRANSans-web.ttf') format('ttf');
         font-weight: normal;
     }
+    .fade {
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+    .fade.active {
+        opacity: 0.5;
+    }
     .container-app {
         @apply px-[40px] md:px-[80px]
 
@@ -128,6 +135,7 @@
         padding: 40px;
         background-image: linear-gradient(89deg, #fff, #fff 31%, hsla(0, 0%, 100%, 0));
     }
+
 
     .slick-slide img {
         margin: auto;
