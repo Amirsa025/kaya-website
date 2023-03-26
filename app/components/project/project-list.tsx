@@ -21,7 +21,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
 
     }, []);
     return (
-        <section className={" px-2 md:py-2"}>
+        <section className={"md:py-2"}>
             {
 
                 projectItem?.data?.projects.map((item: any) => {

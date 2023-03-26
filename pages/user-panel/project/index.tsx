@@ -45,11 +45,16 @@ const Project: NextPageWithLayout = () => {
                 ) : isError ? (
                     <div className={"text-white center-item w-full tex-[12px] h-16 bg-red-300 rounded-md px-8"}>خطایی پیش بینی نشده ای به وجود امده دوباره امتحان کنید.</div>
                 ) : (
-                    <div className={"flex"}>
-                        {/*<div className={"w-1/6 border rounded-md mx-2"}>1</div>*/}
+                    <div className={"flex flex-col md:flex-row"}>
+                        <div className={"w-1/6 border rounded-md mx-2"}>1</div>
                         <div className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                             <div>
-
+                                  <div className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
+                                       <div>
+                                        <i className="ri-search-line text-[1.5rem] text-gray-600"></i>
+                                       </div>
+                                    <input type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
+                                 </div>
                                 <ProjectList projectItem={project} />
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
