@@ -6,7 +6,7 @@ import Pagination from '@mui/material/Pagination';
 import {useQuery} from "@tanstack/react-query";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import { toast } from 'react-toastify';
+
 
 const Project: NextPageWithLayout = () => {
     const [page, setPage] = React.useState(1)
@@ -39,16 +39,17 @@ const Project: NextPageWithLayout = () => {
 
     return (
         <div className={"md:container-app"}>
-            <div className={"mr-4 sm:mx-6 md:mr-0"}>
+            <div className={" mr-4 sm:mx-6 md:mr-0 "}>
                 {isLoading ? (
                     <div className={"text-white center-item w-full tex-[12px] h-16 bg-blue-300 rounded-md px-8"}>درحال دریافت اطلاعات از سرور... </div>
                 ) : isError ? (
                     <div className={"text-white center-item w-full tex-[12px] h-16 bg-red-300 rounded-md px-8"}>خطایی پیش بینی نشده ای به وجود امده دوباره امتحان کنید.</div>
                 ) : (
-                    <div className={"flex  md:flex-1 border rounded-md "}>
-                        <div className={"w-full flex flex-col  md:py-6 lg:px-4"}>
-                            {/*paginagin*/}
+                    <div className={"flex"}>
+                        {/*<div className={"w-1/6 border rounded-md mx-2"}>1</div>*/}
+                        <div className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                             <div>
+
                                 <ProjectList projectItem={project} />
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>

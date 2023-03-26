@@ -7,7 +7,7 @@ interface IContainer {
 
 const Container: React.FC<IContainer> = ({children}) => {
     return (
-        <div>
+        <div className={"scroll-smooth hover:scroll-auto scroll-ml-6"}>
             <div>
                 {children}
             </div>

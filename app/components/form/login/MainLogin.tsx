@@ -73,6 +73,8 @@ const MainLogin: NextPageWithLayout = () => {
             </div>
             {/*form */}
             <div className={"w-full"}>
+                {isError &&
+                    <p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>}
                 {isSuccess &&
                     <p className="center-items text-[12px] py-2  text-green-500">با موفقیت وارد
                         شدید!</p>}
@@ -103,8 +105,7 @@ const MainLogin: NextPageWithLayout = () => {
                            className={`absolute top-3 left-3 ${isRevealPwd ? 'ri-eye-line' : 'ri-eye-off-line'}`}></i>
                         {Myformik.touched.password && Boolean(Myformik.errors.password)}
                         <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
-                        {isError &&
-                            <p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>}
+
                     </div>
                     <a href="@/app/components/form/login/MainLogin#">
                         <span

@@ -5,7 +5,7 @@ import callApi from "@/app/helper/callApi";
      const cookies = new Cookies();
      cookies.set(`${tokenName}`,token,{
          path:"/",
-         maxAge:12000,
+         maxAge:120000,
          secure:true,
          sameSite:'lax'
      })
@@ -23,7 +23,6 @@ import callApi from "@/app/helper/callApi";
 };
 const useSginUp = () => {
     return useMutation((formPayload: void) => {
-        console.log(formPayload)
         return callApi().post('/users/sign_up', {
             //@ts-ignore
             phone_number: formPayload?.phoneNumber,

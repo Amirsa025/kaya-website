@@ -19,9 +19,9 @@ import {DotLoader} from "react-spinners";
 export default function Home() {
     const [loading,setloading] = useState(true)
     useEffect(()=>{
-        setTimeout(()=>setloading(false),100)
+        setTimeout(()=>setloading(false),1000)
     },[])
-    if(loading) return <div className={" h-screen flex items-center justify-center"}>
+    if(loading) return <div className={"   backdrop-blur-xl   h-screen flex items-center justify-center"}>
         <Heading page={"خانه"} titlesite={" کایا"}/>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader
