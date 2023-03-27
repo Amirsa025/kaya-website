@@ -61,6 +61,7 @@ const Project: NextPageWithLayout = () => {
                                 <ProjectList projectItem={project} />
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
+                                {/*edit*/}
                                 <Pagination count={8}   onChange={(event, page) => setPage((page-1)*5)} />
                             </div>
                         </div>
