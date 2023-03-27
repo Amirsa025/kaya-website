@@ -30,7 +30,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                     return (
 
                         <div  key={item.project_id}>
-                            <Link href={`project/${item.project_id}`} legacyBehavior  className={"cursor-pointer"}>
+                            <>
                                 <div
                                     className={" w-full flex flex-col-reverse md:flex-row px-2 md:py-2  md:border-t border-b md:border-b-0  hover:bg-gray-50"}
                                    >
@@ -145,7 +145,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
 
                                     </div>
                                 </div>
-                            </Link>
+                            </>
 
                         </div>
 
