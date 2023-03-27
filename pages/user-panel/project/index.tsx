@@ -9,36 +9,44 @@ import Cookies from "universal-cookie";
 
 
 const Project: NextPageWithLayout = () => {
-    const [searchTerm, setSearchTerm] = React.useState("");
-    const [page, setPage] = React.useState(1)
-    const cookie =new Cookies()
-    const ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token')
-    const fetchProjects = async (page =0) =>{
+    const PAGE_SIZE = 10;
+    const [searchTerm, setSearchTerm] = React.useState(""), [offset, setOffset] = React.useState(1),
+        cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token'),
+        fetchProjects = async (page:any) => {
             try {
-                return await callApi().get(`/projects/projects?limit=5&offset=${page}`, {
+                return await callApi().get(`/projects/projects?limit=5&offset=${offset}`, {
                     headers: {
                         'Authorization': `Bearer ${ACCESS_TOKEN}`
                     }
                 })
-            }catch (error){
+            } catch (error) {
                 console.log(error)
             }
+        }, {
+            isLoading,
+            isError,
+            data: project,
+        } = useQuery({
+            queryKey: ['page', offset, searchTerm],
+            queryFn: () => fetchProjects(offset),
+            keepPreviousData: true,
+            staleTime: 500,
+            refetchOnWindowFocus: true,
+            cacheTime: 0,
+
+        }),
+
+          [page, setPage]:any = React.useState(3),
+        handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+            setSearchTerm(event.target.value);
+        }
+
+    const handleChangePage = (page:any)=>{
+        setOffset((page-1)*5)
+        console.log(page)
+        setPage(page+1)
     }
-    const {
-        isLoading,
-        isError,
-        data: project,
-    } = useQuery({
-        queryKey: ['page' ,page,searchTerm],
-        queryFn: () => fetchProjects(page),
-        keepPreviousData: true,
-        staleTime: 500,
-        refetchOnWindowFocus:true,
-        cacheTime: 0
-    })
-    const handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setSearchTerm(event.target.value);
-    };
+    //search filter
     const filteredData = project?.data?.projects.filter((item:any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
     console.log(filteredData)
     return (
@@ -54,17 +62,17 @@ const Project: NextPageWithLayout = () => {
 
                         <div className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                             <div>
-                                  <div className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
-                                       <div>
+                                <div className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
+                                    <div>
                                         <i   className="ri-search-line text-[1.5rem] text-gray-600"></i>
-                                       </div>
-                                      <input  value={searchTerm} onChange={handleSearchChange}  type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
-                                 </div>
-                                  <ProjectList projectItem={filteredData} />
+                                    </div>
+                                    <input  value={searchTerm} onChange={handleSearchChange}  type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
+                                </div>
+                                <ProjectList projectItem={filteredData} />
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
                                 {/*edit*/}
-                                <Pagination count={8}   onChange={(event, page) => setPage((page-1)*5)} />
+                                <Pagination count={page}  onChange={(event, page) => handleChangePage(page)} />
                             </div>
                         </div>
 
