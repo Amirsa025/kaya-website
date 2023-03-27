@@ -6,11 +6,14 @@ import Pagination from '@mui/material/Pagination';
 import {useQuery} from "@tanstack/react-query";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import {PaginationItem} from "@mui/material";
 
 const Project: NextPageWithLayout = () => {
-    const PAGE_SIZE = 10;
-    const [searchTerm, setSearchTerm] = React.useState(""), [offset, setOffset] = React.useState(1),
+    const [searchTerm, setSearchTerm] = React.useState(""),
+        [offset, setOffset] = React.useState(1),
+        [page, setPage]:any = React.useState(3),
         cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token'),
         fetchProjects = async (page:any) => {
             try {
@@ -36,19 +39,17 @@ const Project: NextPageWithLayout = () => {
 
         }),
 
-          [page, setPage]:any = React.useState(3),
+
         handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
             setSearchTerm(event.target.value);
         }
 
     const handleChangePage = (page:any)=>{
         setOffset((page-1)*5)
-        console.log(page)
         setPage(page+1)
     }
     //search filter
     const filteredData = project?.data?.projects.filter((item:any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
-    console.log(filteredData)
     return (
         <div className={"md:container-app"}>
             <div className={" mr-4 sm:mx-6 md:mr-0 "}>
@@ -72,7 +73,12 @@ const Project: NextPageWithLayout = () => {
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
                                 {/*edit*/}
-                                <Pagination count={page}  onChange={(event, page) => handleChangePage(page)} />
+                                <Pagination siblingCount={0} boundaryCount={1}  renderItem={(item) => (
+                                    <PaginationItem
+                                        slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                                        {...item}
+                                    />
+                                )} count={page}  onChange={(event, page) => handleChangePage(page)} />
                             </div>
                         </div>
 
