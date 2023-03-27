@@ -24,8 +24,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
     return (
         <section className={"lg:py-2"}>
             {
-
-                projectItem?.data?.projects.map((item: any) => {
+                projectItem?.map((item: any) => {
 
                     return (
 
@@ -45,7 +44,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                                                     <span className={"text-[14px] font-normal"}>{item.budget_minimum} {" - "} {item.budget_maximum}</span>
                                                         <div className={"flex justify-center items-center "}>
                                                             <span className={"md:pl-1"}>  {item.currency_code}</span> {" / "}
-                                                            <span className={"md:pl-1 text-black text-[16px] font-bold"}> hr</span>
+                                                            <span className={" text-black text-[16px] font-bold"}> hr</span>
                                                         </div>
                                                 </div>
                                                 :

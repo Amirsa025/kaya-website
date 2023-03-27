@@ -27,18 +27,20 @@ const Project: NextPageWithLayout = () => {
     const {
         isLoading,
         isError,
-        refetch,
         data: project,
     } = useQuery({
         queryKey: ['page' ,page,searchTerm],
         queryFn: () => fetchProjects(page),
         keepPreviousData: true,
         staleTime: 500,
-        refetchOnWindowFocus:false,
+        refetchOnWindowFocus:true,
         cacheTime: 0
     })
-    const [state, setPost] = useState(project?.data?.projects)
-
+    const handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSearchTerm(event.target.value);
+    };
+    const filteredData = project?.data?.projects.filter((item:any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    console.log(filteredData)
     return (
         <div className={"md:container-app"}>
             <div className={" mr-4 sm:mx-6 md:mr-0 "}>
@@ -54,11 +56,11 @@ const Project: NextPageWithLayout = () => {
                             <div>
                                   <div className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
                                        <div>
-                                        <i  className="ri-search-line text-[1.5rem] text-gray-600"></i>
+                                        <i   className="ri-search-line text-[1.5rem] text-gray-600"></i>
                                        </div>
-                                      <input    type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
+                                      <input  value={searchTerm} onChange={handleSearchChange}  type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
                                  </div>
-                                <ProjectList projectItem={project} />
+                                  <ProjectList projectItem={filteredData} />
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
                                 {/*edit*/}
