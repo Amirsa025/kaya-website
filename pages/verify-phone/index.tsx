@@ -3,8 +3,8 @@ import Heading from "@/app/shared/Heading";
 import AsideVerifyPhone from "@/app/components/form/verify-phone/AsideVerifyPhone";
 import MainVerify from "@/app/components/form/verify-phone/MainVerify";
 import Cookies from "universal-cookie";
-import Router, {useRouter} from "next/router";
-import {ClipLoader, DotLoader} from "react-spinners";
+import Router from "next/router";
+import {DotLoader} from "react-spinners";
 import VerifyUserPanel from "@/app/components/layout/verify-user-panel";
 const VerifyPhone = () => {
     const [loadings,setloading] = useState(true)

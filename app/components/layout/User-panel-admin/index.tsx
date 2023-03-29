@@ -35,7 +35,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             <div
                 className={" flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 "}>
                 <AsidePanel/>
-                <div className={"pb-[7rem] w-full px-4 md:px-0"}>
+                <div className={"pb-[7rem] w-full px-4 md:px-0 "}>
                     {children}
                 </div>
             </div>

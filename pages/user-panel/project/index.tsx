@@ -28,13 +28,15 @@ const Project: NextPageWithLayout = () => {
         }, {
             isLoading,
             isError,
+
             data: project,
+            refetch
         } = useQuery({
             queryKey: ['page', offset, searchTerm],
             queryFn: () => fetchProjects(offset),
             keepPreviousData: true,
             staleTime: 500,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             cacheTime: 0,
 
         }),
@@ -73,7 +75,8 @@ const Project: NextPageWithLayout = () => {
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
                                 {/*edit*/}
-                                <Pagination siblingCount={0} boundaryCount={1}  renderItem={(item) => (
+
+                                <Pagination  siblingCount={0} boundaryCount={1}  renderItem={(item) => (
                                     <PaginationItem
                                         slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
                                         {...item}
