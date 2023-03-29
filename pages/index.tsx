@@ -21,7 +21,7 @@ export default function Home() {
         setTimeout(() => setloading(false), 1000)
     }, [])
     if (loading) return <div
-        className={"   backdrop-blur-xl   h-screen flex items-center justify-center"}>
+        className={"backdrop-blur-xl   h-screen flex items-center justify-center"}>
         <Heading page={"خانه"} titlesite={" کایا"}/>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader

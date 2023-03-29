@@ -78,8 +78,18 @@
     textarea {
         resize: none;
     }
-    textarea.ta10em {
-        height: 10rem;
+    .upload{
+        @apply mb-4 md:mb-0  cursor-pointer  px-6 rounded-md  text-white font-medium text-[12px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd]
+    }
+
+    #inputTag{
+        display: none;
+    }
+    label{
+        cursor:pointer;
+    }
+    #imageName{
+        color:green;
     }
     .direction-ltr{
         direction: ltr !important;
