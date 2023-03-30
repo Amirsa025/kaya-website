@@ -52,7 +52,7 @@ const ComplateRegister: NextPageWithLayout = () => {
                             </div>
                             <div className={"flex-1"}>
                                 <div className={"grid grid-cols-1 lg:grid-cols-2 w-full"}>
-                                    <div className={"px-8 flex flex-col w-full  py-4  space-y-3 px-4"}>
+                                    <div className={"md:px-8 flex flex-col w-full  py-4  space-y-3 "}>
                                         <label className={"pr-2 text-[12px] font-bold"} htmlFor="firstName"> نام </label>
                                         <input type="text"
                                                id="firstName"
@@ -64,7 +64,7 @@ const ComplateRegister: NextPageWithLayout = () => {
                                         />
                                         <p className="text-red-500 pt-1 text-[12px] text-right font-light pr-4">{Myformik.errors.firstName}</p>
                                     </div>
-                                    <div className={"px-8 flex flex-col w-full  py-4  space-y-3 px-4"}>
+                                    <div className={"md:px-8 flex flex-col w-full  py-4  space-y-3 "}>
                                         <label htmlFor="lastName" className={"pr-2 text-[12px] font-bold "}> نام
                                             خانوادگی </label>
                                         <input type="text"
@@ -77,7 +77,7 @@ const ComplateRegister: NextPageWithLayout = () => {
                                         />
                                         <p className="text-red-500 pt-1 text-[12px] text-right font-light pr-4">{Myformik.errors.lastName}</p>
                                     </div>
-                                    <div className={"px-8 flex flex-col w-full  py-4  space-y-3 px-4"}>
+                                    <div className={"md:px-8 flex flex-col w-full  py-4  space-y-3 "}>
                                         <label htmlFor="NationalCode" className={"pr-2 text-[12px] font-bold"}> کد ملی </label>
                                         <input type="number"
                                                id="NationalCode"
