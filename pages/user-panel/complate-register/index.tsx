@@ -40,7 +40,10 @@ const ComplateRegister: NextPageWithLayout = () => {
         }
     });
     return (
-        <section className={" md:container-app "}>
+        <section className={" md:container-app "} data-aos="zoom-in-up"
+                 data-aos-anchor="#example-anchor"
+                 data-aos-offset="500"
+                 data-aos-duration="500">
             <form onSubmit={Myformik.handleSubmit}
                   className={" rounded-md border"}>
                 <div className={"px-4 py-8"}>
@@ -48,11 +51,11 @@ const ComplateRegister: NextPageWithLayout = () => {
                         className={"flex flex-col flex-wrap lg:flex-row  w-full items-center justify-between"}>
                         <div className={"w-full flex flex-col md:flex-row md:items-center "}>
                             <div className={"pt-4 text-center md:text-right"}>
-                                <span className={"py-2 text-[16px] md:text-[14px] font-bold"}>اطلاعات حساب کاربری</span>
+                                <span className={"py-2 text-[16px] md:text-[14px] font-bold"} >اطلاعات حساب کاربری</span>
                             </div>
                             <div className={"flex-1"}>
                                 <div className={"grid grid-cols-1 lg:grid-cols-2 w-full"}>
-                                    <div className={"md:px-8 flex flex-col w-full  py-4  space-y-3 "}>
+                                    <div className={"lg:px-8 flex flex-col w-full  py-4  space-y-3 "}>
                                         <label className={"pr-2 text-[12px] font-bold"} htmlFor="firstName"> نام </label>
                                         <input type="text"
                                                id="firstName"
@@ -64,7 +67,7 @@ const ComplateRegister: NextPageWithLayout = () => {
                                         />
                                         <p className="text-red-500 pt-1 text-[12px] text-right font-light pr-4">{Myformik.errors.firstName}</p>
                                     </div>
-                                    <div className={"md:px-8 flex flex-col w-full  py-4  space-y-3 "}>
+                                    <div className={"lg:px-8 flex flex-col w-full  py-4  space-y-3 "}>
                                         <label htmlFor="lastName" className={"pr-2 text-[12px] font-bold "}> نام
                                             خانوادگی </label>
                                         <input type="text"
@@ -77,7 +80,7 @@ const ComplateRegister: NextPageWithLayout = () => {
                                         />
                                         <p className="text-red-500 pt-1 text-[12px] text-right font-light pr-4">{Myformik.errors.lastName}</p>
                                     </div>
-                                    <div className={"md:px-8 flex flex-col w-full  py-4  space-y-3 "}>
+                                    <div className={"lg:px-8 flex flex-col w-full  py-4  space-y-3 "}>
                                         <label htmlFor="NationalCode" className={"pr-2 text-[12px] font-bold"}> کد ملی </label>
                                         <input type="number"
                                                id="NationalCode"

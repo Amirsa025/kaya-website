@@ -2,7 +2,10 @@ import React from 'react';
 import Image from 'next/image'
 const JobSeeker = () => {
     return (
-        <section className={"border-t  border-gray-100 lg:pt-[162px]"}>
+        <section className={"border-t  border-gray-100 lg:pt-[162px]"}
+                 data-aos="zoom-in-up"
+                 data-aos-delay="50"
+                 data-aos-duration="1000">
             <div className={"container-app flex flex-col-reverse lg:grid lg:grid-cols-2"}>
                 <div>
                     <div className={"mb-[2rem]"}>

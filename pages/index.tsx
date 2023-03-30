@@ -16,6 +16,7 @@ import {DotLoader} from "react-spinners";
 
 
 export default function Home() {
+
     const [loading, setloading] = useState(true)
     useEffect(() => {
         setTimeout(() => setloading(false), 1000)
@@ -34,13 +35,14 @@ export default function Home() {
     return (
         <>
             <Heading page={"صفحه اصلی"} titlesite={" کایا"}/>
-            <div>
+            <div data-aos="fade-up">
                 <div className={"hidden md:block"}>
                     <BannerTop/>
                 </div>
                 <Header/>
                 <div className={"pt-32 md:pt-0"}>
                     <KayaTalent/>
+
                 </div>
                 <LoginSignUP/>
                 <Figures/>

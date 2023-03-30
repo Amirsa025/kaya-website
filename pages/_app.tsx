@@ -1,11 +1,12 @@
 'use client'
 import '@/styles/globals.css'
+
 import type {AppProps} from 'next/app'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Container from "@/app/components/layout/Container";
 import 'remixicon/fonts/remixicon.css'
-import React, {ReactElement, ReactNode} from "react";
+import React, {ReactElement, ReactNode, useEffect} from "react";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,7 +28,7 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
 
     const [queryClient] = React.useState(() => new QueryClient())
     return getLayout(
-        <Container>
+        <Container >
             <QueryClientProvider client={queryClient}>
                 <Hydrate state={pageProps.dehydratedState}>
                     <Component {...pageProps} />

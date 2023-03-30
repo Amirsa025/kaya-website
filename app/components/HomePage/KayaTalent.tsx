@@ -5,8 +5,11 @@ const KayaTalent = () => {
     return (
         <>
             <section className={"container-app md:grid flex flex-col-reverse gap-y-4 md:grid-cols-2 md:pt-[155px] "}>
-                <div className={"lg:pt-[7rem]"}>
-                    <h1 className={"text-[20px] font-bold lg:text-[2.5rem] text-black mb-20"}>
+                <div className={"lg:pt-[7rem]"}
+                     data-aos="zoom-in-up"
+                     data-aos-delay="50"
+                     data-aos-duration="1000">
+                    <h1  className={"text-[20px] font-bold lg:text-[2.5rem] text-black mb-20"}>
                         کایا لیستی از استعداد ها را به خوبی پیدا می کند
                     </h1>
                     <div>
@@ -22,7 +25,10 @@ const KayaTalent = () => {
                             بیشتر</a>
                     </div>
                 </div>
-                <div className={" w-full"}>
+                <div className={" w-full"} data-aos="fade-up"
+                     data-aos-anchor="#example-anchor"
+                     data-aos-offset="500"
+                     data-aos-duration="500">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1690 1640" width="1800"
                          height="1800" preserveAspectRatio="xMidYMid meet"
                          className={"w-full h-full  transMovemt"}>

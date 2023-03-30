@@ -3,7 +3,10 @@ import Image from "next/image";
 
 const NeedTalent = () => {
     return (
-        <section className={"container-app "}>
+        <section className={"container-app "}  data-aos="zoom-in-up"
+                 data-aos-anchor="#example-anchor"
+                 data-aos-offset="1500"
+                 data-aos-duration="1500">
             {/* desktop Mode */}
             <div className={"hidden lg:grid lg:grid-cols-2 border-t  border-gray-300 lg:pt-[10.188rem]"}>
                 <div>
@@ -61,7 +64,7 @@ const NeedTalent = () => {
                         <a href="#" className={"px-4 py-2 text-[15px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd] "}>ثبت نام کن </a>
                     </div>
                 </div>
-                <div>
+                <div  >
                     <div className={"flex   items-center justify-center md:justify-end lg:justify-center"}>
                         <Image
                             src="/images/min-p-500.png" alt={"Star"}
