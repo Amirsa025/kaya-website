@@ -8,7 +8,7 @@ const AsidePanel = () => {
     const router = useRouter();
     return (
         <>
-            <div className={"container-app flex  md:block lg:flex w-full lg:w-[12rem] "}>
+            <div className={"relative z-[1000] container-app flex  md:block lg:flex w-full lg:w-[12rem] "}>
                 <div
                     className={" flex lg:flex-col gap-y-4 hidden md:flex md:flex-row  md:justify-between lg:justify-start lg:fixed"}>
                     {

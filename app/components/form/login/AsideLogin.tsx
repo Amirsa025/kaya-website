@@ -7,8 +7,9 @@ const AsideLogin = () => {
             <div className={"flex flex-row-reverse lg:flex-col justify-between lg:h-screen"}
                  data-aos="fade-down"
                  data-aos-anchor="#example-anchor"
-                 data-aos-offset="700"
-                 data-aos-duration="700"
+                 data-aos-easing="linear"
+                 data-aos-duration="1000"
+                 data-aos-offset="750"
             >
                 <div>
                     <Image src={"/images/login kaya.webp"} alt={""} height={800} width={800} className={"hidden lg:block"}/>
