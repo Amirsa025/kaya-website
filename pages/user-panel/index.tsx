@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const UserPanelPage:NextPageWithLayout = () => {
     const {data ,isFetching , isLoading , error} = useAuth()
-    console.log(data)
+        console.log(data)
       if(data?.data.verify_status==='unverified'){
             return  (
                 <div className={"bg-red-500 text-white w-1/2 flex w-full px-12 mx-auto py-2 rounded-md items-center"}>
@@ -31,22 +31,17 @@ const UserPanelPage:NextPageWithLayout = () => {
     }else if(data?.data.verify_status==='pending'){
         return  null
     }
+      if(isLoading){
+            return  (
+                <div className={"px-4"}>
+                    {/*loadingf*/}
+                    <BannerTop title={"در حال دریافت اطلاعات "}/>
+                </div>
+            )
+      }
     return (
         <>
             <div className={"container-app"}>
-                <div className={"hidden md:block"}>
-                    {
-                        isLoading ? toast.info('در حال دربافت اطلاعات کاربر',{
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: false,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "colored",}) :null
-                    }
-                </div>
                 <div className={"flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 pb-8"}>
                     <span>به داشبورد خوش آمدید</span>
                 </div>
