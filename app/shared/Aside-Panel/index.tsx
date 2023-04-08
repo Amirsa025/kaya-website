@@ -16,7 +16,7 @@ const AsidePanel = () => {
                             return (
                                 <Link href={item.path} legacyBehavior key={item.id} className={"w-20 h-12  flex items-center justify-center"}>
                                     <Tooltip title={item.title} placement="left">
-                                        <div className={""}>
+                                        <div>
                                             <div className={"w-20 h-12  hover:bg-[#f2f8ff] rounded-md hover:cursor-pointer  w-full flex items-center justify-center "} >
                                                 <a  href={item.path} className={router.pathname == item.path ? "block w-20 h-12  flex items-center justify-center bg-[#f2f8ff] rounded-md hover:cursor-pointer" : ""}>
                                                     <i className={`${item.icon} text-[1.5rem]`}></i>

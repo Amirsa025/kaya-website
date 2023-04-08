@@ -31,4 +31,15 @@ const useSginUp = () => {
         })
     });
 };
- export {storeToken,useLogin,useSginUp}
+const useComplateRegister = () => {
+    return useMutation((formPayload: void) => {
+
+        return callApi().post('/users/verify', {
+            //@ts-ignore
+            firstName: formPayload?.loginNumber,
+            //@ts-ignore
+            password: formPayload?.password
+        })
+    });
+};
+ export {storeToken,useLogin,useSginUp,useComplateRegister}

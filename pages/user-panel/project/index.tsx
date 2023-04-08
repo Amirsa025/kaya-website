@@ -9,9 +9,13 @@ import Cookies from "universal-cookie";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {PaginationItem} from "@mui/material";
+import useAuth from "@/app/helper/useAuth";
 
 const Project: NextPageWithLayout = () => {
+    const {data ,isFetching , error} = useAuth()
+    console.log(data)
     const [searchTerm, setSearchTerm] = React.useState(""),
+
         [offset, setOffset] = React.useState(1),
         [page, setPage]:any = React.useState(3),
         cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token'),
@@ -25,12 +29,11 @@ const Project: NextPageWithLayout = () => {
             } catch (error) {
                 console.log(error)
             }
-        }, {
+        },
+        {
             isLoading,
             isError,
-
             data: project,
-            refetch
         } = useQuery({
             queryKey: ['page', offset, searchTerm],
             queryFn: () => fetchProjects(offset),

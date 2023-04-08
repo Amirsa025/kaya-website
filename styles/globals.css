@@ -85,6 +85,9 @@
     #inputTag{
         display: none;
     }
+    #personPhoto{
+        display: none;
+    }
     label{
         cursor:pointer;
     }

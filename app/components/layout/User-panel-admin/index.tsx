@@ -12,10 +12,11 @@ interface IPropsAdmin {
 
 const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     const [loading, setloading] = useState(true)
+
     useEffect(() => {
         setTimeout(() => setloading(false), 1000)
     }, [])
-    if (loading) return <div className={" backdrop-blur-sm h-screen flex items-center justify-center"}>
+    if (loading) return <div className={"backdrop-blur-0 flex items-center justify-center"}>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader
                 color="#36d7b7"
@@ -34,7 +35,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             <Header/>
             <div
                 className={" flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 "}>
-                <AsidePanel/>
+                 <AsidePanel/>
                 <div className={"pb-[7rem] w-full px-4 md:px-0 "}>
                     {children}
                 </div>
