@@ -22,32 +22,40 @@ const UserPanelPage:NextPageWithLayout = () => {
                     </div>
                 </div>
             )
-    }else if(data?.data.verify_status==='pending'){
+    }
+      else if(data?.data.verify_status==='pending'){
         return  (
-            <div>
+            <div className={"container-app"}>
                 <BannerTop title={"احراز هویت شما در حال بررسی است "}/>
             </div>
         )
-    }else if(data?.data.verify_status==='pending'){
-        return  null
+    }
+      else if(data?.data.verify_status==='verified'){
+        return  (
+            <div className={"container-app !pt-[10rem]"}>
+                <div className={"flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 pb-8"}>
+                    <span>به داشبورد خوش آمدید</span>
+                </div>
+            </div>
+        )
     }
       if(isLoading){
             return  (
-                <div className={"px-4"}>
+                <div className={"container-app px-4"}>
                     {/*loadingf*/}
                     <BannerTop title={"در حال دریافت اطلاعات "}/>
                 </div>
             )
       }
-    return (
-        <>
-            <div className={"container-app"}>
-                <div className={"flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 pb-8"}>
-                    <span>به داشبورد خوش آمدید</span>
-                </div>
+    if(isFetching){
+        return  (
+            <div className={"container-app px-4"}>
+                {/*loadingf*/}
+                <BannerTop title={"صبر کنید... "}/>
             </div>
-        </>
-    );
+        )
+    }
+    return <></>
 };
 UserPanelPage.getLayout = (page)=> <UserPanelAdmin>{page}</UserPanelAdmin>
 export default UserPanelPage;
