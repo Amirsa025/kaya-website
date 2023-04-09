@@ -32,7 +32,7 @@ const MainLogin: NextPageWithLayout = () => {
                                 position: "top-center",
                                 closeButton: false,
                                 autoClose: 3000,
-                                hideProgressBar: false,
+                                hideProgressBar: true,
                                 closeOnClick: true,
                                 pauseOnHover: true,
                                 draggable: true,

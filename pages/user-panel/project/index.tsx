@@ -40,7 +40,7 @@ const Project: NextPageWithLayout = () => {
             keepPreviousData: true,
             staleTime: 500,
             refetchOnWindowFocus: false,
-            cacheTime: 0,
+            cacheTime: 1000,
 
         }),
 

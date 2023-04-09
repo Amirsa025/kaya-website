@@ -36,10 +36,11 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
                         className="custom-toast-container"
                         bodyClassName="toastBody"
                         icon={false}
-                        hideProgressBar={false}
+                        transition={Slide}
+                        hideProgressBar
                         newestOnTop={false}
                         closeOnClick
-
+                        closeButton={false}
                         rtl={false}
                         pauseOnFocusLoss
                         draggable

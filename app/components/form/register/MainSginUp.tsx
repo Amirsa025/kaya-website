@@ -34,9 +34,10 @@ const MainSginup = () => {
                     console.log(err)
                    if(err.data.code===1001 && err.data.status===401){
                        toast.error(`${err.message}`, {
-                           position: "top-right",
-                           autoClose: 5000,
-                           hideProgressBar: false,
+                           position: "top-center",
+                           className:"toast-success-container",
+                           autoClose: 3000,
+                           hideProgressBar: true,
                            closeOnClick: true,
                            pauseOnHover: true,
                            draggable: true,
@@ -46,9 +47,9 @@ const MainSginup = () => {
                    }
                    if (err.data.status===401 && err.data.code===1002 && err.data.phone_verified===true){
                        toast.error(`${err.message}`, {
-                           position: "top-right",
+                           position: "top-center",
                            autoClose: 5000,
-                           hideProgressBar: false,
+                           hideProgressBar: true,
                            closeOnClick: true,
                            pauseOnHover: true,
                            draggable: true,

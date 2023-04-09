@@ -4,6 +4,7 @@ import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import {toast} from "react-toastify";
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 const ComplateRegister: NextPageWithLayout = () => {
     const [previewImage, setPreviewImage] = useState(null)
         const [showError,setShowError] = useState({
@@ -42,20 +43,22 @@ const ComplateRegister: NextPageWithLayout = () => {
             if(result.status===200){
                 toast.success('اطلاعات اولیه شما با موفقیت ثبت شد',{
                     position: "top-center",
+                    className:"toast-success-container",
                     autoClose: 5000,
-                    hideProgressBar: false,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    theme: "colored",})
+                    theme: "colored",}
+                )
             }
             return result.data
         }catch (error){
             toast.error('اطلاعات وارد شده یا شبکه مشکل دارد',{
                 position: "top-center",
                 autoClose: 5000,
-                hideProgressBar: false,
+                hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,

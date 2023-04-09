@@ -29,7 +29,9 @@ const MainVerify = () => {
                 console.log(responseData.data)
                 if(responseData.status===200 && responseData.data.phone_verified===true){
                     toast.success('احراز هویت شما باموفقیت  انجام شد!', {
-                        position: "top-right",
+                        position: "top-center",
+                        className:"toast-success-container",
+                        closeButton: false,
                         autoClose: 3000,
                         hideProgressBar: false,
                         closeOnClick: true,
@@ -48,9 +50,9 @@ const MainVerify = () => {
                 }
                 if(responseData.data.message==="Forbidden" && responseData.status===401){
                     toast.error(' خطایی به وجود آمده است.', {
-                        position: "top-right",
+                        position: "top-center",
                         autoClose: 5000,
-                        hideProgressBar: false,
+                        hideProgressBar: true,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,

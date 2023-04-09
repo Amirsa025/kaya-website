@@ -21,15 +21,15 @@ const callApi = () => {
             if(res) {
                 if(res.status === 400  ) {
                     toast.error('خطا ', {
-                        position: "top-right",
+                        position: "top-center",
+                        className:"toast-success-container",
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        theme: "colored",
-                    });
+                        theme: "colored",});
                 }
             }
             throw err;

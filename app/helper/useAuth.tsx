@@ -13,7 +13,10 @@ const fetchUser = ()=>{
 const UseAuth = () => {
     const { isLoading, error, data:user, isFetching } = useQuery({
         queryKey: ["getUser"],
-        queryFn: () => fetchUser()
+        queryFn: () => fetchUser(),
+        staleTime: 500,
+        refetchOnWindowFocus: false,
+        cacheTime: 0,
     });
     return {data:user ,isFetching , error ,isLoading}
 };
