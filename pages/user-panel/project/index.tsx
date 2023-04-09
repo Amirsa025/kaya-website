@@ -10,6 +10,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {PaginationItem} from "@mui/material";
 import useAuth from "@/app/helper/useAuth";
+import Heading from "@/app/shared/Heading";
 
 const Project: NextPageWithLayout = () => {
     const {data ,isFetching , error} = useAuth()
@@ -57,6 +58,7 @@ const Project: NextPageWithLayout = () => {
     const filteredData = project?.data?.projects.filter((item:any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
     return (
         <div className={"md:container-app"}>
+            <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
             <div className={" mr-4 sm:mx-6 md:mr-0 "}>
                 {isLoading ? (
                     <div className={"text-white center-item w-full tex-[12px] h-16 bg-blue-300 rounded-md px-8"}>درحال دریافت اطلاعات از سرور... </div>
