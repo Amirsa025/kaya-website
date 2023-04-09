@@ -4,6 +4,7 @@ import {useQuery} from "@tanstack/react-query";
 import callApi from "@/app/helper/callApi";
 const cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token')
 const fetchUser = ()=>{
+    console.log(ACCESS_TOKEN)
         return callApi().get('/users/me',{
             headers: {
                 'Authorization': `Bearer ${ACCESS_TOKEN}`

@@ -16,7 +16,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     useEffect(() => {
         setTimeout(() => setloading(false), 1000)
     }, [])
-    if (loading) return <div className={"backdrop-blur-0 flex items-center justify-center"}>
+    if (loading) return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader
                 color="#36d7b7"

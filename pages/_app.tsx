@@ -7,6 +7,7 @@ import Container from "@/app/components/layout/Container";
 import 'remixicon/fonts/remixicon.css'
 import React, {ReactElement, ReactNode, useEffect} from "react";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {NextPage} from "next";
@@ -32,12 +33,13 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
                 <Hydrate state={pageProps.dehydratedState}>
                     <Component {...pageProps} />
                     <ToastContainer
+                        className="custom-toast-container"
                         bodyClassName="toastBody"
-                        position="top-right"
-                        autoClose={3000}
+                        icon={false}
                         hideProgressBar={false}
                         newestOnTop={false}
                         closeOnClick
+
                         rtl={false}
                         pauseOnFocusLoss
                         draggable

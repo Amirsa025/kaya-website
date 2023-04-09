@@ -28,7 +28,9 @@ const MainLogin: NextPageWithLayout = () => {
                             setDisable(true)
                             setTimeout(async () => await Router.replace('/user-panel'), 3000)
                             toast.success('شما باموفقیت  وارد شدید', {
-                                position: "top-right",
+                                className:"toast-success-container",
+                                position: "top-center",
+                                closeButton: false,
                                 autoClose: 3000,
                                 hideProgressBar: false,
                                 closeOnClick: true,

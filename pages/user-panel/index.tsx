@@ -5,21 +5,23 @@ import BannerTop from "@/app/shared/banner-content";
 import useAuth from "@/app/helper/useAuth";
 import {toast} from "react-toastify";
 import Link from "next/link";
-
 const UserPanelPage:NextPageWithLayout = () => {
     const {data ,isFetching , isLoading , error} = useAuth()
         console.log(data)
       if(data?.data.verify_status==='unverified'){
             return  (
-                <div className={"bg-red-500 text-white w-1/2 flex w-full px-12 mx-auto py-2 rounded-md items-center"}>
-                    <div className={"flex items-center justify-center w-full"}>
-                        <div>
-                            <span className={"text-[15px] "}>احراز هویت شما کامل نیست .</span>
-                        </div>
-                        <div className={"underline text-[12px] font-medium"}>
-                            <Link href={'/user-panel/complate-register'}>تکمیل ثبت نام</Link>
+                <div className={"container-app"}>
+                    <div className={"bg-red-500 text-white w-1/2 flex w-full px-12 mx-auto py-2 rounded-md items-center"}>
+                        <div className={" flex items-center justify-center w-full"}>
+                            <div>
+                                <span className={"text-[15px] "}>احراز هویت شما کامل نیست .</span>
+                            </div>
+                            <div className={"underline text-[12px] font-medium"}>
+                                <Link href={'/user-panel/complate-register'}>تکمیل ثبت نام</Link>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             )
     }
@@ -40,8 +42,10 @@ const UserPanelPage:NextPageWithLayout = () => {
         )
     }
       if(isLoading){
-            return  (
+
+          return  (
                 <div className={"container-app px-4"}>
+
                     {/*loadingf*/}
                     <BannerTop title={"در حال دریافت اطلاعات "}/>
                 </div>
@@ -50,8 +54,17 @@ const UserPanelPage:NextPageWithLayout = () => {
     if(isFetching){
         return  (
             <div className={"container-app px-4"}>
-                {/*loadingf*/}
-                <BannerTop title={"صبر کنید... "}/>
+                {toast.info('در حال دریافت اطلاعات ',{
+                    className:"toast-success-container ",
+                    position: "top-center",
+                    autoClose: 2000,
+                    closeButton: false,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: 0,
+                    theme: "colored",})}
             </div>
         )
     }

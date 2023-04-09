@@ -42,7 +42,6 @@ export default function Home() {
                 <Header/>
                 <div className={"pt-32 md:pt-0"}>
                     <KayaTalent/>
-
                 </div>
                 <LoginSignUP/>
                 <Figures/>
