@@ -61,7 +61,7 @@ const MainLogin: NextPageWithLayout = () => {
     });
 
     return (
-        <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}    data-aos="fade-down"
+        <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}
              data-aos-anchor="#example-anchor"
              data-aos-easing="linear"
              data-aos-duration="1000"
