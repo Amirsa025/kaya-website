@@ -34,37 +34,10 @@ const UserPanelPage:NextPageWithLayout = () => {
     }
       else if(data?.data.verify_status==='verified'){
         return  (
-            <div className={"container-app !pt-[10rem]"}>
+            <div className={"container-app "}>
                 <div className={"flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 pb-8"}>
-                    <span>به داشبورد خوش آمدید</span>
+                    <div><span className={"px-2 text-red-400 font-medium text-[1.5rem]"}>{data?.data.profile?.first_name}</span>به داشبورد خوش آمدید </div>
                 </div>
-            </div>
-        )
-    }
-      if(isLoading){
-
-          return  (
-                <div className={"container-app px-4"}>
-
-                    {/*loadingf*/}
-                    <BannerTop title={"در حال دریافت اطلاعات "}/>
-                </div>
-            )
-      }
-    if(isFetching){
-        return  (
-            <div className={"container-app px-4"}>
-                {toast.info('در حال دریافت اطلاعات ',{
-                    className:"toast-success-container ",
-                    position: "top-center",
-                    autoClose: 2000,
-                    closeButton: false,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: 0,
-                    theme: "colored",})}
             </div>
         )
     }
