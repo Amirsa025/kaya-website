@@ -11,7 +11,7 @@ const fetchUser = ()=>{
         })
 }
 const UseAuth = () => {
-    const { isLoading, error, data:user, isFetching ,refetch } = useQuery({
+    const { isLoading, isError, data:user, isFetching ,refetch } = useQuery({
         queryKey: ["getUser"],
         queryFn: () => fetchUser(),
         staleTime: 500,
@@ -20,7 +20,7 @@ const UseAuth = () => {
         retry: 10,
 
     });
-    return {data:user ,isFetching , error ,isLoading}
+    return {data:user ,isFetching , isError ,isLoading}
 };
 
 export default UseAuth;

@@ -13,10 +13,7 @@ import useAuth from "@/app/helper/useAuth";
 import Heading from "@/app/shared/Heading";
 
 const Project: NextPageWithLayout = () => {
-    const {data , error} = useAuth()
-    console.log(data)
     const [searchTerm, setSearchTerm] = React.useState(""),
-
         [offset, setOffset] = React.useState(1),
         [page, setPage]:any = React.useState(3),
         cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token'),
