@@ -12,22 +12,23 @@ import {MoonLoader} from "react-spinners";
 const UserPanelPage: NextPageWithLayout = () => {
     const {data, isFetching, isLoading, isError} = useAuth()
     if(isLoading){
-        return  <div className={"px-24 w-full"}>
-                <div className={"text-white center-item w-full tex-[12px] h-16 bg-blue-400 rounded-md px-4 w-10/12 "}>
-                    <div className={" rounded-md w-full py-2 px-4 bg-blue-300 flex  items-center gap-8"}>
-                        <div>
+        return  <div className={"lg:px-24 w-full"}>
+                <div className={"text-white center-item  tex-[12px] h-16 bg-blue-400 rounded-md px-2  w-full lg:w-10/12 "}>
+                    <div className={" rounded-md w-full py-2 lg:px-1 bg-blue-300 flex  items-center  gap-4"}>
+                        <div className={"px-3"}>
                             <MoonLoader
                                 color="#162f48"
                                 size={20}
                             />
                         </div>
-                        درحال دریافت اطلاعات از سرور...</div>
+                        <span>  درحال دریافت اطلاعات از سرور...</span>
+                      </div>
 
                 </div>
         </div>
     }
     if(isError) {
-        return   <div className={"bg-red-300 rounded-md w-10/12 py-4 px-6"}>
+        return   <div className={"bg-red-300 rounded-md w-full lg:w-10/12 py-4 px-6"}>
 
             <div className={"bg-red-200 py-2  flex items-center gap-8 text-white  w-full tex-[12px]   rounded-md px-8"}>
                 <svg className="text-red-600 flex-shrink-0" width="30" height="30"
