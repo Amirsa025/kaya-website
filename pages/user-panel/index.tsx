@@ -62,7 +62,7 @@ const UserPanelPage: NextPageWithLayout = () => {
         )
     } else if (data?.data.verify_status === 'pending') {
         return (
-            <div className={"container-app"}>
+            <div className={"md:container-app"}>
                 <div className={"bg-gray-100 w-full  lg:w-10/12 py-6 rounded-md px-2  "}>
                     <div
                         className={"flex gap-4 items-center px-4 border border-gray-200 bg-gray-50 rounded-md py-2"}>
