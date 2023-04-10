@@ -13,7 +13,7 @@ import useAuth from "@/app/helper/useAuth";
 import Heading from "@/app/shared/Heading";
 
 const Project: NextPageWithLayout = () => {
-    const {data ,isFetching , error} = useAuth()
+    const {data , error} = useAuth()
     console.log(data)
     const [searchTerm, setSearchTerm] = React.useState(""),
 
@@ -24,7 +24,7 @@ const Project: NextPageWithLayout = () => {
             try {
                 return await callApi().get(`/projects/projects?limit=5&offset=${offset}`, {
                     headers: {
-                        'Authorization': `Bearer ${ACCESS_TOKEN}`
+                        'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
                     }
                 })
             } catch (error) {
@@ -42,7 +42,7 @@ const Project: NextPageWithLayout = () => {
             staleTime: 500,
             refetchOnWindowFocus: false,
             cacheTime: 1000,
-
+            retryDelay: 1000, // Will always wait 1000ms to retry, regardless of how many retries
         }),
 
 

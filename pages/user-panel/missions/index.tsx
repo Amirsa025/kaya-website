@@ -6,6 +6,7 @@ import useAuth from "@/app/helper/useAuth";
 import ViewProfile from "@/app/components/form/view-profile/VeiwProfile";
 const Mission: NextPageWithLayout = () => {
     const {data, isFetching, isLoading, error} = useAuth()
+
     if(data?.data.verify_status==="unverified" ||data?.data.verify_status==="pending"){
         return (
             <>

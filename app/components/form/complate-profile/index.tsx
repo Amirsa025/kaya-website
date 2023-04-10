@@ -7,8 +7,6 @@ import Router from "next/router";
 
 const CompleteProfile:React.FC = () => {
     const [previewImage, setPreviewImage] = useState(null)
-    const [enteredName, setEnteredName] = useState("");
-
     const [previewImagePerson, setPreviewImagePerson] = useState(null)
     const cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token')
     const handleFileInputChange = (event:any) => {
@@ -86,6 +84,7 @@ const CompleteProfile:React.FC = () => {
                                         <div className={"lg:px-8 flex flex-col w-full  pt-4  space-y-3 "}>
                                             <label className={"pr-2 text-[12px] font-bold"} htmlFor="first_name"> نام </label>
                                             <input
+                                                required
                                                 type="text"
                                                 id="first_name"
                                                 name="first_name"
