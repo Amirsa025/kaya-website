@@ -3,12 +3,12 @@ import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import {toast} from "react-toastify";
 import Heading from "@/app/shared/Heading";
+import Router from "next/router";
 
 const CompleteProfile:React.FC = () => {
     const [previewImage, setPreviewImage] = useState(null)
-    const [showError,setShowError] = useState({
-        first_Name:null
-    })
+    const [enteredName, setEnteredName] = useState("");
+
     const [previewImagePerson, setPreviewImagePerson] = useState(null)
     const cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token')
     const handleFileInputChange = (event:any) => {
@@ -28,9 +28,9 @@ const CompleteProfile:React.FC = () => {
     }
     const submitFormHandler = async (e:any) => {
         e.preventDefault();
+
         const formData = new FormData(e.target);
         const inputObject = Object.fromEntries(formData);
-
         try {
             const result = await callApi().post('/users/verify',inputObject,{ headers: {
                     "Content-Type": "multipart/form-data",
@@ -48,6 +48,9 @@ const CompleteProfile:React.FC = () => {
                     progress: undefined,
                     theme: "colored",}
                 )
+                setTimeout(async ()=>{
+                    await Router.replace('/user-panel')}
+                ,1000)
             }
             return result.data
         }catch (error){
@@ -83,7 +86,6 @@ const CompleteProfile:React.FC = () => {
                                         <div className={"lg:px-8 flex flex-col w-full  pt-4  space-y-3 "}>
                                             <label className={"pr-2 text-[12px] font-bold"} htmlFor="first_name"> نام </label>
                                             <input
-                                                required
                                                 type="text"
                                                 id="first_name"
                                                 name="first_name"
@@ -168,7 +170,6 @@ const CompleteProfile:React.FC = () => {
                                                             انتخاب عکس <br/>
                                                             <i className="ri-camera-fill"></i>
                                                             <input id="inputTag" type="file"
-                                                                   required
                                                                    name='national_card_photo'
                                                                    accept='image/*'
                                                                    onChange={handleFileInputChange}/>
@@ -195,7 +196,7 @@ const CompleteProfile:React.FC = () => {
                                                             انتخاب عکس <br/>
                                                             <i className="ri-camera-fill"></i>
                                                             <input
-                                                                required
+
                                                                 id="personPhoto"
                                                                 name={"verify_photo"}
                                                                 type="file"
