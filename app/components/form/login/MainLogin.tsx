@@ -71,7 +71,7 @@ const MainLogin: NextPageWithLayout = () => {
             {/*logo*/}
             <div className={"flex items-center pt-1 w-16 h-8"}>
                 <Link href={"/"}>
-                    <Image  src="/images/Asset.png" alt="logo"/>
+                    <Image width={64}  height={32} src="/images/Asset.png" alt="logo"/>
                 </Link>
             </div>
             <div>
