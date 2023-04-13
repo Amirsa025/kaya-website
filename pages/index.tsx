@@ -19,14 +19,14 @@ export default function Home() {
 
     const [loading, setloading] = useState(true)
     useEffect(() => {
-        setTimeout(() => setloading(false), 1000)
+        setTimeout(() => setloading(false), 10)
     }, [])
     if (loading) return <div
         className={"backdrop-blur-xl   h-screen flex items-center justify-center"}>
         <Heading page={"خانه"} titlesite={" کایا"}/>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader
-                color="#36d7b7"
+                color="#1976D2"
                 size={150}
             />
         </div>

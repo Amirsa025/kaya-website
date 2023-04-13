@@ -1,12 +1,8 @@
 import React from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
-import BannerTop from "@/app/shared/banner-content";
 import useAuth from "@/app/helper/useAuth";
-import {toast} from "react-toastify";
 import Link from "next/link";
-import {Alert} from "@material-tailwind/react";
-import Heading from "@/app/shared/Heading";
 import {MoonLoader} from "react-spinners";
 
 const UserPanelPage: NextPageWithLayout = () => {

@@ -19,7 +19,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     if (loading) return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
         <div className={"flex flex-col items-center justify-center "}>
             <DotLoader
-                color="#36d7b7"
+                color="#1976D2"
                 size={150}
             />
         </div>
