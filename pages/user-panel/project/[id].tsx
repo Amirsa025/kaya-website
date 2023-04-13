@@ -5,6 +5,7 @@ import {dehydrate} from "@tanstack/query-core";
 import {QueryClient, useQuery} from "@tanstack/react-query";
 import {useRouter} from "next/router";
 import {GetStaticPaths, GetStaticProps} from "next";
+import Header from "@/app/shared/NavBar";
 export const fetchProjects = async (id: any) => {
     const cookie = new  Cookies()
     try {
@@ -43,7 +44,7 @@ const SendBid = () => {
 
     return (
         <>
-            {/*<Header/>*/}
+            <Header/>
             <span className={"container-app"}>send-bid</span>
         </>
     );
