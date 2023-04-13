@@ -1,13 +1,7 @@
 import React from 'react';
-// import callApi from "@/app/helper/callApi";
-// import Cookies from "universal-cookie";
-// import {dehydrate} from "@tanstack/query-core";
-// import {QueryClient, useQuery} from "@tanstack/react-query";
-//
-// import {GetStaticPaths, GetStaticProps} from "next";
 import Header from "@/app/shared/NavBar";
 import {useRouter} from "next/router";
-import {GetStaticPaths, GetStaticProps} from "next";
+import {GetServerSideProps} from "next";
 import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
@@ -60,7 +54,7 @@ const SendBid = () => {
 export default SendBid;
 
 
-export const getStaticProps: GetStaticProps = async (context:any) => {
+export const getServerSideProps: GetServerSideProps = async (context:any) => {
     const { id } = context.params;
     const queryClient = new QueryClient();
 
@@ -75,13 +69,5 @@ export const getStaticProps: GetStaticProps = async (context:any) => {
             //also passing down isError state to show a custom error component.
             dehydratedState: dehydrate(queryClient),
         },
-        revalidate: 60
     }
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    return {
-        paths: [],
-        fallback: "blocking"
-    };
 };
