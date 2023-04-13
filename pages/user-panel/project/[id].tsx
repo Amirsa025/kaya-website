@@ -51,17 +51,17 @@ const SendBid = () => {
             staleTime: Infinity
         }
     );
-    console.log(data)
     return (
         <>
 
             <Header/>
-            <div className={"md:container-app"}>
+            {
+                isLoading ?    <LinearProgress variant="determinate" color="inherit"  value={progress} />:null
+            }
+            <div className={"md:container-app pt-40 text-left md:pt-20 px-6 w-full"}>
+
                 {
-                   isLoading ?    <LinearProgress variant="determinate" color="inherit"  value={progress} />:null
-                }
-                {
-                    isSuccess ? <span className={"py-4"}> {data?.data.title}</span>:null
+                    isSuccess ? <span className={""}> {data?.data.title}</span>:null
                 }
 
             </div>
