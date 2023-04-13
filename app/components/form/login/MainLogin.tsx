@@ -9,6 +9,7 @@ import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
 import {SginINSchema} from "@/app/components/form/login/vaildation";
 import Cookies from "universal-cookie";
+import Image from "next/image";
 const MainLogin: NextPageWithLayout = () => {
     const {mutate, isSuccess, isError, isLoading} = useLogin();
     const cookies = new Cookies()
@@ -70,7 +71,7 @@ const MainLogin: NextPageWithLayout = () => {
             {/*logo*/}
             <div className={"flex items-center pt-1 w-16 h-8"}>
                 <Link href={"/"}>
-                    <img src="/images/Asset.png" alt="logo"/>
+                    <Image  src="/images/Asset.png" alt="logo"/>
                 </Link>
             </div>
             <div>

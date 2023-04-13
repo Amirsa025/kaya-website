@@ -6,6 +6,7 @@ import Cookies from "universal-cookie";
 import Router from "next/router";
 import {codeVerifySchema} from "@/app/components/form/verify-phone/vaildation";
 import {toast} from "react-toastify";
+import Image from "next/image";
 
 const MainVerify = () => {
     const cookie = new Cookies()
@@ -82,7 +83,7 @@ const MainVerify = () => {
             {/*logo*/}
             <div className={"flex items-center pt-1 w-16 h-8"}>
                 <Link href={"/"}>
-                    <img src="/images/Asset.png" alt="logo"/>
+                    <Image src="/images/Asset.png" alt="logo"/>
                 </Link>
             </div>
                 <div>
