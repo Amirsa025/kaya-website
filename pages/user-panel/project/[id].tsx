@@ -68,6 +68,7 @@ export const getStaticProps: GetStaticProps = async (context:any) => {
             //also passing down isError state to show a custom error component.
             dehydratedState: dehydrate(queryClient),
         },
+        revalidate: 60
     }
 };
 
