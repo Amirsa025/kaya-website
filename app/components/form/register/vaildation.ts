@@ -6,7 +6,8 @@ const SginupSchema: any = yup.object().shape({
     phoneNumber: yup.string().required('لطفاشماره همراه خود را وارد کنید').min(4, 'لطفا در در وارد کردن تلفن همراه  خود دقت کنید')
         .matches(phonenumberPattern, 'لطفا شماره تلفن خود را به درستی وارد کنید. '),
     password: yup.string().required('لطفا در رمز خود را وارد کنید.').min(8, 'لطفا در در وارد کردن رمز عبور خود دقت کنید')
-        .matches(passwordPattern, 'رمز عبور براساس حروف کوچیک و حروف بزرگ و اعداد می باشد. ')
+        .matches(passwordPattern, 'رمز عبور براساس حروف کوچیک و حروف بزرگ و اعداد می باشد. ')  ,
+    referralCode: yup.string().required('کد معرف شما معتبر نیست.')
 });
 
 export {SginupSchema}

@@ -16,7 +16,8 @@ const MainSginup = () => {
     const Myformik = useFormik({
         initialValues: {
             phoneNumber:'',
-            password: ''
+            referralCode: '',
+            password: '',
         },
         validationSchema: SginupSchema,
         onSubmit: (values:any) => {
@@ -111,7 +112,18 @@ const MainSginup = () => {
                         {Myformik.touched.password && Boolean(Myformik.errors.password)}
                         <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
                     </div>
-
+                    <div>
+                        <input
+                            id="referralCode"
+                            name="referralCode"
+                            type="text"
+                            onChange={Myformik.handleChange}
+                            value={Myformik.values.referralCode}
+                            className={"overflow-hidden w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-500 rounded-md outline-0"}
+                            placeholder={"کد معرف خود را وارد کنبد..."}/>
+                        {Myformik.touched.phoneNumber && Boolean(Myformik.errors.referralCode)}
+                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.referralCode}</p>
+                    </div>
                     <div className={"cursor-pointer "}>
                         <button
                             type={"submit"}

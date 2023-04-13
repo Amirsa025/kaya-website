@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import Router from "next/router";
 import AsidePanel from "@/app/shared/Aside-Panel";
 import Header from "@/app/shared/NavBar";
+import LinearProgress from "@mui/material/LinearProgress";
 
 interface IPropsAdmin {
     children: ReactNode
@@ -12,25 +13,28 @@ interface IPropsAdmin {
 
 const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     const [loading, setloading] = useState(true)
-
+      const cookie = new Cookies()
     useEffect(() => {
-        setTimeout(() => setloading(false), 1000)
+        setTimeout(() => setloading(false), 100)
     }, [])
-    if (loading) return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
-        <div className={"flex flex-col items-center justify-center "}>
-            <DotLoader
-                color="#1976D2"
-                size={150}
-            />
+    if (loading){
+        return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
+            <div className={"flex flex-col items-center justify-center "}>
+                <DotLoader
+                    color="#36d7b7"
+                    size={150}
+                />
+            </div>
         </div>
-    </div>
-    const cookie = new Cookies()
+    }
+
     if (!cookie.get('token') && !cookie.get('sginUP')) {
         Router.replace('/').then()
         return <></>
     }
     return (
         <div className={"w-full "}>
+            {loading ?   <LinearProgress color="inherit" />:null}
             <Heading page={"پنل کاربر"} titlesite={" کایا"}/>
             <Header/>
             <div

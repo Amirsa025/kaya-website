@@ -27,7 +27,9 @@ const useSginUp = () => {
             //@ts-ignore
             phone_number: formPayload?.phoneNumber,
             //@ts-ignore
-            password: formPayload?.password
+            password: formPayload?.password,
+            //@ts-ignore
+            referral_code: formPayload?.referralCode,
         })
     });
 };

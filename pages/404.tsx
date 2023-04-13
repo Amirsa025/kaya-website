@@ -641,13 +641,13 @@ const Custom404 = () => {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <div className={"absolute lg:top-[40rem] top-[30rem] text-center "}>
-                                   <p className={"text-2xl font-bold py-6 text-gray-600"}> عرض پوزش از شما، چنین صفحه‌ای در سایت وجود ندارد یا این صفحه از سایت پاک شده است</p>
+                            <div className={"px-6 py-4 absolute lg:top-[40rem] top-[30rem] text-center "}>
+                                   <p className={"text-xl md:text-2xl font-bold py-6 text-gray-600 leading-8"}> عرض پوزش از شما، چنین صفحه‌ای در سایت وجود ندارد یا این صفحه از سایت پاک شده است</p>
                                 <Link href="/" legacyBehavior className={""}>
                                     <a className={"text-lg text-blue-700 font-medium  p-4 border w-full inline-block bg-white rounded-md"}>
 
                                     <span className={"border !bg-gray-50 w-1/2  mx-auto block py-2 rounded-md"}>
-                                        بازگشت به خانه
+                                        <span>        بازگشت به خانه</span>
                                        <svg className="inline text-lg md:w-7 md:h-7 w-4 h-4"
                                             viewBox="0 0 28 29" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">

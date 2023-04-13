@@ -1,15 +1,17 @@
 import React from 'react';
-import Header from "@/app/shared/NavBar";
 import {useRouter} from "next/router";
 import {GetServerSideProps} from "next";
 import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
+import dynamic from "next/dynamic";
+import LinearProgress from '@mui/material/LinearProgress';
+
 export const fetchProjects = async (id: any) => {
-    console.log(id)
+
     const cookie = new  Cookies()
     try {
-        return await callApi().get(`/projects/projects?limit=5&offset=8`, {
+        return await callApi().get(`/projects/projects/${id}`, {
             headers: {
                 'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
             }
@@ -18,7 +20,27 @@ export const fetchProjects = async (id: any) => {
         console.error(error)
     }
 }
+const Header = dynamic(
+    () => import('@/app/shared/NavBar'),
+    { ssr: false }
+)
 const SendBid = () => {
+    const [progress, setProgress] = React.useState(0);
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress((oldProgress) => {
+                if (oldProgress === 100) {
+                    return 0;
+                }
+                const diff = Math.random() * 100;
+                return Math.min(oldProgress + diff, 100);
+            });
+        }, 500);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
     const router =useRouter()
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
     const { isSuccess, data, isLoading, isError } = useQuery(
@@ -29,24 +51,21 @@ const SendBid = () => {
             staleTime: Infinity
         }
     );
-    if(isError){
-        return (
-            <div className="center">
-                <Header/>
-                We could not find your ProjectList
-                <span role="img" aria-label="sad">
-        </span>
-            </div>
-        );
-    }
-    if (isLoading) {
-        return <div className="center">Loading...</div>;
-    }
-
+    console.log(data)
     return (
         <>
+
             <Header/>
-            <span className={"container-app"}>send-bid</span>
+            <div className={"md:container-app"}>
+                {
+                   isLoading ?    <LinearProgress variant="determinate" color="inherit"  value={progress} />:null
+                }
+                {
+                    isSuccess ? <span className={"py-4"}> {data?.data.title}</span>:null
+                }
+
+            </div>
+
         </>
     );
 };
