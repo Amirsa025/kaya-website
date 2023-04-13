@@ -11,8 +11,9 @@ import Cookies from "universal-cookie";
                 window.location.reload()
             }
          if(cookie.get('token')){
-             cookie.remove('token')
              window.location.reload()
+             cookie.remove('token')
+
          }
 
      }
@@ -28,7 +29,7 @@ import Cookies from "universal-cookie";
              </Link>
              <button
                  className={" w-[90px] h-[40px]  border rounded-md hover:bg-red-400 hover:border-red-600 hover:text-white text-[14px]"}
-                 onClick={()=>logout()}>خروج
+                 onClick={logout}>خروج
              </button>
          </div>
      } else {
@@ -87,7 +88,7 @@ import Cookies from "universal-cookie";
                                     navigation.map((item, idx) => {
                                         return (
                                             <li key={idx} className=" text-gray-900 hover:text-[#143fcd]  md:hover_Me hover:overflow-hidden text-[16px]  py-4 md:py-0">
-                                                <a href={item.path} className={""}>
+                                                <a href={item.path}>
                                                     { item.title }
                                                 </a>
                                             </li>

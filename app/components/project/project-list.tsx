@@ -63,10 +63,10 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                                             </div>
 
                                             <div className={"flex items-center gap-2"}>
-                                                <Link href={`/user-panel/project/${item.project_id}`} >
-                                                    <button
+                                                <Link shallow={true} href={`/user-panel/project/${item.project_id}`} >
+                                                    <div
                                                         className={" hover:block text-[13px] font-bold bg-green-500 px-4 py-2 md:px-3 lg:px-8 rounded-sm text-white"}>Send
-                                                    </button>
+                                                    </div>
                                                 </Link>
 
                                             </div>

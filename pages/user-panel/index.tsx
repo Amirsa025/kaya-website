@@ -29,7 +29,6 @@ const UserPanelPage: NextPageWithLayout = () => {
     }
     if(isError) {
         return   <div className={"bg-red-300 rounded-md w-full lg:w-10/12 py-4 px-6"}>
-
             <div className={"bg-red-200 py-2  flex items-center gap-8 text-white  w-full tex-[12px]   rounded-md px-8"}>
                 <svg className="text-red-600 flex-shrink-0" width="30" height="30"
                      viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
