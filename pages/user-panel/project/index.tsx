@@ -9,7 +9,6 @@ import Cookies from "universal-cookie";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {PaginationItem} from "@mui/material";
-import useAuth from "@/app/helper/useAuth";
 import Heading from "@/app/shared/Heading";
 import {MoonLoader} from "react-spinners";
 import EmptyList from "@/app/shared/EmptyList";
@@ -17,9 +16,9 @@ import EmptyList from "@/app/shared/EmptyList";
 const Project: NextPageWithLayout = () => {
     const [searchTerm, setSearchTerm] = React.useState(""),
         [offset, setOffset] = React.useState(1),
-        [page, setPage]:any = React.useState(3),
+        [page, setPage]: any = React.useState(3),
         cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token'),
-        fetchProjects = async (page:any) => {
+        fetchProjects = async (page: any) => {
             try {
                 return await callApi().get(`/projects/projects?limit=5&offset=${offset}`, {
                     headers: {
@@ -47,20 +46,22 @@ const Project: NextPageWithLayout = () => {
             setSearchTerm(event.target.value);
         }
 
-    const handleChangePage = (page:any)=>{
-        setOffset((page-1)*5)
-        setPage(page+1)
+    const handleChangePage = (page: any) => {
+        setOffset((page - 1) * 5)
+        setPage(page + 1)
     }
     //search filter
-    const filteredData = project?.data?.projects.filter((item:any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredData = project?.data?.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
     return (
         <div className={"md:container-app"}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
             <div className={" mr-4 sm:mx-6 md:mr-0 "}>
                 {isLoading ? (
                     <div className={"lg:px-24 w-full"}>
-                        <div className={"text-white center-item  tex-[12px] h-16 bg-blue-400 rounded-md px-2  w-full lg:w-10/12 "}>
-                            <div className={" rounded-md w-full py-2 lg:px-1 bg-blue-300 flex  items-center  gap-4"}>
+                        <div
+                            className={"text-white center-item  tex-[12px] h-16 bg-blue-400 rounded-md px-2  w-full lg:w-10/12 "}>
+                            <div
+                                className={" rounded-md w-full py-2 lg:px-1 bg-blue-300 flex  items-center  gap-4"}>
                                 <div className={"px-3"}>
                                     <MoonLoader
                                         color="#162f48"
@@ -75,7 +76,8 @@ const Project: NextPageWithLayout = () => {
                 ) : isError ? (
                     <div className={"bg-red-300 rounded-md w-full lg:w-10/12 py-4 px-6"}>
 
-                        <div className={"bg-red-200 py-2  flex items-center gap-8 text-white  w-full tex-[12px]   rounded-md px-8"}>
+                        <div
+                            className={"bg-red-200 py-2  flex items-center gap-8 text-white  w-full tex-[12px]   rounded-md px-8"}>
                             <svg className="text-red-600 flex-shrink-0" width="30" height="30"
                                  viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="30" height="30" rx="5" fill="currentColor"></rect>
@@ -89,27 +91,40 @@ const Project: NextPageWithLayout = () => {
                 ) : (
                     <div className={"flex flex-col md:flex-row"}>
                         {/*filter and */}
-                        <div className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
+                        <div
+                            className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                             <div>
-                                <div className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
+                                <div
+                                    className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
                                     <div>
-                                        <i   className="ri-search-line text-[1.5rem] text-gray-600"></i>
+                                        <i className="ri-search-line text-[1.5rem] text-gray-600"></i>
                                     </div>
-                                    <input  value={searchTerm} onChange={handleSearchChange}  type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
+                                    <input value={searchTerm} onChange={handleSearchChange}
+                                           type="text" placeholder={"Search Keyword"}
+                                           className={"outline-0 py-2 flex-1"}/>
                                 </div>
                                 {
-                                    !filteredData.length ? <EmptyList className={"sm:mx-0 mx-4 my-4"} description={"پروژه برای نمایش وجود ندارد"} title={"برای دیدن پروژه های بیشتر به صفحات قبل مراجعه کنید"}/>:<ProjectList projectItem={filteredData} />
+                                    !filteredData.length ?
+                                        <EmptyList className={"sm:mx-0 mx-4 my-4"}
+                                                   description={"پروژه برای نمایش وجود ندارد"}
+                                                   title={"برای دیدن پروژه های بیشتر به صفحات قبل مراجعه کنید"}/> :
+                                        <ProjectList projectItem={filteredData}/>
                                 }
 
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
                                 {/*edit*/}
-                                <Pagination  siblingCount={0} boundaryCount={1}  renderItem={(item) => (
-                                    <PaginationItem
-                                        slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                                        {...item}
-                                    />
-                                )} count={page}  onChange={(event, page) => handleChangePage(page)} />
+                                <Pagination siblingCount={0} boundaryCount={1}
+                                            renderItem={(item) => (
+                                                <PaginationItem
+                                                    slots={{
+                                                        previous: ArrowBackIcon,
+                                                        next: ArrowForwardIcon
+                                                    }}
+                                                    {...item}
+                                                />
+                                            )} count={page}
+                                            onChange={(event, page) => handleChangePage(page)}/>
                             </div>
                         </div>
 
@@ -119,5 +134,5 @@ const Project: NextPageWithLayout = () => {
         </div>
     );
 };
-Project.getLayout = (page)=> <UserPanelAdmin>{page}</UserPanelAdmin>
+Project.getLayout = (page) => <UserPanelAdmin>{page}</UserPanelAdmin>
 export default Project;

@@ -1,5 +1,5 @@
 import React, {ReactNode, useEffect, useState} from 'react';
-import {DotLoader} from "react-spinners";
+import {DotLoader, ScaleLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 import Router from "next/router";
 
@@ -14,9 +14,10 @@ const VerifyUserPanel: React.FC<IPropsAdmin> = ({children}) => {
     }, [])
     if (loadingUser) return <div className={" h-screen flex items-center justify-center"}>
         <div className={"flex flex-col items-center justify-center "}>
-            <DotLoader
-                color="#36d7b7"
-                size={150}
+            <ScaleLoader
+                color="#3676d6"
+                height={100}
+                width={10}
             />
         </div>
     </div>
