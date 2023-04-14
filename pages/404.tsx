@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "@/app/shared/NavBar";
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import Heading from "@/app/shared/Heading";
 
 const Custom404 = () => {
     const Header = dynamic(
@@ -10,6 +11,7 @@ const Custom404 = () => {
     )
     return (
         <div className={""}>
+            <Heading titlesite={"کایا"} page={"404"}/>
             <Header/>
             <div className={"flex  relative bg-gray-50"}>
                         <div className={"flex flex-col items-center justify-center h-screen w-full space-x-2"}>

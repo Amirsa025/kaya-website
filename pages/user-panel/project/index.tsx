@@ -12,6 +12,7 @@ import {PaginationItem} from "@mui/material";
 import useAuth from "@/app/helper/useAuth";
 import Heading from "@/app/shared/Heading";
 import {MoonLoader} from "react-spinners";
+import EmptyList from "@/app/shared/EmptyList";
 
 const Project: NextPageWithLayout = () => {
     const [searchTerm, setSearchTerm] = React.useState(""),
@@ -42,8 +43,6 @@ const Project: NextPageWithLayout = () => {
             cacheTime: 1000,
             retryDelay: 1000, // Will always wait 1000ms to retry, regardless of how many retries
         }),
-
-
         handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
             setSearchTerm(event.target.value);
         }
@@ -90,7 +89,6 @@ const Project: NextPageWithLayout = () => {
                 ) : (
                     <div className={"flex flex-col md:flex-row"}>
                         {/*filter and */}
-
                         <div className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                             <div>
                                 <div className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
@@ -99,11 +97,13 @@ const Project: NextPageWithLayout = () => {
                                     </div>
                                     <input  value={searchTerm} onChange={handleSearchChange}  type="text" placeholder={"Search Keyword"} className={"outline-0 py-2 flex-1"}/>
                                 </div>
-                                <ProjectList projectItem={filteredData} />
+                                {
+                                    !filteredData.length ? <EmptyList className={"sm:mx-0 mx-4 my-4"} description={"پروژه برای نمایش وجود ندارد"} title={"برای دیدن پروژه های بیشتر به صفحات قبل مراجعه کنید"}/>:<ProjectList projectItem={filteredData} />
+                                }
+
                             </div>
                             <div className={"direction-ltr py-6 w-full flex justify-center"}>
                                 {/*edit*/}
-
                                 <Pagination  siblingCount={0} boundaryCount={1}  renderItem={(item) => (
                                     <PaginationItem
                                         slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}

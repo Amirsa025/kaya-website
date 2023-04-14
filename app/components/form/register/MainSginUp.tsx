@@ -9,7 +9,7 @@ import {ClipLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 
 const MainSginup = () => {
-    const [isRevealPwd, setIsRevealPwd] = useState(false);
+ const [isRevealPwd, setIsRevealPwd] = useState(false);
    const cookie = new Cookies()
     const {mutate,isError,isSuccess, isLoading} = useSginUp()
     const[disable ,setDisable] =useState(false)

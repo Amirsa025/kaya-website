@@ -29,7 +29,7 @@ const MainVerify = () => {
                 })
                 console.log(responseData.data)
                 if(responseData.status===200 && responseData.data.phone_verified===true){
-                    toast.success('احراز هویت شما باموفقیت  انجام شد!', {
+                    toast.success('ثبت نام اولیه شما باموفقیت  انجام شد!', {
                         position: "top-center",
                         className:"toast-success-container",
                         closeButton: false,

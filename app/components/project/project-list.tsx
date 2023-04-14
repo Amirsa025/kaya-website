@@ -3,7 +3,11 @@ import {Tooltip} from "@mui/material";
 import Image from 'next/image'
 import Link from "next/link";
 interface ProjectProps {
-    projectItem: any
+    projectItem: any,
+    project_id?:number,
+    submit_date?:string,
+    title?:string,
+    description?:string
 }
 
 const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
@@ -23,9 +27,9 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
     }, []);
     return (
         <section className={"lg:py-2"}>
+
             {
                 projectItem?.map((item: any) => {
-
                     return (
 
                         <div  key={item.project_id}>
