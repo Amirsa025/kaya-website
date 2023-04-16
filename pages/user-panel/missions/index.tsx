@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
-import CompleteProfile from "@/app/components/form/complate-profile";
+import CompleteProfile from "@/app/shared/form/complate-profile";
 import useAuth from "@/app/helper/useAuth";
-import ViewProfile from "@/app/components/form/view-profile/VeiwProfile";
+import ViewProfile from "@/app/shared/form/view-profile/VeiwProfile";
 import {MoonLoader} from "react-spinners";
 const Mission: NextPageWithLayout = () => {
     const {data, isFetching, isLoading, isError} = useAuth()

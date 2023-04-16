@@ -4,7 +4,7 @@ import Link from "next/link";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import Router from "next/router";
-import {codeVerifySchema} from "@/app/components/form/verify-phone/vaildation";
+import {codeVerifySchema} from "@/app/shared/form/verify-phone/vaildation";
 import {toast} from "react-toastify";
 import Image from "next/image";
 

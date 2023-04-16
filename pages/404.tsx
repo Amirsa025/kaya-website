@@ -608,38 +608,38 @@ const Custom404 = () => {
                                     <linearGradient id="paint0_linear_773_11503" x1="-8"
                                                     y1="165.914" x2="8.18698" y2="373.104"
                                                     gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#3B82F6" stop-opacity="0"></stop>
-                                        <stop offset="1" stop-color="white"></stop>
+                                        <stop stopColor="#3B82F6" stopOpacity="0"></stop>
+                                        <stop offset="1" stopColor="white"></stop>
                                     </linearGradient>
                                     <linearGradient id="paint1_linear_773_11503" x1="1021"
                                                     y1="165.914" x2="1037.19" y2="373.104"
                                                     gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#3B82F6" stop-opacity="0"></stop>
-                                        <stop offset="1" stop-color="white"></stop>
+                                        <stop stopColor="#3B82F6" stopOpacity="0"></stop>
+                                        <stop offset="1" stopColor="white"></stop>
                                     </linearGradient>
                                     <linearGradient id="paint2_linear_773_11503" x1="44.6667"
                                                     y1="246.667" x2="64.3333" y2="432.667"
                                                     gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#3B82F6" stop-opacity="0"></stop>
-                                        <stop offset="1" stop-color="white"></stop>
+                                        <stop stopColor="#3B82F6" stopOpacity="0"></stop>
+                                        <stop offset="1" stopColor="white"></stop>
                                     </linearGradient>
                                     <linearGradient id="paint3_linear_773_11503" x1="1073.67"
                                                     y1="246.667" x2="1093.33" y2="432.667"
                                                     gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#3B82F6" stop-opacity="0"></stop>
-                                        <stop offset="1" stop-color="white"></stop>
+                                        <stop stopColor="#3B82F6" stopOpacity="0"></stop>
+                                        <stop offset="1" stopColor="white"></stop>
                                     </linearGradient>
                                     <linearGradient id="paint4_linear_773_11503" x1="-2.66667"
                                                     y1="-31.1667" x2="7.16667" y2="61.8333"
                                                     gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#3B82F6" stop-opacity="0"></stop>
-                                        <stop offset="1" stop-color="white"></stop>
+                                        <stop stopColor="#3B82F6" stopOpacity="0"></stop>
+                                        <stop offset="1" stopColor="white"></stop>
                                     </linearGradient>
                                     <linearGradient id="paint5_linear_773_11503" x1="-2.66667"
                                                     y1="-31.1667" x2="7.16667" y2="61.8333"
                                                     gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#3B82F6" stop-opacity="0"></stop>
-                                        <stop offset="1" stop-color="white"></stop>
+                                        <stop stopColor="#3B82F6" stopOpacity="0"></stop>
+                                        <stop offset="1" stopColor="white"></stop>
                                     </linearGradient>
                                 </defs>
                             </svg>

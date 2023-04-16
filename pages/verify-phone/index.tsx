@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Heading from "@/app/shared/Heading";
-import AsideVerifyPhone from "@/app/components/form/verify-phone/AsideVerifyPhone";
-import MainVerify from "@/app/components/form/verify-phone/MainVerify";
+import AsideVerifyPhone from "@/app/shared/form/verify-phone/AsideVerifyPhone";
+import MainVerify from "@/app/shared/form/verify-phone/MainVerify";
 import Cookies from "universal-cookie";
 import Router from "next/router";
 import VerifyUserPanel from "@/app/components/layout/verify-user-panel";

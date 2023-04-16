@@ -13,10 +13,7 @@ import BannerTop from "@/app/shared/banner-content";
 import Heading from "@/app/shared/Heading";
 import Header from "@/app/shared/NavBar";
 import {ScaleLoader} from "react-spinners";
-
-
 export default function Home() {
-
     const [loading, setloading] = useState(true)
     useEffect(() => {
         setTimeout(() => setloading(false), 500)

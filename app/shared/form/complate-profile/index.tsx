@@ -161,7 +161,7 @@ const CompleteProfile:React.FC = () => {
                                                 <div>
                                                     <span className={"text-[13px] font-bold"}>تصویر کارت ملی </span>
                                                 </div>
-                                                {previewImage ? <img src={previewImage} className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}  alt=""/>: <img src="/images/img-min-p-800.png" className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}  alt=""/>}
+                                                {previewImage ? <img src={previewImage} className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}  alt=""/>: <img src="/images/img-min-p-800.png" className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"} alt=""/>}
 
                                                 <div>
                                                     <div className={"upload"}>
@@ -188,7 +188,7 @@ const CompleteProfile:React.FC = () => {
                                                 <div>
                                                     <span className={"text-[13px] font-bold"}>تصویر با کارت ملی</span>
                                                 </div>
-                                                {previewImagePerson ? <img src={previewImagePerson} className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}  alt=""/>: <img src="/images/img-min-p-800.png" className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}  alt=""/>}
+                                                {previewImagePerson ? <img src={previewImagePerson} className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}  alt=""/>: <img src="/images/img-min-p-800.png" className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"} alt=""/>}
                                                 <div>
                                                     <div className={"upload"}>
                                                         <label htmlFor="personPhoto" className={"flex py-2 items-center  gap-2"}>

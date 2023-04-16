@@ -9,7 +9,7 @@ import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 import {NextPageWithLayout} from "@/pages/_app";
 import {MoonLoader} from "react-spinners";
 import Image from "next/image";
-import RequestBid from "@/app/components/form/sendBid";
+import RequestBid from "@/app/shared/form/sendBid";
 
 export const fetchProjects = async (id: any) => {
 

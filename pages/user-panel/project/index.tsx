@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
-import ProjectList from "@/app/components/project/project-list";
+import ProjectList from "@/app/components/project/project-list/project-list";
 import Pagination from '@mui/material/Pagination';
 import {useQuery} from "@tanstack/react-query";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import {PaginationItem} from "@mui/material";
+import {PaginationItem, Tooltip} from "@mui/material";
 import Heading from "@/app/shared/Heading";
 import {MoonLoader} from "react-spinners";
 import EmptyList from "@/app/shared/EmptyList";
+import FilterOrder from "@/app/components/project/filter-order/filter-order";
+import ModalFilter from "@/app/utils/Modal/modal-filter";
 
 const Project: NextPageWithLayout = () => {
     const [searchTerm, setSearchTerm] = React.useState(""),
@@ -89,20 +91,24 @@ const Project: NextPageWithLayout = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className={"flex flex-col md:flex-row"}>
-                        {/*filter and */}
+                    <div className={"flex flex-col md:flex-row "}>
+                        {/*filter and lsit project */}
                         <div
-                            className={"flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
+                            className={"lg:mx-6 flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                             <div>
-                                <div
-                                    className={"direction-ltr px-4  flex items-center gap-4 px-2 md:py-2 border "}>
-                                    <div>
-                                        <i className="ri-search-line text-[1.5rem] text-gray-600"></i>
+                                <div className={"flex items-center"}>
+                                    <ModalFilter/>
+                                    <div
+                                        className={"flex-1 direction-ltr px-8  flex items-center gap-4 px-2 md:py-2 border "}>
+                                        <div>
+                                            <i className="ri-search-line text-[1.5rem] text-gray-600"></i>
+                                        </div>
+                                        <input value={searchTerm} onChange={handleSearchChange}
+                                               type="text" placeholder={"Search Keyword"}
+                                               className={"outline-0 py-2 flex-1"}/>
                                     </div>
-                                    <input value={searchTerm} onChange={handleSearchChange}
-                                           type="text" placeholder={"Search Keyword"}
-                                           className={"outline-0 py-2 flex-1"}/>
                                 </div>
+
                                 {
                                     !filteredData.length ?
                                         <EmptyList className={"sm:mx-0 mx-4 my-4"}
@@ -127,6 +133,10 @@ const Project: NextPageWithLayout = () => {
                                             onChange={(event, page) => handleChangePage(page)}/>
                             </div>
                         </div>
+                            <div>
+
+                                <FilterOrder/>
+                            </div>
 
                     </div>
                 )}

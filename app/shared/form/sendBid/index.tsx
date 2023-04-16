@@ -2,7 +2,7 @@ import React from 'react';
 import {useFormik} from "formik";
 
 import {toast} from "react-toastify";
-import {SendBidSchema} from "@/app/components/form/sendBid/validation";
+import {SendBidSchema} from "@/app/shared/form/sendBid/validation";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 interface ISendProps{
@@ -74,7 +74,7 @@ const RequestBid:React.FC<ISendProps> = ({id}) => {
     });
     return (
         <>
-            <form action="" className={"pt-6  border-t "} onSubmit={Myformik.handleSubmit}>
+            <form action="@/app/shared/form/sendBid/index" className={"pt-6  border-t "} onSubmit={Myformik.handleSubmit}>
                 <div className={" space-y-2"}>
                     <div className={"flex flex-col "}>
                         <label htmlFor="" className={"text-[14px] font-bold  py-2" }>Amount</label>

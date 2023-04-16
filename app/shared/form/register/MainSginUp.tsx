@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useFormik} from "formik";
 import Router from "next/router";
 import {storeToken, useSginUp} from "@/app/helper/auth";
-import {SginupSchema} from "@/app/components/form/register/vaildation";
+import {SginupSchema} from "@/app/shared/form/register/vaildation";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
 import Cookies from "universal-cookie";

@@ -5,7 +5,7 @@ const BlogPost = () => {
     return (
         <section className={"container-app pt-[5rem]"}>
             <div className={"border-t border-gray-300 flex flex-col "}>
-                    <div className={"flex items-center justify-between py-[80px]"}>
+                    <div className={"flex flex-col sm:flex-row items-center justify-between py-[80px] space-y-6"}>
                     {/*    title and more post*/}
                         <div>
                             <span className={"font-bold text-3xl"}>پست های بلاگ ما </span>

@@ -7,7 +7,7 @@ import {storeToken, useLogin} from "@/app/helper/auth";
 import {NextPageWithLayout} from "@/pages/_app";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
-import {SginINSchema} from "@/app/components/form/login/vaildation";
+import {SginINSchema} from "@/app/shared/form/login/vaildation";
 import Cookies from "universal-cookie";
 import Image from "next/image";
 const MainLogin: NextPageWithLayout = () => {
