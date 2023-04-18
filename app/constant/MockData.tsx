@@ -15,7 +15,28 @@ export const UserNavigation = [
     { id:"2",icon: "ri-file-list-3-line", path: "/user-panel/project",title:"Project" },
     { id:"3",icon: "ri-user-settings-line", path: "/user-panel/missions",title:"profile" },
 ]
-export const SelectSkills = ["PHP" , "Perl","ASP" , "C Programming"]
+export const SelectSkills = [
+    {
+        "id": 3,
+        "name": "PHP"
+    },
+    {
+        "id": 4,
+        "name": "Perl"
+    },
+    {
+        "id": 5,
+        "name": "ASP"
+    },
+    {
+        "id": 6,
+        "name": "C Programming"
+    },
+    {
+        "id": 7,
+        "name": "Java"
+    },
+]
 
 export const skills  =[
     {
