@@ -5,6 +5,7 @@ import CompleteProfile from "@/app/shared/form/complate-profile";
 import useAuth from "@/app/helper/useAuth";
 import ViewProfile from "@/app/shared/form/view-profile/VeiwProfile";
 import {MoonLoader} from "react-spinners";
+import Wizard from "@/app/shared/form/complate-profile/wizard";
 const Mission: NextPageWithLayout = () => {
     const {data, isFetching, isLoading, isError} = useAuth()
     if(isLoading){
@@ -41,7 +42,8 @@ const Mission: NextPageWithLayout = () => {
     if(data?.data.verify_status==="unverified" ||data?.data.verify_status==="pending"){
         return (
             <>
-                <CompleteProfile/>
+                {/*<CompleteProfile/>*/}
+                <Wizard/>
             </>
         );
     }else if (data?.data.verify_status==="verified"){

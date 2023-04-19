@@ -33,8 +33,6 @@ const Project: NextPageWithLayout<FilterValues> = () => {
         [filters, setFilters] = React.useState([]),
         [page, setPage]: any = React.useState(3),
         cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token');
-
-
     const onFilters = (filterValues: any) => {
         let FilterArray = []
         FilterArray.push(filterValues)
@@ -60,11 +58,24 @@ const Project: NextPageWithLayout<FilterValues> = () => {
             console.log(error)
         }
     };
+    //query for search filter
+    const {isLoading, isError, data: project} = useQuery({
+            queryKey: ['page', offset, searchTerm, filters],
+            // @ts-ignore
+            queryFn: () => fetchProjects(offset),
+            keepPreviousData: true,
+            staleTime: 500,
+            cacheTime: 600000, // cache for 10 minutes
+            refetchInterval: 60000, // refetch every minute
+        }),
+    handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+            setSearchTerm(event.target.value);
+        }
     const feachFilterProject = async () => {
 
         try {
             const result = filters.map(async (item: any, id) => {
-                return await callApi().get(`/projects/projects?limit=10&offset=${offset}&skills[]=3&skills[]=1315&fixed=true&hourly=true&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
+                return await callApi().get(`/projects/projects?limit=10&offset=${offset}&${item.skills.map(((skilled: any, id: number) => `skills[]=${skilled}`))}&fixed=${item?.fixed}&hourly=${item?.hourly}&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
                     headers: {
                         'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
                     }
@@ -79,34 +90,26 @@ const Project: NextPageWithLayout<FilterValues> = () => {
     };
     const {data: filtersDatas, status: statusCategories} = useQuery({
         queryKey: ["filter", filters, offset],
-        queryFn: () => feachFilterProject()
+        queryFn: () => feachFilterProject(),
+        keepPreviousData: true,
+        staleTime: 500,
+        cacheTime: 600000, // cache for 10 minutes
+        refetchInterval: 60000, // refetch every minute
     })
 
 
-    const {isLoading, isError, data: project} = useQuery({
-            queryKey: ['page', offset, searchTerm, filters],
-            // @ts-ignore
-            queryFn: () => fetchProjects(offset),
-            keepPreviousData: true,
-            staleTime: 500,
-            cacheTime: 600000, // cache for 10 minutes
-            refetchInterval: 60000, // refetch every minute
-        }),
-
-        handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-            setSearchTerm(event.target.value);
-        }
     const handleChangePage = (page: any) => {
         setOffset((page - 1) * 5)
         setPage(page + 1)
     }
-    //search filter
+    // filter Asides
     if (filtersDatas) {
         if (filtersDatas[0]?.data.projects.length) {
             const filteredData = filtersDatas[0]?.data.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
         }
 
     }
+    //response first when loaded
     const response = project?.data.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
     // console.log(filteredData)
 

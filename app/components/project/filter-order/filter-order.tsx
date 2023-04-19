@@ -1,51 +1,27 @@
 import React, {useState} from 'react';
-// import FormFilter from "@/app/shared/form/filter-form";
 import {useQuery} from "@tanstack/react-query";
 import {MockAPI} from "@/app/constant/Mock-filter";
 import {SelectSkills, skills} from "@/app/constant/MockData";
 import {Checkbox} from "@material-tailwind/react";
 import {useFormik} from "formik";
+import {IOrderProps, MyType} from "@/app/shared/form/filter-form/filter-type";
 
-interface IOrederProps {
-    onFilter: any
-}
-interface FilterValues {
-    searchTerm: string;
-    fixed_min: string;
-    fixed_max: string;
-    Hourly_max: string;
-    Hourly_min: string;
-    age: number;
-    skills: string[];
-}
-const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
+
+const FilterOrder: React.FC<IOrderProps> = ({onFilter}) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [isChecked, setIsChecked] = useState(false);
-    const {
-        data,
-        isLoading,
-        isError
-    } = useQuery(['Skills', searchQuery], () => MockAPI.search(searchQuery));
+    const {data, isLoading, isError} = useQuery(['Skills', searchQuery], () => MockAPI.search(searchQuery));
     const [selectedValue, setSelectedValue] = useState('');
-    const [filteredArray, setFilteredArray] = useState([]);
+    const [filteredArray, setFilteredArray] = useState<MyType[]>([]);
     const [AddSkills, setAddSkills] = useState(SelectSkills);
     const [skillId, setSkillId] = useState([])
-    const [checked, setChecked] = useState(true)
-    const [Hourly, setHourly] = useState(true)
     const [show, setShow] = useState(false)
-
-    const checkboxHandler = () => {
-        setChecked(!checked)
-    }
-    const HourlyHandler = () => {
-        setHourly(!Hourly)
-    }
+    //filterd skilled
     const handleFilterArray = () => {
         const trimmedQuery = searchQuery.trim();
         const filtered = skills.filter(item => item.name.toLowerCase().includes(trimmedQuery));
         setShow(!show)
-        // @ts-ignore
         setFilteredArray(filtered);
         setSearchQuery('')
     }
@@ -65,9 +41,12 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
             Hourly_max: '',
             Hourly_min: '',
             skills: [],
+            fixed:false,
+            hourly: false,
 
         },
         onSubmit: (values: any) => {
+            console.log(values)
             onFilter(values)
         },
     });
@@ -86,19 +65,23 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                     <form className={"px-2 xl:px-0 "} onSubmit={formik.handleSubmit}>
                         <h1 className={" text-lg pt-2 font-bold px-2"}>Budget</h1>
                         <div>
-                            <div
-                                className={"flex items-center justify-start  xl:px-0 flex-row-reverse xl:flex-row"}>
-                                <Checkbox color="blue" name={"fixed"} defaultChecked={checked} id={"checkerMinMax"}
-                                          className={"w-5 h-5"} onChange={checkboxHandler}/>
-                                <label htmlFor="checkerMinMax" className={"text-[14px]"}> Fixed
-                                    Price Projects</label>
+                            <div className={"flex items-center justify-start  xl:px-0 flex-row-reverse xl:flex-row"}>
+                                <Checkbox
+                                    color="blue"
+                                    name={"fixed"}
+                                    id={"checkerMinMax"}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    checked={formik.values.fixed}
+                                    className={"rounded-md w-4 h-4"}
+                                />
+                                <label htmlFor="checkerMinMax" className={"text-[14px]"}> Fixed Price Projects</label>
                             </div>
-                            <div
-                                className={"direction-ltr xl:space-x-0 flex items-center justify-end gap-6 xl:gap-0 xl:justify-around px-4 xl:px-0"}>
+                            <div className={"direction-ltr xl:space-x-0 flex items-center justify-end gap-6 xl:gap-0 xl:justify-around px-4 xl:px-0"}>
                                 <input
                                     id={"fixed_max"}
                                     name={"fixed_max"}
-                                    disabled={checked}
+                                    disabled={!formik.values.hourly}
                                     className={"border rounded-md py-2 px-1 w-full xl:w-[4.5rem] outline-0 placeholder:text-xs"}
                                     placeholder={"Max"}
                                     value={formik.values.fixed_max}
@@ -106,7 +89,7 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                                 />
                                 <span>to</span>
                                 <input
-                                    disabled={checked}
+                                    disabled={!formik.values.hourly}
                                     id={"fixed_min"}
                                     name={"fixed_min"}
                                     value={formik.values.fixed_min}
@@ -116,20 +99,26 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                             </div>
                         </div>
                         <div className={" py-4 "}>
-                            <div
-                                className={"flex items-center justify-start xl:px-0 flex-row-reverse xl:flex-row"}>
-                                <input type={"checkbox"} name={"fixed"} defaultChecked={Hourly}  id={"checkerMax"}
-                                          className={""}
-                                          onChange={HourlyHandler}/>
-                                <label htmlFor="checkerMax" className={"text-[14px] px-4"}>Hourly
-                                    Projects</label>
+                            <div className={"flex items-center justify-start xl:px-0 flex-row-reverse xl:flex-row"}>
+                                <Checkbox
+                                    color="blue"
+                                    type={"checkbox"}
+                                    name={"hourly"}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    checked={formik.values.hourly}
+                                    id={"checkerMax"}
+                                    className={"rounded-md w-4 h-4"}
+                                    value={formik.values.Hourly_max}
+                                />
+                                <label htmlFor="checkerMax" className={"text-[14px]"}>Hourly Projects</label>
                             </div>
                             <div
                                 className={"direction-ltr xl:space-x-0 flex items-center justify-end gap-6 xl:gap-0 xl:justify-around px-4 xl:px-0"}>
                                 <input
                                     id={"Hourly_max"}
                                     name={"Hourly_max"}
-                                    disabled={Hourly}
+                                    disabled={!formik.values.fixed}
                                     className={"border rounded-md py-2 px-1 w-full xl:w-[4.5rem] placeholder:text-xs outline-0"}
                                     placeholder={"Max"}
                                     value={formik.values.Hourly_max}
@@ -139,7 +128,7 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                                 <input
                                     id={"Hourly_min"}
                                     name={"Hourly_min"}
-                                    disabled={Hourly}
+                                    disabled={!formik.values.fixed}
                                     className={"border rounded-md py-2 px-1 w-full xl:w-[4.5rem] placeholder:text-xs outline-0"}
                                     placeholder={"Min"}
                                     value={formik.values.Hourly_min}
@@ -158,10 +147,10 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                                             return (
                                                 <div key={id}>
                                                     {/*// @ts-ignore*/}
-                                                    <input type={"checkbox"} name="skills"
+                                                    <Checkbox color="blue" type={"checkbox"} name="skills"
                                                            onChange={formik.handleChange}
                                                            value={item.id} id={item.name}
-                                                           className={"rounded-none w-3 h-3"}/>
+                                                           className={"rounded-md w-4 h-4"}/>
                                                     <label htmlFor={item.name}
                                                            className={"text-[14px] px-2"}>{item.name}</label>
                                                 </div>
@@ -182,12 +171,11 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                                         </svg>
                                     </div>
                                     <input
-                                        placeholder={"add Skills"}
-                                        className={"w-full p-2.5 text-gray-500 placeholder:uppercase  bg-white border rounded-md shadow-sm outline-none border rounded-md py-2 px-1 w-full  outline-0 placeholder:text-xs"}
-                                        type="text" onChange={(e) => {
-                                        setSearchQuery(e.target.value)
-                                        setShow(true)
-                                    }}/>
+                                     placeholder={"add Skills"}
+                                     className={"w-full p-2.5 text-gray-500 placeholder:uppercase  bg-white border rounded-md shadow-sm outline-none border rounded-md py-2 px-1 w-full  outline-0 placeholder:text-xs"}
+                                     type="text" onChange={(e) => {setSearchQuery(e.target.value)
+                                        setShow(true)}}
+                                    />
                                     <div className={`w-full  border`}>
                                         {isLoading ?? <div>not found</div>}
                                         {/*@ts-ignore*/}
@@ -204,9 +192,7 @@ const FilterOrder: React.FC<IOrederProps> = ({onFilter}) => {
                                 </div>
                             </div>
                         </div>
-                        <button
-                                className={"w-full px-4 py-2 text-[15px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>Filter
-                        </button>
+                        <button className={"w-full px-4 py-2 text-[15px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>Filter</button>
                     </form>
                 </div>
             </aside>

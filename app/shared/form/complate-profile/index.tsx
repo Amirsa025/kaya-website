@@ -26,7 +26,6 @@ const CompleteProfile:React.FC = () => {
     }
     const submitFormHandler = async (e:any) => {
         e.preventDefault();
-
         const formData = new FormData(e.target);
         const inputObject = Object.fromEntries(formData);
         try {

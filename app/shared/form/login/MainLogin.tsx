@@ -76,8 +76,7 @@ const MainLogin: NextPageWithLayout = () => {
             </div>
             <div>
                 <h1 className={"text-4xl font-bold text-[1rem]"}>ورود کاربران </h1>
-                <span
-                    className={"block pt-[18px] pb-[24px]"}>شغل ساخته شده برای شما را پیدا کنید!</span>
+                <span className={"block pt-[18px] pb-[24px]"}>شغل ساخته شده برای شما را پیدا کنید!</span>
             </div>
             {/*form */}
             <div className={"w-full"}>
