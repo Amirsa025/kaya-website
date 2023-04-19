@@ -72,10 +72,10 @@ const Project: NextPageWithLayout<FilterValues> = () => {
             setSearchTerm(event.target.value);
         }
     const feachFilterProject = async () => {
-
+        const separator = '&'
         try {
             const result = filters.map(async (item: any, id) => {
-                return await callApi().get(`/projects/projects?limit=10&offset=${offset}&${item.skills.map(((skilled: any, id: number) => `skills[]=${skilled}`))}&fixed=${item?.fixed}&hourly=${item?.hourly}&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
+                return await callApi().get(`/projects/projects?limit=10&offset=${offset}&${item.skills.join(separator).map(((skilled: any, id: number) => `skills[]=${skilled}`))}&fixed=${item?.fixed}&hourly=${item?.hourly}&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
                     headers: {
                         'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
                     }

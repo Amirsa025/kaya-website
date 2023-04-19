@@ -138,7 +138,7 @@ const FilterOrder: React.FC<IOrderProps> = ({onFilter}) => {
                             <div className={" py-4 px-2 direction-ltr text-sm"}>
                             </div>
                             {/**/}
-                            <div className={" direction-ltr px-3 border-t py-2 space-y-2"}>
+                            <div className={" direction-ltr border-t py-2 space-y-2"}>
                                 <h2>skills</h2>
                                 {/*    Array with result    */}
                                 <div className={"flex flex-col"}>
