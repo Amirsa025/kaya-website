@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
-import CompleteProfile from "@/app/shared/form/complate-profile";
 import useAuth from "@/app/helper/useAuth";
 import ViewProfile from "@/app/shared/form/view-profile/VeiwProfile";
 import {MoonLoader} from "react-spinners";
@@ -42,7 +41,6 @@ const Mission: NextPageWithLayout = () => {
     if(data?.data.verify_status==="unverified" ||data?.data.verify_status==="pending"){
         return (
             <>
-                {/*<CompleteProfile/>*/}
                 <WizardComplete/>
             </>
         );
