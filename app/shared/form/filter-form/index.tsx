@@ -183,7 +183,6 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
                             </div>
                         </div>
                     </div>
-
                       <button className={"border block mx-auto md:hidden  w-1/2 border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600  py-2 mt-4"}>filter</button>
                     <button  className={" hidden md:block w-full px-4 py-2 text-[15px]   border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>Filter</button>
                 </div>
