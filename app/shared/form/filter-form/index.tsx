@@ -53,7 +53,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
 
     return (
 
-        <div className={"md:flex items-center justify-between px-4 md:border-b "}>
+        <div className={"md:flex items-center justify-between px-4  "}>
             <form className={"px-2 xl:px-0 "} onSubmit={formik.handleSubmit}>
                 <h1 className={" text-lg pt-2 font-bold px-2"}>Budget</h1>
                 <div>

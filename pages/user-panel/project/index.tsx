@@ -108,7 +108,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
         setPage(page + 1)
     }
     return (
-        <div className={"md:container-app px-2 sm:pl-0"}>
+        <div className={"md:container-app px-2 "}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
             <div className={"flex items-start "}>
                 <div className={"flex-1"}>

@@ -9,9 +9,10 @@ import {toast} from "react-toastify";
 import Router from "next/router";
 import {styleStepper} from "@/styles/styleStepper";
 import { StepContent} from "@mui/material";
-import CustomisedConnector from "@/app/utils/stepper/CustomisedConnector";
+import CustomisedConnector from "@/app/utils/steper/CustomisedConnector";
 import {steps} from "@/app/constant/MockData";
 import {validationSchema} from "@/app/models/validation";
+import {Checkbox} from "@material-tailwind/react";
 
 const MultiFormStepper = () => {
     const cookie = new Cookies()
@@ -562,7 +563,8 @@ const MultiFormStepper = () => {
                                                             نظر نیست.
                                                         </p>
                                                         <label className={"space-x-2 flex items-center gap-4 pt-5"}>
-                                                            <input
+
+                                                            <Checkbox
                                                                 type="checkbox"
                                                                 checked={isChecked}
                                                                 onChange={handleCheckboxChange}
