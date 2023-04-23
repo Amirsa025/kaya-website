@@ -5,9 +5,9 @@ import CompleteProfile from "@/app/shared/form/complate-profile";
 import useAuth from "@/app/helper/useAuth";
 import ViewProfile from "@/app/shared/form/view-profile/VeiwProfile";
 import {MoonLoader} from "react-spinners";
-// import Wizard from "@/app/shared/form/complate-profile/wizard";
+import WizardComplete from "@/app/shared/form/complate-profile/wizard";
 const Mission: NextPageWithLayout = () => {
-    const {data, isFetching, isLoading, isError} = useAuth()
+    const {data, isLoading, isError} = useAuth()
     if(isLoading){
         return  <div className={"lg:px-24 w-full"}>
             <div className={"text-white center-item  tex-[12px] h-16 bg-blue-400 rounded-md px-2  w-full lg:w-10/12 "}>
@@ -42,7 +42,8 @@ const Mission: NextPageWithLayout = () => {
     if(data?.data.verify_status==="unverified" ||data?.data.verify_status==="pending"){
         return (
             <>
-                <CompleteProfile/>
+                {/*<CompleteProfile/>*/}
+                <WizardComplete/>
             </>
         );
     }else if (data?.data.verify_status==="verified"){

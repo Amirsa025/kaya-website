@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import {Tooltip} from "@mui/material";
 import {
-    Button,
     Dialog,
     DialogHeader,
-    DialogBody,
-    DialogFooter,
+
     IconButton,
     Typography,
-    MenuItem,
 } from "@material-tailwind/react";
 import FormFilter from "@/app/shared/form/filter-form";
-const ModalFilter = () => {
+const ModalFilter = ({onFilter}:any) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
 
@@ -42,8 +39,8 @@ const ModalFilter = () => {
                         </IconButton>
                     </DialogHeader>
                     {/*start body*/}
-                    <div className={"text-black"}>
-                        <FormFilter/>
+                    <div className={"text-black px-2"}>
+                        <FormFilter handleOpen={handleOpen} onSubmit={onFilter}/>
                     </div>
                 </Dialog>
             </div>

@@ -495,7 +495,7 @@ const Custom404 = () => {
                                     strokeLinejoin="round"></path>
                                 <path
                                     d="M532.475 161.795L522.077 158.612L523.017 156.46L532.869 159.491L532.475 161.795Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
                                     strokeMiterlimit="10" strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 <path
@@ -505,22 +505,22 @@ const Custom404 = () => {
                                     strokeLinejoin="round"></path>
                                 <path
                                     d="M536.627 163.069L544.994 165.645C545.722 179.136 535.293 184.016 535.293 184.016C528.078 172.921 536.627 163.069 536.627 163.069Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
                                     strokeMiterlimit="10" strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 <path
                                     d="M543.69 165.251L537.93 163.493C536.445 166.858 534.656 172.739 536.778 178.499C536.778 178.499 542.083 174.376 543.69 165.251Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
                                     strokeMiterlimit="10" strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 <path
                                     d="M545.903 165.919L535.505 162.736L536.444 160.614L546.327 163.615L545.903 165.919Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
                                     strokeMiterlimit="10" strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 <path
                                     d="M546.875 163.797L547.906 160.432C548.057 159.947 547.784 159.462 547.33 159.31L538.023 156.461C537.568 156.309 537.053 156.582 536.901 157.037L535.871 160.402L546.875 163.797Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
                                     strokeMiterlimit="10" strokeLinecap="round"
                                     strokeLinejoin="round"></path>
                                 <path
@@ -568,7 +568,7 @@ const Custom404 = () => {
                                     <filter id="filter0_d_773_11503" x="220.076" y="138.849"
                                             width="333.221" height="343.093"
                                             filterUnits="userSpaceOnUse"
-                                            color-interpolation-filters="sRGB">
+                                            colorInterpolationFilters="sRGB">
                                         <feFlood floodOpacity="0"
                                                  result="BackgroundImageFix"></feFlood>
                                         <feColorMatrix in="SourceAlpha" type="matrix"
@@ -588,7 +588,7 @@ const Custom404 = () => {
                                     <filter id="filter1_d_773_11503" x="634.497" y="237.725"
                                             width="333.221" height="343.093"
                                             filterUnits="userSpaceOnUse"
-                                            color-interpolation-filters="sRGB">
+                                            colorInterpolationFilters="sRGB">
                                         <feFlood floodOpacity="0"
                                                  result="BackgroundImageFix"></feFlood>
                                         <feColorMatrix in="SourceAlpha" type="matrix"

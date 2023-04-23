@@ -10784,3 +10784,4 @@ export const skills  =[
         "name": "Watercolor Painting"
     }
 ]
+export const steps = ['پذیرش قوانین و مقررات ', 'اطلاعات شخصی', 'اطلاعات پرداخت ', 'احراز هویت  ', 'آدرس و نشانی'];

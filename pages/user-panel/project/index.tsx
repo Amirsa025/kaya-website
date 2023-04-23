@@ -8,13 +8,14 @@ import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import {PaginationItem, Tooltip} from "@mui/material";
+import {PaginationItem} from "@mui/material";
 import Heading from "@/app/shared/Heading";
 import {MoonLoader} from "react-spinners";
 import EmptyList from "@/app/shared/EmptyList";
-import FilterOrder from "@/app/components/project/filter-order/filter-order";
+
 import ModalFilter from "@/app/utils/Modal/modal-filter";
 import {useRouter} from "next/router";
+import AsideFilter from "@/app/components/project/filter-order/filter-order";
 
 interface FilterValues {
     searchTerm: string;
@@ -27,24 +28,22 @@ interface FilterValues {
 }
 
 const Project: NextPageWithLayout<FilterValues> = () => {
-    const router = useRouter()
+
     const [searchTerm, setSearchTerm] = React.useState(""),
         [offset, setOffset] = React.useState(1),
-        [filters, setFilters] = React.useState([]),
+        [filters, setFilters] = React.useState<string[]>([]),
         [page, setPage]: any = React.useState(3),
-        cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token');
+        cookie = new Cookies();
     const onFilters = (filterValues: any) => {
         let FilterArray = []
         FilterArray.push(filterValues)
-        //@ts-ignore
+
         setFilters(FilterArray)
         if (FilterArray.length === 0) {
-            // @ts-ignore
             setFilters(FilterArray)
         }
     }
-
-    const fetchProjects = async (page: any) => {
+    const fetchProjects = async () => {
 
         try {
             return await callApi().get(`/projects/projects?limit=5&offset=${offset}`, {
@@ -72,10 +71,9 @@ const Project: NextPageWithLayout<FilterValues> = () => {
             setSearchTerm(event.target.value);
         }
     const feachFilterProject = async () => {
-        const separator = '&'
         try {
             const result = filters.map(async (item: any, id) => {
-                return await callApi().get(`/projects/projects?limit=10&offset=${offset}&${item.skills.join(separator).map(((skilled: any, id: number) => `skills[]=${skilled}`))}&fixed=${item?.fixed}&hourly=${item?.hourly}&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
+                return await callApi().get(`/projects/projects?limit=10&offset=${offset}&${item.skills.map(((skilled: any, id: number) => `skills[]=${skilled}`)).join('&')}&fixed=${item?.fixed}&hourly=${item?.hourly}&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
                     headers: {
                         'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
                     }
@@ -96,24 +94,19 @@ const Project: NextPageWithLayout<FilterValues> = () => {
         cacheTime: 600000, // cache for 10 minutes
         refetchInterval: 60000, // refetch every minute
     })
-
-
+    let searchTermsFilter;
+    if (filtersDatas) {
+        if (filtersDatas[0]?.data.projects.length) {
+          searchTermsFilter = filtersDatas[0]?.data.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
+            console.log(searchTermsFilter.length)
+        }
+    }
+    //response first when loaded
+    const response = project?.data.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
     const handleChangePage = (page: any) => {
         setOffset((page - 1) * 5)
         setPage(page + 1)
     }
-    // filter Asides
-    if (filtersDatas) {
-        if (filtersDatas[0]?.data.projects.length) {
-            const filteredData = filtersDatas[0]?.data.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
-        }
-
-    }
-    //response first when loaded
-    const response = project?.data.projects.filter((item: any) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
-    // console.log(filteredData)
-
-
     return (
         <div className={"md:container-app"}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
@@ -159,7 +152,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                                 className={"lg:mx-6 flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
                                 <div>
                                     <div className={"flex items-center"}>
-                                        <ModalFilter/>
+                                        <ModalFilter onFilter={onFilters}/>
                                         <div
                                             className={"flex-1 direction-ltr px-8  flex items-center gap-4 px-2 md:py-2 border "}>
                                             <div>
@@ -172,12 +165,12 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                                     </div>
 
                                     {
-                                        filtersDatas ? filtersDatas[0]?.data.projects.length ? !filtersDatas[0]?.data.projects.length ?
+                                        filtersDatas ? filtersDatas[0]?.data.projects.length ? !searchTermsFilter.length ?
                                                     <EmptyList className={"sm:mx-0 mx-4 my-4"}
                                                                description={"پروژه برای نمایش وجود ندارد"}
                                                                title={"برای دیدن پروژه های بیشتر به صفحات قبل مراجعه کنید"}/> :
                                                     <ProjectList
-                                                        projectItem={filtersDatas[0]?.data.projects}/>
+                                                        projectItem={searchTermsFilter}/>
 
 
                                                 : !response.length ?
@@ -210,7 +203,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                 </div>
 
                 <div className={""}>
-                    <FilterOrder onFilter={onFilters}/>
+                    <AsideFilter onFilter={onFilters}/>
                 </div>
             </div>
         </div>
