@@ -26,9 +26,9 @@ const CompleteProfile:React.FC = () => {
     }
     const submitFormHandler = async (e:any) => {
         e.preventDefault();
-
         const formData = new FormData(e.target);
         const inputObject = Object.fromEntries(formData);
+        console.log(inputObject)
         try {
             const result = await callApi().post('/users/verify',inputObject,{ headers: {
                     "Content-Type": "multipart/form-data",
@@ -195,7 +195,6 @@ const CompleteProfile:React.FC = () => {
                                                             انتخاب عکس <br/>
                                                             <i className="ri-camera-fill"></i>
                                                             <input
-
                                                                 id="personPhoto"
                                                                 name={"verify_photo"}
                                                                 type="file"

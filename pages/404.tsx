@@ -455,74 +455,74 @@ const Custom404 = () => {
                                     fill="#98A3B8" fillOpacity="0.4"></path>
                                 <path
                                     d="M534.202 113.625L510.465 130.632C503.31 135.725 504.523 142.576 513.496 145.365L523.47 148.457L534.202 113.625Z"
-                                    stroke="#98A3B8" strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10" strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M561.272 121.931L571.367 149.336C574.429 157.582 569.579 162.554 560.575 159.825L550.571 156.794L561.272 121.931Z"
-                                    stroke="#98A3B8" strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10" strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M536.778 100.861C533.474 106.379 533.231 108.561 533.231 108.561L520.196 151.003L551.845 160.704L564.881 118.262C564.881 118.262 566.245 115.322 566.366 109.926L536.778 100.861Z"
                                     stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M536.779 100.862L566.366 109.956C566.366 110.108 566.397 108.653 566.336 107.652C566.003 100.225 560.182 85.4614 557.848 84.7339C555.514 84.0063 542.387 91.9792 537.961 98.9214C537.052 100.377 536.385 101.529 536.779 100.862Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M549.964 110.472C542.688 108.228 534.958 112.321 532.714 119.627C530.471 126.903 534.564 134.633 541.87 136.876C549.176 139.12 556.876 135.027 559.119 127.721C561.332 120.415 557.239 112.685 549.964 110.472ZM542.779 133.845C537.14 132.117 533.988 126.145 535.716 120.536C537.444 114.898 543.416 111.745 549.024 113.473C554.663 115.201 557.815 121.173 556.087 126.781C554.359 132.42 548.418 135.573 542.779 133.845Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
+                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
                                     strokeMiterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M556.086 126.782C554.358 132.42 548.386 135.573 542.778 133.845C537.139 132.117 533.987 126.145 535.715 120.537C537.443 114.898 543.415 111.745 549.023 113.473C554.662 115.201 557.814 121.143 556.086 126.782Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8"strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10"strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M523.2 158.945L531.597 161.522C532.294 175.013 521.896 179.893 521.896 179.893C514.651 168.798 523.2 158.945 523.2 158.945Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M530.265 161.128L524.505 159.37C523.019 162.735 521.231 168.616 523.353 174.376C523.353 174.376 528.658 170.253 530.265 161.128Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M532.475 161.795L522.077 158.612L523.017 156.46L532.869 159.491L532.475 161.795Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M533.444 159.673L534.475 156.308C534.627 155.854 534.354 155.338 533.899 155.187L524.592 152.337C524.107 152.186 523.622 152.458 523.471 152.913L522.44 156.308L533.444 159.673Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M536.627 163.069L544.994 165.645C545.722 179.136 535.293 184.016 535.293 184.016C528.078 172.921 536.627 163.069 536.627 163.069Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M543.69 165.251L537.93 163.493C536.445 166.858 534.656 172.739 536.778 178.499C536.778 178.499 542.083 174.376 543.69 165.251Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M545.903 165.919L535.505 162.736L536.444 160.614L546.327 163.615L545.903 165.919Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M546.875 163.797L547.906 160.432C548.057 159.947 547.784 159.462 547.33 159.31L538.023 156.461C537.568 156.309 537.053 156.582 536.901 157.037L535.871 160.402L546.875 163.797Z"
-                                    stroke="#98A3B8"strokeOpacity="0.4" stroke-width="2.95616"
-                                    stroke-miterlimit="10"strokeLinecap="round"
-                                    stroke-linejoin="round"></path>
+                                    stroke="#98A3B8" strokeOpacity="0.4" strokeWidth="2.95616"
+                                    strokeMiterlimit="10" strokeLinecap="round"
+                                    strokeLinejoin="round"></path>
                                 <path
                                     d="M556.909 87.221C556.879 88.858 557.485 90.6163 557.91 92.1624C558.395 93.86 558.941 95.5274 559.486 97.1947C560.032 98.8621 560.517 100.56 561.002 102.227C561.366 103.47 561.457 105.35 562.639 106.077C562.851 106.198 563.094 106.107 563.245 105.926C564.094 104.804 563.306 102.924 563.003 101.681C562.548 99.9837 561.972 98.3164 561.396 96.6491C560.82 94.9817 560.214 93.3447 559.607 91.6773C559.032 90.1313 558.637 88.4033 557.88 86.9179C557.637 86.5238 556.909 86.736 556.909 87.221Z"
                                     fill="#98A3B8" fillOpacity="0.4"></path>
@@ -554,7 +554,7 @@ const Custom404 = () => {
                                     d="M704.711 217.424C693.306 217.424 683.998 208.116 683.998 196.711C683.998 185.306 693.306 175.999 704.711 175.999C716.116 175.999 725.423 185.306 725.423 196.711C725.423 208.116 716.116 217.424 704.711 217.424ZM704.711 182.029C696.714 182.029 690.159 188.584 690.159 196.58C690.159 204.577 696.714 211.131 704.711 211.131C712.707 211.131 719.262 204.577 719.262 196.58C719.262 188.584 712.707 182.029 704.711 182.029Z"
                                     fill="#BDC4D2"></path>
                                 <path d="M716.902 182.029L693.175 211.131" stroke="#BDC4D2"
-                                      stroke-width="4.522" stroke-miterlimit="10"></path>
+                                      strokeWidth="4.522"></path>
                                 <path
                                     d="M742.393 141.27C723.203 141.27 707.812 125.69 707.812 106.69C707.812 87.4995 723.393 72.1094 742.393 72.1094C761.583 72.1094 776.973 87.6895 776.973 106.69C776.973 125.69 761.393 141.27 742.393 141.27ZM742.393 79.8995C727.573 79.8995 715.603 91.8696 715.603 106.69C715.603 121.51 727.573 133.48 742.393 133.48C757.213 133.48 769.183 121.51 769.183 106.69C769.183 91.8696 757.213 79.8995 742.393 79.8995Z"
                                     fill="#BDC4D2"></path>
@@ -568,7 +568,7 @@ const Custom404 = () => {
                                     <filter id="filter0_d_773_11503" x="220.076" y="138.849"
                                             width="333.221" height="343.093"
                                             filterUnits="userSpaceOnUse"
-                                            color-interpolation-filters="sRGB">
+                                            colorInterpolationFilters="sRGB">
                                         <feFlood floodOpacity="0"
                                                  result="BackgroundImageFix"></feFlood>
                                         <feColorMatrix in="SourceAlpha" type="matrix"
@@ -588,7 +588,7 @@ const Custom404 = () => {
                                     <filter id="filter1_d_773_11503" x="634.497" y="237.725"
                                             width="333.221" height="343.093"
                                             filterUnits="userSpaceOnUse"
-                                            color-interpolation-filters="sRGB">
+                                            colorInterpolationFilters="sRGB">
                                         <feFlood floodOpacity="0"
                                                  result="BackgroundImageFix"></feFlood>
                                         <feColorMatrix in="SourceAlpha" type="matrix"

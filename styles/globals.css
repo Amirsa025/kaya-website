@@ -10,8 +10,6 @@
         url('../public/Assets/IRANSans-Bold-web.ttf') format('ttf');
         font-weight: bold;
     }
-
-
     @font-face {
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-Medium-web.eot');
@@ -22,8 +20,6 @@
         url('../public/Assets/IRANSans-Medium-web.ttf') format('ttf');
         font-weight: 500;
     }
-
-
     @font-face {
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-UltraLight-web.eot');
@@ -34,8 +30,6 @@
         url('../public/Assets/IRANSans-UltraLight-web.ttf') format('ttf');
         font-weight: 200;
     }
-
-
     @font-face {
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-Light-web.eot');
@@ -100,6 +94,7 @@
     .fontMain {
         @apply font-main
     }
+
     .center-item{
         @apply  flex items-center justify-center
     }
@@ -135,6 +130,7 @@
             height: 40px;
             border: 2px solid transparent;
     }
+
     .hover_link {
         @apply  hover:border-b hover:border-blue-400 hover:py-1 cursor-pointer
     }

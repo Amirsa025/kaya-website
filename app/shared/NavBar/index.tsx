@@ -11,9 +11,8 @@ import Cookies from "universal-cookie";
                 window.location.reload()
             }
          if(cookie.get('token')){
-             window.location.reload()
              cookie.remove('token')
-
+             window.location.reload()
          }
 
      }
