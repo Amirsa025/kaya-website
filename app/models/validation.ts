@@ -1,5 +1,5 @@
 import * as yup from "yup";
-
+//step validationSchema
 export const validationSchema = yup.object().shape({
     first_name: yup.string().required('نام را وارد کنید'),
     last_name: yup.string().required('نام خانوادگی را وارد کنید'),

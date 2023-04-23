@@ -15,7 +15,7 @@ import {validationSchema} from "@/app/models/validation";
 
 const MultiFormStepper = () => {
     const cookie = new Cookies()
-    //state
+    //statex
     const [activeStep, setActiveStep] = React.useState(0);
     const [formValues, setFormValues] = useState({
         first_name: '',
