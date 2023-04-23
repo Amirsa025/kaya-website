@@ -9,10 +9,10 @@ import {toast} from "react-toastify";
 import Router from "next/router";
 import {styleStepper} from "@/styles/styleStepper";
 import { StepContent} from "@mui/material";
-import CustomisedConnector from "@/app/utils/steper/CustomisedConnector";
+import CustomisedConnector from "@/app/utils/stepper/CustomisedConnector";
 import {steps} from "@/app/constant/MockData";
 import {validationSchema} from "@/app/models/validation";
-import {Checkbox} from "@material-tailwind/react";
+import { Checkbox } from "@material-tailwind/react";
 
 const MultiFormStepper = () => {
     const cookie = new Cookies()
@@ -142,11 +142,12 @@ const MultiFormStepper = () => {
 
     return (
         <div>
+            {/*desktop Mode*/}
             <div className={"px-4 md:container-app hidden md:block"}>
                 <Stepper activeStep={activeStep} sx={styleStepper}  connector={<CustomisedConnector />}>
                     {steps.map((label, index) => {
                         return (
-                            <Step key={index} className={"flex flex-col  font-[IRANSans] "}
+                            <Step key={index} className={"flex flex-col  font-[IRANSans] pt-[25px]"}
                                   sx={{text: "text-blue-400"}}>
                                 <StepLabel className={"flex md:flex-col text-center gap-y-4  items-center"}>
                                     <span className={"!font-semibold  text-[10px] sm:!text-[10px] font-[IRANSans]"}>{label}</span>
@@ -207,7 +208,7 @@ const MultiFormStepper = () => {
                                         نظر نیست.
                                     </p>
                                     <label className={"space-x-2 flex items-center gap-4 pt-5"}>
-                                        <input
+                                        <Checkbox
                                             type="checkbox"
                                             checked={isChecked}
                                             onChange={handleCheckboxChange}
@@ -507,367 +508,364 @@ const MultiFormStepper = () => {
                     </>
                 )}
             </div>
-            <div>
-                <div  className={"block md:hidden px-6"}>
-                    <Stepper activeStep={activeStep}  orientation="vertical" >
-                        {steps.map((step, index) => (
-                            <Step key={step} sx={styleStepper}>
-                                <StepLabel >
-                                    <div className={"font-[IRANSans]"}>
-                                        <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
-                                    </div>
-                                </StepLabel>
-                                <StepContent >
-                                    <div className={"font-[IRANSans]"}>
-                                        <React.Fragment>
-                                            <form id={"Mobile"} onSubmit={submitFormHandler}>
-                                                {activeStep === 0 && (
-                                                    <div className={"py-16"}>
-                                                        <p className={"leading-10 text-[12px] py-8 text-justify"}>
-                                                            استفاده از فروشگاه اینترنتی هما به معنی توافق کامل شما با شرایط
-                                                            و ضوابط ذیل تلقی می گردد:
-                                                            1- خرید کالا از فروشگاه اینترنتی هما بر مبنای قوانین و آئین نامه
-                                                            های موجود در تجارت الکترونیک و با رعایت کامل تمام قوانین جمهوری
-                                                            اسلامی ایران صورت می پذیرد.
-                                                            2- محصولات این سایت براى استفاده شخصی و غیر تجارى مشتریان عرضه
-                                                            شده است و مالکیت معنوی اطلاعات موجود در آن متعلق به این فروشگاه
-                                                            بوده و هر گونه سوء استفاده از این اطلاعات پیگرد قانونی دارد.
-                                                            استفاده غیرتجاری از محتویات سایت با ذکر منبع بلامانع است و اگر
-                                                            مایلید از اطلاعات موجود در سایت جهت مقاصد تجاری استفاده نمایید
-                                                            باید از طریق پست الکترونیکی info@homais.comدرخواست خود را ارسال
-                                                            نموده و اجازه نامه کتبی اخذ نمایید.
-                                                            3- کاربران هنگام سفارش کالا ملزم می باشند اطلاعات صحیح کامل را
-                                                            در پایگاه درج کنند. بدیهی است کاستی یا نادرستی اطلاعات، مانع
-                                                            تکمیل مراحل سفارش خواهد شد.
-                                                            4- فروشگاه اینترنتی هما هیچ گونه مسئولیتی را در مورد کارکرد ناقص
-                                                            سایت که می تواند ناشی از عوامل خارج از حوزه مدیریت این سایت باشد
-                                                            (همانند نقص اینترنت، مسائل مخابراتی، تجهیزات سخت افزاری و غیره)
-                                                            نمی پذیرد.
-                                                            5- ارتباط فروشگاه اینترنتی هما با کاربران از طریق homais.com
-                                                            برقرار می گردد و فقط با استفاده از اطلاعاتی که کاربران در سایت
-                                                            درج کرده اند (همانند نشانی، تلفن و …) صورت می پذیرد.
-                                                            9- فروشگاه اینترنتی هما به هیچ وجه اطلاعات منحصر بفرد کاربران را
-                                                            به اشخاص و طرفین غیر، واگذار نخواهد کرد و ضمنا با استفاده از
-                                                            آخرین فن آوری ها متعهد است حتی المقدور از حریم شخصی کاربران دفاع
-                                                            کند.
-                                                            10- هدف از ایجاد بخش نظرات در فروشگاه اینترنتی هما، اشتراک گذاری
-                                                            تجربه خرید محصولاتی است که به فروش می رسد. بخش نظرات فروشگاه
-                                                            اینترنتی هما با دیگر سایت ها و شبکه های اجتماعی متفاوت است. در
-                                                            این بخش، هر کاربر مجاز است در چهارچوب شرایط و قوانین سایت، نظرات
-                                                            خود را به اشتراک بگذارد که پس از بررسی و تایید کارشناسان، امکان
-                                                            مشاهده وجود دارد. بدیهی است که اگر قوانین سایت در نظرات کاربری
-                                                            رعایت نشود، تایید نمی‌شود و در نتیجه در سایت به نمایش درنمی آید.
-                                                            فروشگاه اینترنتی هما در قبال درستی یا نادرستی نظرات منتشرشده در
-                                                            این قسمت، هیچگونه مسئولیتی ندارد و نمایش نظرات کاربران در سایت
-                                                            به هیچ وجه به معنی تایید فنی فروشگاه اینترنتی هما درباره محتویات
-                                                            نظر نیست.
-                                                        </p>
-                                                        <label className={"space-x-2 flex items-center gap-4 pt-5"}>
+            <div  className={"block md:hidden px-6"}>
+                {/*mobile  Mode*/}
+                <Stepper activeStep={activeStep}  orientation="vertical" >
+                    {steps.map((step, index) => (
+                        <Step key={step} sx={styleStepper}>
+                            <StepLabel >
+                                <div className={"font-[IRANSans]"}>
+                                    <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
+                                </div>
+                            </StepLabel>
+                            <StepContent style={{ fontFamily: 'IRANSans' }}>
+                                <React.Fragment>
+                                    <form id={"Mobile"} onSubmit={submitFormHandler}>
+                                        {activeStep === 0 && (
+                                            <div className={"py-16"}>
+                                                <p className={"leading-10 text-[12px] py-8 text-justify"}>
+                                                    استفاده از فروشگاه اینترنتی هما به معنی توافق کامل شما با شرایط
+                                                    و ضوابط ذیل تلقی می گردد:
+                                                    1- خرید کالا از فروشگاه اینترنتی هما بر مبنای قوانین و آئین نامه
+                                                    های موجود در تجارت الکترونیک و با رعایت کامل تمام قوانین جمهوری
+                                                    اسلامی ایران صورت می پذیرد.
+                                                    2- محصولات این سایت براى استفاده شخصی و غیر تجارى مشتریان عرضه
+                                                    شده است و مالکیت معنوی اطلاعات موجود در آن متعلق به این فروشگاه
+                                                    بوده و هر گونه سوء استفاده از این اطلاعات پیگرد قانونی دارد.
+                                                    استفاده غیرتجاری از محتویات سایت با ذکر منبع بلامانع است و اگر
+                                                    مایلید از اطلاعات موجود در سایت جهت مقاصد تجاری استفاده نمایید
+                                                    باید از طریق پست الکترونیکی info@homais.comدرخواست خود را ارسال
+                                                    نموده و اجازه نامه کتبی اخذ نمایید.
+                                                    3- کاربران هنگام سفارش کالا ملزم می باشند اطلاعات صحیح کامل را
+                                                    در پایگاه درج کنند. بدیهی است کاستی یا نادرستی اطلاعات، مانع
+                                                    تکمیل مراحل سفارش خواهد شد.
+                                                    4- فروشگاه اینترنتی هما هیچ گونه مسئولیتی را در مورد کارکرد ناقص
+                                                    سایت که می تواند ناشی از عوامل خارج از حوزه مدیریت این سایت باشد
+                                                    (همانند نقص اینترنت، مسائل مخابراتی، تجهیزات سخت افزاری و غیره)
+                                                    نمی پذیرد.
+                                                    5- ارتباط فروشگاه اینترنتی هما با کاربران از طریق homais.com
+                                                    برقرار می گردد و فقط با استفاده از اطلاعاتی که کاربران در سایت
+                                                    درج کرده اند (همانند نشانی، تلفن و …) صورت می پذیرد.
+                                                    9- فروشگاه اینترنتی هما به هیچ وجه اطلاعات منحصر بفرد کاربران را
+                                                    به اشخاص و طرفین غیر، واگذار نخواهد کرد و ضمنا با استفاده از
+                                                    آخرین فن آوری ها متعهد است حتی المقدور از حریم شخصی کاربران دفاع
+                                                    کند.
+                                                    10- هدف از ایجاد بخش نظرات در فروشگاه اینترنتی هما، اشتراک گذاری
+                                                    تجربه خرید محصولاتی است که به فروش می رسد. بخش نظرات فروشگاه
+                                                    اینترنتی هما با دیگر سایت ها و شبکه های اجتماعی متفاوت است. در
+                                                    این بخش، هر کاربر مجاز است در چهارچوب شرایط و قوانین سایت، نظرات
+                                                    خود را به اشتراک بگذارد که پس از بررسی و تایید کارشناسان، امکان
+                                                    مشاهده وجود دارد. بدیهی است که اگر قوانین سایت در نظرات کاربری
+                                                    رعایت نشود، تایید نمی‌شود و در نتیجه در سایت به نمایش درنمی آید.
+                                                    فروشگاه اینترنتی هما در قبال درستی یا نادرستی نظرات منتشرشده در
+                                                    این قسمت، هیچگونه مسئولیتی ندارد و نمایش نظرات کاربران در سایت
+                                                    به هیچ وجه به معنی تایید فنی فروشگاه اینترنتی هما درباره محتویات
+                                                    نظر نیست.
+                                                </p>
+                                                <label className={"space-x-2 flex items-center gap-4 pt-5"}>
 
-                                                            <Checkbox
-                                                                type="checkbox"
-                                                                checked={isChecked}
-                                                                onChange={handleCheckboxChange}
-                                                            />
-                                                            <span
-                                                                className={"text-[10px] block"}>پذیرش قوانین و مقررات </span>
-                                                        </label>
-                                                    </div>
-                                                )}
-                                                {activeStep === 1 && (
-                                                    <div className={"pt-16"}>
-                                                        <div className={"w-full flex flex-col md:flex-row md:items-center "}>
-                                                            <div className={"flex-1"}>
-                                                                <div className={"grid grid-cols-1  w-full"}>
-                                                                    <div className={" flex flex-col w-full  pt-4  space-y-3 "}>
-                                                                        <label className={"pr-2 text-[12px] font-bold"} htmlFor="first_name"> نام </label>
-                                                                        <input
-                                                                            onBlur={() => {
-                                                                                validationSchema.validateAt('first_name', formValues)
-                                                                                    .then(() => setErrors({
-                                                                                        ...errors,
-                                                                                        // @ts-ignore
-                                                                                        first_name: ''
-                                                                                    }))
-                                                                                    .catch((error) => setErrors({
-                                                                                        ...errors,
-                                                                                        first_name: error.message
-                                                                                    }));
-                                                                            }}
-                                                                            required
-                                                                            value={formValues.first_name}
-                                                                            onChange={handleInputChange}
-                                                                            type="text"
-                                                                            id="first_name"
-                                                                            name="first_name"
-                                                                            className={"focus:shadow-lg placeholder:text-[12px] w-full md:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
-                                                                            placeholder={"نام خود را وارد کنید"}
-                                                                        />
-                                                                        {errors.first_name &&
-                                                                            <div className={"py-2 text-[12px] text-red-500"}>{errors.first_name}</div>}
-                                                                    </div>
-                                                                    <div className={" flex flex-col w-full  py-4  space-y-3 "}>
-                                                                        <label htmlFor="last_name" className={"pr-2 text-[12px] font-bold "}> نام خانوادگی </label>
-                                                                        <input type="text"
-                                                                               required
-                                                                               onBlur={() => {validationSchema.validateAt('last_name', formValues).then(() => setErrors({...errors,
+                                                    <Checkbox
+                                                        type="checkbox"
+                                                        checked={isChecked}
+                                                        onChange={handleCheckboxChange}
+                                                    />
+                                                    <span
+                                                        className={"text-[10px] block"}>پذیرش قوانین و مقررات </span>
+                                                </label>
+                                            </div>
+                                        )}
+                                        {activeStep === 1 && (
+                                            <div className={"pt-16"}>
+                                                <div className={"w-full flex flex-col mt-[30px] md:flex-row md:items-center "}>
+                                                    <div className={"flex-1"}>
+                                                        <div className={"grid grid-cols-1  w-full"}>
+                                                            <div className={" flex flex-col w-full  pt-4  space-y-3 "}>
+                                                                <label className={"pr-2 text-[12px] font-bold"} htmlFor="first_name"> نام </label>
+                                                                <input
+                                                                    onBlur={() => {
+                                                                        validationSchema.validateAt('first_name', formValues)
+                                                                            .then(() => setErrors({
+                                                                                ...errors,
+                                                                                // @ts-ignore
+                                                                                first_name: ''
+                                                                            }))
+                                                                            .catch((error) => setErrors({
+                                                                                ...errors,
+                                                                                first_name: error.message
+                                                                            }));
+                                                                    }}
+                                                                    required
+                                                                    value={formValues.first_name}
+                                                                    onChange={handleInputChange}
+                                                                    type="text"
+                                                                    id="first_name"
+                                                                    name="first_name"
+                                                                    className={"focus:shadow-lg placeholder:text-[12px] w-full md:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
+                                                                    placeholder={"نام خود را وارد کنید"}
+                                                                />
+                                                                {errors.first_name &&
+                                                                    <div className={"py-2 text-[12px] text-red-500"}>{errors.first_name}</div>}
+                                                            </div>
+                                                            <div className={" flex flex-col w-full  py-4  space-y-3 "}>
+                                                                <label htmlFor="last_name" className={"pr-2 text-[12px] font-bold "}> نام خانوادگی </label>
+                                                                <input type="text"
+                                                                       required
+                                                                       onBlur={() => {validationSchema.validateAt('last_name', formValues).then(() => setErrors({...errors,
+                                                                           // @ts-ignore
+                                                                           last_name: ''}))
+                                                                           .catch((error) => setErrors({
+                                                                               ...errors,
+                                                                               last_name: error.message
+                                                                           }));
+                                                                       }}
+                                                                       value={formValues.last_name}
+                                                                       onChange={handleInputChange}
+                                                                       id="last_name"
+                                                                       name="last_name"
+                                                                       className={" focus:shadow-lg placeholder:text-[12px] w-full md:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
+                                                                       placeholder={"نام خود را وارد کنید"}
+                                                                />
+                                                                {errors.last_name &&
+                                                                    <div className={"py-2 text-[12px] text-red-500"}>{errors.last_name}</div>}
+                                                            </div>
+                                                            <div className={" flex flex-col w-full  pb-4  space-y-3 "}>
+                                                                <label htmlFor="national_id"
+                                                                       className={"pr-2 text-[12px] font-bold"}> کد
+                                                                    ملی </label>
+                                                                <input type="number"
+                                                                       required
+                                                                       onBlur={() => {
+                                                                           validationSchema.validateAt('national_id', formValues)
+                                                                               .then(() => setErrors({
+                                                                                   ...errors,
                                                                                    // @ts-ignore
-                                                                                   last_name: ''}))
-                                                                                   .catch((error) => setErrors({
-                                                                                       ...errors,
-                                                                                       last_name: error.message
-                                                                                   }));
-                                                                               }}
-                                                                               value={formValues.last_name}
-                                                                               onChange={handleInputChange}
-                                                                               id="last_name"
-                                                                               name="last_name"
-                                                                               className={" focus:shadow-lg placeholder:text-[12px] w-full md:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
-                                                                               placeholder={"نام خود را وارد کنید"}
-                                                                        />
-                                                                        {errors.last_name &&
-                                                                            <div className={"py-2 text-[12px] text-red-500"}>{errors.last_name}</div>}
-                                                                    </div>
-                                                                    <div className={" flex flex-col w-full  pb-4  space-y-3 "}>
-                                                                        <label htmlFor="national_id"
-                                                                               className={"pr-2 text-[12px] font-bold"}> کد
-                                                                            ملی </label>
-                                                                        <input type="number"
+                                                                                   national_id: ''
+                                                                               }))
+                                                                               .catch((error) => setErrors({
+                                                                                   ...errors,
+                                                                                   national_id: error.message
+                                                                               }));
+                                                                       }}
+                                                                       value={formValues.national_id}
+                                                                       onChange={handleInputChange}
+                                                                       id="national_id"
+                                                                       name="national_id"
+                                                                       className={"focus:shadow-lg placeholder:text-[12px] w-full md:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
+                                                                       placeholder={"کد ملی  خود را وارد کنید"}
+                                                                />
+                                                                {errors.national_id &&
+                                                                    <div className={"py-2 text-[12px] text-red-500"}>{errors.national_id}</div>}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {activeStep === 2 && (
+                                            <div className={"w-full pt-16"}>
+
+                                                <div className={"flex-1"}>
+                                                    <div className={" grid grid-cols-1 lg:grid-cols-1 w-full"}>
+                                                        <div className={" flex flex-col w-full  py-4  space-y-3  "}>
+                                                            <label htmlFor="accountNumber" className={"pr-2 text-[12px] font-bold"}>شماره
+                                                                شبا </label>
+                                                            <input type="text"
+                                                                   required
+                                                                   onBlur={() => {
+                                                                       validationSchema.validateAt('sheba_number', formValues)
+                                                                           .then(() => setErrors({
+                                                                               ...errors,
+                                                                               // @ts-ignore
+                                                                               sheba_number: ''
+                                                                           }))
+                                                                           .catch((error) => setErrors({
+                                                                               ...errors,
+                                                                               sheba_number: error.message
+                                                                           }));
+                                                                   }}
+                                                                   value={formValues.sheba_number}
+                                                                   onChange={handleInputChange}
+                                                                   id="sheba_number"
+                                                                   name="sheba_number"
+                                                                   className={"focus:shadow-lg placeholder:text-[12px] w-full lg:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
+                                                                   placeholder={"شماره حساب را وارد کنید"}
+                                                            />
+                                                            {errors.sheba_number &&
+                                                                <div className={"py-2 text-[12px] text-red-500"}>{errors.sheba_number}</div>}
+                                                        </div>
+                                                        <div className={" flex flex-col w-full  py-4  space-y-3  "}>
+                                                            <label
+                                                                htmlFor="card_number"
+                                                                className={"pr-2 text-[12px] font-bold "}>شماره کارت </label>
+                                                            <input
+                                                                type="text"
+                                                                value={formValues.card_number}
+                                                                onBlur={() => {
+
+                                                                    validationSchema.validateAt('card_number', formValues)
+                                                                        .then(() => setErrors({
+                                                                            ...errors,
+                                                                            // @ts-ignore
+                                                                            card_number: ''
+                                                                        }))
+                                                                        .catch((error) => setErrors({
+                                                                            ...errors,
+                                                                            card_number: error.message
+                                                                        }));
+                                                                }}
+                                                                onChange={handleInputChange}
+                                                                id="card_number"
+                                                                name="card_number"
+                                                                className={"focus:shadow-lg placeholder:text-[12px] w-full lg:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
+                                                                placeholder={"شماره کارت خود را وارد کنید"}
+                                                            />
+                                                            {errors.card_number &&
+                                                                <div className={"py-2 text-[12px] text-red-500"}>{errors.card_number}</div>}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {activeStep === 3 && (
+                                            <div className={"w-full space-y-6  py-24"}>
+                                                <div className={"flex flex-col font-semibold "}>احراز هویت بصری</div>
+                                                <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-4 "}>
+                                                    <div className={"w-1/2 bg-[#fafafa] rounded-md px-4 my-4 md:pr-[4rem] flex flex-col w-full  py-4  space-y-3 px-4 "}>
+                                                        <div className={" flex flex-col   2xl:flex-row  items-center gap-12"}>
+                                                            <div>
+                                                                <span className={"text-[13px] font-bold"}>تصویر کارت ملی </span>
+                                                            </div>
+                                                            {previewImage ? <img src={previewImage}
+                                                                                 className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
+                                                                                 alt=""/> :
+                                                                <img src="/images/img-min-p-800.png"
+                                                                     className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
+                                                                     alt=""/>}
+
+                                                            <div>
+                                                                <div className={"upload"}>
+                                                                    <label htmlFor="inputTag"
+                                                                           className={"flex py-2 items-center  gap-2"}>
+                                                                        انتخاب عکس <br/>
+                                                                        <i className="ri-camera-fill"></i>
+                                                                        <input id="inputTag"
                                                                                required
-                                                                               onBlur={() => {
-                                                                                   validationSchema.validateAt('national_id', formValues)
-                                                                                       .then(() => setErrors({
-                                                                                           ...errors,
-                                                                                           // @ts-ignore
-                                                                                           national_id: ''
-                                                                                       }))
-                                                                                       .catch((error) => setErrors({
-                                                                                           ...errors,
-                                                                                           national_id: error.message
-                                                                                       }));
-                                                                               }}
-                                                                               value={formValues.national_id}
-                                                                               onChange={handleInputChange}
-                                                                               id="national_id"
-                                                                               name="national_id"
-                                                                               className={"focus:shadow-lg placeholder:text-[12px] w-full md:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
-                                                                               placeholder={"کد ملی  خود را وارد کنید"}
-                                                                        />
-                                                                        {errors.national_id &&
-                                                                            <div className={"py-2 text-[12px] text-red-500"}>{errors.national_id}</div>}
-                                                                    </div>
+                                                                               type="file"
+                                                                               name='national_card_photo'
+                                                                               accept='image/*'
+                                                                               onChange={handleFileInputChange}/>
+                                                                        <br/>
+                                                                        <span id="imageName"></span>
+                                                                    </label>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
-                                                )}
-                                                {activeStep === 2 && (
-                                                    <div className={"w-full pt-16"}>
+                                                    <div className={"w-1/2 bg-[#fafafa] rounded-md px-4 my-4 md:pr-[4rem] flex flex-col w-full  py-4  space-y-3 px-4 "}>
+                                                        <div
+                                                            className={" flex flex-col 2xl:flex-row  items-center gap-12"}>
+                                                            <div>
+                                                                <span className={"text-[13px] font-bold"}>تصویر با کارت ملی</span>
+                                                            </div>
+                                                            {previewImagePerson ? <img src={previewImagePerson}
+                                                                                       className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
+                                                                                       alt=""/> :
+                                                                <img src="/images/img-min-p-800.png"
+                                                                     className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
+                                                                     alt=""/>}
+                                                            <div>
+                                                                <div className={"upload"}>
+                                                                    <label htmlFor="personPhoto"
+                                                                           className={"flex py-2 items-center  gap-2"}>
+                                                                        انتخاب عکس <br/>
+                                                                        <i className="ri-camera-fill"></i>
+                                                                        <input
+                                                                            required
+                                                                            id="personPhoto"
+                                                                            name={"verify_photo"}
+                                                                            type="file"
+                                                                            onChange={handleFileInputChangePerson}/>
 
-                                                        <div className={"flex-1"}>
-                                                            <div className={" grid grid-cols-1 lg:grid-cols-1 w-full"}>
-                                                                <div className={" flex flex-col w-full  py-4  space-y-3  "}>
-                                                                    <label htmlFor="accountNumber" className={"pr-2 text-[12px] font-bold"}>شماره
-                                                                        شبا </label>
-                                                                    <input type="text"
-                                                                           required
-                                                                           onBlur={() => {
-                                                                               validationSchema.validateAt('sheba_number', formValues)
-                                                                                   .then(() => setErrors({
-                                                                                       ...errors,
-                                                                                       // @ts-ignore
-                                                                                       sheba_number: ''
-                                                                                   }))
-                                                                                   .catch((error) => setErrors({
-                                                                                       ...errors,
-                                                                                       sheba_number: error.message
-                                                                                   }));
-                                                                           }}
-                                                                           value={formValues.sheba_number}
-                                                                           onChange={handleInputChange}
-                                                                           id="sheba_number"
-                                                                           name="sheba_number"
-                                                                           className={"focus:shadow-lg placeholder:text-[12px] w-full lg:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
-                                                                           placeholder={"شماره حساب را وارد کنید"}
-                                                                    />
-                                                                    {errors.sheba_number &&
-                                                                        <div className={"py-2 text-[12px] text-red-500"}>{errors.sheba_number}</div>}
-                                                                </div>
-                                                                <div className={" flex flex-col w-full  py-4  space-y-3  "}>
-                                                                    <label
-                                                                        htmlFor="card_number"
-                                                                        className={"pr-2 text-[12px] font-bold "}>شماره کارت </label>
-                                                                    <input
-                                                                        type="text"
-                                                                        value={formValues.card_number}
-                                                                        onBlur={() => {
+                                                                        <br/>
+                                                                        <span id="imageName"></span>
+                                                                    </label>
 
-                                                                            validationSchema.validateAt('card_number', formValues)
-                                                                                .then(() => setErrors({
-                                                                                    ...errors,
-                                                                                    // @ts-ignore
-                                                                                    card_number: ''
-                                                                                }))
-                                                                                .catch((error) => setErrors({
-                                                                                    ...errors,
-                                                                                    card_number: error.message
-                                                                                }));
-                                                                        }}
-                                                                        onChange={handleInputChange}
-                                                                        id="card_number"
-                                                                        name="card_number"
-                                                                        className={"focus:shadow-lg placeholder:text-[12px] w-full lg:w-1/2 text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
-                                                                        placeholder={"شماره کارت خود را وارد کنید"}
-                                                                    />
-                                                                    {errors.card_number &&
-                                                                        <div className={"py-2 text-[12px] text-red-500"}>{errors.card_number}</div>}
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
-                                                )}
-                                                {activeStep === 3 && (
-                                                    <div className={"w-full space-y-6  py-24"}>
-                                                        <div className={"flex flex-col font-semibold "}>احراز هویت بصری</div>
-                                                        <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-4 "}>
-                                                            <div className={"w-1/2 bg-[#fafafa] rounded-md px-4 my-4 md:pr-[4rem] flex flex-col w-full  py-4  space-y-3 px-4 "}>
-                                                                <div className={" flex flex-col   2xl:flex-row  items-center gap-12"}>
-                                                                    <div>
-                                                                        <span className={"text-[13px] font-bold"}>تصویر کارت ملی </span>
-                                                                    </div>
-                                                                    {previewImage ? <img src={previewImage}
-                                                                                         className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
-                                                                                         alt=""/> :
-                                                                        <img src="/images/img-min-p-800.png"
-                                                                             className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
-                                                                             alt=""/>}
+                                                </div>
+                                            </div>
+                                        )}
+                                        {activeStep === 4 && (
+                                            <div className={"w-full  py-12"}>
+                                                <div className={"flex-1  lg:py-[3rem]"}>
+                                                    <div className={" grid grid-cols-1 xl:grid-cols-2 w-full"}>
+                                                        <div className={" flex flex-col w-full  py-4  space-y-3  "}>
+                                                            <label htmlFor="accountNumber"
+                                                                   className={" text-[12px] font-bold"}>آدرس و
+                                                                نشانی </label>
+                                                            <textarea
+                                                                required
+                                                                onBlur={() => {
 
-                                                                    <div>
-                                                                        <div className={"upload"}>
-                                                                            <label htmlFor="inputTag"
-                                                                                   className={"flex py-2 items-center  gap-2"}>
-                                                                                انتخاب عکس <br/>
-                                                                                <i className="ri-camera-fill"></i>
-                                                                                <input id="inputTag"
-                                                                                       required
-                                                                                       type="file"
-                                                                                       name='national_card_photo'
-                                                                                       accept='image/*'
-                                                                                       onChange={handleFileInputChange}/>
-                                                                                <br/>
-                                                                                <span id="imageName"></span>
-                                                                            </label>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className={"w-1/2 bg-[#fafafa] rounded-md px-4 my-4 md:pr-[4rem] flex flex-col w-full  py-4  space-y-3 px-4 "}>
-                                                                <div
-                                                                    className={" flex flex-col 2xl:flex-row  items-center gap-12"}>
-                                                                    <div>
-                                                                        <span className={"text-[13px] font-bold"}>تصویر با کارت ملی</span>
-                                                                    </div>
-                                                                    {previewImagePerson ? <img src={previewImagePerson}
-                                                                                               className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
-                                                                                               alt=""/> :
-                                                                        <img src="/images/img-min-p-800.png"
-                                                                             className={"px-2 bg-white  block w-[10rem] h-[7rem] rounded-md"}
-                                                                             alt=""/>}
-                                                                    <div>
-                                                                        <div className={"upload"}>
-                                                                            <label htmlFor="personPhoto"
-                                                                                   className={"flex py-2 items-center  gap-2"}>
-                                                                                انتخاب عکس <br/>
-                                                                                <i className="ri-camera-fill"></i>
-                                                                                <input
-                                                                                    required
-                                                                                    id="personPhoto"
-                                                                                    name={"verify_photo"}
-                                                                                    type="file"
-                                                                                    onChange={handleFileInputChangePerson}/>
-
-                                                                                <br/>
-                                                                                <span id="imageName"></span>
-                                                                            </label>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                                    validationSchema.validateAt('address', formValues)
+                                                                        .then(() => setErrors({
+                                                                            ...errors,
+                                                                            // @ts-ignore
+                                                                            address: ''
+                                                                        }))
+                                                                        .catch((error) => setErrors({
+                                                                            ...errors,
+                                                                            address: error.message
+                                                                        }));
+                                                                }}
+                                                                id="Address"
+                                                                onChange={handleInputChange}
+                                                                value={formValues.address}
+                                                                name="address"
+                                                                className={"!h-[10rem] py-2 px-2 focus:shadow-lg placeholder:text-[12px] w-full text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
+                                                                placeholder={"آدرس خود را وارد کنید"}
+                                                            />
+                                                            {errors.address &&
+                                                                <div className={"py-2 text-[12px] text-red-500"}>{errors.address}</div>}
                                                         </div>
-                                                    </div>
-                                                )}
-                                                {activeStep === 4 && (
-                                                    <div className={"w-full  py-12"}>
-                                                        <div className={"flex-1  lg:py-[3rem]"}>
-                                                            <div className={" grid grid-cols-1 xl:grid-cols-2 w-full"}>
-                                                                <div className={" flex flex-col w-full  py-4  space-y-3  "}>
-                                                                    <label htmlFor="accountNumber"
-                                                                           className={" text-[12px] font-bold"}>آدرس و
-                                                                        نشانی </label>
-                                                                    <textarea
-                                                                        required
-                                                                        onBlur={() => {
-
-                                                                            validationSchema.validateAt('address', formValues)
-                                                                                .then(() => setErrors({
-                                                                                    ...errors,
-                                                                                    // @ts-ignore
-                                                                                    address: ''
-                                                                                }))
-                                                                                .catch((error) => setErrors({
-                                                                                    ...errors,
-                                                                                    address: error.message
-                                                                                }));
-                                                                        }}
-                                                                        id="Address"
-                                                                        onChange={handleInputChange}
-                                                                        value={formValues.address}
-                                                                        name="address"
-                                                                        className={"!h-[10rem] py-2 px-2 focus:shadow-lg placeholder:text-[12px] w-full text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
-                                                                        placeholder={"آدرس خود را وارد کنید"}
-                                                                    />
-                                                                    {errors.address &&
-                                                                        <div className={"py-2 text-[12px] text-red-500"}>{errors.address}</div>}
-                                                                </div>
-                                                                <div
-                                                                    className={"flex items-center justify-center md:pr-[4rem] lg:pr-[47px] flex flex-col w-full  py-4  space-y-3 px-4 "}>
-                                                                    <button
-                                                                        className={"w-full md:w-1/2  px-6 rounded-md py-4 text-white font-medium text-[12px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] "}>{activeStep === steps.length - 1 ? 'ثبت اطلاعات ' : 'بعد'}</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </form>
-                                            <>
-                                                {
-                                                    isChecked && (
-                                                        <div className={"flex items-center justify-between py-12"}>
+                                                        <div
+                                                            className={"flex items-center justify-center md:pr-[4rem] lg:pr-[47px] flex flex-col w-full  py-4  space-y-3 px-4 "}>
                                                             <button
-                                                                className={"w-full  md:w-[86px] p-[8px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] text-[1rem]"}
-                                                                disabled={activeStep === 0}
-                                                                onClick={handleBack}>
-                                                                بازگشت
-                                                            </button>
-                                                            <button
-                                                                onClick={activeStep === steps.length - 1 ? handleReset : handleNext}
-                                                                className={" mx-4 w-full  md:w-[86px] p-[8px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] text-[1rem]"}>
-                                                                {activeStep === steps.length - 1 ? 'دوباره ' : 'بعد'}
-                                                            </button>
+                                                                className={"w-full md:w-1/2  px-6 rounded-md py-4 text-white font-medium text-[12px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] "}>{activeStep === steps.length - 1 ? 'ثبت اطلاعات ' : 'بعد'}</button>
                                                         </div>
-                                                    )
-                                                }
-                                            </>
-                                        </React.Fragment>
-                                    </div>
-                                </StepContent>
-                            </Step>
-                        ))}
-                    </Stepper>
-                </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </form>
+                                    <>
+                                        {
+                                            isChecked && (
+                                                <div className={"flex items-center justify-between py-12"}>
+                                                    <button
+                                                        className={"w-full  md:w-[86px] p-[8px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] text-[1rem]"}
+                                                        disabled={activeStep === 0}
+                                                        onClick={handleBack}>
+                                                        بازگشت
+                                                    </button>
+                                                    <button
+                                                        onClick={activeStep === steps.length - 1 ? handleReset : handleNext}
+                                                        className={" mx-4 w-full  md:w-[86px] p-[8px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] text-[1rem]"}>
+                                                        {activeStep === steps.length - 1 ? 'دوباره ' : 'بعد'}
+                                                    </button>
+                                                </div>
+                                            )
+                                        }
+                                    </>
+                                </React.Fragment>
+                            </StepContent>
+                        </Step>
+                    ))}
+                </Stepper>
             </div>
         </div>
 

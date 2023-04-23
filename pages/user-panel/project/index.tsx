@@ -110,7 +110,8 @@ const Project: NextPageWithLayout<FilterValues> = () => {
     return (
         <div className={"md:container-app px-2 "}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
-            <div className={"flex items-start "}>
+            <div className={"flex items-start gap-4"}>
+
                 <div className={"flex-1"}>
                     {isLoading ? (
                         <div className={"lg:px-24 w-full"}>
@@ -146,10 +147,10 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className={"flex flex-col md:flex-row "}>
+                        <div className={"flex flex-col md:flex-row gap-4"}>
                             {/*filter and lsit project */}
                             <div
-                                className={"lg:mx-6 flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  md:py-6 lg:px-4"}>
+                                className={" flex justify-start md:flex-1 border rounded-md  w-full flex flex-col  "}>
                                 <div>
                                     <div className={"flex items-center"}>
                                         <ModalFilter onFilter={onFilters}/>
@@ -195,7 +196,6 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                                                 )} count={page}
                                                 onChange={(event, page) => handleChangePage(page)}/>
                                 </div>
-
                             </div>
 
                         </div>

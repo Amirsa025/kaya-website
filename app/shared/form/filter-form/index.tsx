@@ -53,7 +53,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
 
     return (
 
-        <div className={"md:flex items-center justify-between px-4  "}>
+        <div className={"flex md:block items-center justify-between px-4 md:border-b "}>
             <form className={"px-2 xl:px-0 "} onSubmit={formik.handleSubmit}>
                 <h1 className={" text-lg pt-2 font-bold px-2"}>Budget</h1>
                 <div>
@@ -183,6 +183,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
                             </div>
                         </div>
                     </div>
+
                       <button className={"border block mx-auto md:hidden  w-1/2 border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600  py-2 mt-4"}>filter</button>
                     <button  className={" hidden md:block w-full px-4 py-2 text-[15px]   border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>Filter</button>
                 </div>

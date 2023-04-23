@@ -23,6 +23,7 @@ export const styleStepper={
     },
     '.MuiStepIcon-root': {
         width: 40,
+        marginY: "10px",
         height: 40,
         border: "1px solid #e7e7e7",
         color: '#1976d2',
@@ -30,16 +31,19 @@ export const styleStepper={
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize:"10px",  marginY: "-10px"
+        fontSize:"10px",
+
     },
     'root': {
         color: '#00bfed',
         border: "1px solid #e7e7e7",
         fontSize:"10px",
+
         fontFamily:"IRANSans-web"
     },".MuiSvgIcon-root.Mui-active": {
         padding: "3px",
         color: "#00bfed",
+
         borderRadius: "50%",
         border: "2px solid #00bfed",
         marginY: "-5px"
