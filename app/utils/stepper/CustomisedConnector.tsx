@@ -16,6 +16,7 @@ const CustomisedConnector = styled(StepConnector)(({ theme }) => ({
         },
     },
     [`& .${stepConnectorClasses.line}`]: {
+
         height: 5,
         border: "10px",
         backgroundColor: "#e7e7e7",
