@@ -19,7 +19,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     }, [])
     if (loading) {
         return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
-            <div className={"flex flex-col mx-4 items-center justify-center "}>
+            <div className={"flex flex-col items-center justify-center "}>
                 <ScaleLoader
                     color="#3676d6"
                     height={100}
