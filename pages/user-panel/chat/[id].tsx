@@ -11,7 +11,8 @@ const MainContent:NextPageWithLayout = () => {
     return (
         <div className={"py-24 "}>
             <ChatLayout>
-                <h1 className={"text-center"}>User ID: {userId}</h1>
+                <h1>Chat {userId}</h1>
+                <p>This is the chat page for chat number {userId}.</p>
             </ChatLayout>
         </div>
 
