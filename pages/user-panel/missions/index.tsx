@@ -8,7 +8,7 @@ import WizardComplete from "@/app/shared/form/complate-profile/wizard";
 const Mission: NextPageWithLayout = () => {
     const {data, isLoading, isError} = useAuth()
     if(isLoading){
-        return  <div className={"lg:px-24 w-full"}>
+        return  <div className={"lg:px-24 w-full px-4"}>
             <div className={"text-white center-item  tex-[12px] h-16 bg-blue-400 rounded-md px-2  w-full lg:w-10/12 "}>
                 <div className={" rounded-md w-full py-2 lg:px-1 bg-blue-300 flex  items-center  gap-4"}>
                     <div className={"px-3"}>

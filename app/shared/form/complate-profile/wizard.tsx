@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import {toast} from "react-toastify";
 import Router from "next/router";
-import {styleStepper, styleStepperMobile} from "@/styles/styleStepper";
+import {styleStepper, styleStepperMobile} from "@/app/utils/stepper/styleStepper";
 import { StepContent} from "@mui/material";
 import CustomisedConnector from "@/app/utils/stepper/CustomisedConnector";
 import {steps} from "@/app/constant/MockData";
