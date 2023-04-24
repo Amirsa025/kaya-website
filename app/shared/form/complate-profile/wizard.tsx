@@ -518,7 +518,7 @@ const MultiFormStepper = () => {
                                     <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
                                 </div>
                             </StepLabel>
-                            <StepContent style={{ fontFamily: 'IRANSans' }}>
+                            <StepContent style={{ fontFamily: 'IRANSans-web' }}>
                                 <React.Fragment>
                                     <form id={"Mobile"} onSubmit={submitFormHandler}>
                                         {activeStep === 0 && (
