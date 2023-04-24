@@ -7,12 +7,13 @@ import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import {toast} from "react-toastify";
 import Router from "next/router";
-import {styleStepper, styleStepperMobile} from "@/app/utils/stepper/styleStepper";
+import {styleStepper} from "@/app/utils/stepper/styleStepper";
 import { StepContent} from "@mui/material";
 import CustomisedConnector from "@/app/utils/stepper/CustomisedConnector";
 import {steps} from "@/app/constant/MockData";
 import {validationSchema} from "@/app/models/validation";
 import { Checkbox } from "@material-tailwind/react";
+
 
 const MultiFormStepper = () => {
     const cookie = new Cookies()
@@ -510,15 +511,15 @@ const MultiFormStepper = () => {
             </div>
             <div  className={"block md:hidden px-6"}>
                 {/*mobile  Mode*/}
-                <Stepper activeStep={activeStep}  orientation="vertical" >
+                <Stepper activeStep={activeStep}  orientation="vertical"  >
                     {steps.map((step, index) => (
-                        <Step key={step} sx={styleStepper}  >
+                        <Step key={step} sx={styleStepper}  className={"direction-ltr"}>
                             <StepLabel>
                                 <div >
                                     <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
                                 </div>
                             </StepLabel>
-                            <StepContent style={{ fontFamily: 'IRANSans-web' }} className={"flex flex-col"}>
+                            <StepContent style={{ fontFamily: 'IRANSans-web',direction:"rtl" }} className={"flex flex-col"}>
                                 <React.Fragment>
                                     <form id={"Mobile"} onSubmit={submitFormHandler}>
                                         {activeStep === 0 && (
