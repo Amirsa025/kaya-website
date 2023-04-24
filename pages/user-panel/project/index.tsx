@@ -110,7 +110,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
     return (
         <div className={"md:container-app px-2 "}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
-            <div className={"flex items-start gap-4"}>
+            <div className={"flex items-start md:gap-4"}>
 
                 <div className={"flex-1"}>
                     {isLoading ? (
