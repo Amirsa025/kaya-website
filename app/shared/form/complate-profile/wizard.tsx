@@ -512,9 +512,9 @@ const MultiFormStepper = () => {
                 {/*mobile  Mode*/}
                 <Stepper activeStep={activeStep}  orientation="vertical" >
                     {steps.map((step, index) => (
-                        <Step key={step} sx={styleStepper}>
-                            <StepLabel >
-                                <div className={"font-[IRANSans]"}>
+                        <Step key={step} sx={styleStepper} style={{ fontFamily: 'IRANSans-web' }}>
+                            <StepLabel>
+                                <div>
                                     <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
                                 </div>
                             </StepLabel>
