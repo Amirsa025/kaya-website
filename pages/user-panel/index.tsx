@@ -8,7 +8,7 @@ import {MoonLoader} from "react-spinners";
 const UserPanelPage: NextPageWithLayout = () => {
     const {data, isFetching, isLoading, isError} = useAuth()
     if(isLoading){
-        return  <div className={"lg:px-24 w-full"}>
+        return  <div className={"lg:px-24 w-full px-4"}>
                 <div className={"text-white center-item  tex-[12px] h-16 bg-blue-400 rounded-md px-2  w-full lg:w-10/12 "}>
                     <div className={" rounded-md w-full py-2 lg:px-1 bg-blue-300 flex  items-center  gap-4"}>
                         <div className={"px-3"}>
@@ -40,7 +40,7 @@ const UserPanelPage: NextPageWithLayout = () => {
     }
     if (data?.data.verify_status === 'unverified') {
         return (
-            <div className={"container-app"}>
+            <div className={"container-app "}>
                 <div
                     className={"bg-red-500 text-white w-1/2 flex w-full px-12 mx-auto py-2 rounded-md items-center"}>
                     <div className={" flex items-center justify-center w-full"}>
@@ -57,7 +57,7 @@ const UserPanelPage: NextPageWithLayout = () => {
         )
     } else if (data?.data.verify_status === 'pending') {
         return (
-            <div className={"md:container-app"}>
+            <div className={"md:container-app px-4"}>
                 <div className={"bg-gray-100 w-full  lg:w-10/12 py-6 rounded-md px-2  "}>
                     <div
                         className={"flex gap-4 items-center px-4 border border-gray-200 bg-gray-50 rounded-md py-2"}>

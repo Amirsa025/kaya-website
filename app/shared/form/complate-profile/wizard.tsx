@@ -510,15 +510,15 @@ const MultiFormStepper = () => {
             </div>
             <div  className={"block md:hidden px-6"}>
                 {/*mobile  Mode*/}
-                <Stepper activeStep={activeStep}  orientation="vertical" style={{ fontFamily: 'IRANSans-web' }}>
+                <Stepper activeStep={activeStep}  orientation="vertical" >
                     {steps.map((step, index) => (
-                        <Step key={step} sx={styleStepper} >
+                        <Step key={step} sx={styleStepper}  >
                             <StepLabel>
-                                <div>
+                                <div >
                                     <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
                                 </div>
                             </StepLabel>
-                            <StepContent style={{ fontFamily: 'IRANSans-web' }} >
+                            <StepContent style={{ fontFamily: 'IRANSans-web' }} className={"flex flex-col"}>
                                 <React.Fragment>
                                     <form id={"Mobile"} onSubmit={submitFormHandler}>
                                         {activeStep === 0 && (
