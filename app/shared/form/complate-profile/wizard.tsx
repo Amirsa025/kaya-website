@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import {toast} from "react-toastify";
 import Router from "next/router";
-import {styleStepper} from "@/styles/styleStepper";
+import {styleStepper, styleStepperMobile} from "@/styles/styleStepper";
 import { StepContent} from "@mui/material";
 import CustomisedConnector from "@/app/utils/stepper/CustomisedConnector";
 import {steps} from "@/app/constant/MockData";
@@ -510,15 +510,15 @@ const MultiFormStepper = () => {
             </div>
             <div  className={"block md:hidden px-6"}>
                 {/*mobile  Mode*/}
-                <Stepper activeStep={activeStep}  orientation="vertical" >
+                <Stepper activeStep={activeStep}  orientation="vertical" style={{ fontFamily: 'IRANSans-web' }}>
                     {steps.map((step, index) => (
-                        <Step key={step} sx={styleStepper} style={{ fontFamily: 'IRANSans-web' }}>
+                        <Step key={step} sx={styleStepper} >
                             <StepLabel>
                                 <div>
                                     <span className={"!font-semibold !text-gray-700  sm:!text-[10px] font-[IRANSans]"}> {step}</span>
                                 </div>
                             </StepLabel>
-                            <StepContent style={{ fontFamily: 'IRANSans-web' }}>
+                            <StepContent style={{ fontFamily: 'IRANSans-web' }} >
                                 <React.Fragment>
                                     <form id={"Mobile"} onSubmit={submitFormHandler}>
                                         {activeStep === 0 && (

@@ -50,6 +50,9 @@ export const styleStepper={
     },
     ".MuiStepConnector-line":{
       borderColor: "none"
-    }
+    } ,
 }
 //add
+export const styleStepperMobile = {
+
+}
