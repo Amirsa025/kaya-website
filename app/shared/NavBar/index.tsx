@@ -21,10 +21,11 @@ const Header = () => {
         }
     }
     const handleNavigate = ()=>{
-        if(cookie.get('signUp') && cookie.get('token')){
+        if(cookie.get('signUp') ||  cookie.get('token')){
             router.replace('/user-panel').then()
+        }else {
+            router.replace('/login').then()
         }
-        router.replace('/login').then()
     }
     let userAdmin;
     if (cookie.get('token') || cookie.get('signUp')) {
