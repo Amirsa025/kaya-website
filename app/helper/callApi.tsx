@@ -18,10 +18,6 @@ const callApi = () => {
             return res;
         },
         err => {
-            const res = err?.response
-            if(res) {
-                console.log("error rsponse",res.status)
-            }
             throw err;
         }
     )

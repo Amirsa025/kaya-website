@@ -27,7 +27,7 @@ const Header = () => {
         router.replace('/login').then()
     }
     let userAdmin;
-    if (cookie.get('token') || cookie.get('signUP')) {
+    if (cookie.get('token') || cookie.get('signUp')) {
         userAdmin = <div className={"flex items-center gap-5"}>
             {
                 router.asPath==="/user-panel"?<>
@@ -102,9 +102,8 @@ const Header = () => {
                         </button>
                     </div>
                 </div>
-                <div className={"flex "}>
-                    <div
-                        className={` md:px-[36px]  md:h-0  justify-self-center pb-3 md:block md:pb-0 ${state ? 'block ' : 'hidden transMovemt'}`}>
+                <div className={"flex"}>
+                    <div className={` md:px-[36px]  md:h-0  justify-self-center pb-3 md:block md:pb-0 ${state ? 'block ' : 'hidden transMovemt'}`}>
                         <ul className="  flex flex-start md:items-center  md:space-x-8 md:space-x-reverse md:space-y-0 pt-2  flex-col md:flex-row ">
                             <li   className=" text-gray-900 hover:text-[#143fcd]  md:hover_Me hover:overflow-hidden text-[16px]  py-4 md:py-0">
                                 <Link href={"/"} legacyBehavior>

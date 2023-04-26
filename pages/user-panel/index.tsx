@@ -49,7 +49,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
         try {
             return await callApi().get(`/projects/projects?limit=5&offset=${offset}`, {
                 headers: {
-                    'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
+                    'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
                 }
             })
 
@@ -77,7 +77,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
             const result = filters.map(async (item: any, id) => {
                 return await callApi().get(`/projects/projects?limit=10&offset=${offset}&${item.skills.map(((skilled: any, id: number) => `skills[]=${skilled}`)).join('&')}&fixed=${item?.fixed}&hourly=${item?.hourly}&fixed_min=${item?.fixed_min}&fixed_max=${item?.fixed_max}&hourly_min=${item?.Hourly_min}&hourly_max=${item?.Hourly_max}`, {
                     headers: {
-                        'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
+                        'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
                     }
                 })
             })
@@ -115,7 +115,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
             {
                 AuthUser?.data.verify_status === 'unverified' ?<div>
-                    <div className={"container-app "}>
+                    <div className={" py-8"}>
                         <div
                             className={"bg-red-500 text-white w-1/2 flex w-full px-12 mx-auto py-2 rounded-md items-center"}>
                             <div className={" flex items-center justify-center w-full"}>

@@ -6,7 +6,7 @@ const cookie = new Cookies()
 const fetchUser = ()=>{
         return callApi().get('/users/me',{
             headers: {
-                'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
+                'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
             }
         })
 }
