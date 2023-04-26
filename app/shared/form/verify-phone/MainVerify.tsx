@@ -11,7 +11,7 @@ import Image from "next/image";
 const MainVerify = () => {
     const cookie = new Cookies()
     const[disable ,setDisable] =useState(false)
-    const ACCESS_TOKEN = cookie.get('sginUP')
+    const ACCESS_TOKEN = cookie.get('signUp')
     const Myformik = useFormik({
         initialValues: {
             codeVerify: '',
@@ -74,7 +74,10 @@ const MainVerify = () => {
                     progress: undefined,
                     theme: "colored",
                 });
-                setTimeout(async ()=> await Router.replace('/'),2000)
+                setTimeout(async ()=> {
+                    await Router.replace('/')
+                    cookie.remove('signUp')
+                },2000)
             }
         },
     });

@@ -6,15 +6,14 @@ export  const ourCourse = [
     {id:3,comment:"نیمی از پیشنهاداتی که من می دهم از Wellfound (استعداد فرشته لیست) تهیه شده است. این بهترین محصول برای افرادی است که به دنبال استعدادهای نوپا هستند."},
 ]
 export const navigation = [
-    { title: "تماس با ما ", path: "#" },
-    { title: "پروژه ها", path: "/user-panel/project" },
-    { title: "خانه", path: "/" },
+    { title: "تماس با ما ", path: "/contact" },
+    { title: "پروژه ها", path: "/user-panel" },
 ]
 export const UserNavigation = [
-    { id:"1",icon: "ri-home-3-line", path: "/user-panel",title:"Home" },
-    { id:"2",icon: "ri-file-list-3-line", path: "/user-panel/project",title:"Project" },
+    { id:"1",icon: "ri-file-list-3-line", path: "/user-panel",title:"Project" },
+    // { id:"2",icon: "ri-file-list-3-line", path: "/user-panel/project",title:"Project" },
     { id:"3",icon: "ri-user-settings-line", path: "/user-panel/missions",title:"profile" },
-    { id:"4",icon: "ri-chat-3-line", path: "/user-panel/chat",title:"profile" },
+    // { id:"4",icon: "ri-chat-3-line", path: "/user-panel/chat",title:"profile" },
 ]
 export const SelectSkills = [
     {

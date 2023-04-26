@@ -35,9 +35,9 @@ export default function Home() {
                 </div> : <>
                     <Heading page={"صفحه اصلی"} titlesite={" کایا"}/>
                     <div data-aos="fade-up">
-                        <div className={"hidden md:block"}>
-                            <BannerTop title={" عصر جدیدی در راه است"}/>
-                        </div>
+                        {/*<div className={"hidden md:block"}>*/}
+                        {/*    <BannerTop title={" عصر جدیدی در راه است"}/>*/}
+                        {/*</div>*/}
                         <Header/>
                         <div className={"pt-32 md:pt-0"}>
                             <KayaTalent/>

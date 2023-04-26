@@ -33,7 +33,7 @@ const RequestBid:React.FC<ISendProps> = ({id}) => {
                         period: formPayload?.period,
                     },{
                         headers :{
-                            'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
+                            'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
                         }
                     }).then(result => {
                         // @ts-ignore

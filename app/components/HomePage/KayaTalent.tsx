@@ -4,7 +4,7 @@ const KayaTalent = () => {
     // @ts-ignore
     return (
         <>
-            <section className={"container-app md:grid flex flex-col-reverse gap-y-4 md:grid-cols-2 md:pt-[155px] "}>
+            <section className={"container-app md:grid flex flex-col-reverse gap-y-4 md:grid-cols-2"}>
                 <div className={"lg:pt-[7rem]"}
                      data-aos="zoom-in-up"
                      data-aos-delay="50"

@@ -7,7 +7,7 @@ import Router from "next/router";
 import VerifyUserPanel from "@/app/components/layout/verify-user-panel";
 const VerifyPhone = () => {
     const cookie = new Cookies()
-    if(!cookie.get('sginUP')){
+    if(!cookie.get('signUp')){
         Router.replace('/').then()
         return <></>
     }

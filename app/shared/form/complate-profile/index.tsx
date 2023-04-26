@@ -8,7 +8,7 @@ import Router from "next/router";
 const CompleteProfile:React.FC = () => {
     const [previewImage, setPreviewImage] = useState(null)
     const [previewImagePerson, setPreviewImagePerson] = useState(null)
-    const cookie = new Cookies(), ACCESS_TOKEN = cookie.get('sginUP') || cookie.get('token')
+    const cookie = new Cookies(), ACCESS_TOKEN = cookie.get('signUp') || cookie.get('token')
     const handleFileInputChange = (event:any) => {
         const formData = new FormData()
         const file = event.currentTarget.files[0]

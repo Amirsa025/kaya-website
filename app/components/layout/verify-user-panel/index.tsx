@@ -22,7 +22,7 @@ const VerifyUserPanel: React.FC<IPropsAdmin> = ({children}) => {
         </div>
     </div>
     const cookie = new Cookies()
-    if (!cookie.get('token') && !cookie.get('sginUP')) {
+    if (!cookie.get('token') && !cookie.get('signUp')) {
         Router.replace('/').then()
         return <></>
     }

@@ -41,7 +41,7 @@ const MainLogin: NextPageWithLayout = () => {
                                 theme: "colored",
                             });
                             storeToken(res?.data?.token,'token')
-                                cookies.remove('sginUP')
+                                cookies.remove('signUp')
                         }
                     },
                     onError: (response:any) => {

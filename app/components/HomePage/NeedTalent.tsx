@@ -8,7 +8,7 @@ const NeedTalent = () => {
                  data-aos-offset="1500"
                  data-aos-duration="1500">
             {/* desktop Mode */}
-            <div className={"hidden lg:grid lg:grid-cols-2 border-t  border-gray-300 lg:pt-[10.188rem]"}>
+            <div className={"hidden lg:grid lg:grid-cols-2 border-t  border-gray-300 lg:pt-[4.188rem]"}>
                 <div>
                     <div className={"pb-[29px]"}>
                     <span

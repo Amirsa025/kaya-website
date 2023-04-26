@@ -26,7 +26,7 @@ const MainSginup = () => {
                     if(responseData.status===200 && responseData.data.phone_verified===false){
                        setTimeout(async ()=>{
                            setDisable(true)
-                           storeToken(responseData?.data?.token,'sginUP')
+                           storeToken(responseData?.data?.token,'signUp')
                            cookie.remove('token')
                            await Router.replace('/verify-phone')},2000)
                     }
@@ -45,11 +45,14 @@ const MainSginup = () => {
                            progress: undefined,
                            theme: "colored",
                        });
+                       setTimeout(()=>{
+                           Router.push('/').then()
+                       },3000)
                    }
                    if (err.data.status===401 && err.data.code===1002 && err.data.phone_verified===true){
                        toast.error(`${err.message}`, {
                            position: "top-center",
-                           autoClose: 5000,
+                           autoClose: 3000,
                            hideProgressBar: true,
                            closeOnClick: true,
                            pauseOnHover: true,
@@ -57,6 +60,9 @@ const MainSginup = () => {
                            progress: undefined,
                            theme: "colored",
                        });
+                       setTimeout(()=>{
+                           Router.push('/').then()
+                       },3000)
                    }
                }
            })
