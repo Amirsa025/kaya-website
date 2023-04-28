@@ -24,10 +24,10 @@ export const fetchProjects = async (id: any) => {
         console.error(error)
     }
 }
-const Header = dynamic(
+dynamic(
     () => import('@/app/shared/NavBar'),
     {ssr: false}
-)
+);
 const SendBid: NextPageWithLayout = () => {
     const [progress, setProgress] = React.useState(0);
     React.useEffect(() => {
@@ -40,7 +40,6 @@ const SendBid: NextPageWithLayout = () => {
                 return Math.min(oldProgress + diff, 100);
             });
         }, 500);
-
         return () => {
             clearInterval(timer);
         };

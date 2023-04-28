@@ -30,25 +30,26 @@ const MainSginup = () => {
                            cookie.remove('token')
                            await Router.replace('/verify-phone')},2000)
                     }
-                    if(responseData.data.code===1005){
-                        toast.error(`${responseData.message}`, {
-                            position: "top-center",
-                            autoClose: 3000,
-                            hideProgressBar: true,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "colored",
-                        });
-                        setTimeout(()=>{
-                            Router.push('/').then()
-                        },3000)
-                    }
                 },
                onError :(err:any)=>{
-                    console.log(err)
+                    console.log(err.data.code)
                    if(err.data.code===1001 && err.data.status===401){
+                       toast.error(`${err.message}`, {
+                           position: "top-center",
+                           className:"toast-success-container",
+                           autoClose: 3000,
+                           hideProgressBar: true,
+                           closeOnClick: true,
+                           pauseOnHover: true,
+                           draggable: true,
+                           progress: undefined,
+                           theme: "colored",
+                       });
+                       setTimeout(()=>{
+                           Router.push('/').then()
+                       },3000)
+                   }
+                   if(err.data.code===1002 && err.data.status===401){
                        toast.error(`${err.message}`, {
                            position: "top-center",
                            className:"toast-success-container",

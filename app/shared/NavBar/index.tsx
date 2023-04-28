@@ -31,13 +31,20 @@ const Header = () => {
     if (cookie.get('token') || cookie.get('signUp')) {
         userAdmin = <div className={"flex items-center gap-5"}>
             {
-                router.asPath==="/user-panel"?<>
-                    <Link href="/" legacyBehavior>
-                        <button
-                            className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>خانه
-                        </button>
-                    </Link>
-                </>:<></>
+                navigation.map((item,id)=>{
+                    return (
+                        <section key={id}>
+                            {router.asPath === item.path ? <>
+                                <Link href="/" legacyBehavior>
+                                    <button
+                                        className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>خانه
+                                    </button>
+                                </Link>
+                            </> : <></>}
+                        </section>
+
+                    )
+                })
             }
             {
                 router.asPath==="/"?<>
@@ -69,8 +76,7 @@ const Header = () => {
         </div>
     }
     return (
-        <nav
-            className="container-app bg-white w-full fixed z-[1000] md:relative border-b-2 md:border-0">
+        <nav className="container-app bg-white w-full fixed z-[1000] md:relative border-b-2 md:border-0">
             <div className="md:flex items-center justify-between px-4 md:border-b ">
                 <div className=" flex items-center justify-between py-2 md:py-5 md:flex ">
                     <a href="#">
@@ -115,9 +121,8 @@ const Header = () => {
                             </li>
                             <li  onClick={handleNavigate} className="cursor-pointer text-gray-900 hover:text-[#143fcd]  md:hover_Me hover:overflow-hidden text-[16px]  py-4 md:py-0">
                                 <a >
-                                    پروژها
+                                    پروژه ها
                                 </a>
-
                             </li>
                         </ul>
                         <div className="flex md:hidden items-center py-6 gap-8">

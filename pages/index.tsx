@@ -9,14 +9,13 @@ import GetFeatured from "@/app/components/HomePage/GetFeatured";
 import BlogPost from "@/app/components/HomePage/blogPost";
 import Footer from "@/app/shared/footer/footer";
 import React, {useEffect, useState} from "react";
-import BannerTop from "@/app/shared/banner-content";
 import Heading from "@/app/shared/Heading";
 import Header from "@/app/shared/NavBar";
 import {ScaleLoader} from "react-spinners";
 export default function Home() {
-    const [loading, setloading] = useState(true)
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
-        setTimeout(() => setloading(false), 500)
+        setTimeout(() => setLoading(false), 500)
     }, [])
     return (
         <>

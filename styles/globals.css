@@ -63,6 +63,14 @@
         @apply px-[40px] md:px-[80px]
 
     }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .remove-scrollbar {
+        -ms-overflow-style: none;  /* IE + Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
     body {
         direction: rtl;
         /*font-family: "IRANSans",sans-serif;*/

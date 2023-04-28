@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 import ProjectList from "@/app/components/project/project-list/project-list";
@@ -13,10 +13,10 @@ import Heading from "@/app/shared/Heading";
 import {MoonLoader} from "react-spinners";
 import EmptyList from "@/app/shared/EmptyList";
 import ModalFilter from "@/app/utils/Modal/modal-filter";
-import {useRouter} from "next/router";
 import AsideFilter from "@/app/components/project/filter-order/filter-order";
 import useAuth from "@/app/helper/useAuth";
 import Link from "next/link";
+import {Alert} from "@material-tailwind/react";
 
 interface FilterValues {
     searchTerm: string;
@@ -29,49 +29,47 @@ interface FilterValues {
 }
 
 const Project: NextPageWithLayout<FilterValues> = () => {
-
+   //variable
+   const cookie = new Cookies();
+    //state
     const [searchTerm, setSearchTerm] = React.useState(""),
         [offset, setOffset] = React.useState(1),
         [filters, setFilters] = React.useState<string[]>([]),
-        [page, setPage]: any = React.useState(3),
-        cookie = new Cookies();
+        [page, setPage]: any = React.useState(3);
+    //function
     const onFilters = (filterValues: any) => {
         let FilterArray = []
         FilterArray.push(filterValues)
-
         setFilters(FilterArray)
         if (FilterArray.length === 0) {
             setFilters(FilterArray)
         }
     }
-    const fetchProjects = async () => {
-
+   const handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setSearchTerm(event.target.value);
+    }
+    //query's React query All project
+    const fetchProjects = async (offset: number) => {
         try {
             return await callApi().get(`/projects/projects?limit=5&offset=${offset}`, {
                 headers: {
                     'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
                 }
             })
-
-
         } catch (error) {
             console.log(error)
         }
     };
-    //query for search filter
     const {data:AuthUser, isFetching, isLoading:loadingUser, isError:ErrorUser} = useAuth()
     const {isLoading, isError, data: project} = useQuery({
             queryKey: ['page', offset, searchTerm, filters],
-            // @ts-ignore
             queryFn: () => fetchProjects(offset),
             keepPreviousData: true,
             staleTime: 500,
             cacheTime: 600000, // cache for 10 minutes
-            refetchInterval: 60000, // refetch every minute
-        }),
-    handleSearchChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-            setSearchTerm(event.target.value);
-        }
+            refetchInterval: 60000, // prefetch every minute
+        });
+    //query's React query Filter project
     const feachFilterProject = async () => {
         try {
             const result = filters.map(async (item: any, id) => {
@@ -111,7 +109,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
     }
 
     return (
-        <div className={"md:container-app px-2 "}>
+        <section className={"md:container-app px-2 "}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>
             {
                 AuthUser?.data.verify_status === 'unverified' ?<div>
@@ -148,9 +146,9 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                                         fill="white"></path>
                                 </svg>
                             </div>
-                           <span
-                               className={"px-2 text-yellow-800 font-medium text-[1.5rem]"}>{AuthUser?.data.profile?.first_name}</span>
+                            <span className={"px-2 text-yellow-800 font-medium text-[1.5rem]"}>{AuthUser?.data.profile?.first_name}</span>
                             <span className={"text-gray-700  text-[14px]"}>به داشبورد خوش آمدید</span>
+
                         </div>
                         {
                             AuthUser?.data.connected_to_projects_bot === false ?
@@ -305,7 +303,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
                     <AsideFilter onFilter={onFilters}/>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 Project.getLayout = (page) => <UserPanelAdmin>{page}</UserPanelAdmin>

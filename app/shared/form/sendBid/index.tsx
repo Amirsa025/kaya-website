@@ -14,7 +14,7 @@ interface ISendProps{
 
 const RequestBid:React.FC<ISendProps> = ({id}) => {
     const cookie = new Cookies()
-    const Myformik = useFormik({
+    const RequestBid = useFormik({
         initialValues: {
             description:'',
             amount: '',
@@ -74,7 +74,7 @@ const RequestBid:React.FC<ISendProps> = ({id}) => {
     });
     return (
         <>
-            <form action="@/app/shared/form/sendBid/index" className={"pt-6  border-t "} onSubmit={Myformik.handleSubmit}>
+            <form action="@/app/shared/form/sendBid/index" className={"pt-6  border-t "} onSubmit={RequestBid.handleSubmit}>
                 <div className={" space-y-2"}>
                     <div className={"flex flex-col "}>
                         <label htmlFor="" className={"text-[14px] font-bold  py-2" }>Amount</label>
@@ -82,34 +82,34 @@ const RequestBid:React.FC<ISendProps> = ({id}) => {
                                id="amount"
                                name={"amount"}
                                placeholder={"send bids"}
-                               value={Myformik.values.amount}
-                               onChange={Myformik.handleChange}
+                               value={RequestBid.values.amount}
+                               onChange={RequestBid.handleChange}
                                className={"focus:shadow-lg  overflow-hidden lg:w-full xl:w-1/2 w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-200 rounded-md outline-0"}/>
-                        {Myformik.touched.amount && Boolean(Myformik.errors.amount)}
-                        <p className="direction-ltr text-red-500 py-2 text-[12px]   font-light">{Myformik.errors.amount}</p>
+                        {RequestBid.touched.amount && Boolean(RequestBid.errors.amount)}
+                        <p className="direction-ltr text-red-500 py-2 text-[12px]   font-light">{RequestBid.errors.amount}</p>
                     </div>
                     <div className={"flex flex-col "}>
                         <label htmlFor="" className={"text-[14px] font-bold  py-2" }>period</label>
                     <input type="text"
-                           value={Myformik.values.period}
-                           onChange={Myformik.handleChange}
+                           value={RequestBid.values.period}
+                           onChange={RequestBid.handleChange}
                            placeholder={"period"}
                            name={"period"}
                            className={"focus:shadow-lg  overflow-hidden xl:w-1/2 w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-200 rounded-md outline-0"}/>
-                        <p className="direction-ltr text-red-500 py-2 text-[12px]  font-light">{Myformik.errors.period}</p>
+                        <p className="direction-ltr text-red-500 py-2 text-[12px]  font-light">{RequestBid.errors.period}</p>
                     </div>
                 </div>
                 <div className={"pt-4 flex flex-col "}>
                     <label htmlFor="" className={"text-[14px] font-bold  py-2" }>description</label>
                         <textarea
-                            value={Myformik.values.description}
-                            onChange={Myformik.handleChange}
+                            value={RequestBid.values.description}
+                            onChange={RequestBid.handleChange}
                             id="description"
                             name="description"
                             className={"!h-[10rem] py-2 px-2 focus:shadow-lg placeholder:text-[12px] w-full  2xl:w-[43rem] md:w-full text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
                             placeholder={"description"}
                         />
-                    <p className="direction-ltr text-red-500 py-2 text-[12px]  font-light">{Myformik.errors.description}</p>
+                    <p className="direction-ltr text-red-500 py-2 text-[12px]  font-light">{RequestBid.errors.description}</p>
                 </div>
                 <button className={ "w-full md:w-1/3 lg:w-[10rem] px-4 py-2 text-[15px]  border rounded-md bg-black text-white rounded-md hover:bg-[#143fcd] my-4 text-[12px]"}>Request Project</button>
             </form>

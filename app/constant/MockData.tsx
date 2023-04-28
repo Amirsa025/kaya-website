@@ -13,7 +13,7 @@ export const UserNavigation = [
     { id:"1",icon: "ri-file-list-3-line", path: "/user-panel",title:"Project" },
     // { id:"2",icon: "ri-file-list-3-line", path: "/user-panel/project",title:"Project" },
     { id:"3",icon: "ri-user-settings-line", path: "/user-panel/missions",title:"profile" },
-    // { id:"4",icon: "ri-chat-3-line", path: "/user-panel/chat",title:"profile" },
+    { id:"4",icon: "ri-chat-3-line", path: "/user-panel/chat",title:"profile" },
 ]
 export const SelectSkills = [
     {
