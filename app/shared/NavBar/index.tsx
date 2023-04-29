@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {navigation} from "@/app/constant/MockData";
+import { UserNavigation} from "@/app/constant/MockData";
 import Link from "next/link";
 import Cookies from "universal-cookie";
 import {useRouter} from "next/router";
@@ -15,9 +15,9 @@ const Header = () => {
             router.push('/')
         }
         else if (cookie.get('token')) {
-            router.replace('/')
-            window.location.reload()
             cookie.remove('token')
+            window.location.reload()
+            router.replace('/')
         }
     }
     const handleNavigate = ()=>{
@@ -29,12 +29,12 @@ const Header = () => {
     }
     let userAdmin;
     if (cookie.get('token') || cookie.get('signUp')) {
-        userAdmin = <div className={"flex items-center gap-5"}>
+        userAdmin = <div className={"flex items-center  gap-4"}>
             {
-                navigation.map((item,id)=>{
+                UserNavigation.map((item,id)=>{
                     return (
                         <section key={id}>
-                            {router.asPath === item.path ? <>
+                            {router.pathname === item.path ? <>
                                 <Link href="/" legacyBehavior>
                                     <button
                                         className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>خانه
@@ -47,7 +47,7 @@ const Header = () => {
                 })
             }
             {
-                router.asPath==="/"?<>
+                router.pathname==="/"?<>
                     <Link href="/user-panel" legacyBehavior>
                         <button
                             className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>پنل کاربری
@@ -61,7 +61,7 @@ const Header = () => {
             </button>
         </div>
     } else {
-        userAdmin = <div className="flex items-center justify-around gap-8 ">
+        userAdmin = <div className="flex items-center justify-around gap-4 ">
             <Link href="/login" legacyBehavior>
                 <button
                     className={"w-[90px] h-[40px]  border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>ورود

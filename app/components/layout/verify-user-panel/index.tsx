@@ -15,7 +15,7 @@ const VerifyUserPanel: React.FC<IPropsAdmin> = ({children}) => {
     if (loadingUser) return <div className={" h-screen flex items-center justify-center"}>
         <div className={"flex flex-col items-center justify-center "}>
             <ScaleLoader
-                color="#3676d6"
+                color="#4B6677"
                 height={100}
                 width={10}
             />

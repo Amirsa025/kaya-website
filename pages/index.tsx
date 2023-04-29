@@ -26,7 +26,7 @@ export default function Home() {
                     <div className={"flex flex-col items-center justify-center "}>
 
                         <ScaleLoader
-                            color="#3676d6"
+                            color="#4B6677"
                             height={100}
                             width={10}
                         />

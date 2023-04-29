@@ -12,7 +12,7 @@ const Ourusers = () => {
                     <h4 className={"font-bold text-[12px] "}>با ما اوج بگیرید</h4>
                 </div>
                 <div className={"center-item pt-[47px] "}>
-                    <h5 className={"font-bold text-[40px] "}>از نظرات  کاربران ما</h5>
+                    <h5 className={"font-bold text-[40px] blog"}>از نظرات  کاربران ما</h5>
                 </div>
             </div>
             <div className={"pt-[91px] grid  grid-col-1 gap-4 md:grid-cols-2 lg:grid-cols-4"}>

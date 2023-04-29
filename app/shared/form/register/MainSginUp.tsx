@@ -28,7 +28,7 @@ const MainSginup = () => {
                            setDisable(true)
                            storeToken(responseData?.data?.token,'signUp')
                            cookie.remove('token')
-                           await Router.replace('/verify-phone')},2000)
+                           await Router.replace('/verify-phone')},1000)
                     }
                 },
                onError :(err:any)=>{

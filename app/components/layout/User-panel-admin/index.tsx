@@ -21,7 +21,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
         return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
             <div className={"flex flex-col items-center justify-center "}>
                 <ScaleLoader
-                    color="#3676d6"
+                    color="#4B6677"
                     height={100}
                     width={10}
                 />
@@ -40,7 +40,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             <Header/>
             <div className={" flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 "}>
                   <AsidePanel/>
-                <div className={"pb-[7rem] w-full   md:px-0 "}>
+                    <div className={"pb-[7rem] w-full   md:px-0 "}>
                     {children}
                 </div>
             </div>

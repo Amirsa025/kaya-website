@@ -17,7 +17,7 @@ import { Checkbox } from "@material-tailwind/react";
 
 const MultiFormStepper = () => {
     const cookie = new Cookies()
-    //statex
+    //state
     const [activeStep, setActiveStep] = React.useState(0);
     const [formValues, setFormValues] = useState({
         first_name: '',
@@ -31,7 +31,7 @@ const MultiFormStepper = () => {
         isChecked: false
     });
     const [previewImage, setPreviewImage] = useState(null)
-    const [previewImagePerson, setPreviewImagePerson] = useState(null)
+    const [previewImagePerson, setPreviewImagePerson] = useState('')
     const [isChecked, setIsChecked] = useState(false);
     const [errors, setErrors] = useState({
         first_name: undefined,
@@ -830,13 +830,11 @@ const MultiFormStepper = () => {
                                                                 className={"!h-[10rem] py-2 px-2 focus:shadow-lg placeholder:text-[12px] w-full text-gray-800 px-2  h-[48px] border border-gray-200 rounded-md outline-0"}
                                                                 placeholder={"آدرس خود را وارد کنید"}
                                                             />
-                                                            {errors.address &&
-                                                                <div className={"py-2 text-[12px] text-red-500"}>{errors.address}</div>}
+                                                            {errors.address && <div className={"py-2 text-[12px] text-red-500"}>{errors.address}</div>}
                                                         </div>
                                                         <div
                                                             className={"flex items-center justify-center md:pr-[4rem] lg:pr-[47px] flex flex-col w-full  py-4  space-y-3 px-4 "}>
-                                                            <button
-                                                                className={"w-full md:w-1/2  px-6 rounded-md py-4 text-white font-medium text-[12px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] "}>{activeStep === steps.length - 1 ? 'ثبت اطلاعات ' : 'بعد'}</button>
+                                                            <button className={"w-full md:w-1/2  px-6 rounded-md py-4 text-white font-medium text-[12px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] "}>{activeStep === steps.length - 1 ? 'ثبت اطلاعات ' : 'بعد'}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -855,7 +853,7 @@ const MultiFormStepper = () => {
                                                     </button>
                                                     <button
                                                         onClick={activeStep === steps.length - 1 ? handleReset : handleNext}
-                                                        className={" mx-4 w-full  md:w-[86px] p-[8px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] text-[1rem]"}>
+                                                        className={activeStep === steps.length - 1?'bg-blue-600':'mx-4 w-full  md:w-[86px] p-[8px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd] text-[1rem]' }>
                                                         {activeStep === steps.length - 1 ? 'دوباره ' : 'بعد'}
                                                     </button>
                                                 </div>

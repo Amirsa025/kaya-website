@@ -71,6 +71,15 @@
         -ms-overflow-style: none;  /* IE + Edge */
         scrollbar-width: none;  /* Firefox */
     }
+    .MessageAnimation {
+        display: inline-block;
+        margin: 0 0.5rem;
+        animation-duration: 1s; /* don't forget to set a duration! */
+    }
+    .openListChats {
+        display: inline-block;
+        animation-duration: 1s; /* don't forget to set a duration! */
+    }
     body {
         direction: rtl;
         /*font-family: "IRANSans",sans-serif;*/

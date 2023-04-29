@@ -5,8 +5,9 @@ import {useRouter} from "next/router";
 import ChatLayout from "@/app/components/chat/Chat-layout/ChantLayout";
 import Heading from "@/app/shared/Heading";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
-import ChatForm from "@/app/components/chat/Chat-layout/formChat";
+import ChatForm from "@/app/shared/form/chat-form/formChat";
 import dynamic from "next/dynamic";
+import SubLayout from "@/app/components/layout/sublayout";
 interface Props {
     currentUser: number;
 }
@@ -46,14 +47,15 @@ const MainContent: NextPageWithLayout = () => {
                                 <div className=" h-[50vh] overflow-y-scroll flex flex-col  mt-5">
                                     {/*receive message from server*/}
                                     {messages.map((message,id) => (
-                                        <ul key={id} className=" flex justify-end items-center mb-4">
-                                            <span>user:{userId}</span>
-                                            <li className="mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-
-                                                {message.content}
-                                            </li>
-                                            <i className="ri-close-circle-line text-red-400 text-lg"></i>
-                                            <i className="ri-checkbox-circle-fill text-green-400 text-lg"></i>
+                                        <ul key={id} className="flex justify-end items-center mb-4">
+                                            <div className={"flex items-center MessageAnimation animate__fadeInTopRight"}>
+                                                <li className="  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                                    {message.content}
+                                                </li>
+                                                <span>user:{userId}</span>
+                                                {/*<i className="ri-close-circle-line text-red-400 text-lg"></i>*/}
+                                                <i className="ri-checkbox-circle-fill text-green-400 text-lg"></i>
+                                            </div>
                                         </ul>
                                     ))}
 
@@ -80,5 +82,5 @@ const MainContent: NextPageWithLayout = () => {
 
     );
 };
-MainContent.getLayout = (page) => <UserPanelAdmin>{page}</UserPanelAdmin>
+MainContent.getLayout = (page) => <SubLayout>{page}</SubLayout>
 export default MainContent;

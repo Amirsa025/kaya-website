@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 import ProjectList from "@/app/components/project/project-list/project-list";
@@ -16,7 +16,7 @@ import ModalFilter from "@/app/utils/Modal/modal-filter";
 import AsideFilter from "@/app/components/project/filter-order/filter-order";
 import useAuth from "@/app/helper/useAuth";
 import Link from "next/link";
-import {Alert} from "@material-tailwind/react";
+
 
 interface FilterValues {
     searchTerm: string;

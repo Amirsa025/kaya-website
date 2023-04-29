@@ -17,7 +17,7 @@ export const fetchProjects = async (id: any) => {
     try {
         return await callApi().get(`/projects/projects/${id}`, {
             headers: {
-                'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
+                'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
             }
         })
     } catch (error) {
