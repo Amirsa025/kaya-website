@@ -1,22 +1,23 @@
 import {useFormik} from "formik";
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import Router from "next/router";
+import Router, {useRouter} from "next/router";
 import {codeVerifySchema} from "@/app/shared/form/verify-phone/vaildation";
 import {toast} from "react-toastify";
 import Image from "next/image";
 
+
 const MainVerify = () => {
     const cookie = new Cookies()
+    const router = useRouter();
     const[disable ,setDisable] =useState(false)
     const ACCESS_TOKEN = cookie.get('signUp')
     const Myformik = useFormik({
         initialValues: {
             codeVerify: '',
         },
-
         validationSchema: codeVerifySchema,
         onSubmit: async (values) => {
             try {
@@ -86,7 +87,7 @@ const MainVerify = () => {
             {/*logo*/}
             <div className={"flex items-center pt-1 w-16 h-8"}>
                 <Link href={"/"}>
-                    <Image width={64}  height={32} src="/images/Asset.png" alt="logo"/>
+                    <Image width={32} height={32} src="/images/Asset.png" alt="logo"/>
                 </Link>
             </div>
                 <div>

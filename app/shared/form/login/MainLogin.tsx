@@ -11,7 +11,7 @@ import {SginINSchema} from "@/app/shared/form/login/vaildation";
 import Cookies from "universal-cookie";
 import Image from "next/image";
 const MainLogin: NextPageWithLayout = () => {
-    const {mutate, isSuccess, isError, isLoading} = useLogin();
+    const {mutate, isSuccess, isError,error, isLoading} = useLogin();
     const cookies = new Cookies()
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const[disable ,setDisable] =useState(false)
@@ -44,7 +44,7 @@ const MainLogin: NextPageWithLayout = () => {
                                 cookies.remove('signUp')
                         }
                     },
-                    onError: (response:any) => {
+                    onError: async (response:any) => {
                         toast.error(`${response.message}`, {
                             position: "top-right",
                             autoClose: 3000,
@@ -60,7 +60,6 @@ const MainLogin: NextPageWithLayout = () => {
 
             },
     });
-
     return (
         <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}
              data-aos-anchor="#example-anchor"
@@ -80,8 +79,10 @@ const MainLogin: NextPageWithLayout = () => {
             </div>
             {/*form */}
             <div className={"w-full"}>
-                {isError &&
-                    <p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>}
+                {/*{isError &&*/}
+                {/*    <p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>}*/}
+                {/*@ts-ignore*/}
+                {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error.response.data.code===1004 ?<p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>:null}</div>}
                 {isSuccess &&
                     <p className="center-items text-[12px] py-2  text-green-500">با موفقیت وارد
                         شدید!</p>}

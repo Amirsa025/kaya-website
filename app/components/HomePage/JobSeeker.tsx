@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image'
 const JobSeeker = () => {
     return (
-        <section className={"border-t  border-gray-100 lg:pt-[162px]"}
+        <section className={"border-t  border-gray-100 lg:pt-[50px]"}
                  data-aos="zoom-in-up"
                  data-aos-delay="50"
                  data-aos-duration="1000">

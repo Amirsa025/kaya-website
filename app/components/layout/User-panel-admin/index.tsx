@@ -12,10 +12,10 @@ interface IPropsAdmin {
 }
 
 const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
-    const [loading, setloading] = useState(true)
+    const [loading, setLoading] = useState(true)
     const cookie = new Cookies()
     useEffect(() => {
-        setTimeout(() => setloading(false), 100)
+        setTimeout(() => setLoading(false), 100)
     }, [])
     if (loading) {
         return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>

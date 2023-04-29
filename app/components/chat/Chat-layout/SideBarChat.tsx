@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-
 import {useRouter} from "next/router";
 import Link from "next/link";
-
 const chats = [
     {id: 1, name: "John Doe"},
     {id: 2, name: "Arsen Luoin"},
@@ -12,7 +10,6 @@ const chats = [
     {id: 6, name: "Assan Deuob"},
     {id: 8, name: "Assan Deuob"},
 ];
-
 
 const SideBarChat = () => {
     const router = useRouter();
@@ -28,7 +25,8 @@ const SideBarChat = () => {
                     <i className="md:hidden ri-chat-1-fill text-gray-400   cursor-pointer block"  onClick={() => setIsOpen(!isOpen)}></i>
                 </div>
                 {
-                    chats.length ?   <ul className={"hidden md:block overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
+                    chats.length ?
+                        <ul className={"hidden md:block overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
                             {chats.map((chat) => (
                                 <li key={chat.id} className={"mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100 "}>
                                     <Link href={`/user-panel/chat/${chat.id}`} legacyBehavior

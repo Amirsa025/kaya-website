@@ -8,16 +8,16 @@ const Header = () => {
     const router = useRouter()
     const [state, setState] = useState(false)
     const cookie = new Cookies()
-    const logout = () => {
+    const logout = async () => {
         if (cookie.get('signUp')) {
             cookie.remove('signUp')
             window.location.reload()
-            router.push('/')
+           await router.push('/')
         }
         else if (cookie.get('token')) {
             cookie.remove('token')
             window.location.reload()
-            router.replace('/')
+          await  router.replace('/')
         }
     }
     const handleNavigate = ()=>{

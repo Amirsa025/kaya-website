@@ -9,17 +9,14 @@ const callApi = () => {
     axiosInstance.interceptors.request.use(
         (config) => {
             return config;
-        },
-        err => { throw err }
+        }
     )
 
     axiosInstance.interceptors.response.use(
         res => {
             return res;
         },
-        err => {
-            throw err;
-        }
+
     )
 
     return axiosInstance;

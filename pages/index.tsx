@@ -1,5 +1,4 @@
 import KayaTalent from "@/app/components/HomePage/KayaTalent";
-import LoginSignUP from "@/app/components/HomePage/LoginSignUP";
 import Figures from "@/app/components/HomePage/figures";
 import ScrollSilder from "@/app/utils/slider/slider";
 import JobSeeker from "@/app/components/HomePage/JobSeeker";
@@ -41,7 +40,6 @@ export default function Home() {
                         <div className={"pt-32 md:pt-0"}>
                             <KayaTalent/>
                         </div>
-                        <LoginSignUP/>
                         <Figures/>
                         <ScrollSilder/>
                         <JobSeeker/>

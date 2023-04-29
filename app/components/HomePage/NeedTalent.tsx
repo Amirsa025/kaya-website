@@ -8,13 +8,13 @@ const NeedTalent = () => {
                  data-aos-offset="1500"
                  data-aos-duration="1500">
             {/* desktop Mode */}
-            <div className={"hidden lg:grid lg:grid-cols-2 border-t  border-gray-300 lg:pt-[4.188rem]"}>
+            <div className={"hidden lg:grid lg:grid-cols-2 border-t  border-gray-300 lg:pt-[2.188rem]"}>
                 <div>
-                    <div className={"pb-[29px]"}>
+                    <div className={""}>
                     <span
                         className={"text-black text-[12px] font-bold"}>به استعداد نیاز دارید؟</span>
                     </div>
-                    <div className={"pb-[29px]"}>
+                    <div className={""}>
                         <h2 className={"text-black text-[1.4rem] font-bold"}>چرا استخدام کنندگان ما
                             را
                             دوست دارند؟</h2>

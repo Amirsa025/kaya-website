@@ -11,7 +11,7 @@ import Cookies from "universal-cookie";
 const MainSginup = () => {
  const [isRevealPwd, setIsRevealPwd] = useState(false);
    const cookie = new Cookies()
-    const {mutate,isError,isSuccess, isLoading} = useSginUp()
+    const {mutate,isError,isSuccess,error, isLoading} = useSginUp()
     const[disable ,setDisable] =useState(false)
     const Myformik = useFormik({
         initialValues: {
@@ -28,79 +28,16 @@ const MainSginup = () => {
                            setDisable(true)
                            storeToken(responseData?.data?.token,'signUp')
                            cookie.remove('token')
-                           await Router.replace('/verify-phone')},1000)
+                           await Router.replace('/verify-phone')},2000)
                     }
                 },
-               onError :(err:any)=>{
-                    console.log(err.data.code)
-                   if(err.data.code===1001 && err.data.status===401){
-                       toast.error(`${err.message}`, {
-                           position: "top-center",
-                           className:"toast-success-container",
-                           autoClose: 3000,
-                           hideProgressBar: true,
-                           closeOnClick: true,
-                           pauseOnHover: true,
-                           draggable: true,
-                           progress: undefined,
-                           theme: "colored",
-                       });
-                       setTimeout(()=>{
-                           Router.push('/').then()
-                       },3000)
-                   }
-                   if(err.data.code===1002 && err.data.status===401){
-                       toast.error(`${err.message}`, {
-                           position: "top-center",
-                           className:"toast-success-container",
-                           autoClose: 3000,
-                           hideProgressBar: true,
-                           closeOnClick: true,
-                           pauseOnHover: true,
-                           draggable: true,
-                           progress: undefined,
-                           theme: "colored",
-                       });
-                       setTimeout(()=>{
-                           Router.push('/').then()
-                       },3000)
-                   }
-                   if(err.data.code===1005 && err.data.status===404){
-                       toast.error(`${err.message}`, {
-                           position: "top-center",
-                           autoClose: 3000,
-                           hideProgressBar: true,
-                           closeOnClick: true,
-                           pauseOnHover: true,
-                           draggable: true,
-                           progress: undefined,
-                           theme: "colored",
-                       });
-                       setTimeout(()=>{
-                           Router.push('/').then()
-                       },3000)
-                   }
-                   if (err.data.status===401 && err.data.code===1002 && err.data.phone_verified===true){
-                       toast.error(`${err.message}`, {
-                           position: "top-center",
-                           autoClose: 3000,
-                           hideProgressBar: true,
-                           closeOnClick: true,
-                           pauseOnHover: true,
-                           draggable: true,
-                           progress: undefined,
-                           theme: "colored",
-                       });
-                       setTimeout(()=>{
-                           Router.push('/').then()
-                       },3000)
-                   }
+               onError :async (err:any)=>{
                }
            })
         },
     });
 
-
+    // @ts-ignore
     return (
         <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}>
             {/*logo*/}
@@ -120,8 +57,12 @@ const MainSginup = () => {
             <div className={"w-full"}>
                 {isSuccess &&
                     <p className="center-items text-[12px] py-2  text-green-500">تبریک !!! مراحل را ادامه دهید!</p>}
-                {isError &&
-                    <p className="center-items text-[11px] py-3 text-red-500"> شماره اشتباه است یا کاربر وجود دارد لطفا مجددا امتحان کنید.</p>}
+                {/* @ts-ignore*/}
+                {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error.response.data.code===1002 ?<div>این شماره وجود دارد. </div>:null}</div>}
+                {
+                    //@ts-ignore
+                    isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error.response.data.code===1005 ?<div>کد معرف شما نامعتبر است</div>:null}</div>
+                }
                 <form onSubmit={Myformik.handleSubmit} className={"flex flex-col space-y-4 "}>
                     <div>
                         <input
@@ -159,7 +100,8 @@ const MainSginup = () => {
                             className={"overflow-hidden w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"کد معرف خود را وارد کنبد..."}/>
                         {Myformik.touched.phoneNumber && Boolean(Myformik.errors.referralCode)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.referralCode}</p>
+
+
                     </div>
                     <div className={"cursor-pointer "}>
                         <button
