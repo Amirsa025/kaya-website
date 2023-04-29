@@ -82,7 +82,7 @@ const MainLogin: NextPageWithLayout = () => {
                 {/*{isError &&*/}
                 {/*    <p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>}*/}
                 {/*@ts-ignore*/}
-                {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error.response.data.code===1004 ?<p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>:null}</div>}
+                {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error?.response?.data?.code===1004 ?<p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>:null}</div>}
                 {isSuccess &&
                     <p className="center-items text-[12px] py-2  text-green-500">با موفقیت وارد
                         شدید!</p>}

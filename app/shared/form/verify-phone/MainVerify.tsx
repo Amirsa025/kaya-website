@@ -1,23 +1,22 @@
 import {useFormik} from "formik";
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import Router, {useRouter} from "next/router";
+import Router from "next/router";
 import {codeVerifySchema} from "@/app/shared/form/verify-phone/vaildation";
 import {toast} from "react-toastify";
 import Image from "next/image";
 
-
 const MainVerify = () => {
     const cookie = new Cookies()
-    const router = useRouter();
     const[disable ,setDisable] =useState(false)
     const ACCESS_TOKEN = cookie.get('signUp')
     const Myformik = useFormik({
         initialValues: {
             codeVerify: '',
         },
+
         validationSchema: codeVerifySchema,
         onSubmit: async (values) => {
             try {
