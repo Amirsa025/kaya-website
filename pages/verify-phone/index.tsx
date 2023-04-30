@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Heading from "@/app/shared/Heading";
+import Heading from "@/app/shared/HeadingTitle";
 import AsideVerifyPhone from "@/app/shared/form/verify-phone/AsideVerifyPhone";
 import MainVerify from "@/app/shared/form/verify-phone/MainVerify";
 import Cookies from "universal-cookie";

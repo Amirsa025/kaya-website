@@ -32,8 +32,10 @@ const SideBarChat = () => {
                                     <Link href={`/user-panel/chat/${chat.id}`} legacyBehavior
                                           shallow={true}>
                                         <div  className={router.asPath ==`/user-panel/chat/${chat.id}`  ? "text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"} >
-                                            <i className={router.asPath ==`/user-panel/chat/${chat.id}`? "ri-message-3-fill text-white":"ri-message-3-fill text-gray-400 "}></i>
-                                            <a>{chat.name}</a>
+                                            <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
+                                                <i className={router.asPath ==`/user-panel/chat/${chat.id}`? "ri-message-3-fill text-white":"ri-message-3-fill text-gray-50 "}></i>
+                                            </div>
+                                            <a href={"text-md "}>{chat.name}</a>
                                         </div>
                                     </Link>
                                 </li>
@@ -61,7 +63,9 @@ const SideBarChat = () => {
                                             <Link href={`/user-panel/chat/${chat.id}`} legacyBehavior
                                                   shallow={true}>
                                                 <div  onClick={() => setIsOpen(!isOpen)}  className={router.asPath ==`/user-panel/chat/${chat.id}`  ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"} >
-                                                    <i className={router.asPath ==`/user-panel/chat/${chat.id}`? "ri-message-3-fill text-white":"ri-message-3-fill text-gray-400 "}></i>
+                                                    <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
+                                                        <i className={router.asPath ==`/user-panel/chat/${chat.id}`? "ri-message-3-fill text-white":"ri-message-3-fill text-gray-50 "}></i>
+                                                    </div>
                                                     <a>{chat.name}</a>
                                                 </div>
                                             </Link>

@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from "@/app/shared/NavBar";
+import Header from "@/app/shared/Header";
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import Heading from "@/app/shared/Heading";
+import Heading from "@/app/shared/HeadingTitle";
 
 const Custom404 = () => {
     const Header = dynamic(
-        () => import('@/app/shared/NavBar'),
+        () => import('@/app/shared/Header'),
         { ssr: false }
     )
     return (

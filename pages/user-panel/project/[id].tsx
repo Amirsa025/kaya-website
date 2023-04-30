@@ -10,6 +10,7 @@ import {NextPageWithLayout} from "@/pages/_app";
 import {MoonLoader} from "react-spinners";
 import Image from "next/image";
 import RequestBid from "@/app/shared/form/sendBid";
+import SubProjectlayout from "@/app/components/layout/SubProjectlayout";
 
 export const fetchProjects = async (id: any) => {
 
@@ -25,7 +26,7 @@ export const fetchProjects = async (id: any) => {
     }
 }
 dynamic(
-    () => import('@/app/shared/NavBar'),
+    () => import('@/app/shared/Header'),
     {ssr: false}
 );
 const SendBid: NextPageWithLayout = () => {
@@ -157,7 +158,7 @@ const SendBid: NextPageWithLayout = () => {
 
 };
 
-SendBid.getLayout = (page) => <UserPanelAdmin>{page}</UserPanelAdmin>
+SendBid.getLayout = (page) => <SubProjectlayout>{page}</SubProjectlayout>
 export default SendBid;
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const {id} = context.params;

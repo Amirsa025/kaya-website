@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import {toast} from "react-toastify";
-import Heading from "@/app/shared/Heading";
+import Heading from "@/app/shared/HeadingTitle";
 import Router from "next/router";
 
 const CompleteProfile:React.FC = () => {
@@ -15,7 +15,6 @@ const CompleteProfile:React.FC = () => {
         formData.append('photo',file)
         //@ts-ignore
         setPreviewImage(URL.createObjectURL(file))
-        console.log(previewImage)
     }
     const handleFileInputChangePerson = (event:any) => {
         const formData = new FormData()

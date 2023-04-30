@@ -3,16 +3,15 @@ import React, {useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import {useRouter} from "next/router";
 import ChatLayout from "@/app/components/chat/Chat-layout/ChantLayout";
-import Heading from "@/app/shared/Heading";
-import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
+import Heading from "@/app/shared/HeadingTitle";
 import ChatForm from "@/app/shared/form/chat-form/formChat";
 import dynamic from "next/dynamic";
-import SubLayout from "@/app/components/layout/sublayout";
+import SubChatLayout from "@/app/components/layout/SubChatlayout";
 interface Props {
     currentUser: number;
 }
 dynamic(
-    () => import('@/app/shared/NavBar'),
+    () => import('@/app/shared/Header'),
     {ssr: false}
 );
 interface Message {
@@ -82,5 +81,5 @@ const MainContent: NextPageWithLayout = () => {
 
     );
 };
-MainContent.getLayout = (page) => <SubLayout>{page}</SubLayout>
+MainContent.getLayout = (page) => <SubChatLayout>{page}</SubChatLayout>
 export default MainContent;

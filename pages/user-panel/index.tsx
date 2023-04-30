@@ -9,7 +9,7 @@ import Cookies from "universal-cookie";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {PaginationItem} from "@mui/material";
-import Heading from "@/app/shared/Heading";
+import Heading from "@/app/shared/HeadingTitle";
 import {MoonLoader} from "react-spinners";
 import EmptyList from "@/app/shared/EmptyList";
 import ModalFilter from "@/app/utils/Modal/modal-filter";

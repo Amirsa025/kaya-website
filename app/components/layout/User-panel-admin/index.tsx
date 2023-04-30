@@ -1,10 +1,10 @@
 import React, {ReactNode, useEffect, useState} from 'react';
-import Heading from "@/app/shared/Heading";
+import Heading from "@/app/shared/HeadingTitle";
 import {DotLoader, ScaleLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 import Router from "next/router";
 import AsidePanel from "@/app/shared/Aside-Panel";
-import Header from "@/app/shared/NavBar";
+import Header from "@/app/shared/Header";
 import LinearProgress from "@mui/material/LinearProgress";
 
 interface IPropsAdmin {

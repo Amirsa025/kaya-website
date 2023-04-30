@@ -8,8 +8,8 @@ import GetFeatured from "@/app/components/HomePage/GetFeatured";
 import BlogPost from "@/app/components/HomePage/blogPost";
 import Footer from "@/app/shared/footer/footer";
 import React, {useEffect, useState} from "react";
-import Heading from "@/app/shared/Heading";
-import Header from "@/app/shared/NavBar";
+import Heading from "@/app/shared/HeadingTitle";
+import Header from "@/app/shared/Header";
 import {ScaleLoader} from "react-spinners";
 export default function Home() {
     const [loading, setLoading] = useState(true)

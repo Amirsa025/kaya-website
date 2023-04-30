@@ -34,31 +34,35 @@ const Header = () => {
                 UserNavigation.map((item,id)=>{
                     return (
                         <section key={id}>
-                            {router.pathname === item.path ? <>
+                            {router.pathname === item.path ? <div className={"gap-4 flex"}>
                                 <Link href="/" legacyBehavior>
                                     <button
                                         className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>خانه
                                     </button>
                                 </Link>
-                            </> : <></>}
-                        </section>
+                                <button
+                                    className={" w-[90px] h-[40px]  border rounded-md hover:bg-red-400 hover:border-red-600 hover:text-white text-[14px]"}
+                                    onClick={logout}>خروج
+                                </button>
+                            </div> : <></>}
 
+                        </section>
                     )
                 })
             }
             {
-                router.pathname==="/"?<>
+                router.pathname==="/"?<div className={"gap-4 flex"}>
                     <Link href="/user-panel" legacyBehavior>
                         <button
                             className={"w-[90px] h-[40px] text-[0.9rem] border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 "}>پنل کاربری
                         </button>
                     </Link>
-                </>:<></>
+                    <button
+                        className={" w-[90px] h-[40px]  border rounded-md hover:bg-red-400 hover:border-red-600 hover:text-white text-[14px]"}
+                        onClick={logout}>خروج
+                    </button>
+                </div>:<></>
             }
-            <button
-                className={" w-[90px] h-[40px]  border rounded-md hover:bg-red-400 hover:border-red-600 hover:text-white text-[14px]"}
-                onClick={logout}>خروج
-            </button>
         </div>
     } else {
         userAdmin = <div className="flex items-center justify-around gap-4 ">

@@ -1,18 +1,21 @@
 import {useFormik} from "formik";
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import Router from "next/router";
+import Router, {useRouter} from "next/router";
 import {codeVerifySchema} from "@/app/shared/form/verify-phone/vaildation";
 import {toast} from "react-toastify";
 import Image from "next/image";
 
 const MainVerify = () => {
+    //variable
     const cookie = new Cookies()
-    const[disable ,setDisable] =useState(false)
     const ACCESS_TOKEN = cookie.get('signUp')
-    const Myformik = useFormik({
+    //state
+    const[disable ,setDisable] =useState(false)
+    //function
+    const SignVerify = useFormik({
         initialValues: {
             codeVerify: '',
         },
@@ -33,7 +36,7 @@ const MainVerify = () => {
                         position: "top-center",
                         className:"toast-success-container",
                         closeButton: false,
-                        autoClose: 3000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -41,7 +44,6 @@ const MainVerify = () => {
                         progress: undefined,
                         theme: "colored",
                     });
-
                     setTimeout(async()=>{
                         setDisable(true)
                         // cookie.remove('sginUP')
@@ -49,21 +51,7 @@ const MainVerify = () => {
 
                     },3000)
                 }
-                if(responseData.data.message==="Forbidden" && responseData.status===401){
-                    toast.error(' خطایی به وجود آمده است.', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                    });
-
-                }
             }catch (error:any){
-                console.log(error.message)
                 toast.error(' خطایی به وجود آمده است.', {
                     position: "top-right",
                     autoClose: 5000,
@@ -81,6 +69,7 @@ const MainVerify = () => {
             }
         },
     });
+
     return (
         <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}>
             {/*logo*/}
@@ -96,17 +85,17 @@ const MainVerify = () => {
                 </div>
             {/*form */}
                 <div className={"w-full"}>
-                    <form onSubmit={Myformik.handleSubmit} className={"flex flex-col space-y-4 "}>
+                    <form onSubmit={SignVerify.handleSubmit} className={"flex flex-col space-y-4 "}>
                         <div>
                             <input type="text"
                                    id="codeVerify"
                                    name="codeVerify"
-                                   onChange={Myformik.handleChange}
-                                   value={Myformik.values.codeVerify}
+                                   onChange={SignVerify.handleChange}
+                                   value={SignVerify.values.codeVerify}
                                    className={"focus:shadow-lg placeholder:text-[12px] w-full text-gray-800 px-2  h-[48px] border border-gray-500 rounded-md outline-0"}
                                    placeholder={"کد که sms شده را وارد کنید..."}
                             />
-                            <p className="text-red-500 pt-1 text-[12px] text-right font-light">{Myformik.errors.codeVerify}</p>
+                            <p className="text-red-500 pt-1 text-[12px] text-right font-light">{SignVerify.errors.codeVerify}</p>
                         </div>
                             <div>
                                 <button disabled={disable} className={`w-full h-[40px]  border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>ورود</button>

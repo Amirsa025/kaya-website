@@ -1,5 +1,5 @@
 import React from 'react';
-import Heading from "@/app/shared/Heading";
+import Heading from "@/app/shared/HeadingTitle";
 import AsideLogin from "@/app/shared/form/login/AsideLogin";
 import MainLogin from "@/app/shared/form/login/MainLogin";
 import {NextPageWithLayout} from "@/pages/_app";

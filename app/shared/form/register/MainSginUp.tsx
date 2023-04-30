@@ -8,12 +8,12 @@ import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 
-const MainSginup = () => {
+const MainSignup = () => {
  const [isRevealPwd, setIsRevealPwd] = useState(false);
    const cookie = new Cookies()
     const {mutate,isError,isSuccess,error, isLoading} = useSginUp()
     const[disable ,setDisable] =useState(false)
-    const Myformik = useFormik({
+    const SignupForm = useFormik({
         initialValues: {
             phoneNumber:'',
             referralCode: '',
@@ -32,6 +32,7 @@ const MainSginup = () => {
                     }
                 },
                onError :async (err:any)=>{
+                    console.log(err)
                }
            })
         },
@@ -55,51 +56,50 @@ const MainSginup = () => {
 
             {/*form */}
             <div className={"w-full"}>
-                {isSuccess &&
-                    <p className="center-items text-[12px] py-2  text-green-500">تبریک !!! مراحل را ادامه دهید!</p>}
+                {isSuccess && <p className="center-items text-[12px] py-2  text-green-500">تبریک !!! مراحل را ادامه دهید!</p>}
                 {/* @ts-ignore*/}
-                {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error.response.data.code===1002 ?<div>این شماره وجود دارد. </div>:null}</div>}
+                {isError && <div className="text-red-500 center-items text-[12px] py-2">{error.response?.data?.code===1002 ?<div>این شماره وجود دارد. </div>:null}</div>}
                 {
                     //@ts-ignore
-                    isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error.response.data.code===1005 ?<div>کد معرف شما نامعتبر است</div>:null}</div>
+                    isError && <div className="text-red-500 center-items text-[12px] py-2 text-[12px] text-right font-light">{error?.response?.data?.code===1005 ?<div>کد معرف شما نامعتبر است</div>:null}</div>
                 }
-                <form onSubmit={Myformik.handleSubmit} className={"flex flex-col space-y-4 "}>
+                <form onSubmit={SignupForm.handleSubmit} className={"flex flex-col space-y-4 "}>
                     <div>
                         <input
                             id="phoneNumber"
                             name="phoneNumber"
                             type="text"
-                            onChange={Myformik.handleChange}
-                            value={Myformik.values.phoneNumber}
+                            onChange={SignupForm.handleChange}
+                            value={SignupForm.values.phoneNumber}
                             className={"overflow-hidden w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"تلفن همراه خود را وارد کنید..."}/>
-                               {Myformik.touched.phoneNumber && Boolean(Myformik.errors.phoneNumber)}
-                                <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.phoneNumber}</p>
+                               {SignupForm.touched.phoneNumber && Boolean(SignupForm.errors.phoneNumber)}
+                                <p className="text-red-500 pt-2 text-[12px] text-right font-light">{SignupForm.errors.phoneNumber}</p>
                     </div>
                     <div className={"relative"}>
                         <input
                             type={isRevealPwd ? "text" : "password"}
                                id="password"
                                name="password"
-                               onChange={Myformik.handleChange}
-                               value={Myformik.values.password}
+                               onChange={SignupForm.handleChange}
+                               value={SignupForm.values.password}
                                className={" w-full text-gray-800 px-2 w-full placeholder:text-[13px]   h-[48px] border border-gray-500 rounded-md outline-0"}
                                placeholder={"رمز خود را وارد کنید..."}/>
                                 <i onClick={() => setIsRevealPwd(prevState => !prevState)}
                                    className={`absolute top-3 left-3 ${isRevealPwd ? 'ri-eye-line':'ri-eye-off-line'}`}></i>
-                        {Myformik.touched.password && Boolean(Myformik.errors.password)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
+                        {SignupForm.touched.password && Boolean(SignupForm.errors.password)}
+                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{SignupForm.errors.password}</p>
                     </div>
                     <div>
                         <input
                             id="referralCode"
                             name="referralCode"
                             type="text"
-                            onChange={Myformik.handleChange}
-                            value={Myformik.values.referralCode}
+                            onChange={SignupForm.handleChange}
+                            value={SignupForm.values.referralCode}
                             className={"overflow-hidden w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"کد معرف خود را وارد کنبد..."}/>
-                        {Myformik.touched.phoneNumber && Boolean(Myformik.errors.referralCode)}
+                        {SignupForm.touched.phoneNumber && Boolean(SignupForm.errors.referralCode)}
 
 
                     </div>
@@ -132,4 +132,4 @@ const MainSginup = () => {
     );
 };
 
-export default MainSginup;
+export default MainSignup;

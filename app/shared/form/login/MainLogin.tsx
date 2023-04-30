@@ -15,7 +15,7 @@ const MainLogin: NextPageWithLayout = () => {
     const cookies = new Cookies()
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const[disable ,setDisable] =useState(false)
-    const Myformik = useFormik({
+    const LoginForm = useFormik({
         initialValues: {
             loginNumber: '',
             password: ''
@@ -78,41 +78,39 @@ const MainLogin: NextPageWithLayout = () => {
                 <span className={"block pt-[18px] pb-[24px]"}>شغل ساخته شده برای شما را پیدا کنید!</span>
             </div>
             {/*form */}
-            <div className={"w-full"}>
-                {/*{isError &&*/}
-                {/*    <p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>}*/}
+            <div className={"w-full"}> 
                 {/*@ts-ignore*/}
                 {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error?.response?.data?.code===1004 ?<p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>:null}</div>}
                 {isSuccess &&
                     <p className="center-items text-[12px] py-2  text-green-500">با موفقیت وارد
                         شدید!</p>}
 
-                <form onSubmit={Myformik.handleSubmit} className={"flex flex-col space-y-4 "}>
+                <form onSubmit={LoginForm.handleSubmit} className={"flex flex-col space-y-4 "}>
                     <div>
                         <input
                             id="loginNumber"
                             name="loginNumber"
                             type="text"
-                            onChange={Myformik.handleChange}
-                            value={Myformik.values.loginNumber}
+                            onChange={LoginForm.handleChange}
+                            value={LoginForm.values.loginNumber}
                             className={"focus-visible:shadow-xl focus:outline-0  placeholder:text-[13px] w-full text-gray-800 px-2  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"شماره همراه خود را وارد کنید..."}/>
-                        {Myformik.touched.loginNumber && Boolean(Myformik.errors.loginNumber)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.loginNumber}</p>
+                        {LoginForm.touched.loginNumber && Boolean(LoginForm.errors.loginNumber)}
+                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{LoginForm.errors.loginNumber}</p>
                     </div>
                     <div className={"relative"}>
                         <input
                             type={isRevealPwd ? "text" : "password"}
                             id="password"
                             name="password"
-                            onChange={Myformik.handleChange}
-                            value={Myformik.values.password}
+                            onChange={LoginForm.handleChange}
+                            value={LoginForm.values.password}
                             className={" w-full text-gray-800 px-2 w-full placeholder:text-[13px]   h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"رمز خود را وارد کنید..."}/>
                         <i onClick={() => setIsRevealPwd(prevState => !prevState)}
                            className={`absolute top-3 left-3 ${isRevealPwd ? 'ri-eye-line' : 'ri-eye-off-line'}`}></i>
-                        {Myformik.touched.password && Boolean(Myformik.errors.password)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{Myformik.errors.password}</p>
+                        {LoginForm.touched.password && Boolean(LoginForm.errors.password)}
+                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{LoginForm.errors.password}</p>
 
                     </div>
                     <a href="@/app/components/form/login/MainLogin#">

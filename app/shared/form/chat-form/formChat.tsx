@@ -10,15 +10,14 @@ const ChatForm:React.FC<ChatInputProps> = ({onSendMessage }) => {
             message:'',
         },
         validationSchema: massageSchema,
-        onSubmit: (formPayload:any) => {
-            console.log(formPayload)
+        onSubmit: (formPayload:any,{resetForm}) => {
             onSendMessage(formPayload)
+            resetForm()
         }
     });
     return (
         <>
             <form className="flex  my-4 w-full  bg-gray-100  rounded-xl" onSubmit={sendMassage.handleSubmit}>
-
                 <input
                     className="flex-1 bg-gray-100 focus:outline-blue-gray-400 py-3 px-4"
                     type="text"
