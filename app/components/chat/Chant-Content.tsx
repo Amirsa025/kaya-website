@@ -16,9 +16,8 @@ const ChatLayout = ({children}: any) => {
                             className={"h-[58vh] text-center  w-full px-2 flex items-center justify-center w-full md:h-full flex-col direction-ltr"}>
                             <Image src={'/images/live-chat.svg'} height={100} width={100}
                                    alt={'chat-logo'}/>
-                            <h2 className={"font-bold text-[1.3rem] "}>Welcome to your messages</h2>
-                            <span>Start connecting with others by
-                            <Link href={"/user-panel/project"} className={"font-bold"}>browser a jobs</Link>or posting a project .
+                            <h2 className={"font-bold text-[1.3rem] "}>you have a 3 massages</h2>
+                            <span>Start connecting with others by<Link href={"/user-panel/project"} className={"font-bold"}>browser a jobs</Link>or posting a project .
                         </span>
                         </div>)
                     }

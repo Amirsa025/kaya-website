@@ -51,7 +51,7 @@ const SideBarChat = () => {
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
                         </div>)
                 }
-                <div className={"relative md:hidden "}>
+                <div className={"relative md:hidden"}>
                     <div
                         className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}
                     >

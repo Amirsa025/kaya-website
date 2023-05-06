@@ -1,5 +1,5 @@
 import {useFormik} from "formik";
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
@@ -12,12 +12,26 @@ const MainVerify = () => {
     //variable
     const cookie = new Cookies()
     const ACCESS_TOKEN = cookie.get('signUp')
-    const router = useRouter();
+
     //state
     const[disable ,setDisable] =useState(false)
     // Set up state to track whether the form is completed
 
     //Effect
+    const router = useRouter();
+    useEffect(() => {
+        const handleRouteChangeStart = (url:any) => {
+            // حذف توکن در صورت برگشت به وضعیت قبلی
+            if (url === '/') {
+                cookie.remove('signUp');
+            }
+        };
+        router.events.on('routeChangeStart', handleRouteChangeStart);
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChangeStart);
+        };
+    }, []);
+
 
     //function
 

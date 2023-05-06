@@ -99,9 +99,7 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
                                     </a>
                                     </li>
                             </ul>
-                            <div className="flex md:hidden items-center py-6 gap-8">
 
-                            </div>
                         </div>
 
                     </div>
