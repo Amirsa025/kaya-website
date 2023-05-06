@@ -95,7 +95,7 @@ const MultiFormStepper = () => {
             const result = await callApi().post('/users/verify', inputObject, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    'Authorization': `Bearer ${cookie.get('sginUP') || cookie.get('token')}`
+                    'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
                 }
             })
             if (result.status === 200) {

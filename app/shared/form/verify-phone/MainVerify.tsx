@@ -21,8 +21,7 @@ const MainVerify = () => {
     const router = useRouter();
     useEffect(() => {
         const handleRouteChangeStart = (url:any) => {
-            // حذف توکن در صورت برگشت به وضعیت قبلی
-            if (url === '/') {
+            if (url === '/' || url==='/login') {
                 cookie.remove('signUp');
             }
         };
@@ -32,9 +31,7 @@ const MainVerify = () => {
         };
     }, []);
 
-
     //function
-
     const SignVerify = useFormik({
         initialValues: {
             codeVerify: '',
@@ -88,7 +85,6 @@ const MainVerify = () => {
             }
         },
     });
-
     return (
         <div className={" flex flex-col w-[20.25rem]  mx-auto space-y-8 pt-12 text-[#0e1111]"}>
             {/*logo*/}
