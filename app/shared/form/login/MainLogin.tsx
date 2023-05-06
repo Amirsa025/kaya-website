@@ -80,9 +80,9 @@ const MainLogin: NextPageWithLayout = () => {
             {/*form */}
             <div className={"w-full"}> 
                 {/*@ts-ignore*/}
-                {isError && <div className="text-red-500 pt-2 text-[12px] text-right font-light">{error?.response?.data?.code===1004 ?<p className="center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>:null}</div>}
+                {isError && <div className=" text-red-500 pt-2 text-[12px] text-right font-light">{error?.response?.data?.code===1004 ?<p className=" animate__fadeInUp center-items text-[12px] py-2 text-red-500">شماره تلفن یا رمز عبور  خود را اشتباه وارد کردید.</p>:null}</div>}
                 {isSuccess &&
-                    <p className="center-items text-[12px] py-2  text-green-500">با موفقیت وارد
+                    <p className="animate__animated animate__fadeInDown animate__delay-1s center-items text-[12px] py-2  text-green-500">با موفقیت وارد
                         شدید!</p>}
 
                 <form onSubmit={LoginForm.handleSubmit} className={"flex flex-col space-y-4 "}>
@@ -96,7 +96,7 @@ const MainLogin: NextPageWithLayout = () => {
                             className={"focus-visible:shadow-xl focus:outline-0  placeholder:text-[13px] w-full text-gray-800 px-2  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"شماره همراه خود را وارد کنید..."}/>
                         {LoginForm.touched.loginNumber && Boolean(LoginForm.errors.loginNumber)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{LoginForm.errors.loginNumber}</p>
+                        <p className=" animate__animated animate__fadeInUp animate__delay-1s text-red-500 pt-2 text-[12px] text-right font-light">{LoginForm.errors.loginNumber}</p>
                     </div>
                     <div className={"relative"}>
                         <input
@@ -110,7 +110,7 @@ const MainLogin: NextPageWithLayout = () => {
                         <i onClick={() => setIsRevealPwd(prevState => !prevState)}
                            className={`absolute top-3 left-3 ${isRevealPwd ? 'ri-eye-line' : 'ri-eye-off-line'}`}></i>
                         {LoginForm.touched.password && Boolean(LoginForm.errors.password)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{LoginForm.errors.password}</p>
+                        <p className=" animate__animated animate__fadeInUp animate__delay-1s text-red-500 pt-2 text-[12px] text-right font-light">{LoginForm.errors.password}</p>
 
                     </div>
                     <a href="@/app/components/form/login/MainLogin#">

@@ -1,5 +1,5 @@
 import {useFormik} from "formik";
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
@@ -12,9 +12,15 @@ const MainVerify = () => {
     //variable
     const cookie = new Cookies()
     const ACCESS_TOKEN = cookie.get('signUp')
+    const router = useRouter();
     //state
     const[disable ,setDisable] =useState(false)
+    // Set up state to track whether the form is completed
+
+    //Effect
+
     //function
+
     const SignVerify = useFormik({
         initialValues: {
             codeVerify: '',
@@ -30,7 +36,6 @@ const MainVerify = () => {
                         'Authorization': `Bearer ${ACCESS_TOKEN}`
                     }
                 })
-                console.log(responseData.data)
                 if(responseData.status===200 && responseData.data.phone_verified===true){
                     toast.success('ثبت نام اولیه شما باموفقیت  انجام شد!', {
                         position: "top-center",
@@ -78,30 +83,30 @@ const MainVerify = () => {
                     <Image width={32} height={32} src="/images/Asset.png" alt="logo"/>
                 </Link>
             </div>
-                <div>
-                    <h1 className={"text-4xl font-bold text-[1rem]"}>ورود کاربران </h1>
-                    <span className={"block pt-[18px] pb-[24px]"}>شغل ساخته شده برای شما را پیدا کنید!</span>
-                        {/*login form width google */}
-                </div>
+            <div>
+                <h1 className={"text-4xl font-bold text-[1rem]"}>ورود کاربران </h1>
+                <span className={"block pt-[18px] pb-[24px]"}>شغل ساخته شده برای شما را پیدا کنید!</span>
+                {/*login form width google */}
+            </div>
             {/*form */}
-                <div className={"w-full"}>
-                    <form onSubmit={SignVerify.handleSubmit} className={"flex flex-col space-y-4 "}>
-                        <div>
-                            <input type="text"
-                                   id="codeVerify"
-                                   name="codeVerify"
-                                   onChange={SignVerify.handleChange}
-                                   value={SignVerify.values.codeVerify}
-                                   className={"focus:shadow-lg placeholder:text-[12px] w-full text-gray-800 px-2  h-[48px] border border-gray-500 rounded-md outline-0"}
-                                   placeholder={"کد که sms شده را وارد کنید..."}
-                            />
-                            <p className="text-red-500 pt-1 text-[12px] text-right font-light">{SignVerify.errors.codeVerify}</p>
-                        </div>
-                            <div>
-                                <button disabled={disable} className={`w-full h-[40px]  border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>ورود</button>
-                            </div>
-                    </form>
-                </div>
+            <div className={"w-full"}>
+                <form onSubmit={SignVerify.handleSubmit} className={"flex flex-col space-y-4 "}>
+                    <div>
+                        <input type="text"
+                               id="codeVerify"
+                               name="codeVerify"
+                               onChange={SignVerify.handleChange}
+                               value={SignVerify.values.codeVerify}
+                               className={"focus:shadow-lg placeholder:text-[12px] w-full text-gray-800 px-2  h-[48px] border border-gray-500 rounded-md outline-0"}
+                               placeholder={"کد که sms شده را وارد کنید..."}
+                        />
+                        <p className=" animate__animated animate__fadeInDown animate__delay-1s text-red-500 pt-1 text-[12px] text-right font-light">{SignVerify.errors.codeVerify}</p>
+                    </div>
+                    <div>
+                        <button disabled={disable} className={`w-full h-[40px]  border rounded-md ${!disable ? 'bg-black':'bg-gray-500 text-white'} text-white rounded-md hover:bg-[#143fcd]`}>ورود</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

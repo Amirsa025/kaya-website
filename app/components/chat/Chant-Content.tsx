@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import SideBarChat from "@/app/components/chat/Chat-layout/SideBarChat";
+import SideBarChat from "@/app/components/chat/SideBarChat";
 
 const ChatLayout = ({children}: any) => {
     return (
-        <div className={"container-app w-full  direction-ltr  "}>
+        <div className={"px-4 sm:container-app w-full  direction-ltr  "}>
             <div className={"flex flex-col lg:flex-row   rounded-lg border bg-white "}>
                 {/*start chat list*/}
                 <SideBarChat/>

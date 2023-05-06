@@ -12,7 +12,7 @@ const ChatForm:React.FC<ChatInputProps> = ({onSendMessage }) => {
         validationSchema: massageSchema,
         onSubmit: (formPayload:any,{resetForm}) => {
             onSendMessage(formPayload)
-            resetForm()
+               resetForm()
         }
     });
     return (

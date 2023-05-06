@@ -1,12 +1,10 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import Heading from "@/app/shared/HeadingTitle";
-import {DotLoader, ScaleLoader} from "react-spinners";
+import { ScaleLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 import Router, {useRouter} from "next/router";
-import Header from "@/app/shared/Header";
 import LinearProgress from "@mui/material/LinearProgress";
 import AsidePanel from "@/app/shared/Aside-Panel";
-import Link from "next/link";
 
 interface IPropsAdmin {
     children: ReactNode
@@ -25,7 +23,7 @@ const SubProjectlayout: React.FC<IPropsAdmin> = ({children}) => {
         }
     }
     useEffect(() => {
-        setTimeout(() => setLoading(false), 1000)
+        setTimeout(() => setLoading(false), 10)
     }, [])
     if (loading) {
         return <div className={"h-screen backdrop-blur-0 flex items-center justify-center"}>
@@ -82,7 +80,7 @@ const SubProjectlayout: React.FC<IPropsAdmin> = ({children}) => {
                     </div>
                     <div className={"flex"}>
                         <div className={` md:px-[36px]  md:h-0  justify-self-center pb-3 md:block md:pb-0 ${state ? 'block ' : 'hidden transMovemt'}`}>
-                            <ul className="  flex flex-start md:items-center  md:space-x-8 md:space-x-reverse md:space-y-0 pt-2  flex-col md:flex-row ">
+                            <ul className="  flex flex-col gap-y-4 md:flex-row flex-start md:items-center  md:space-x-8 md:space-x-reverse md:space-y-0 pt-2  flex-col md:flex-row ">
 
                                 <li  onClick={handleNavigate} >
                                     <a className={"flex gap-2 border px-4 py-2 border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 cursor-pointer "}>
@@ -93,9 +91,6 @@ const SubProjectlayout: React.FC<IPropsAdmin> = ({children}) => {
                                     </a>
                                 </li>
                             </ul>
-                            <div className="flex md:hidden items-center py-6 gap-8">
-
-                            </div>
                         </div>
 
                     </div>

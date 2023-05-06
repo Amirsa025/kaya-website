@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import {NextPageWithLayout} from "@/pages/_app";
 import {useRouter} from "next/router";
-import ChatLayout from "@/app/components/chat/Chat-layout/ChantLayout";
+import ChatLayout from "@/app/components/chat/Chant-Content";
 import Heading from "@/app/shared/HeadingTitle";
 import ChatForm from "@/app/shared/form/chat-form/formChat";
 import dynamic from "next/dynamic";

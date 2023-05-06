@@ -12,7 +12,7 @@ interface ISendProps{
     period?:string
 }
 
-const RequestBid:React.FC<ISendProps> = ({id}) => {
+const RequestBid:React.FC<ISendProps> = ({id}:any) => {
     const cookie = new Cookies()
     const RequestBid = useFormik({
         initialValues: {

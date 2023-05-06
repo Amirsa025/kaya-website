@@ -56,12 +56,12 @@ const MainSignup = () => {
 
             {/*form */}
             <div className={"w-full"}>
-                {isSuccess && <p className="center-items text-[12px] py-2  text-green-500">تبریک !!! مراحل را ادامه دهید!</p>}
+                {isSuccess && <p className="animate__animated animate__fadeInDown animate__delay-1s center-items text-[12px] py-2  text-green-500">تبریک !!! مراحل را ادامه دهید!</p>}
                 {/* @ts-ignore*/}
-                {isError && <div className="text-red-500 center-items text-[12px] py-2">{error.response?.data?.code===1002 ?<div>این شماره وجود دارد. </div>:null}</div>}
+                {isError && <div className="animate__animated animate__fadeInDown animate__delay-1s text-red-500 center-items text-[12px] py-2">{error.response?.data?.code===1002 ?<div>این شماره وجود دارد. </div>:null}</div>}
                 {
                     //@ts-ignore
-                    isError && <div className="text-red-500 center-items text-[12px] py-2 text-[12px] text-right font-light">{error?.response?.data?.code===1005 ?<div>کد معرف شما نامعتبر است</div>:null}</div>
+                    isError && <div className="animate__animated animate__fadeInDown animate__delay-1s text-red-500 center-items text-[12px] py-2 text-[12px] text-right font-light">{error?.response?.data?.code===1005 ?<div>کد معرف شما نامعتبر است</div>:null}</div>
                 }
                 <form onSubmit={SignupForm.handleSubmit} className={"flex flex-col space-y-4 "}>
                     <div>
@@ -88,7 +88,7 @@ const MainSignup = () => {
                                 <i onClick={() => setIsRevealPwd(prevState => !prevState)}
                                    className={`absolute top-3 left-3 ${isRevealPwd ? 'ri-eye-line':'ri-eye-off-line'}`}></i>
                         {SignupForm.touched.password && Boolean(SignupForm.errors.password)}
-                        <p className="text-red-500 pt-2 text-[12px] text-right font-light">{SignupForm.errors.password}</p>
+                        <p className="animate__animated animate__fadeInDown animate__delay-1s text-red-500 pt-2 text-[12px] text-right font-light">{SignupForm.errors.password}</p>
                     </div>
                     <div>
                         <input
@@ -100,7 +100,6 @@ const MainSignup = () => {
                             className={"overflow-hidden w-full text-gray-800 px-2 placeholder:text-[13px]  h-[48px] border border-gray-500 rounded-md outline-0"}
                             placeholder={"کد معرف خود را وارد کنبد..."}/>
                         {SignupForm.touched.phoneNumber && Boolean(SignupForm.errors.referralCode)}
-
 
                     </div>
                     <div className={"cursor-pointer "}>

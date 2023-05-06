@@ -5,15 +5,13 @@ import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import dynamic from "next/dynamic";
-import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 import {NextPageWithLayout} from "@/pages/_app";
 import {MoonLoader} from "react-spinners";
 import Image from "next/image";
 import RequestBid from "@/app/shared/form/sendBid";
-import SubProjectlayout from "@/app/components/layout/SubProjectlayout";
+import SubProjectLayout from "@/app/components/layout/SubProjectlayout";
 
 export const fetchProjects = async (id: any) => {
-
     const cookie = new Cookies()
     try {
         return await callApi().get(`/projects/projects/${id}`, {
@@ -25,26 +23,7 @@ export const fetchProjects = async (id: any) => {
         console.error(error)
     }
 }
-dynamic(
-    () => import('@/app/shared/Header'),
-    {ssr: false}
-);
 const SendBid: NextPageWithLayout = () => {
-    const [progress, setProgress] = React.useState(0);
-    React.useEffect(() => {
-        const timer = setInterval(() => {
-            setProgress((oldProgress) => {
-                if (oldProgress === 100) {
-                    return 0;
-                }
-                const diff = Math.random() * 100;
-                return Math.min(oldProgress + diff, 100);
-            });
-        }, 500);
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
     const router = useRouter()
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
     const {isSuccess, data, isLoading, isError} = useQuery(
@@ -52,9 +31,17 @@ const SendBid: NextPageWithLayout = () => {
         () => fetchProjects(ProjectId),
         {
             enabled: ProjectId.length > 0,
-            staleTime: Infinity
+            staleTime: Infinity,
         }
     );
+    React.useEffect(() => {
+        if (data === undefined) {
+            const queryClient = new QueryClient();
+            queryClient.setQueryData(['getSendData', ProjectId], {});
+            queryClient.getQueryData(['myQueryKey', ProjectId]);
+        }
+    }, [data]);
+
     if (isLoading) {
         return <div className={"lg:px-24 w-full md:container-app"}>
             <div
@@ -104,7 +91,7 @@ const SendBid: NextPageWithLayout = () => {
                             <span className={"text-left text-xl font-bold"}>skills:</span>
                         </div>
                         {
-                            data?.data.jobs.map((skill: any, id: number) => {
+                            data?.data?.jobs.map((skill: any, id: number) => {
                                 return <div key={id} className={""}>
                                     <span
                                         className={"text-blue-400 hover:underline "}>{skill?.name}</span>
@@ -134,7 +121,7 @@ const SendBid: NextPageWithLayout = () => {
                 </div>
                 {/*End skills*/}
                {/*  SendBid  */}
-                <RequestBid id={data?.data.project_id} />
+                <RequestBid id={data?.data?.project_id} />
             </div>
 
         </div>
@@ -158,14 +145,13 @@ const SendBid: NextPageWithLayout = () => {
 
 };
 
-SendBid.getLayout = (page) => <SubProjectlayout>{page}</SubProjectlayout>
+SendBid.getLayout = (page) => <SubProjectLayout>{page}</SubProjectLayout>
 export default SendBid;
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const {id} = context.params;
     const queryClient = new QueryClient();
-
     try {
-        await queryClient.fetchQuery(['[project]', id], () => fetchProjects(id))
+        await queryClient.prefetchQuery(['[project]', id], () => fetchProjects(id))
     } catch (error: any) {
         context.res.statusCode = error.response.status;
     }
