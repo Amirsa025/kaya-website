@@ -7,9 +7,9 @@ import Heading from "@/app/shared/HeadingTitle";
 import ChatForm from "@/app/shared/form/chat-form/formChat";
 import dynamic from "next/dynamic";
 import SubChatLayout from "@/app/components/layout/SubChatlayout";
-interface Props {
-    currentUser: number;
-}
+import callApi from "@/app/helper/callApi";
+import Cookies from "universal-cookie";
+
 dynamic(
     () => import('@/app/shared/Header'),
     {ssr: false}
@@ -23,16 +23,32 @@ interface Message {
 const MainContent: NextPageWithLayout = () => {
     const router = useRouter();
     const userId = router.query.id;
-
+    const cookie = new Cookies();
     const [messages, setMessages] = useState< Message[]>([]);
-
-    const handleSendMessage = (formPayload: any) => {
+    const handleSendMessage =async (formPayload: any) => {
         const newMessage: any = {
             id: messages.length + 1,
             content:formPayload.message,
             timestamp: new Date(),
         };
+        try {
+         const res= await callApi().post(`/threads/threads/${userId}/messages`,{
+             text:formPayload.message
+         },{
+             headers: {
+                 'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
+             }
+         })
+           if(res.data){
+            console.log(res.data)
+               setMessages([...messages, newMessage]);
+           }
+
+        }catch (err){
+
+        }
         setMessages([...messages, newMessage]);
+
     };
     return (
         <div>
@@ -47,13 +63,20 @@ const MainContent: NextPageWithLayout = () => {
                                     {/*receive message from server*/}
                                     {messages.map((message,id) => (
                                         <ul key={id} className="flex justify-end items-center mb-4">
-                                            <div className={"flex items-center MessageAnimation animate__fadeInTopRight"}>
-                                                <li className="  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                                    {message.content}
-                                                </li>
-                                                <span>user:{userId}</span>
-                                                {/*<i className="ri-close-circle-line text-red-400 text-lg"></i>*/}
-                                                <i className="ri-checkbox-circle-fill text-green-400 text-lg"></i>
+                                            <div className={"flex flex-col items-end  MessageAnimation animate__fadeInTopRight"}>
+                                                <div className={"flex items-center justify-between"}>
+                                                    <li className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                                        <i className="ri-more-2-line"></i>
+                                                        <span className={"text-sm"}>{message.content}</span>
+                                                    </li>
+                                                    <i className="ri-checkbox-circle-fill text-green-400 text-lg"></i>
+                                                    {/*<i className="ri-close-circle-line text-red-400 text-lg"></i>*/}
+                                                </div>
+                                                <div>
+                                                    <span className={"block pr-7 pt-1"}>{userId}</span>
+                                                </div>
+
+
                                             </div>
                                         </ul>
                                     ))}

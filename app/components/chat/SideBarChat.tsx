@@ -1,20 +1,67 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {useInView} from 'react-intersection-observer'
+import {useInterval} from 'react-use';
+import callApi from "@/app/helper/callApi";
+import Cookies from "universal-cookie";
+import {ScaleLoader} from "react-spinners";
+import Chatlist from "@/app/components/chat/Chatlist";
+import Link from 'next/link';
 import {useRouter} from "next/router";
-import Link from "next/link";
-const chats = [
-    {id: 1, name: "John Doe"},
-    {id: 2, name: "Arsen Luoin"},
-    {id: 3, name: "Assan Deuob"},
-    {id: 4, name: "Assan Deuob"},
-    {id: 5, name: "Assan Deuob"},
-    {id: 6, name: "Assan Deuob"},
-    {id: 8, name: "Assan Deuob"},
-];
+//variable
+const cookie = new Cookies()
+const CHAT_SIZE = 10;
+
+//function
+const fetchChatList = async (pageParam: number) => {
+
+    try {
+        return await callApi().get(`/threads/threads?limit=7&offset=${pageParam}`, {
+            headers: {
+                'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
+            }
+        })
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 const SideBarChat = () => {
-    const router = useRouter();
+    //state
     const [isOpen, setIsOpen] = useState(false);
+    const {ref, inView} = useInView()
 
+    React.useEffect(() => {
+        if (inView) {
+            fetchNextPage().then()
+        }
+    }, [inView])
+
+    //query
+    const {
+        status,
+        data: chatList,
+        fetchNextPage,
+        isFetchingNextPage
+
+    } = useInfiniteQuery({
+        queryKey: ['ChatList'],
+        queryFn: ({pageParam = 1}) => fetchChatList(pageParam),
+        // @ts-ignore
+        getNextPageParam: (lastPage) => {
+            // @ts-ignore
+            if (lastPage?.length < CHAT_SIZE) {
+                return undefined; // all items fetched
+            }
+            return lastPage?.data.threads.length + 7
+        },
+
+    })
+    // Automatically update the list every 30 seconds
+
+    const threads = chatList?.pages.flatMap((group: any) => group?.data.threads)
+    const router = useRouter()
+    // @ts-ignore
     return (
         <>
             <section className={"border-r  lg:w-1/2 xl:w-1/4  w-full"}>
@@ -22,64 +69,90 @@ const SideBarChat = () => {
                     <i className="ri-search-line text-gray-400 block "></i>
                     <input type="text" placeholder={"Search"} className={"focus:outline-0"}/>
 
-                    <i className="md:hidden ri-chat-1-fill text-gray-400   cursor-pointer block"  onClick={() => setIsOpen(!isOpen)}></i>
+                    <i className="md:hidden ri-chat-1-fill text-gray-400   cursor-pointer block"
+                       onClick={() => setIsOpen(!isOpen)}></i>
                 </div>
+
                 {
-                    chats.length ?
-                        <ul className={"hidden md:block overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
-                            {chats.map((chat) => (
-                                <li key={chat.id} className={"mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100 "}>
-                                    <Link href={`/user-panel/chat/${chat.id}`} legacyBehavior
-                                          shallow={true}>
-                                        <div  className={router.asPath ==`/user-panel/chat/${chat.id}`  ? "text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"} >
-                                            <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
-                                                <i className={router.asPath ==`/user-panel/chat/${chat.id}`? "ri-message-3-fill text-white":"ri-message-3-fill text-gray-50 "}></i>
-                                            </div>
-                                            <a href={"text-md "}>{chat.name}</a>
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                        :
-                        ( <div className={"text-yellow-900 text-center flex h-full items-center gap-2 justify-center "}>
+                    status === 'loading' ? (
+                        <div className={"min-h-[70vh] flex items-center justify-center flex-col"}>
+                            <ScaleLoader
+                                color="#4B6677"
+                                height={70}
+                                width={10}
+                            />
+                        </div>
+                    ) : status === 'error' ? (
+                        <div
+                            className={"text-yellow-900 text-center flex h-full items-center gap-2 justify-center min-h-[70vh]"}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                 strokeWidth="1.5" stroke="currentColor" className="w-9 h-9 text-yellow-900">
+                                 strokeWidth="1.5" stroke="currentColor"
+                                 className="w-9 h-9 text-yellow-900">
                                 <path strokeLinecap="round" strokeLinejoin="round"
                                       d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                             </svg>
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
-                        </div>)
+                        </div>
+                    ) : (
+                        <ul className={"hidden md:block overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4 pt-4"}>
+                            {/*get and map data in load more*/}
+                            {
+                                chatList?.pages?.flatMap((item, id) => {
+                                    return (
+                                        <Chatlist key={id} thread={item?.data}/>
+
+                                    )
+                                })
+                            }
+                            <div className={"flex items-center justify-center "}>
+                                {/*@ts-ignore*/}
+                                <button ref={ref} className={" text-center transition transition-all duration-100"} onClick={fetchNextPage} disabled={isFetchingNextPage}>
+                                    {isFetchingNextPage ?
+                                        <i className=" text-2xl ri-arrow-drop-down-line"></i> :''}
+                                </button>
+                            </div>
+                        </ul>
+                    )
                 }
                 <div className={"relative md:hidden"}>
                     <div
-                        className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}
-                    >
+                        className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
-                            chats.length ?   <ul className={"border overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
-                                    {chats.map((chat) => (
-                                        <li key={chat.id}
-                                            className={"mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100 "}>
-                                            <Link href={`/user-panel/chat/${chat.id}`} legacyBehavior
-                                                  shallow={true}>
-                                                <div  onClick={() => setIsOpen(!isOpen)}  className={router.asPath ==`/user-panel/chat/${chat.id}`  ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"} >
-                                                    <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
-                                                        <i className={router.asPath ==`/user-panel/chat/${chat.id}`? "ri-message-3-fill text-white":"ri-message-3-fill text-gray-50 "}></i>
+                            threads?.length ?
+                                <ul className={"border overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
+                                    {threads.map((chat,id) => (
+                                        <li key={id}
+                                            className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-4 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
+                                            <Link href={`/user-panel/chat/${chat?.thread_id}`}
+                                                  legacyBehavior shallow={true}>
+                                                <div onClick={() => setIsOpen(!isOpen)}
+                                                     className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"}>
+                                                    <div
+                                                        className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
+                                                        <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
+
                                                     </div>
-                                                    <a>{chat.name}</a>
+                                                    <div className={"flex justify-between w-full"}>
+                                                        <div>{chat?.employer_user_name}</div>
+                                                        <div>{chat?.date}</div>
+                                                    </div>
                                                 </div>
                                             </Link>
                                         </li>
                                     ))}
                                 </ul>
                                 :
-                                ( <div className={"text-yellow-900 text-center flex h-full items-center gap-2 justify-center "}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         strokeWidth="1.5" stroke="currentColor" className="w-9 h-9 text-yellow-900">
+                                (<div
+                                    className={"text-yellow-900 text-center flex h-full items-center gap-2 justify-center "}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                         viewBox="0 0 24 24"
+                                         strokeWidth="1.5" stroke="currentColor"
+                                         className="w-9 h-9 text-yellow-900">
                                         <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                                     </svg>
-                                    <span className={"font-bold txt-8 "}>you are not exist chat </span>
+                                    <span
+                                        className={"font-bold txt-8 "}> you are not exist chat </span>
                                 </div>)
                         }
                     </div>

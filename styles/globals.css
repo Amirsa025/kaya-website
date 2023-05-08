@@ -4,40 +4,28 @@
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-Bold-web.eot');
 
-        src: url('../public/Assets/IRANSans-Bold-web.eot?#iefix') format('eot'),  /* IE6–8 */
-        url('../public/Assets/IRANSans-Bold-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
-        url('../public/Assets/IRANSans-Bold-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../public/Assets/IRANSans-Bold-web.ttf') format('ttf');
+        src: url('../public/Assets/IRANSans-Bold-web.eot?#iefix') format('eot'), /* IE6–8 */ url('../public/Assets/IRANSans-Bold-web.woff2') format('woff2'), /* Chrome36+, Opera24+*/ url('../public/Assets/IRANSans-Bold-web.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../public/Assets/IRANSans-Bold-web.ttf') format('ttf');
         font-weight: bold;
     }
     @font-face {
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-Medium-web.eot');
 
-        src: url('../public/Assets/IRANSans-Medium-web.eot?#iefix') format('eot'),  /* IE6–8 */
-        url('../public/Assets/IRANSans-Medium-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
-        url('../public/Assets/IRANSans-Medium-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../public/Assets/IRANSans-Medium-web.ttf') format('ttf');
+        src: url('../public/Assets/IRANSans-Medium-web.eot?#iefix') format('eot'), /* IE6–8 */ url('../public/Assets/IRANSans-Medium-web.woff2') format('woff2'), /* Chrome36+, Opera24+*/ url('../public/Assets/IRANSans-Medium-web.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../public/Assets/IRANSans-Medium-web.ttf') format('ttf');
         font-weight: 500;
     }
     @font-face {
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-UltraLight-web.eot');
 
-        src: url('../public/Assets/IRANSans-UltraLight-web.eot?#iefix') format('eot'),  /* IE6–8 */
-        url('../public/Assets/IRANSans-UltraLight-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
-        url('../public/Assets/IRANSans-UltraLight-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../public/Assets/IRANSans-UltraLight-web.ttf') format('ttf');
+        src: url('../public/Assets/IRANSans-UltraLight-web.eot?#iefix') format('eot'), /* IE6–8 */ url('../public/Assets/IRANSans-UltraLight-web.woff2') format('woff2'), /* Chrome36+, Opera24+*/ url('../public/Assets/IRANSans-UltraLight-web.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../public/Assets/IRANSans-UltraLight-web.ttf') format('ttf');
         font-weight: 200;
     }
     @font-face {
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-Light-web.eot');
 
-        src: url('../public/Assets/IRANSans-Light-web.eot?#iefix') format('eot'),  /* IE6–8 */
-        url('../public/Assets/IRANSans-Light-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
-        url('../public/Assets/IRANSans-Light-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../public/Assets/IRANSans-Light-web.ttf') format('ttf');
+        src: url('../public/Assets/IRANSans-Light-web.eot?#iefix') format('eot'), /* IE6–8 */ url('../public/Assets/IRANSans-Light-web.woff2') format('woff2'), /* Chrome36+, Opera24+*/ url('../public/Assets/IRANSans-Light-web.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../public/Assets/IRANSans-Light-web.ttf') format('ttf');
         font-weight: 300;
     }
 
@@ -46,115 +34,134 @@
         font-family: 'IRANSans-web';
         src: url('../public/Assets/IRANSans-web.eot');
 
-        src: url('../public/Assets/IRANSans-web.eot?#iefix') format('eot'),  /* IE6–8 */
-        url('../public/Assets/IRANSans-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
-        url('../public/Assets/IRANSans-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url('../public/Assets/IRANSans-web.ttf') format('ttf');
+        src: url('../public/Assets/IRANSans-web.eot?#iefix') format('eot'), /* IE6–8 */ url('../public/Assets/IRANSans-web.woff2') format('woff2'), /* Chrome36+, Opera24+*/ url('../public/Assets/IRANSans-web.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../public/Assets/IRANSans-web.ttf') format('ttf');
         font-weight: normal;
     }
     .fade {
         opacity: 1;
         transition: opacity 0.3s ease-in-out;
     }
+
     .fade.active {
         opacity: 0.5;
     }
+
     .container-app {
         @apply px-[40px] md:px-[80px]
 
     }
+
     ::-webkit-scrollbar {
         display: none;
     }
 
     .remove-scrollbar {
-        -ms-overflow-style: none;  /* IE + Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none; /* IE + Edge */
+        scrollbar-width: none; /* Firefox */
     }
+
     .MessageAnimation {
         display: inline-block;
         margin: 0 0.5rem;
         animation-duration: 1s; /* don't forget to set a duration! */
     }
+
     .openListChats {
         display: inline-block;
         animation-duration: 1s; /* don't forget to set a duration! */
     }
+
     body {
         direction: rtl;
         /*font-family: "IRANSans",sans-serif;*/
         box-sizing: border-box;
-        font-family: 'IRANSans-web',sans-serif;
+        font-family: 'IRANSans-web', sans-serif;
     }
+
     textarea {
         resize: none;
     }
-    .upload{
+
+    .upload {
         @apply mb-4 md:mb-0  cursor-pointer  px-6 rounded-md  text-white font-medium text-[12px] transition-all duration-300 bg-black text-white rounded-md hover:bg-[#143fcd]
     }
 
-    #inputTag{
+    #inputTag {
         display: none;
     }
-    #personPhoto{
+
+    #personPhoto {
         display: none;
     }
-    label{
-        cursor:pointer;
+
+    label {
+        cursor: pointer;
     }
-    #imageName{
-        color:green;
+
+    #imageName {
+        color: green;
     }
-    .direction-ltr{
+
+    .direction-ltr {
         direction: ltr !important;
     }
-    .direction-rtl{
+
+    .direction-rtl {
         direction: rtl !important;
     }
+
     .fontMain {
         @apply font-main
     }
 
-    .center-item{
-        @apply  flex items-center justify-center
+    .center-item {
+        @apply flex items-center justify-center
     }
+
     .between-items {
-        @apply  flex items-center justify-between
+        @apply flex items-center justify-between
     }
+
     .around-items {
-        @apply  flex items-center justify-around
+        @apply flex items-center justify-around
     }
+
     .col-items {
-        @apply  flex flex-col
+        @apply flex flex-col
     }
+
     .row-items {
-        @apply  flex flex-row
+        @apply flex flex-row
     }
+
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+
     input[type=number] {
         -moz-appearance: textfield;
     }
 }
 @tailwind components;
 @layer components {
-    .notification-bar{
+    .notification-bar {
         background-image: linear-gradient(82deg, #dfe3fd, #fae7e1);
         font-weight: 300;
     }
-    .hover_Me{
-            text-align: center;
-            height: 40px;
-            border: 2px solid transparent;
+
+    .hover_Me {
+        text-align: center;
+        height: 40px;
+        border: 2px solid transparent;
     }
 
     .hover_link {
-        @apply  hover:border-b hover:border-blue-400 hover:py-1 cursor-pointer
+        @apply hover:border-b hover:border-blue-400 hover:py-1 cursor-pointer
     }
-    .hover_Me:hover{
+
+    .hover_Me:hover {
         border-bottom: 2px solid #143fcd;
         -webkit-transition: all 500ms linear;
         -moz-transition: all 500ms linear;
@@ -163,24 +170,93 @@
         transition: all 500ms linear;
     }
 
-    .transMovment{
+    .transMovment {
         transform: translate3d(0px, 0px, 0px)
     }
+
     .container-slider {
         padding: 40px;
         background-image: linear-gradient(89deg, #fff, #fff 31%, hsla(0, 0%, 100%, 0));
+    }
+
+    .sendMassageButton {
+        background: hsl(188, 71%, 21%);
+        border: 0.1em solid hsl(185, 53%, 34%);
+        border-radius: 100vw;
+        cursor: pointer;
+        transition: background-color 250ms;
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+    }
+
+    .sendMassageButton span {
+        position: absolute;
+        z-index: -1;
+        width: 33.333%;
+        height: 100%;
+        background: transparent;
+        opacity: 0.5;
+    }
+
+    .sendMassageButton > :first-child {
+        left: 0;
+        top: 0;
+    }
+
+    .sendMassageButton > :last-child {
+        right: 0;
+        top: 0;
+    }
+
+    .sendMassageButton::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: hsl(200 60% 20%);
+        /* background: hotpink; */
+        width: 10%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        inset: 0;
+        margin: auto;
+        opacity: 0;
+
+        transition: transform 1000ms 200ms, opacity 200ms;
+    }
+
+    .sendMassageButton:active::before {
+        transform: scale(20);
+        opacity: 1;
+
+        transition: transform 1000ms, opacity 500ms;
+    }
+
+    .sendMassageButton:has(:first-child:active)::before {
+        margin-left: 0;
+    }
+
+    .sendMassageButton:has(:last-child:active)::before {
+        margin-right: 0;
+    }
+
+    .sendMassageButton:has(:first-child:active)::before,
+    .sendMassageButton:has(:last-child:active)::before {
+        transition: transform 500ms, opacity 250ms;
     }
 
 
     .slick-slide img {
         margin: auto;
     }
+
     .toastBody {
-        font-family: 'IRANSans-web',sans-serif;
+        font-family: 'IRANSans-web', sans-serif;
         color: #ffffff; /* #10171D */
         font-size: 0.7rem !important;
         text-align: right;
     }
+
     .card {
         backdrop-filter: blur(15px) saturate(100%);
         -webkit-backdrop-filter: blur(15px) saturate(100%);
@@ -197,7 +273,7 @@
     box-shadow: 0px 1px 5px rgba(248, 175, 175, 0.1) !important;
 }
 
-	.MuiStepContent-root{
+.MuiStepContent-root {
     @apply font-[IRANSans]
 }
 
