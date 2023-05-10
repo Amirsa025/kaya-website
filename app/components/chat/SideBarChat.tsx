@@ -3,13 +3,13 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import {useInView} from 'react-intersection-observer'
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import {ScaleLoader} from "react-spinners";
-import Chatlist from "@/app/components/chat/Chatlist";
+import {BeatLoader, ScaleLoader} from "react-spinners";
+import ChatList from "@/app/components/chat/Chatlist";
 import Link from 'next/link';
 import {useRouter} from "next/router";
 //variable
 const cookie = new Cookies()
-const LIMIT = 7;
+const LIMIT = 6;
 
 //function
 const fetchChatList = async (pageParam: number) => {
@@ -91,22 +91,27 @@ const SideBarChat = () => {
                             {
                                 chatList?.pages?.map((page, id) => {
                                     return (
-                                        <Chatlist key={id} page={page?.data}/>
-
+                                        <ChatList key={id} page={page?.data}/>
                                     )
                                 })
                             }
-                            <div className={"flex items-center justify-center "}>
+                            <div className={"flex items-center justify-center py-1"}>
                                 <button
                                     ref={ref}
                                     onClick={() => fetchNextPage()}
                                     disabled={!hasNextPage || isFetchingNextPage}
                                 >
                                     {isFetchingNextPage
-                                        ? 'Loading more...'
+                                        ? <div className={"animate__animated animate__fadeInDown text-[10px]"}>
+                                            <BeatLoader
+                                                color="#4A6576"
+                                                size={10}
+                                            /> </div>
                                         : hasNextPage
-                                            ? 'Load Newer'
-                                            : 'Nothing more to load'}
+                                            ?    <div className={" w-7 h-7 shadow rounded-full"}>
+                                                <i className="flex items-center justify-center block text-3xl ri-arrow-drop-down-line"></i>
+                                            </div>
+                                            : null}
                                 </button>
                             </div>
                         </ul>
@@ -138,11 +143,11 @@ const SideBarChat = () => {
                                             onClick={() => fetchNextPage()}
                                             disabled={!hasNextPage || isFetchingNextPage}
                                         >
-                                            {isFetchingNextPage
-                                                ? 'Loading more...'
-                                                : hasNextPage
-                                                    ? 'Load Newer'
-                                                    : 'Nothing more to load'}
+                                            {isFetchingNextPage?'Loading more...': hasNextPage ?
+                                                <div className={"w-3 h-3 shadow rounded-full"}>
+                                                <i className="ri-arrow-drop-down-line"></i>
+                                            </div>
+                                                :   <div className={"animate__fadeInUp"}>پایان لیست </div>}
                                         </button>
                                     </div>
                                 </ul>

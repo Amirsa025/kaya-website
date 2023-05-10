@@ -9,6 +9,9 @@ import dynamic from "next/dynamic";
 import SubChatLayout from "@/app/components/layout/SubChatlayout";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
+import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
+import {GetServerSideProps} from "next";
+import {fetchProjects} from "@/pages/user-panel/project/[id]";
 
 dynamic(
     () => import('@/app/shared/Header'),
@@ -21,10 +24,13 @@ interface Message {
     timestamp: Date;
 }
 const MainContent: NextPageWithLayout = () => {
+    //variable
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
+    //state
     const [messages, setMessages] = useState< Message[]>([]);
+    //function
     const handleSendMessage =async (formPayload: any) => {
         const newMessage: any = {
             id: messages.length + 1,
@@ -50,6 +56,23 @@ const MainContent: NextPageWithLayout = () => {
         setMessages([...messages, newMessage]);
 
     };
+    //query
+    const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
+    const {isSuccess, data:Getmessage, isLoading, isError} = useQuery(
+        ["getSendData", ProjectId],
+        () => FetchMassageFromServer(ProjectId),
+        {
+            enabled: ProjectId.length > 0,
+            staleTime: Infinity,
+        }
+    );
+    React.useEffect(() => {
+        if (Getmessage === undefined) {
+            const queryClient = new QueryClient();
+            queryClient.setQueryData(['getMessage', ProjectId], {});
+            queryClient.getQueryData(['myQueryData', ProjectId]);
+        }
+    }, [Getmessage]);
     return (
         <div>
             {
@@ -61,36 +84,19 @@ const MainContent: NextPageWithLayout = () => {
                                 {/*show message*/}
                                 <div className=" h-[50vh] overflow-y-scroll flex flex-col  mt-5">
                                     {/*receive message from server*/}
-                                    {messages.map((message,id) => (
-                                        <ul key={id} className="flex justify-end items-center mb-4">
-                                            <div className={"flex flex-col items-end  MessageAnimation animate__fadeInTopRight"}>
-                                                <div className={"flex items-center justify-between"}>
-                                                    <li className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                                        <i className="ri-more-2-line"></i>
-                                                        <span className={"text-sm"}>{message.content}</span>
-                                                    </li>
-                                                    <i className="ri-checkbox-circle-fill text-green-400 text-lg"></i>
-                                                    {/*<i className="ri-close-circle-line text-red-400 text-lg"></i>*/}
-                                                </div>
-                                                <div>
-                                                    <span className={"block pr-7 pt-1"}>{userId}</span>
-                                                </div>
+                                    {
+                                        Getmessage?.data?.messages?.map((massage:any,id:number)=>{
+                                           return (
+                                               <ul key={id} className={`flex ${massage?.is_received?'justify-start':'justify-end'} items-center mb-4`}>
+                                                   {
+                                                     massage?.is_received ? <li  className="ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">{massage?.text}</li>:<li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">{massage?.text}</li>
+                                                   }
 
+                                               </ul>
 
-                                            </div>
-                                        </ul>
-                                    ))}
-
-                                    <div className="flex justify-start items-center mb-4">
-                                        <img
-                                            src="/images/profile.png"
-                                            className="object-cover h-8 w-8 rounded-full"
-                                            alt=""
-                                        />
-                                        <div className="ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                                            {userId && "happy holiday guys!"}
-                                        </div>
-                                    </div>
+                                           )
+                                        })
+                                    }
                                 </div>
                                 {/*send Message*/}
                                   <ChatForm onSendMessage={handleSendMessage}/>
@@ -106,3 +112,32 @@ const MainContent: NextPageWithLayout = () => {
 };
 MainContent.getLayout = (page) => <SubChatLayout>{page}</SubChatLayout>
 export default MainContent;
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+    const {id} = context.params;
+    console.log(id)
+    const queryClient = new QueryClient();
+    try {
+        await queryClient.prefetchQuery(['[project]', id], () => FetchMassageFromServer(id))
+    } catch (error: any) {
+        context.res.statusCode = error.response.status;
+    }
+
+    return {
+        props: {
+            //also passing down isError state to show a custom error component.
+            dehydratedState: dehydrate(queryClient),
+        },
+    }
+};
+export const FetchMassageFromServer = async (id: any) => {
+    const cookie = new Cookies()
+    try {
+        return await callApi().get(`/threads/threads/${id}/messages?limit=50&offset=5`, {
+            headers: {
+                'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
+            }
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
