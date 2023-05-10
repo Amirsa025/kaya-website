@@ -38,10 +38,10 @@ const SideBarChat = () => {
         hasNextPage
     } = useInfiniteQuery({
         queryKey: ['ChatList'],
-        queryFn: ({pageParam = 2}) => fetchChatList(pageParam),
+        queryFn: ({pageParam = 0}) => fetchChatList(pageParam),
         getNextPageParam: (lastPage,allPages) => {
             // @ts-ignore
-            return lastPage?.data.threads.length === LIMIT ? allPages[0].data.threads.length + 1 : undefined
+            return lastPage?.data.threads.length === LIMIT ? allPages[0].data.threads.length  : undefined
         }
         , cacheTime: 5000,
     })
