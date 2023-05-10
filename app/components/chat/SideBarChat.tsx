@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {useInView} from 'react-intersection-observer'
-import {useInterval} from 'react-use';
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import {ScaleLoader} from "react-spinners";
@@ -10,13 +9,13 @@ import Link from 'next/link';
 import {useRouter} from "next/router";
 //variable
 const cookie = new Cookies()
-const CHAT_SIZE = 10;
+const LIMIT = 7;
 
 //function
 const fetchChatList = async (pageParam: number) => {
 
     try {
-        return await callApi().get(`/threads/threads?limit=7&offset=${pageParam}`, {
+        return await callApi().get(`/threads/threads?limit=${LIMIT}&offset=${pageParam}`, {
             headers: {
                 'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
             }
@@ -30,38 +29,31 @@ const SideBarChat = () => {
     //state
     const [isOpen, setIsOpen] = useState(false);
     const {ref, inView} = useInView()
-
-    React.useEffect(() => {
-        if (inView) {
-            fetchNextPage().then()
-        }
-    }, [inView])
-
     //query
     const {
         status,
         data: chatList,
         fetchNextPage,
-        isFetchingNextPage
-
+        isFetchingNextPage,
+        hasNextPage
     } = useInfiniteQuery({
         queryKey: ['ChatList'],
-        queryFn: ({pageParam = 1}) => fetchChatList(pageParam),
-        // @ts-ignore
-        getNextPageParam: (lastPage) => {
+        queryFn: ({pageParam = 2}) => fetchChatList(pageParam),
+        getNextPageParam: (lastPage,allPages) => {
             // @ts-ignore
-            if (lastPage?.length < CHAT_SIZE) {
-                return undefined; // all items fetched
-            }
-            return lastPage?.data.threads.length + 7
-        },
-
+            return lastPage?.data.threads.length === LIMIT ? allPages[0].data.threads.length + 1 : undefined
+        }
+        , cacheTime: 5000,
     })
-    // Automatically update the list every 30 seconds
 
+    useEffect( () => {
+        if (inView && hasNextPage) {
+            fetchNextPage();
+        }
+    }, [inView, fetchNextPage, hasNextPage]);
     const threads = chatList?.pages.flatMap((group: any) => group?.data.threads)
     const router = useRouter()
-    // @ts-ignore
+
     return (
         <>
             <section className={"border-r  lg:w-1/2 xl:w-1/4  w-full"}>
@@ -97,49 +89,62 @@ const SideBarChat = () => {
                         <ul className={"hidden md:block overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4 pt-4"}>
                             {/*get and map data in load more*/}
                             {
-                                chatList?.pages?.flatMap((item, id) => {
+                                chatList?.pages?.map((page, id) => {
                                     return (
-                                        <Chatlist key={id} thread={item?.data}/>
+                                        <Chatlist key={id} page={page?.data}/>
 
                                     )
                                 })
                             }
                             <div className={"flex items-center justify-center "}>
-                                {/*@ts-ignore*/}
-                                <button ref={ref} className={" text-center transition transition-all duration-100"} onClick={fetchNextPage} disabled={isFetchingNextPage}>
-                                    {isFetchingNextPage ?
-                                        <i className=" text-2xl ri-arrow-drop-down-line"></i> :''}
+                                <button
+                                    ref={ref}
+                                    onClick={() => fetchNextPage()}
+                                    disabled={!hasNextPage || isFetchingNextPage}
+                                >
+                                    {isFetchingNextPage
+                                        ? 'Loading more...'
+                                        : hasNextPage
+                                            ? 'Load Newer'
+                                            : 'Nothing more to load'}
                                 </button>
                             </div>
                         </ul>
                     )
                 }
                 <div className={"relative md:hidden"}>
-                    <div
-                        className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
+                    <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
                             threads?.length ?
                                 <ul className={"border overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
                                     {threads.map((chat,id) => (
-                                        <li key={id}
-                                            className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-4 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
-                                            <Link href={`/user-panel/chat/${chat?.thread_id}`}
-                                                  legacyBehavior shallow={true}>
-                                                <div onClick={() => setIsOpen(!isOpen)}
-                                                     className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"}>
-                                                    <div
-                                                        className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
+                                        <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
+                                            <div className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-8 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
+                                                <div onClick={() => setIsOpen(!isOpen)} className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"}>
+                                                    <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
                                                         <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
-
                                                     </div>
                                                     <div className={"flex justify-between w-full"}>
                                                         <div>{chat?.employer_user_name}</div>
                                                         <div>{chat?.date}</div>
                                                     </div>
                                                 </div>
-                                            </Link>
-                                        </li>
+                                            </div>
+                                        </Link>
                                     ))}
+                                    <div className={"flex items-center justify-center "}>
+                                        <button
+                                            ref={ref}
+                                            onClick={() => fetchNextPage()}
+                                            disabled={!hasNextPage || isFetchingNextPage}
+                                        >
+                                            {isFetchingNextPage
+                                                ? 'Loading more...'
+                                                : hasNextPage
+                                                    ? 'Load Newer'
+                                                    : 'Nothing more to load'}
+                                        </button>
+                                    </div>
                                 </ul>
                                 :
                                 (<div
