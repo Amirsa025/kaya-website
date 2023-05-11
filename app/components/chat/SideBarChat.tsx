@@ -124,7 +124,7 @@ const SideBarChat = () => {
                                 <ul className={"border overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
                                     {threads.map((chat,id) => (
                                         <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
-                                            <div className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-8 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
+                                            <a className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-8 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
                                                 <div onClick={() => setIsOpen(!isOpen)} className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"}>
                                                     <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
                                                         <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
@@ -134,7 +134,7 @@ const SideBarChat = () => {
                                                         <div>{chat?.date}</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </Link>
                                     ))}
                                     <div className={"flex items-center justify-center "}>

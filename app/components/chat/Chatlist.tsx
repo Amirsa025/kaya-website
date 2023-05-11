@@ -16,7 +16,7 @@ const ChatList:React.FC<IChatProps> = ({page}) => {
                     if(page?.threads.length===id+1){
                         return (
                             <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={chat?.thread_id} >
-                                <div className={"sendMassageButton text-white hover:text-black  mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100"}>
+                                <a className={"sendMassageButton text-white hover:text-black  mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100"}>
                                     <span></span>
                                     <div  className={"w-full"}>
                                         <div className={ router.asPath ==`/user-panel/chat/${chat?.thread_id}` ?`text-white bg-blue-gray-400 flex items-center py-3 gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer`:'flex justify-between w-full items-center gap-2'}>
@@ -36,7 +36,7 @@ const ChatList:React.FC<IChatProps> = ({page}) => {
                                         </div>
                                     </div>
                                     <span></span>
-                                </div>
+                                </a>
                             </Link>
                         )
 

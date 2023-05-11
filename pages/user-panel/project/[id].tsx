@@ -11,12 +11,8 @@ import RequestBid from "@/app/shared/form/sendBid";
 import SubProjectLayout from "@/app/components/layout/SubProjectlayout";
 
 export const fetchProjects = async (id: any) => {
-    const cookie = new Cookies()
     try {
         return await callApi().get(`/projects/projects/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
-            }
         })
     } catch (error) {
         console.error(error)
@@ -25,6 +21,7 @@ export const fetchProjects = async (id: any) => {
 const SendBid: NextPageWithLayout = () => {
     const router = useRouter()
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
+    console.log(ProjectId)
     const {isSuccess, data, isLoading, isError} = useQuery(
         ["getSendData", ProjectId],
         () => fetchProjects(ProjectId),
@@ -37,7 +34,6 @@ const SendBid: NextPageWithLayout = () => {
         if (data === undefined) {
             const queryClient = new QueryClient();
             queryClient.setQueryData(['getSendData', ProjectId], {});
-            queryClient.getQueryData(['myQueryKey', ProjectId]);
         }
     }, [data]);
 
