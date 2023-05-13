@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import Link from "next/link";
 import {useFormik} from "formik";
-
 import Router from "next/router";
-import {storeToken, useLogin} from "@/app/helper/auth";
+import {storeLoginToken, storeToken, useLogin} from "@/app/helper/auth";
 import {NextPageWithLayout} from "@/pages/_app";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
@@ -41,6 +40,7 @@ const MainLogin: NextPageWithLayout = () => {
                                 theme: "colored",
                             });
                             storeToken(res?.data?.token,'token')
+                            // storeLoginToken(res?.data?.token,'token')
                                 cookies.remove('signUp')
                         }
                     },

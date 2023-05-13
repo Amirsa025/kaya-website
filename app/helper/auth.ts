@@ -10,7 +10,18 @@ import axios from "axios";
          secure:true,
          sameSite:'lax'
      })
+
  }
+
+export const storeLoginToken = async (token : string , tokenName:string) => {
+    await fetch('/api/token' , {
+        method : 'POST',
+        headers : {
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify({ token })
+    })
+}
 
  const useLogin = () => {
     return useMutation((formPayload: void) => {
