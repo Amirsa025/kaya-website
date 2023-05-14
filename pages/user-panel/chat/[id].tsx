@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import {useRouter} from "next/router";
 import ChatLayout from "@/app/components/chat/Chant-Content";
@@ -11,29 +11,32 @@ import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
 import {GetServerSideProps} from "next";
 import {ClipLoader} from "react-spinners";
 import InfiniteScroll from "react-infinite-scroll-component";
-import axios from "axios";
 interface Message {
+    text: string;
     id: number;
-    content: string;
-    sender: string;
+    thread_id:number,
+    user_id:number,
+    is_received:boolean,
+    date:number,
     timestamp: Date;
 }
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
+    if(!router.isReady){
+        return <div>loading</div>
+    }
+
     const userId = router.query.id;
     const cookie = new Cookies();
+    const loader = useRef(null);
     //state
     const [messages, setMessages] = useState< Message[]>([]);
+    const itemsRef = useRef();
     const [page, setPage] = useState(7);
     const [hasMore, setHasMore] = useState(true);
     //function
     const handleSendMessage =async (formPayload: any) => {
-        const newMessage: any = {
-            id: messages.length + 1,
-            content:formPayload.message,
-            timestamp: new Date(),
-        };
         try {
          const res= await callApi().post(`/threads/threads/${userId}/messages`,{
              text:formPayload.message
@@ -44,16 +47,16 @@ const MainContent: NextPageWithLayout = () => {
          })
            if(res.data){
             console.log(res.data)
-               setMessages([...messages, newMessage]);
+               setMessages([...messages, res.data]);
            }
 
         }catch (err){
+            console.log(err)
         }
-        setMessages([...messages, newMessage]);
     };
     //query
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
-    const {data: GetMessage, isLoading, isError } = useQuery(
+    const {data: GetMessage, isError } = useQuery(
         ["getMassage", FetchMassageFromServer,page],
         () => FetchMassageFromServer(ProjectId,page),
         {
@@ -61,20 +64,25 @@ const MainContent: NextPageWithLayout = () => {
             staleTime: Infinity
         }
     );
-//
-console.log(GetMessage?.data?.messages?.length || null)
+   // function
    const fetchMoreData = () => {
-        if (GetMessage?.data?.messages?.length  >= 50) {
-            setHasMore(false);
+        if (GetMessage?.data?.messages?.length  >= 52) {
+            setHasMore(true);
             return;
         }
-        // a fake async api call like which sends
         // 20 more records in .5 secs
         setTimeout(() => {
-          setPage(page+15)
+          setPage(page+20)
+            console.log(page)
         }, 500);
     };
+    useEffect(()=>fetchMoreData(),[])
 
+    useEffect(() => {
+        // Scroll to the last item when items change
+        // @ts-ignore
+        itemsRef?.current?.lastChild.scrollIntoView();
+    }, [messages]);
     return (
         <div>
             {
@@ -85,16 +93,13 @@ console.log(GetMessage?.data?.messages?.length || null)
                             <div className="  w-full px-5 flex flex-col justify-between">
                                 {/*show message*/}
                                 <div className=" h-[50vh] overflow-y-scroll flex flex-col  mt-5">
-                                    {
-                                        messages.map((chat,id)=>{
-                                            return (
-                                                <ul  key={id}>
-                                                    {chat?.content}
-                                                </ul>
-                                            )
-                                        })
-                                    }
-                        <InfiniteScroll dataLength={GetMessage?.data?.messages?.length || null} next={fetchMoreData}  hasMore={hasMore} loader={<div className={"animate__animated  animate__fadeInDown flex items-center justify-center"}>
+                        <InfiniteScroll
+                            ref={loader}
+                            scrollThreshold={0.9}
+                            dataLength={GetMessage?.data?.messages?.length || null} next={fetchMoreData}
+                            hasMore={hasMore}
+                            endMessage={<p>No more items to load</p>}
+                            loader={<div className={"animate__animated  animate__fadeInDown flex items-center justify-center"}>
                             <div className={"bg-gray-100 rounded-md px-12 py-1"}>
                                 <ClipLoader color="#8a8a8a" />
                             </div>
@@ -103,17 +108,17 @@ console.log(GetMessage?.data?.messages?.length || null)
                                 GetMessage?.data?.messages?.map((massage:any,id:number)=>{
                                     const dates = [new Date(massage?.date)]
                                     const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
-
                                     return (
                                         <ul key={id} className={`flex ${massage?.is_received?'justify-start':'justify-end'} items-center mb-4`}>
-
                                             {
                                                 massage?.is_received ? <li className="ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                                         <div>
                                                             {massage?.text}
                                                             {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                                 <span className={"text-sm "}>{massage?.file_name}</span>
-                                                                <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i></div>:null}
+                                                                <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
+                                                            </div>
+                                                                :null}
                                                             <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>
                                                         </div>
                                                     </li>:
@@ -137,10 +142,27 @@ console.log(GetMessage?.data?.messages?.length || null)
                                         </ul>
                                     )
                                 })
+
                             }
                         </InfiniteScroll>
+                                    <div className={""}>
+                                        {
+                                            messages.flatMap((chat,ChatId)=>{
+                                                const dates = [new Date(chat?.date)]
+                                                const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
 
-
+                                                return (
+                                                    // @ts-ignore
+                                                    <ul ref={itemsRef}  key={ChatId} className={`flex   items-center mb-4 justify-end`}>
+                                                        <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
+                                                            <span>  {chat?.text}</span>
+                                                            <div className={"text-[8px] text-gray-300 pl-3 text-right"}>{formattedDates}</div>
+                                                        </li>
+                                                    </ul>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
                                 {/*send Message*/}
                                   <ChatForm onSendMessage={handleSendMessage}/>
@@ -174,10 +196,10 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     }
 };
 
-export const FetchMassageFromServer = async (id: any,page:any) => {
+export const FetchMassageFromServer = async (chatId: any,page:any) => {
     const cookie = new Cookies()
     try {
-        return await callApi()?.get(`/threads/threads/${id}/messages?limit=${page}&offset=3`,{
+        return await callApi()?.get(`/threads/threads/${chatId}/messages?limit=${page}&offset=0`,{
             headers: {
                 'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
             }
