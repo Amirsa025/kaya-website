@@ -23,9 +23,6 @@ interface Message {
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
-    if(!router.isReady){
-        return <div>loading</div>
-    }
     const userId = router.query.id;
     const cookie = new Cookies();
     const loader = useRef(null);
@@ -33,10 +30,9 @@ const MainContent: NextPageWithLayout = () => {
     const [messages, setMessages] = useState< Message[]>([]);
     const [page, setPage] = useState(7);
     const [hasMore, setHasMore] = useState(true);
-
     //query
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
-    const {data: GetMessage, isError } = useQuery(
+    const {data: GetMessage, isError } = useQuery   (
         ["getMassage", FetchMassageFromServer,page],
         () => FetchMassageFromServer(ProjectId,page),
         {
@@ -46,6 +42,13 @@ const MainContent: NextPageWithLayout = () => {
             getNextPageParam: (lastPage) => console.log(lastPage),
         }
     );
+    useEffect(()=> {
+        fetchMoreData()
+        // @ts-ignore
+    },[messages])
+    if(!router.isReady){
+        return <div>loading</div>
+    }
    // function
    const fetchMoreData = () => {
         if (GetMessage?.data?.messages?.length  >= 52) {
@@ -58,10 +61,7 @@ const MainContent: NextPageWithLayout = () => {
         }, 500);
     };
 
-    useEffect(()=> {
-        fetchMoreData()
-        // @ts-ignore
-    },[messages])
+
     //function
     const handleSendMessage =async (formPayload: any) => {
         try {
