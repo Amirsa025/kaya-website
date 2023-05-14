@@ -32,7 +32,7 @@ const MainContent: NextPageWithLayout = () => {
     const loader = useRef(null);
     //state
     const [messages, setMessages] = useState< Message[]>([]);
-    const itemsRef = useRef();
+    const itemsRef = useRef<HTMLDivElement>();
     const [page, setPage] = useState(7);
     const [hasMore, setHasMore] = useState(true);
     //function
@@ -61,7 +61,9 @@ const MainContent: NextPageWithLayout = () => {
         () => FetchMassageFromServer(ProjectId,page),
         {
             enabled: ProjectId.length > 0,
-            staleTime: Infinity
+            staleTime: Infinity,
+            keepPreviousData: true,
+            getNextPageParam: (lastPage) => console.log(lastPage),
         }
     );
    // function
@@ -73,15 +75,14 @@ const MainContent: NextPageWithLayout = () => {
         // 20 more records in .5 secs
         setTimeout(() => {
           setPage(page+20)
-            console.log(page)
-        }, 500);
+        }, 5000);
     };
     useEffect(()=>fetchMoreData(),[])
 
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
-        itemsRef?.current?.lastChild.scrollIntoView();
+        itemsRef?.current?.lastChild.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
     return (
         <div>
