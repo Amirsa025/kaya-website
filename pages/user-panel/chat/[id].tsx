@@ -26,34 +26,14 @@ const MainContent: NextPageWithLayout = () => {
     if(!router.isReady){
         return <div>loading</div>
     }
-
     const userId = router.query.id;
     const cookie = new Cookies();
     const loader = useRef(null);
     //state
     const [messages, setMessages] = useState< Message[]>([]);
-    const itemsRef = useRef<HTMLDivElement>();
     const [page, setPage] = useState(7);
     const [hasMore, setHasMore] = useState(true);
-    //function
-    const handleSendMessage =async (formPayload: any) => {
-        try {
-         const res= await callApi().post(`/threads/threads/${userId}/messages`,{
-             text:formPayload.message
-         },{
-             headers: {
-                 'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
-             }
-         })
-           if(res.data){
-            console.log(res.data)
-               setMessages([...messages, res.data]);
-           }
 
-        }catch (err){
-            console.log(err)
-        }
-    };
     //query
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
     const {data: GetMessage, isError } = useQuery(
@@ -75,15 +55,32 @@ const MainContent: NextPageWithLayout = () => {
         // 20 more records in .5 secs
         setTimeout(() => {
           setPage(page+20)
-        }, 5000);
+        }, 500);
     };
-    useEffect(()=>fetchMoreData(),[])
 
-    useEffect(() => {
-        // Scroll to the last item when items change
+    useEffect(()=> {
+        fetchMoreData()
         // @ts-ignore
-        itemsRef?.current?.lastChild.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+    },[messages])
+    //function
+    const handleSendMessage =async (formPayload: any) => {
+        try {
+            const res= await callApi().post(`/threads/threads/${userId}/messages`,{
+                text:formPayload.message
+            },{
+                headers: {
+                    'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
+                }
+            })
+            if(res.data){
+                console.log(res.data)
+                setMessages([...messages, res.data]);
+            }
+
+        }catch (err){
+            console.log(err)
+        }
+    };
     return (
         <div>
             {
@@ -153,13 +150,12 @@ const MainContent: NextPageWithLayout = () => {
                                                 const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
 
                                                 return (
-                                                    // @ts-ignore
-                                                    <ul ref={itemsRef}  key={ChatId} className={`flex   items-center mb-4 justify-end`}>
-                                                        <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
+                                                    <div  key={ChatId} className={`flex   items-center mb-4 justify-end`}>
+                                                        <div className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
                                                             <span>  {chat?.text}</span>
                                                             <div className={"text-[8px] text-gray-300 pl-3 text-right"}>{formattedDates}</div>
-                                                        </li>
-                                                    </ul>
+                                                        </div>
+                                                    </div>
                                                 )
                                             })
                                         }
