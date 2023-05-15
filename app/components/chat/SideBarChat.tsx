@@ -51,7 +51,7 @@ const SideBarChat = () => {
             fetchNextPage();
         }
     }, [inView, fetchNextPage, hasNextPage]);
-    const threads = chatList?.pages.flatMap((group: any) => group?.data.threads)
+    const pages = chatList?.pages.map((group: any) => group?.data)
     const router = useRouter()
 
     return (
@@ -120,23 +120,58 @@ const SideBarChat = () => {
                 <div className={"relative md:hidden"}>
                     <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
-                            threads?.length ?
+                            pages?.length ?
                                 <ul className={"border overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
-                                    {threads.map((chat,id) => (
-                                        <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
-                                            <a className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-8 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
-                                                <div onClick={() => setIsOpen(!isOpen)} className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2 w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2"}>
-                                                    <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
-                                                        <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
-                                                    </div>
-                                                    <div className={"flex justify-between w-full"}>
-                                                        <div>{chat?.employer_user_name}</div>
-                                                        <div>{chat?.date}</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </Link>
-                                    ))}
+                                    {pages?.map((page,id) =>{
+                                            return(
+                                                <React.Fragment key={id}>
+                                                    {
+                                                        page?.threads.map((chat:any,id:number)=>{
+                                                            const dates = [new Date(chat?.date)]
+                                                            const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
+                                                            if(page?.threads.length===id+1){
+                                                                return (
+                                                                    <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
+                                                                        <a className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-8 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
+                                                                            <div onClick={() => setIsOpen(!isOpen)} className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2  w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2 w-full"}>
+                                                                                <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
+                                                                                    <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
+                                                                                </div>
+                                                                                <div className={"flex justify-between w-full items-center"}>
+                                                                                    <div>{chat?.employer_user_name}</div>
+                                                                                    {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
+                                                                                    <div>{formattedDates}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </Link>
+                                                                )
+
+                                                            }else {
+                                                                return (
+                                                                    <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
+                                                                        <a className={"text-white hover:text-black sendMassageButton mt-4 flex items-center my-2 py-8 w-full border  text-white px-2 gap-4 cursor-pointer  rounded-xl hover:text-black hover:bg-gray-100 "}>
+                                                                            <div onClick={() => setIsOpen(!isOpen)} className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? " animate__fadeInDown openListChats text-white bg-[#3e5b6d] flex items-center gap-2  w-full h-12  px-2  rounded-md hover:cursor-pointer" : "flex items-center gap-2 w-full"}>
+                                                                                <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
+                                                                                    <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
+                                                                                </div>
+                                                                                <div className={"flex justify-between w-full items-center"}>
+                                                                                    <div>{chat?.employer_user_name}</div>
+                                                                                    {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
+                                                                                    <div>{formattedDates}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+                                                                    </Link>
+                                                                )
+                                                            }
+                                                        })
+                                                    }
+                                                </React.Fragment>
+                                            )
+
+                                        }
+                                     )}
                                     <div className={"flex items-center justify-center "}>
                                         <button
                                             ref={ref}

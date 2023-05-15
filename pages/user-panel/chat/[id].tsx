@@ -44,7 +44,6 @@ const MainContent: NextPageWithLayout = () => {
              }
          })
            if(res.data){
-            console.log(res.data)
                setMessages([...messages, res.data]);
            }
 
@@ -61,13 +60,12 @@ const MainContent: NextPageWithLayout = () => {
             enabled: ProjectId.length > 0,
             staleTime: Infinity,
             keepPreviousData: true,
-            getNextPageParam: (lastPage) => console.log(lastPage),
         }
     );
    // function
    const fetchMoreData = () => {
-        if (GetMessage?.data?.messages?.length  >= 52) {
-            setHasMore(true);
+        if (GetMessage?.data?.messages?.length  >= 100) {
+            setHasMore(false);
             return;
         }
         // 20 more records in .5 secs

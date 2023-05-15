@@ -12,7 +12,6 @@ const ChatList:React.FC<IChatProps> = ({page}) => {
                 page?.threads.map((chat:any,id:number)=>{
                     const dates = [new Date(chat?.date)]
                     const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
-
                     if(page?.threads.length===id+1){
                         return (
                             <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={chat?.thread_id} >
