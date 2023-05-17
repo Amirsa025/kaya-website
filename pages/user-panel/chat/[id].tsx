@@ -54,7 +54,7 @@ const MainContent: NextPageWithLayout = () => {
     //query
     const ProjectId = typeof router.query?.id === "string" ? router.query.id : "";
     const {data: GetMessage, isError } = useQuery(
-        ["getMassage", FetchMassageFromServer,page],
+        ["getMassage", ProjectId,page],
         () => FetchMassageFromServer(ProjectId,page),
         {
             enabled: ProjectId.length > 0,
