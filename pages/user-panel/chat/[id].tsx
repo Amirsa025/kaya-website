@@ -179,7 +179,7 @@ const MainContent: NextPageWithLayout = () => {
 };
 MainContent.getLayout = (page) => <SubChatLayout>{page}</SubChatLayout>
 export default MainContent;
-<!-- export const getServerSideProps: GetServerSideProps = async (context: any) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const {id} = context.params
     const queryClient = new QueryClient();
     try {
@@ -195,7 +195,7 @@ export default MainContent;
             dehydratedState: dehydrate(queryClient),
         },
     }
-}; -->
+};
 
 export const FetchMassageFromServer = async (chatId: any,page:any) => {
     const cookie = new Cookies()
