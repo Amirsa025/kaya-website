@@ -59,7 +59,7 @@ const MainContent: NextPageWithLayout = () => {
         {
             enabled: ProjectId.length > 0,
             staleTime: Infinity,
-            keepPreviousData: true,
+      
         }
     );
    // function
