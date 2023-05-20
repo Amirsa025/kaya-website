@@ -32,7 +32,7 @@ const MainContent: NextPageWithLayout = () => {
     const [messages, setMessages] = useState< Message[]>([]);
     const [dataMassage, setDataMassage] = useState([]);
     const itemsRef = useRef<HTMLDivElement>();
-    const [MessageLoaded, setMessageLoaded] = useState(5);
+    const [MessageLoaded, setMessageLoaded] = useState(7);
     const [hasMore, setHasMore] = useState(true);
     //function
     const handleSendMessage =async (formPayload: any) => {
@@ -113,7 +113,7 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex  flex-row  min-h-[70vh] justify-between ">
                             <div className="  w-full px-5 flex flex-col justify-between">
                                 {/*show message*/}
-                                <div id="scrollableDiv"  className=" h-[50vh] overflow-y-scroll flex flex-col  mt-5">
+                                <div id="scrollableDiv"  className=" h-[50vh] overflow-y-scroll flex flex-col mt-5">
                         <InfiniteScroll
                             scrollThreshold={0.5}
                             scrollableTarget="scrollableDiv"
@@ -121,15 +121,7 @@ const MainContent: NextPageWithLayout = () => {
                             dataLength={Pages || 0}
                             next={fetchMoreData}
                             style={{ display: 'flex', flexDirection: 'column-reverse' }}
-                            refreshFunction={fetchMoreData}
-                            pullDownToRefresh
-                            pullDownToRefreshThreshold={50}
-                            pullDownToRefreshContent={
-                                <h3 style={{ textAlign: 'center' }}>&#8595;</h3>
-                            }
-                            releaseToRefreshContent={
-                                <h3 style={{ textAlign: 'center' }}>&#8593;</h3>
-                            }
+
                             hasMore={hasMore}
                             endMessage={<span />}
                             loader={

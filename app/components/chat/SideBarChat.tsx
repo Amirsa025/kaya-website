@@ -62,11 +62,9 @@ const SideBarChat = () => {
     return (
         <>
             <section className={"border-r  lg:w-1/2 xl:w-1/4  w-full"}>
-                <div className={"flex items-center justify-around border py-2"}>
-                    <i className="ri-search-line text-gray-400 block "></i>
-                    <input type="text" placeholder={"Search"} className={"focus:outline-0"}/>
+                <div className={"flex items-center justify-start px-4"}>
 
-                    <i className="md:hidden ri-chat-1-fill text-gray-400   cursor-pointer block"
+                    <i className="md:hidden ri-chat-1-fill text-gray-400 text-2xl  cursor-pointer block"
                        onClick={() => setIsOpen(!isOpen)}></i>
                 </div>
 

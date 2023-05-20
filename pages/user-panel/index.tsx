@@ -33,9 +33,9 @@ const Project: NextPageWithLayout<FilterValues> = () => {
    const cookie = new Cookies();
     //state
     const [searchTerm, setSearchTerm] = React.useState(""),
-        [offset, setOffset] = React.useState(1),
+        [offset, setOffset] = React.useState(0),
         [filters, setFilters] = React.useState<string[]>([]),
-        [page, setPage]: any = React.useState(3);
+        [page, setPage]: any = React.useState(2);
     //function
     const onFilters = (filterValues: any) => {
         let FilterArray = []
@@ -60,7 +60,7 @@ const Project: NextPageWithLayout<FilterValues> = () => {
             console.log(error)
         }
     };
-    const {data:AuthUser, isFetching, isLoading:loadingUser, isError:ErrorUser} = useAuth()
+    const {data:AuthUser,isLoading:loadingUser, isError:ErrorUser} = useAuth()
     const {isLoading, isError, data: project} = useQuery({
             queryKey: ['page', offset, searchTerm, filters],
             queryFn: () => fetchProjects(offset),
@@ -107,7 +107,6 @@ const Project: NextPageWithLayout<FilterValues> = () => {
         setOffset((page - 1) * 5)
         setPage(page + 1)
     }
-
     return (
         <section className={"md:container-app px-2 "}>
             <Heading page={"لیست پروژه ها "} titlesite={" کایا"}/>

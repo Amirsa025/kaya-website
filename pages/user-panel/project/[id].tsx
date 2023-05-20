@@ -2,7 +2,6 @@ import React from 'react';
 import {useRouter} from "next/router";
 import {GetServerSideProps} from "next";
 import {dehydrate, QueryClient, useQuery} from "@tanstack/react-query";
-import Cookies from "universal-cookie";
 import callApi from "@/app/helper/callApi";
 import {NextPageWithLayout} from "@/pages/_app";
 import {MoonLoader} from "react-spinners";

@@ -73,7 +73,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
                         <input
                             id={"fixed_max"}
                             name={"fixed_max"}
-                            disabled={!formik.values.hourly}
+                            disabled={!formik.values.fixed}
                             className={"border rounded-md py-2 px-1 w-full xl:w-[4.5rem] outline-0 placeholder:text-xs"}
                             placeholder={"Max"}
                             value={formik.values.fixed_max}
@@ -81,7 +81,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
                         />
                         <span>to</span>
                         <input
-                            disabled={!formik.values.hourly}
+                            disabled={!formik.values.fixed}
                             id={"fixed_min"}
                             name={"fixed_min"}
                             value={formik.values.fixed_min}
@@ -110,7 +110,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
                         <input
                             id={"Hourly_max"}
                             name={"Hourly_max"}
-                            disabled={!formik.values.fixed}
+                            disabled={!formik.values.hourly}
                             className={"border rounded-md py-2 px-1 w-full xl:w-[4.5rem] placeholder:text-xs outline-0"}
                             placeholder={"Max"}
                             value={formik.values.Hourly_max}
@@ -120,7 +120,7 @@ const FormFilter:React.FC<FilterForm> = ({onSubmit,handleOpen}) => {
                         <input
                             id={"Hourly_min"}
                             name={"Hourly_min"}
-                            disabled={!formik.values.fixed}
+                            disabled={!formik.values.hourly}
                             className={"border rounded-md py-2 px-1 w-full xl:w-[4.5rem] placeholder:text-xs outline-0"}
                             placeholder={"Min"}
                             value={formik.values.Hourly_min}

@@ -62,7 +62,7 @@ const ProjectList: React.FC<ProjectProps> = ({projectItem}) => {
                                                 <Image width={30} height={30} src={`https://flagcdn.com/w2560/${item.owner_country_code.toLowerCase()}.webp`} alt={"64.png"}/>
                                                 <div>
                                             <span
-                                                className={"text-[12px] "}>{item.owner_country}{", "}{item.owner_city} </span>
+                                                className={"text-[12px] "}>{item.owner_country}{","}{item.owner_city} </span>
                                                 </div>
                                             </div>
 
