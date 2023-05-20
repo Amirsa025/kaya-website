@@ -1,5 +1,13 @@
 import * as yup from "yup";
-
+  export  interface Message {
+    text: string;
+    id: number;
+    thread_id:number,
+    user_id:number,
+    is_received:boolean,
+    date:number,
+    timestamp: Date;
+}
 const CompleteRegisterSchema: any = yup.object().shape({
     first_name: yup.string().required('نام خود را وارد کنید'),
     last_name: yup.string().required('نام خانوادگی خود را وارد کنید'),
@@ -10,4 +18,4 @@ const CompleteRegisterSchema: any = yup.object().shape({
     // national_card_photo: yup.string().required('عکس کارت ملی خود را وارد کنید'),
     // verify_photo: yup.string().required('عکس خود را وارد کنید'),
 });
-export {CompleteRegisterSchema}
+export {CompleteRegisterSchema,}

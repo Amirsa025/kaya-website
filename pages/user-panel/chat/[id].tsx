@@ -11,15 +11,7 @@ import {useQuery} from "@tanstack/react-query";
 import {ClipLoader} from "react-spinners";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
-interface Message {
-    text: string;
-    id: number;
-    thread_id:number,
-    user_id:number,
-    is_received:boolean,
-    date:number,
-    timestamp: Date;
-}
+import {Message} from "@/app/models/model";
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
@@ -76,7 +68,7 @@ const MainContent: NextPageWithLayout = () => {
         }
         // 20 more records in .5 secs
         setTimeout(() => {
-            setMessageLoaded( MessageLoaded=>MessageLoaded+10)
+            setMessageLoaded( MessageLoaded=>MessageLoaded+5)
         }, 500);
     };
      //auto loading
@@ -113,17 +105,15 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex  flex-row  min-h-[70vh] justify-between ">
                             <div className="  w-full px-5 flex flex-col justify-between">
                                 {/*show message*/}
-                                <div id="scrollableDiv"  className=" h-[50vh] overflow-y-scroll flex flex-col mt-5">
+                                <div id="scrollableDiv"  className=" h-[50vh] overflow-y-scroll  mt-5">
                         <InfiniteScroll
                             scrollThreshold={0.5}
                             scrollableTarget="scrollableDiv"
-                            ref={loader}
                             dataLength={Pages || 0}
                             next={fetchMoreData}
                             style={{ display: 'flex', flexDirection: 'column-reverse' }}
-
                             hasMore={hasMore}
-                            endMessage={<span />}
+                            endMessage={<span/>}
                             loader={
                                 <div className={"animate__animated  animate__fadeInDown flex items-center justify-center"}>
                                     <div className={"bg-gray-100 rounded-md px-12 py-1"}>
@@ -131,7 +121,6 @@ const MainContent: NextPageWithLayout = () => {
                                     </div>
                                 </div>}
                             >
-
                             {
                                 massages?.map((massage:any,id:number)=>{
                                     const resDate = massage?.date
@@ -150,9 +139,8 @@ const MainContent: NextPageWithLayout = () => {
                                                             </div>
                                                                 :null}
                                                             {
-                                                                isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                                isToday(resDate)?<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
                                                             }
-
                                                         </div>
                                                     </li>:
                                                     <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
@@ -186,7 +174,6 @@ const MainContent: NextPageWithLayout = () => {
                                     )
                                 })
                             }
-
                         </InfiniteScroll>
                                     {/*post massages*/}
                                     <div>
@@ -218,7 +205,6 @@ const MainContent: NextPageWithLayout = () => {
                     </div>
                 </ChatLayout> : <div>User not Found</div>
             }
-
         </div>
 
     );

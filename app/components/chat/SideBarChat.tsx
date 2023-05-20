@@ -120,11 +120,11 @@ const SideBarChat = () => {
                         </ul>
                     )
                 }
-                <div className={"relative md:hidden"}>
+                <div className={"z-20 pt-10 relative md:hidden"}>
                     <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
                             pages?.length ?
-                                <ul className={"border overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
+                                <ul className={" overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4"}>
                                     {pages?.map((page,id) =>{
                                             return(
                                                 <React.Fragment key={id}>
