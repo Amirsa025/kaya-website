@@ -107,7 +107,7 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
             </nav>
             <div className={" flex lg:pt-10 pt-32 flex-col lg:flex-row  "}>
                 <AsidePanel/>
-                <div className={"pb-[7rem] w-full   md:px-0 "}>
+                <div className={"pb-[7rem] sm:pb-0 md:pb-[1rem] w-full   md:px-0 "}>
                     {children}
                 </div>
             </div>

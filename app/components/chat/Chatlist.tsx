@@ -2,16 +2,19 @@ import React from 'react';
 import Link from 'next/link';
 import {useRouter} from "next/router";
 interface IChatProps {
-    page:any
+    page:any,
+    isToday:any
 }
-const ChatList:React.FC<IChatProps> = ({page}) => {
+const ChatList:React.FC<IChatProps> = ({page,isToday}) => {
     const router = useRouter()
     return (
         <>
             {
                 page?.threads.map((chat:any,id:number)=>{
-                    const dates = [new Date(chat?.date)]
+                    const dateRes= chat?.date*1000
+                    const dates = [new Date(dateRes)]
                     const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
+                    const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
                     if(page?.threads.length===id+1){
                         return (
                             <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={chat?.thread_id} >
@@ -25,12 +28,16 @@ const ChatList:React.FC<IChatProps> = ({page}) => {
                                                 </div>
                                             </div>
                                             <div className={"flex items-center justify-between w-full gap-2"}>
-                                                <div>
+                                                <div className={"flex-1"}>
                                                     <div className={"text-md "}>{chat?.employer_user_name}</div>
                                                     <div className={"text-[12px] line-clamp-1"}>{chat?.last_message}</div>
                                                 </div>
-                                                {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
-                                                <div className={"text-sm "}>{formattedDates.map((time)=>time)}</div>
+                                                <div className={"flex items-center justify-between gap-2"}>
+                                                    {
+                                                        isToday(dateRes) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right "}>{formattedDates}</div>:  <div className={"text-[12px] text-gray-300 pl-3 text-right "}>{GetDate}</div>
+                                                    }
+                                                     {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -52,12 +59,16 @@ const ChatList:React.FC<IChatProps> = ({page}) => {
                                                 </div>
                                             </div>
                                             <div className={"flex items-center justify-between w-full gap-2"}>
-                                                <div>
+                                                <div className={"flex-1"}>
                                                     <div className={"text-md "}>{chat?.employer_user_name}</div>
                                                     <div className={"text-[12px] line-clamp-1"}>{chat?.last_message}</div>
                                                 </div>
-                                                {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
-                                                <div className={"text-sm "}>{formattedDates.map((time)=>time)}</div>
+                                                <div className={"flex items-center justify-between gap-2"}>
+                                                    {
+                                                        isToday(dateRes) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right "}>{formattedDates}</div>:  <div className={"text-[12px] text-gray-300 pl-3 text-right "}>{GetDate}</div>
+                                                    }
+                                                    {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -25,6 +25,11 @@ const fetchChatList = async (pageParam: number) => {
     }
 }
 
+const isToday = (date:any) => {
+    const now = new Date();
+    if (date > now) return false;
+    return (+new Date() - +date) < 24 * 60 * 60 * 1000;
+};
 const SideBarChat = () => {
     //state
     const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +48,7 @@ const SideBarChat = () => {
             // @ts-ignore
             return lastPage?.data.threads.length === LIMIT ? allPages[0].data.threads.length  : undefined
         }
-        , cacheTime: 5000,
+        , cacheTime: 1000,
     })
 
     useEffect( () => {
@@ -91,7 +96,7 @@ const SideBarChat = () => {
                             {
                                 chatList?.pages?.map((page, id) => {
                                     return (
-                                        <ChatList key={id} page={page?.data}/>
+                                        <ChatList key={id} page={page?.data} isToday={isToday}/>
                                     )
                                 })
                             }
@@ -127,8 +132,10 @@ const SideBarChat = () => {
                                                 <React.Fragment key={id}>
                                                     {
                                                         page?.threads.map((chat:any,id:number)=>{
-                                                            const dates = [new Date(chat?.date)]
+                                                            const dateRes= chat?.date*1000
+                                                            const dates = [new Date(dateRes)]
                                                             const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
+                                                            const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
                                                             if(page?.threads.length===id+1){
                                                                 return (
                                                                     <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
@@ -140,7 +147,9 @@ const SideBarChat = () => {
                                                                                 <div className={"flex justify-between w-full items-center"}>
                                                                                     <div>{chat?.employer_user_name}</div>
                                                                                     {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
-                                                                                    <div>{formattedDates}</div>
+                                                                                    {
+                                                                                        isToday(chat?.date) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                                                    }
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -155,10 +164,17 @@ const SideBarChat = () => {
                                                                                 <div className={"w-6 h-6 bg-green-400 rounded-lg text-center"}>
                                                                                     <i className={router.asPath == `/user-panel/chat/${chat?.thread_id}` ? "ri-message-3-fill text-white" : "ri-message-3-fill text-gray-50 "}></i>
                                                                                 </div>
-                                                                                <div className={"flex justify-between w-full items-center"}>
-                                                                                    <div>{chat?.employer_user_name}</div>
-                                                                                    {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
-                                                                                    <div>{formattedDates}</div>
+                                                                                <div className={"flex items-center justify-between w-full gap-2"}>
+                                                                                    <div className={"flex-1"}>
+                                                                                        <div className={"text-md "}>{chat?.employer_user_name}</div>
+                                                                                        <div className={"text-[12px] line-clamp-1"}>{chat?.last_message}</div>
+                                                                                    </div>
+                                                                                    <div className={"flex items-center justify-between gap-2"}>
+                                                                                        {
+                                                                                            isToday(dateRes) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right "}>{formattedDates}</div>:  <div className={"text-[12px] text-gray-300 pl-3 text-right "}>{GetDate}</div>
+                                                                                        }
+                                                                                        {chat?.is_unread?<div className={"w-2 h-2 aspect-square bg-red-500 rounded-full"}></div>:null}
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -182,7 +198,7 @@ const SideBarChat = () => {
                                                 <div className={"w-3 h-3 shadow rounded-full"}>
                                                 <i className="ri-arrow-drop-down-line"></i>
                                             </div>
-                                                :   <div className={"animate__fadeInUp"}>پایان لیست </div>}
+                                                :   <div className={"animate__fadeInUp"}></div>}
                                         </button>
                                     </div>
                                 </ul>
