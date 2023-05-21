@@ -60,18 +60,17 @@ const MainContent: NextPageWithLayout = () => {
         }
     );
    // function
-
    const fetchMoreData = () => {
-        if (GetMessage?.data?.messages?.length  >=73) {
+       // Set hasMore to false when there is no more data to load
+        if (GetMessage?.data?.messages?.length  === 0) {
             setHasMore(false);
             return;
         }
         // 20 more records in .5 secs
         setTimeout(() => {
             setMessageLoaded( MessageLoaded=>MessageLoaded+5)
-        }, 500);
+        }, 1000);
     };
-     //auto loading
      useEffect( () => {
         if (inView) {
             fetchMoreData();
@@ -85,6 +84,7 @@ const MainContent: NextPageWithLayout = () => {
     }, [messages]);
     //concat data infinite scroll
     useEffect(() => {
+
         if (GetMessage && GetMessage?.data?.messages?.length > 0) {
             // @ts-ignore
             setDataMassage((prevData) => [...prevData, GetMessage]);
@@ -102,16 +102,18 @@ const MainContent: NextPageWithLayout = () => {
                 userId ? <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
                     <div className="">
-                        <div className="flex  flex-row  min-h-[70vh] justify-between ">
-                            <div className="  w-full px-5 flex flex-col justify-between">
+                        <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
+                            <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
                                 <div id="scrollableDiv"  className=" h-[50vh] overflow-y-scroll  mt-5">
                         <InfiniteScroll
-                            scrollThreshold={0.5}
+                            scrollThreshold={0.75}
                             scrollableTarget="scrollableDiv"
                             dataLength={Pages || 0}
                             next={fetchMoreData}
-                            style={{ display: 'flex', flexDirection: 'column-reverse' }}
+                            inverse={true} // Scroll from bottom to top
+                            initialScrollY={500}
+                            style={{ display: 'flex', flexDirection: 'column-reverse' ,overflow:"visible" }}
                             hasMore={hasMore}
                             endMessage={<span/>}
                             loader={
@@ -128,11 +130,11 @@ const MainContent: NextPageWithLayout = () => {
                                     const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
                                     const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
                                     return (
-                                        <ul key={id} className={`flex ${massage?.is_received?'justify-start':'justify-end'} items-center mb-4`}>
+                                        <ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-4`}>
                                             {
-                                                massage?.is_received ? <li className="ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+                                                massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                                         <div>
-                                                            {massage?.text}
+                                                            <span className={"text-sm md:text-lg lg:text-lg"}>{massage?.text}</span>
                                                             {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                                 <span className={"text-sm "}>{massage?.file_name}</span>
                                                                 <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
@@ -145,7 +147,7 @@ const MainContent: NextPageWithLayout = () => {
                                                     </li>:
                                                     <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                                         <div>
-                                                            {massage?.text}
+                                                            <span className={"text-sm md:text-lg lg:text-lg"}>{massage?.text}</span>
                                                             {
                                                                 isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
                                                             }
@@ -182,7 +184,6 @@ const MainContent: NextPageWithLayout = () => {
                                                 const dates = [new Date(chat?.date)]
                                                 const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
                                                 const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
-
                                                 return (
                                                     // @ts-ignore
                                                     <ul ref={itemsRef}  key={ChatId} className={`flex   items-center mb-4 justify-end`}>
