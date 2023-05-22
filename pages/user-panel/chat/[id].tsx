@@ -7,190 +7,160 @@ import ChatForm from "@/app/shared/form/chat-form/formChat";
 import SubChatLayout from "@/app/components/layout/SubChatlayout";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import {useQuery} from "@tanstack/react-query";
-import {ClipLoader} from "react-spinners";
+import {useInfiniteQuery} from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
+import MessagesChat from "@/app/components/chat/Messages";
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const loader = useRef(null);
+    const LIMIT = 50;
     const {ref, inView} = useInView()
-
     //state
-    const [messages, setMessages] = useState< Message[]>([]);
-    const [dataMassage, setDataMassage] = useState([]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const itemsRef = useRef<HTMLDivElement>();
-    const [MessageLoaded, setMessageLoaded] = useState(7);
-    const [hasMore, setHasMore] = useState(true);
     //function
-    const handleSendMessage =async (formPayload: any) => {
+    const handleSendMessage = async (formPayload: any) => {
         try {
-         const res= await callApi().post(`/threads/threads/${userId}/messages`,{
-             text:formPayload.message
-         },{
-             headers: {
-                 'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
-             }
-         })
-           if(res.data){
-               setMessages([...messages, res.data]);
-           }
+            const res = await callApi().post(`/threads/threads/${userId}/messages`, {
+                text: formPayload.message
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
+                }
+            })
+            if (res.data) {
+                setMessages([...messages, res.data]);
+            }
 
-        }catch (err){
+        } catch (err) {
             console.log(err)
         }
     };
-    const isToday = (date:any) => {
+    const isToday = (date: any) => {
         const now = new Date();
         if (date > now) return false;
-        return (+new Date() - +date) < 24 * 60 * 60 *1000;
+        return (+new Date() - +date) < 24 * 60 * 60 * 1000;
     };
     //query
+    const fetchChatList = async (chatId: string | (string[] & string), pageParam: number) => {
+        const cookie = new Cookies()
+        try {
+            return await callApi()?.get(`/threads/threads/${chatId}/messages?limit=${LIMIT}&offset=${pageParam}`, {
+                headers: {
+                    'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
+                }
+            })
+        } catch (error) {
+            // @ts-ignore
+            if (error?.code === 'ECONNRESET') {
+                console.log('Connection was reset.');
+                // You can retry the request here by calling the function again after a short delay.
+            } else {
+                // @ts-ignore
+                console.log('Error occurred:', error);
+            }
+        }
+    }
     const ChatId = typeof router.query?.id === "string" ? router.query.id : "";
-    const {data: GetMessage, isError } = useQuery(
-        ["getMassage", ChatId,MessageLoaded],
-        () => FetchMassageFromServer(ChatId,MessageLoaded),
+    const {
+        data: GetMessage,
+        isLoading,
+        fetchNextPage,
+        isFetchingNextPage,
+        hasNextPage
+    } = useInfiniteQuery(
+        ["getMassage", ChatId],
+        ({pageParam =0}) => fetchChatList(ChatId, pageParam),
         {
             enabled: ChatId.length > 0,
             staleTime: Infinity,
+            getNextPageParam: (lastPage, allPages) => {
+                const all = allPages.flatMap((item) => item?.data.messages)
+                return lastPage?.data?.messages?.length === LIMIT ?all.length : undefined
+            }
+            , cacheTime: 1000,
         }
     );
-   // function
-   const fetchMoreData = () => {
-       // Set hasMore to false when there is no more data to load
-        if (GetMessage?.data?.messages?.length  === 0) {
-            setHasMore(false);
-            return;
+// Fetch the next page if the last item is in view and there are more pages to fetch
+    React.useEffect(() => {
+        if (inView && !isFetchingNextPage && hasNextPage) {
+            fetchNextPage().then();
         }
-        // 20 more records in .5 secs
-        setTimeout(() => {
-            setMessageLoaded( MessageLoaded=>MessageLoaded+5)
-        }, 1000);
-    };
-     useEffect( () => {
-        if (inView) {
-            fetchMoreData();
-        }
-    }, [inView]);
-    // when send message go to last child
-    useEffect(() => {
-        // Scroll to the last item when items change
-        // @ts-ignore
-        itemsRef?.current?.lastChild?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
-    //concat data infinite scroll
-    useEffect(() => {
-
-        if (GetMessage && GetMessage?.data?.messages?.length > 0) {
-            // @ts-ignore
-            setDataMassage((prevData) => [...prevData, GetMessage]);
-        }
-    }, [GetMessage]);
-    const Pages=  dataMassage?.length
+    }, [inView, isFetchingNextPage, fetchNextPage, hasNextPage]);
+    const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
     // @ts-ignore
-    const massages= dataMassage.flatMap(item=>item?.data.messages)
-    if(!router.isReady){
-        return <div>loading</div>
+    if (!router.isReady) {
+        return <div>loading...</div>
     }
     return (
         <div>
             {
-                userId ? <ChatLayout>
+                <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
-                    <div className="">
+                    <div>
                         <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div id="scrollableDiv"  className=" h-[50vh] overflow-y-scroll  mt-5">
-                        <InfiniteScroll
-                            scrollThreshold={0.75}
-                            scrollableTarget="scrollableDiv"
-                            dataLength={Pages || 0}
-                            next={fetchMoreData}
-                            inverse={true} // Scroll from bottom to top
-                            initialScrollY={500}
-                            style={{ display: 'flex', flexDirection: 'column-reverse' ,overflow:"visible" }}
-                            hasMore={hasMore}
-                            endMessage={<span/>}
-                            loader={
-                                <div className={"animate__animated  animate__fadeInDown flex items-center justify-center"}>
-                                    <div className={"bg-gray-100 rounded-md px-12 py-1"}>
-                                        <ClipLoader color="#8a8a8a" />
-                                    </div>
-                                </div>}
-                            >
-                            {
-                                massages?.map((massage:any,id:number)=>{
-                                    const resDate = massage?.date
-                                    const dates = [new Date(resDate)]
-                                    const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
-                                    const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
-                                    return (
-                                        <ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-4`}>
-                                            {
-                                                massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                                                        <div>
-                                                            <span className={"text-sm md:text-lg lg:text-lg"}>{massage?.text}</span>
-                                                            {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
-                                                                <span className={"text-sm "}>{massage?.file_name}</span>
-                                                                <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
+                                <div id="scrollableDiv"
+                                     className=" h-[50vh] overflow-y-scroll  mt-5">
+                                    {
+                                        isLoading ? <div>loading</div> :
+                                            <InfiniteScroll
+                                                scrollThreshold={0.75}
+                                                scrollableTarget="scrollableDiv"
+                                                inverse={true}
+                                                dataLength={pages?.length || 0}
+                                                next={() => fetchNextPage()}
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    overflow: "visible"
+                                                }}
+                                                // @ts-ignore
+                                                hasMore={hasNextPage}
+                                                loader={<div></div>}
+                                            >
+                                                {
+                                                    //@ts-ignore
+                                                    GetMessage?.pages?.map((page: any, id: number) => {
+                                                           return <MessagesChat key={id} isToday={isToday} page={page?.data}/>
+
+                                                    })
+                                                }
+                                                <div
+                                                    className={"flex items-center justify-center "}>
+                                                    <button ref={ref} onClick={() => fetchNextPage()}
+                                                    >
+                                                        {isFetchingNextPage ? 'please Wait' : hasNextPage ?
+                                                            <div
+                                                                className={"w-3 h-3 shadow rounded-full"}>
+                                                                <i className="ri-arrow-drop-down-line"></i>
                                                             </div>
-                                                                :null}
-                                                            {
-                                                                isToday(resDate)?<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
-                                                            }
-                                                        </div>
-                                                    </li>:
-                                                    <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                                        <div>
-                                                            <span className={"text-sm md:text-lg lg:text-lg"}>{massage?.text}</span>
-                                                            {
-                                                                isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
-                                                            }
-                                                            {massage?.is_attachment ? <div className={"text-red-400"}>attach</div>:null}
-                                                        </div>
-                                                        {
-                                                            isError ?
-                                                                <i className="ri-close-circle-fill  text-red-200 text-lg"></i>  : <div>
-                                                                    <i className="ri-checkbox-circle-fill text-green-200 text-lg"></i>
-                                                                </div>
-                                                        }
-                                                    </li>
-                                            }
-                                            {
-                                                isError ?  <i className="ri-close-circle-line text-red-400 text-lg"></i>:null
-                                            }
-                                            {/*//@ts-ignore*/}
-                                            <div ref={itemsRef}></div>
-                                            <div className={"flex items-center justify-center "}  >
-                                                <button
-                                                    ref={ref}
-                                                >
-                                                </button>
-                                            </div>
-                                        </ul>
-                                    )
-                                })
-                            }
-                        </InfiniteScroll>
+                                                            : <div className={"animate__fadeInUp"}></div>}
+                                                    </button>
+                                                </div>
+                                            </InfiniteScroll>
+                                    }
                                     {/*post massages*/}
                                     <div>
                                         {
-                                            messages.flatMap((chat,ChatId)=>{
+                                            messages.flatMap((chat, ChatId) => {
                                                 const dates = [new Date(chat?.date)]
-                                                const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
-                                                const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
+                                                const formattedDates = dates.flatMap(date => `${date?.getHours()}:${date?.getMinutes()}`);
+                                                const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth() + 1}-${date?.getDay()}`);
                                                 return (
                                                     // @ts-ignore
-                                                    <ul ref={itemsRef}  key={ChatId} className={`flex   items-center mb-4 justify-end`}>
+                                                    <ul ref={itemsRef} key={ChatId}
+                                                        className={`flex   items-center mb-4 justify-end`}>
                                                         <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
                                                             <span>  {chat?.text}</span>
                                                             {
-                                                                isToday(chat?.date) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                                isToday(chat?.date) ? <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
+                                                                    <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
                                                             }
                                                         </li>
                                                     </ul>
@@ -200,11 +170,11 @@ const MainContent: NextPageWithLayout = () => {
                                     </div>
                                 </div>
                                 {/*send Message*/}
-                                  <ChatForm onSendMessage={handleSendMessage}/>
+                                <ChatForm onSendMessage={handleSendMessage}/>
                             </div>
                         </div>
                     </div>
-                </ChatLayout> : <div>User not Found</div>
+                </ChatLayout>
             }
         </div>
 
@@ -212,23 +182,3 @@ const MainContent: NextPageWithLayout = () => {
 };
 MainContent.getLayout = (page) => <SubChatLayout>{page}</SubChatLayout>
 export default MainContent;
-
-export const FetchMassageFromServer = async (chatId: any,page:any) => {
-    const cookie = new Cookies()
-    try {
-        return await callApi()?.get(`/threads/threads/${chatId}/messages?limit=${page}&offset=0`,{
-            headers: {
-                'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
-            }
-        })
-    } catch (error) {
-        // @ts-ignore
-        if (error?.code === 'ECONNRESET') {
-            console.log('Connection was reset.');
-            // You can retry the request here by calling the function again after a short delay.
-        } else {
-            // @ts-ignore
-            console.log('Error occurred:', error);
-        }
-    }
-}

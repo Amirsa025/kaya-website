@@ -53,7 +53,7 @@ const SideBarChat = () => {
 
     useEffect( () => {
         if (inView && hasNextPage) {
-            fetchNextPage();
+            fetchNextPage().then();
         }
     }, [inView, fetchNextPage, hasNextPage]);
     const pages = chatList?.pages.map((group: any) => group?.data)
@@ -88,7 +88,7 @@ const SideBarChat = () => {
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
                         </div>
                     ) : (
-                        <ul className={"hidden md:block overflow-y-scroll h-[40rem] flex flex-col gap-4 items-start px-4 pt-8"}>
+                        <ul className={"hidden md:block overflow-y-scroll h-[43rem] flex flex-col gap-4 items-start px-4 pt-8"}>
                             {/*get and map data in load more*/}
                             {
                                 chatList?.pages?.map((page, id) => {

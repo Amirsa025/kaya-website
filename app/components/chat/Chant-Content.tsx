@@ -13,7 +13,7 @@ const ChatLayout = ({children}: any) => {
                 {/*start  Send Chat*/}
                 <div className={"flex-1"}>
                     {children ?? (<div
-                            className={"h-[58vh] text-center  w-full px-2 flex items-center justify-center w-full md:h-full flex-col direction-ltr"}>
+                            className={"h-[63vh] text-center  w-full px-2 flex items-center justify-center w-full md:h-full flex-col direction-ltr"}>
                             <Image src={'/images/live-chat.svg'} height={100} width={100}
                                    alt={'chat-logo'}/>
                             <h2 className={"font-bold text-[1.3rem] "}>you have a 3 massages</h2>
