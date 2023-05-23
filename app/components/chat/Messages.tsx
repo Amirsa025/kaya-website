@@ -13,11 +13,13 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                     const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
                     const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
                 if(page.messages.length===id+1){
-                    return(<ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-4`}>
+
+                    return(<ul key={id}  className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-4`}>
                         {
                             massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                     <div>
-                                        <span className={"text-sm md:text-lg lg:text-lg"}>{massage?.text}</span>
+                                        {/*     // @ts-ignore*/}
+                                        <article className={"text-sm md:text-lg lg:text-md"}>{massage?.text}</article>
                                         {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                 <span className={"text-sm "}>{massage?.file_name}</span>
                                                 <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>

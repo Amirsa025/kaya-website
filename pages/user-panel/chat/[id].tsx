@@ -79,8 +79,9 @@ const MainContent: NextPageWithLayout = () => {
         {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
-                console.log(all)
-                return lastPage?.data?.messages?.length === LIMIT ?all.length+1  : undefined
+                const nextItem = lastPage?.data?.messages?.length === LIMIT ?all.length+1  : undefined
+                console.log(nextItem)
+                return nextItem
             }
             , cacheTime: 500,
 
@@ -89,9 +90,11 @@ const MainContent: NextPageWithLayout = () => {
 // Fetch the next page if the last item is in view and there are more pages to fetch
     useEffect( () => {
         if (inView && hasNextPage) {
+            // @ts-ignore
+            itemsRef?.current?.lastChild?.scrollIntoView({ behavior: 'smooth' });
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage,inView]);
+    }, [fetchNextPage, hasNextPage]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
@@ -124,16 +127,16 @@ const MainContent: NextPageWithLayout = () => {
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
                                                 scrollableTarget="scrollableDiv"
-                                                inverse={true}
                                                 style={{ display: 'flex', flexDirection: 'column-reverse' ,overflow:"visible" }}
                                                 dataLength={pages?.length || 0}
                                                 next={fetchNextPage}
-                                                hasMore={!!hasNextPage}
-                                                loader={<div></div>}
+                                                hasMore={!hasNextPage}
+                                                loader={<div>load</div>}
                                             >
                                                 {
                                                     GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                           return <MessagesChat key={id} isToday={isToday} page={page?.data}/>
+                                                           // @ts-ignore
+                                                        return <MessagesChat ref={itemsRef} key={id} isToday={isToday} page={page?.data}/>
 
                                                     })
                                                 }
