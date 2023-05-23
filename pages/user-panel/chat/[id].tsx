@@ -77,8 +77,6 @@ const MainContent: NextPageWithLayout = () => {
         ["getMassage", ChatId],
         ({pageParam =0}) => fetchChatList(ChatId, pageParam),
         {
-            enabled: ChatId.length > 0,
-            staleTime: Infinity,
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
                 return lastPage?.data?.messages?.length === LIMIT ?all.length : undefined
