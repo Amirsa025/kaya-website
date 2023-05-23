@@ -18,7 +18,7 @@ const MainContent: NextPageWithLayout = () => {
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT =10;
+    const LIMIT =6;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -92,7 +92,7 @@ const MainContent: NextPageWithLayout = () => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage,inView]);
+    }, [fetchNextPage, hasNextPage]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
