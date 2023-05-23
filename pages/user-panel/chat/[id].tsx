@@ -92,7 +92,7 @@ const MainContent: NextPageWithLayout = () => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage,inView]);
+    }, [fetchNextPage, hasNextPage]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
