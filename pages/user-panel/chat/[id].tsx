@@ -80,7 +80,6 @@ const MainContent: NextPageWithLayout = () => {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
                 const nextItem = lastPage?.data?.messages?.length === LIMIT ?all.length  : undefined
-                console.log(nextItem)
                 return nextItem
             }
             , cacheTime: 1000   ,
