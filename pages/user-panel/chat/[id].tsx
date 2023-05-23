@@ -133,7 +133,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 loader={<div></div>}
                                             >
                                                 {
-                                                    GetMessage?.pages?.flatMap((page: any, id: number) => {
+                                                    GetMessage?.pages?.map((page: any, id: number) => {
                                                            return <MessagesChat key={id} isToday={isToday} page={page?.data}/>
 
                                                     })
