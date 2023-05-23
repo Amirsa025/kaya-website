@@ -83,14 +83,18 @@ const MainContent: NextPageWithLayout = () => {
                 return nextItem
             }
             , cacheTime: 1000   ,
-
+            select: (data) =>
+                ({
+                pages: [...data.pages].reverse(),
+                pageParams: [...data.pageParams].reverse(),
+            }),
+            retry:10
         }
     );
 // Fetch the next page if the last item is in view and there are more pages to fetch
     useEffect( () => {
         if (inView && hasNextPage) {
             // @ts-ignore
-            itemsRef?.current?.lastChild?.scrollIntoView({ behavior: 'smooth' });
             fetchNextPage().then();
         }
     }, [fetchNextPage, hasNextPage,inView]);
@@ -126,19 +130,12 @@ const MainContent: NextPageWithLayout = () => {
                                             </div> :
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
-                                                style={{ display: 'flex', flexDirection: 'column-reverse' ,overflow:"visible" }}
+                                                style={{ display: 'flex', flexDirection: 'column' ,overflow:"visible" }}
                                                 dataLength={pages?.length || 0}
                                                 next={fetchNextPage}
                                                 hasMore={!hasNextPage}
                                                 loader={<div>load</div>}
                                             >
-                                                {
-                                                    GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                           // @ts-ignore
-                                                        return <MessagesChat ref={itemsRef} key={id} isToday={isToday} page={page?.data}/>
-
-                                                    })
-                                                }
                                                 <div className={"flex items-center justify-center "}>
                                                     <button
                                                         ref={ref}
@@ -156,6 +153,14 @@ const MainContent: NextPageWithLayout = () => {
                                                             :   <div className={"animate__fadeInUp"}></div>}
                                                     </button>
                                                 </div>
+                                                {
+                                                    GetMessage?.pages?.flatMap((page: any, id: number) => {
+                                                           // @ts-ignore
+                                                        return <MessagesChat  key={id} isToday={isToday} page={page?.data}/>
+
+                                                    })
+                                                }
+
                                             </InfiniteScroll>
                                     }
                                     {/*post massages*/}

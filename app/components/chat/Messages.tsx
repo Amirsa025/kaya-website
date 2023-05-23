@@ -7,7 +7,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
     return (
         <div className={"flex flex-col-reverse"}>
             {
-                page?.messages?.reverse().flatMap((massage:any,id:any)=>{
+                page?.messages?.flatMap((massage:any,id:any)=>{
                     const resDate = massage?.date
                     const dates = [new Date(resDate)]
                     const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
@@ -44,7 +44,8 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
 
                         {/*//@ts-ignore*/}
                     </ul>)
-                }else {
+                }
+                else {
                     return(<ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-4`}>
                         {
                             massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
