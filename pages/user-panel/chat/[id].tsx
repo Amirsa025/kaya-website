@@ -18,7 +18,7 @@ const MainContent: NextPageWithLayout = () => {
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT =7;
+    const LIMIT = 6;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -84,6 +84,8 @@ const MainContent: NextPageWithLayout = () => {
                 return nextItem
             }
             , cacheTime: 500,
+            refetchOnWindowFocus:"always",
+            staleTime:1000
 
         }
     );
