@@ -83,7 +83,7 @@ const MainContent: NextPageWithLayout = () => {
                 console.log(nextItem)
                 return nextItem
             }
-            , cacheTime: 500,
+            , cacheTime: 1000   ,
 
         }
     );
