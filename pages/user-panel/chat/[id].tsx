@@ -18,7 +18,7 @@ const MainContent: NextPageWithLayout = () => {
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT =6;
+    const LIMIT =10;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -83,7 +83,7 @@ const MainContent: NextPageWithLayout = () => {
                 const all = allPages.flatMap((item) => item?.data.messages)
                 return lastPage?.data?.messages?.length === LIMIT ?all.length : undefined
             }
-            , cacheTime: 1000,
+            , cacheTime: 500,
 
         }
     );
@@ -92,7 +92,7 @@ const MainContent: NextPageWithLayout = () => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage,inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
@@ -141,7 +141,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 <div className={"flex items-center justify-center "}>
                                                     <button
                                                         ref={ref}
-                                                        onClick={() => fetchNextPage()}
+
                                                         disabled={!hasNextPage || isFetchingNextPage}
                                                     >
                                                         {isFetchingNextPage?  <ClipLoader
@@ -149,7 +149,7 @@ const MainContent: NextPageWithLayout = () => {
                                                             aria-label="Loading Spinner"
                                                             data-testid="loader"
                                                         />: hasNextPage ?
-                                                            <div className={"w-3 h-3 shadow rounded-full"}>
+                                                            <div className={"w-5  h-5 shadow rounded-full"}  onClick={() => fetchNextPage()}>
                                                                 <i className="ri-add-circle-line text-[20px]"></i>
                                                             </div>
                                                             :   <div className={"animate__fadeInUp"}></div>}

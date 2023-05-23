@@ -4,7 +4,6 @@ interface IMessagesProps {
     isToday:any
 }
 const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
-
     return (
         <div className={"flex flex-col-reverse"}>
             {
@@ -77,7 +76,6 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                 })
             }
         </div>
-
     )
 };
 
