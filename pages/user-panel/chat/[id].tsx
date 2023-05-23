@@ -84,8 +84,6 @@ const MainContent: NextPageWithLayout = () => {
                 return nextItem
             }
             , cacheTime: 500,
-            refetchOnWindowFocus:"always",
-            staleTime:1000
 
         }
     );
