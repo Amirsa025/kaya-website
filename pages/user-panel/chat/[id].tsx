@@ -144,8 +144,12 @@ const MainContent: NextPageWithLayout = () => {
                                                         onClick={() => fetchNextPage()}
                                                         disabled={!hasNextPage || isFetchingNextPage}
                                                     >
-                                                        {isFetchingNextPage?'': hasNextPage ?
-                                                            <div className={"  px-4 "}>
+                                                        {isFetchingNextPage?  <ClipLoader
+                                                            size={50}
+                                                            aria-label="Loading Spinner"
+                                                            data-testid="loader"
+                                                        />: hasNextPage ?
+                                                            <div className={"w-3 h-3 shadow rounded-full"}>
                                                                 <i className="ri-add-circle-line text-[20px]"></i>
                                                             </div>
                                                             :   <div className={"animate__fadeInUp"}></div>}
