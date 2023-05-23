@@ -18,7 +18,7 @@ const MainContent: NextPageWithLayout = () => {
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT =6;
+    const LIMIT =7;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -79,7 +79,8 @@ const MainContent: NextPageWithLayout = () => {
         {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
-                return lastPage?.data?.messages?.length === LIMIT ?all.length : undefined
+                console.log(all)
+                return lastPage?.data?.messages?.length === LIMIT ?all.length+1  : undefined
             }
             , cacheTime: 500,
 
@@ -90,7 +91,7 @@ const MainContent: NextPageWithLayout = () => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage,inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
