@@ -12,12 +12,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
+import ClipLoader from "react-spinners/ClipLoader";
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT = 50;
+    const LIMIT =6;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -80,7 +81,6 @@ const MainContent: NextPageWithLayout = () => {
             staleTime: Infinity,
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
-                    console.log(all)
                 return lastPage?.data?.messages?.length === LIMIT ?all.length : undefined
             }
             , cacheTime: 1000,
@@ -88,11 +88,11 @@ const MainContent: NextPageWithLayout = () => {
         }
     );
 // Fetch the next page if the last item is in view and there are more pages to fetch
-    React.useEffect(() => {
-        if (inView && !isFetchingNextPage && hasNextPage) {
+    useEffect( () => {
+        if (inView && hasNextPage) {
             fetchNextPage().then();
         }
-    }, [inView, isFetchingNextPage, fetchNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage,inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
@@ -115,7 +115,13 @@ const MainContent: NextPageWithLayout = () => {
                                 {/*show message*/}
                                 <div id="scrollableDiv" className=" h-[50vh] overflow-y-scroll  mt-5">
                                     {
-                                        isLoading ? <div>loading</div> :
+                                        isLoading ? <div className={"center-item"}>
+                                                <ClipLoader
+                                                    size={50}
+                                                    aria-label="Loading Spinner"
+                                                    data-testid="loader"
+                                                />
+                                            </div> :
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
                                                 scrollableTarget="scrollableDiv"
@@ -127,22 +133,22 @@ const MainContent: NextPageWithLayout = () => {
                                                 loader={<div></div>}
                                             >
                                                 {
-                                                    //@ts-ignore
                                                     GetMessage?.pages?.map((page: any, id: number) => {
                                                            return <MessagesChat key={id} isToday={isToday} page={page?.data}/>
 
                                                     })
                                                 }
-                                                <div
-                                                    className={"flex  items-center justify-center "}>
-                                                    <button ref={ref} onClick={() => fetchNextPage()}
+                                                <div className={"flex items-center justify-center "}>
+                                                    <button
+                                                        ref={ref}
+                                                        onClick={() => fetchNextPage()}
+                                                        disabled={!hasNextPage || isFetchingNextPage}
                                                     >
-                                                        {isFetchingNextPage ? 'please Wait' : hasNextPage ?
-                                                            <div
-                                                                className={"w-3 h-3 shadow rounded-full"}>
-                                                                <i className="ri-arrow-drop-down-line"></i>
+                                                        {isFetchingNextPage?'': hasNextPage ?
+                                                            <div className={"  px-4 "}>
+                                                                <i className="ri-add-circle-line text-[20px]"></i>
                                                             </div>
-                                                            : <div className={"animate__fadeInUp"}></div>}
+                                                            :   <div className={"animate__fadeInUp"}></div>}
                                                     </button>
                                                 </div>
                                             </InfiniteScroll>
@@ -157,7 +163,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 return (
                                                     // @ts-ignore
                                                     <ul ref={itemsRef} key={ChatId}
-                                                        className={`flex   items-center mb-4 justify-end`}>
+                                                        className={`flex  items-center mb-4 justify-end`}>
                                                         <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
                                                             <span>  {chat?.text}</span>
                                                             {

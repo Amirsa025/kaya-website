@@ -51,7 +51,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                                         <span className={"text-sm md:text-lg lg:text-lg"}>{massage?.text}</span>
                                         {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                 <span className={"text-sm "}>{massage?.file_name}</span>
-                                                <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
+                                                    <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
                                             </div>
                                             :null}
                                         {
