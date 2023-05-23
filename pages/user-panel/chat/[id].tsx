@@ -18,7 +18,7 @@ const MainContent: NextPageWithLayout = () => {
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT = 6;
+    const LIMIT = 5;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -79,7 +79,7 @@ const MainContent: NextPageWithLayout = () => {
         {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
-                const nextItem = lastPage?.data?.messages?.length === LIMIT ?all.length+1  : undefined
+                const nextItem = lastPage?.data?.messages?.length === LIMIT ?all.length  : undefined
                 console.log(nextItem)
                 return nextItem
             }
@@ -96,7 +96,7 @@ const MainContent: NextPageWithLayout = () => {
             itemsRef?.current?.lastChild?.scrollIntoView({ behavior: 'smooth' });
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage,inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
@@ -104,6 +104,7 @@ const MainContent: NextPageWithLayout = () => {
     }, [messages]);
     //concat data infinite scroll
     const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
+
     // @ts-ignore
     if (!router.isReady) {
         return <div>loading...</div>
