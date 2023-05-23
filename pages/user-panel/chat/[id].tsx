@@ -116,7 +116,7 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div id="scrollableDiv" className=" h-[50vh] overflow-y-scroll  mt-5">
+                                <div  className=" h-[50vh] overflow-y-scroll  mt-5">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <ClipLoader
@@ -127,7 +127,6 @@ const MainContent: NextPageWithLayout = () => {
                                             </div> :
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
-                                                scrollableTarget="scrollableDiv"
                                                 style={{ display: 'flex', flexDirection: 'column-reverse' ,overflow:"visible" }}
                                                 dataLength={pages?.length || 0}
                                                 next={fetchNextPage}
