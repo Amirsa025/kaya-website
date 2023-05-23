@@ -80,9 +80,11 @@ const MainContent: NextPageWithLayout = () => {
             staleTime: Infinity,
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
+                    console.log(all)
                 return lastPage?.data?.messages?.length === LIMIT ?all.length : undefined
             }
             , cacheTime: 1000,
+
         }
     );
 // Fetch the next page if the last item is in view and there are more pages to fetch
@@ -91,6 +93,12 @@ const MainContent: NextPageWithLayout = () => {
             fetchNextPage().then();
         }
     }, [inView, isFetchingNextPage, fetchNextPage, hasNextPage]);
+    useEffect(() => {
+        // Scroll to the last item when items change
+        // @ts-ignore
+        itemsRef?.current?.lastChild?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+    //concat data infinite scroll
     const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
     // @ts-ignore
     if (!router.isReady) {
@@ -105,23 +113,17 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div id="scrollableDiv"
-                                     className=" h-[50vh] overflow-y-scroll  mt-5">
+                                <div id="scrollableDiv" className=" h-[50vh] overflow-y-scroll  mt-5">
                                     {
                                         isLoading ? <div>loading</div> :
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
                                                 scrollableTarget="scrollableDiv"
                                                 inverse={true}
+                                                style={{ display: 'flex', flexDirection: 'column-reverse' ,overflow:"visible" }}
                                                 dataLength={pages?.length || 0}
-                                                next={() => fetchNextPage()}
-                                                style={{
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    overflow: "visible"
-                                                }}
-                                                // @ts-ignore
-                                                hasMore={hasNextPage}
+                                                next={fetchNextPage}
+                                                hasMore={!!hasNextPage}
                                                 loader={<div></div>}
                                             >
                                                 {
@@ -132,7 +134,7 @@ const MainContent: NextPageWithLayout = () => {
                                                     })
                                                 }
                                                 <div
-                                                    className={"flex items-center justify-center "}>
+                                                    className={"flex  items-center justify-center "}>
                                                     <button ref={ref} onClick={() => fetchNextPage()}
                                                     >
                                                         {isFetchingNextPage ? 'please Wait' : hasNextPage ?

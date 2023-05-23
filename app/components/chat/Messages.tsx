@@ -6,9 +6,9 @@ interface IMessagesProps {
 const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
 
     return (
-        <div>
+        <div className={"flex flex-col-reverse"}>
             {
-                page?.messages?.flatMap((massage:any,id:any)=>{
+                page?.messages?.reverse().flatMap((massage:any,id:any)=>{
                     const resDate = massage?.date
                     const dates = [new Date(resDate)]
                     const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
