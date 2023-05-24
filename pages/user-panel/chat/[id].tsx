@@ -7,18 +7,19 @@ import ChatForm from "@/app/shared/form/chat-form/formChat";
 import SubChatLayout from "@/app/components/layout/SubChatlayout";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import {useInfiniteQuery} from "@tanstack/react-query";
+import {QueryCache, useInfiniteQuery} from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
 import ClipLoader from "react-spinners/ClipLoader";
+
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
     const userId = router.query.id;
     const cookie = new Cookies();
-    const LIMIT = 5;
+    const LIMIT = 7;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
@@ -79,8 +80,8 @@ const MainContent: NextPageWithLayout = () => {
         {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
-                const nextItem = lastPage?.data?.messages?.length === LIMIT ?all.length  : undefined
-                return nextItem
+
+                return lastPage?.data?.messages?.length === LIMIT ? all.length: undefined
             }
             , cacheTime: 1000   ,
             select: (data) =>
@@ -91,13 +92,25 @@ const MainContent: NextPageWithLayout = () => {
             retry:10
         }
     );
+    const queryCache = new QueryCache({
+        onError: (error) => {
+            console.log(error)
+        },
+        onSuccess: (data) => {
+            console.log(data)
+        },
+        onSettled: (data, error) => {
+            console.log(data, error)
+        },
+    })
+    queryCache.find(['getMassage'])
 // Fetch the next page if the last item is in view and there are more pages to fetch
     useEffect( () => {
         if (inView && hasNextPage) {
-            // @ts-ignore
+
             fetchNextPage().then();
         }
-    }, [fetchNextPage, hasNextPage,inView]);
+    }, [fetchNextPage, hasNextPage]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
@@ -105,7 +118,6 @@ const MainContent: NextPageWithLayout = () => {
     }, [messages]);
     //concat data infinite scroll
     const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
-
     // @ts-ignore
     if (!router.isReady) {
         return <div>loading...</div>
@@ -116,10 +128,10 @@ const MainContent: NextPageWithLayout = () => {
                 <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
                     <div>
-                        <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
+                        <div className="flex  flex-row  min-h-[72vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div  className=" h-[50vh] overflow-y-scroll  mt-5">
+                                <div  className=" h-[65vh] overflow-y-scroll ">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <ClipLoader
@@ -130,16 +142,14 @@ const MainContent: NextPageWithLayout = () => {
                                             </div> :
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
-                                                style={{ display: 'flex', flexDirection: 'column' ,overflow:"visible" }}
+                                                style={{ display: 'flex', flexDirection: 'column' }}
                                                 dataLength={pages?.length || 0}
                                                 next={fetchNextPage}
-                                                hasMore={!hasNextPage}
-                                                loader={<div>load</div>}
+                                                hasMore={!!hasNextPage}
+                                                loader={<div/>}
                                             >
-                                                <div className={"flex items-center justify-center "}>
+                                                <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
                                                     <button
-                                                        ref={ref}
-
                                                         disabled={!hasNextPage || isFetchingNextPage}
                                                     >
                                                         {isFetchingNextPage?  <ClipLoader

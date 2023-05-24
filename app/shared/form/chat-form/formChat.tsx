@@ -19,7 +19,7 @@ const ChatForm:React.FC<ChatInputProps> = ({onSendMessage }) => {
     });
     return (
         <>
-            <form className="flex relative z-10  my-4 w-full  bg-gray-100  rounded-xl lg:mt-[9rem]" onSubmit={sendMassage.handleSubmit}>
+            <form className="flex relative z-10  my-4 w-full  bg-gray-100  rounded-xl lg:mt-[1rem]" onSubmit={sendMassage.handleSubmit}>
                 <input
                     className="flex-1 bg-gray-100 focus:outline-blue-gray-400 py-3 focus:bg-[#10515c] focus:text-white px-2 "
                     type="text"

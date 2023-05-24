@@ -50,7 +50,7 @@ const SideBarChat = () => {
         }
         , cacheTime: 1000,
     })
-
+    //effect side
     useEffect( () => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
@@ -63,10 +63,9 @@ const SideBarChat = () => {
         <>
             <section className={"border-r  lg:w-1/2 xl:w-1/4  w-full"}>
                 <div className={"flex items-center justify-start px-4 pt-2"}>
-                    <i className="md:hidden ri-chat-1-fill text-gray-400 hover:text-gray-600 text-2xl  cursor-pointer block"
+                    <i className="lg:hidden ri-chat-1-fill text-gray-400 hover:text-gray-600 text-2xl  cursor-pointer block"
                        onClick={() => setIsOpen(!isOpen)}></i>
                 </div>
-
                 {
                     status === 'loading' ? (
                         <div className={"min-h-[70vh] flex items-center justify-center flex-col"}>
@@ -88,7 +87,7 @@ const SideBarChat = () => {
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
                         </div>
                     ) : (
-                        <ul className={"hidden md:block overflow-y-scroll h-[43rem] flex flex-col gap-4 items-start px-4 pt-8"}>
+                        <ul className={"hidden lg:block overflow-y-scroll lg:h-[40rem]  flex flex-col gap-4 items-start px-4 pt-8"}>
                             {/*get and map data in load more*/}
                             {
                                 chatList?.pages?.map((page, id) => {
@@ -119,7 +118,7 @@ const SideBarChat = () => {
                         </ul>
                     )
                 }
-                <div className={"z-20 pt-10 relative md:hidden"}>
+                <div className={"z-20 relative lg:hidden"}>
                     <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
                             pages?.length ?
