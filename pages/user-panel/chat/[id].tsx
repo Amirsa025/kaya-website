@@ -23,6 +23,7 @@ const MainContent: NextPageWithLayout = () => {
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
+    const [loading, setLoading] = useState(false);
     const itemsRef = useRef<HTMLDivElement>();
     //function
     const handleSendMessage = async (formPayload: any) => {
@@ -109,6 +110,7 @@ const MainContent: NextPageWithLayout = () => {
         if (inView && hasNextPage) {
 
             fetchNextPage().then();
+            setLoading(true)
         }
     }, [fetchNextPage, hasNextPage]);
     useEffect(() => {
@@ -128,35 +130,27 @@ const MainContent: NextPageWithLayout = () => {
                 <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
                     <div>
-                        <div className="flex  flex-row  min-h-[72vh] justify-evenly ">
+                        <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div  className=" h-[65vh] overflow-y-scroll ">
+                                <div  className="h-[70vh] md:h-[65vh] overflow-y-scroll  mt-5">
                                     {
                                         isLoading ? <div className={"center-item"}>
-                                                <ClipLoader
-                                                    size={50}
-                                                    aria-label="Loading Spinner"
-                                                    data-testid="loader"
-                                                />
+                                                <div className={`px-6 py-1 text-[12px] bg-blue-600 text-white border rounded-full ${isLoading?'animate__animated animate__fadeInUp':'animate__animated animate__fadeInDown'} `}>updating</div>
                                             </div> :
                                             <InfiniteScroll
                                                 scrollThreshold={0.75}
-                                                style={{ display: 'flex', flexDirection: 'column' }}
+                                                style={{ display: 'flex', flexDirection: 'column',overflow:"visible" }}
                                                 dataLength={pages?.length || 0}
                                                 next={fetchNextPage}
                                                 hasMore={!!hasNextPage}
+
                                                 loader={<div/>}
                                             >
                                                 <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
-                                                    <button
-                                                        disabled={!hasNextPage || isFetchingNextPage}
-                                                    >
-                                                        {isFetchingNextPage?  <ClipLoader
-                                                            size={50}
-                                                            aria-label="Loading Spinner"
-                                                            data-testid="loader"
-                                                        />: hasNextPage ?
+                                                    <button ref={ref}>
+                                                        {isFetchingNextPage?
+                                                            <div className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full ${isLoading?'animate__animated animate__fadeOutUp':'animate__animated animate__fadeInDown'} `}>updating conversion</div>: hasNextPage ?
                                                             <div className={"w-5  h-5 shadow rounded-full"}  onClick={() => fetchNextPage()}>
                                                                 <i className="ri-add-circle-line text-[20px]"></i>
                                                             </div>
