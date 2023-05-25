@@ -12,8 +12,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
-import ClipLoader from "react-spinners/ClipLoader";
-
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
@@ -85,12 +83,8 @@ const MainContent: NextPageWithLayout = () => {
                 return lastPage?.data?.messages?.length === LIMIT ? all.length: undefined
             }
             , cacheTime: 1000   ,
-            select: (data) =>
-                ({
-                pages: [...data.pages].reverse(),
-                pageParams: [...data.pageParams].reverse(),
-            }),
-            retry:10
+            retry:10,
+            staleTime: Infinity,
         }
     );
     const queryCache = new QueryCache({
@@ -112,7 +106,7 @@ const MainContent: NextPageWithLayout = () => {
             fetchNextPage().then();
             setLoading(true)
         }
-    }, [fetchNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage,inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
@@ -133,39 +127,43 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div  className="h-[70vh] md:h-[65vh] overflow-y-scroll  mt-5">
+                                <div  className="min-h-[70vh] md:min-h-[65vh] mt-3 ">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <div className={`px-6 py-1 text-[12px] bg-blue-600 text-white border rounded-full ${isLoading?'animate__animated animate__fadeInUp':'animate__animated animate__fadeInDown'} `}>updating</div>
                                             </div> :
-                                            <InfiniteScroll
-                                                scrollThreshold={0.75}
-                                                style={{ display: 'flex', flexDirection: 'column',overflow:"visible" }}
-                                                dataLength={pages?.length || 0}
-                                                next={fetchNextPage}
-                                                hasMore={!!hasNextPage}
+                                            <div id={"scrollableTarget"}>
+                                                <InfiniteScroll
+                                                    scrollThreshold={0.75}
+                                                    height={700}
+                                                    scrollableTarget={"scrollableTarget"}
+                                                    style={{ display: 'flex', flexDirection: 'column-reverse',overflow:"scroll" }}
+                                                    dataLength={pages?.length || 0}
+                                                    next={fetchNextPage}
+                                                    hasMore={!!hasNextPage}
+                                                    loader={<div/>}
+                                                >
+                                                    {
+                                                        GetMessage?.pages?.flatMap((page: any, id: number) => {
+                                                            // @ts-ignore
+                                                            return <MessagesChat  key={id} isToday={isToday} page={page?.data}/>
 
-                                                loader={<div/>}
-                                            >
-                                                <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
-                                                    <button ref={ref}>
-                                                        {isFetchingNextPage?
-                                                            <div className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full ${isLoading?'animate__animated animate__fadeOutUp':'animate__animated animate__fadeInDown'} `}>updating conversion</div>: hasNextPage ?
-                                                            <div className={"w-5  h-5 shadow rounded-full"}  onClick={() => fetchNextPage()}>
-                                                                <i className="ri-add-circle-line text-[20px]"></i>
-                                                            </div>
-                                                            :   <div className={"animate__fadeInUp"}></div>}
-                                                    </button>
-                                                </div>
-                                                {
-                                                    GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                           // @ts-ignore
-                                                        return <MessagesChat  key={id} isToday={isToday} page={page?.data}/>
+                                                        })
+                                                    }
 
-                                                    })
-                                                }
+                                                    <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
+                                                        <button ref={ref}>
+                                                            {isFetchingNextPage?
+                                                                <div className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating conversion</div>: hasNextPage ?
+                                                                    <div className={"w-5  h-5 shadow rounded-full"}  onClick={() => fetchNextPage()}>
+                                                                        <i className="ri-add-circle-line text-[20px]"></i>
+                                                                    </div>
+                                                                    :   <div className={"animate__fadeInUp"}></div>}
+                                                        </button>
+                                                    </div>
 
-                                            </InfiniteScroll>
+                                                </InfiniteScroll>
+                                            </div>
                                     }
                                     {/*post massages*/}
                                     <div>
