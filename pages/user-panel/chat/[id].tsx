@@ -12,16 +12,18 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
+
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
     const userId = router.query.id;
+    const ChatId = typeof userId === "string" ? userId : "";
     const cookie = new Cookies();
-    const LIMIT = 7;
+    const LIMIT = 10;
     const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
-    const [loading, setLoading] = useState(false);
+
     const itemsRef = useRef<HTMLDivElement>();
     //function
     const handleSendMessage = async (formPayload: any) => {
@@ -66,7 +68,6 @@ const MainContent: NextPageWithLayout = () => {
             }
         }
     }
-    const ChatId = typeof router.query?.id === "string" ? router.query.id : "";
     const {
         data: GetMessage,
         isLoading,
@@ -75,16 +76,16 @@ const MainContent: NextPageWithLayout = () => {
         hasNextPage
     } = useInfiniteQuery(
         ["getMassage", ChatId],
-        ({pageParam =0}) => fetchChatList(ChatId, pageParam),
+        ({pageParam = 0}) => fetchChatList(ChatId, pageParam),
         {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
 
-                return lastPage?.data?.messages?.length === LIMIT ? all.length: undefined
-            }
-            , cacheTime: 1000   ,
-            retry:10,
+                return lastPage?.data?.messages?.length === LIMIT ? all.length : undefined
+            },
             staleTime: Infinity,
+            cacheTime:1000,
+            retry: 10,
         }
     );
     const queryCache = new QueryCache({
@@ -100,21 +101,18 @@ const MainContent: NextPageWithLayout = () => {
     })
     queryCache.find(['getMassage'])
 // Fetch the next page if the last item is in view and there are more pages to fetch
-    useEffect( () => {
+    useEffect(() => {
         if (inView && hasNextPage) {
-
             fetchNextPage().then();
-            setLoading(true)
         }
-    }, [fetchNextPage, hasNextPage,inView]);
+    }, [fetchNextPage, hasNextPage, inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
-        itemsRef?.current?.lastChild?.scrollIntoView({ behavior: 'smooth' });
+        itemsRef?.current?.lastChild?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
     //concat data infinite scroll
     const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
-    // @ts-ignore
     if (!router.isReady) {
         return <div>loading...</div>
     }
@@ -127,42 +125,52 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div  className="min-h-[70vh] md:min-h-[65vh] mt-3 ">
+                                <div className="min-h-[70vh] md:min-h-[65vh] ">
                                     {
                                         isLoading ? <div className={"center-item"}>
-                                                <div className={`px-6 py-1 text-[12px] bg-blue-600 text-white border rounded-full ${isLoading?'animate__animated animate__fadeInUp':'animate__animated animate__fadeInDown'} `}>updating</div>
+                                                <div
+                                                    className={`px-6 py-1 text-[12px] bg-blue-600 text-white border rounded-full ${isLoading ? 'animate__animated animate__fadeInUp' : 'animate__animated animate__fadeInDown'} `}>updating
+                                                </div>
                                             </div> :
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
-                                                    height={700}
+                                                    height={650}
                                                     scrollableTarget={"scrollableTarget"}
-                                                    style={{ display: 'flex', flexDirection: 'column-reverse',overflow:"scroll" }}
+                                                    style={{
+                                                        display: 'flex',
+                                                        flexDirection: 'column-reverse',
+                                                        overflow: "scroll"
+                                                    }}
                                                     dataLength={pages?.length || 0}
                                                     next={fetchNextPage}
                                                     hasMore={!!hasNextPage}
                                                     loader={<div/>}
+                                                    inverse={true}
                                                 >
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                            // @ts-ignore
-                                                            return <MessagesChat  key={id} isToday={isToday} page={page?.data}/>
+                                                            return <MessagesChat key={id} isToday={isToday} page={page?.data}/>
 
                                                         })
                                                     }
-
-                                                    <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
+                                                    <div
+                                                        className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
                                                         <button ref={ref}>
-                                                            {isFetchingNextPage?
-                                                                <div className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating conversion</div>: hasNextPage ?
-                                                                    <div className={"w-5  h-5 shadow rounded-full"}  onClick={() => fetchNextPage()}>
+                                                            {isFetchingNextPage ?
+                                                                <div
+                                                                    className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating conversion</div> : hasNextPage ?
+                                                                    <div
+                                                                        className={"w-5  h-5 shadow rounded-full"}
+                                                                        onClick={() => fetchNextPage()}>
                                                                         <i className="ri-add-circle-line text-[20px]"></i>
                                                                     </div>
-                                                                    :   <div className={"animate__fadeInUp"}></div>}
+                                                                    : <div
+                                                                        className={"animate__fadeInUp"}></div>}
                                                         </button>
                                                     </div>
-
                                                 </InfiniteScroll>
+
                                             </div>
                                     }
                                     {/*post massages*/}
@@ -179,8 +187,10 @@ const MainContent: NextPageWithLayout = () => {
                                                         <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
                                                             <span>  {chat?.text}</span>
                                                             {
-                                                                isToday(chat?.date) ? <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
-                                                                    <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                                isToday(chat?.date) ? <div
+                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
+                                                                    <div
+                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
                                                             }
                                                         </li>
                                                     </ul>
