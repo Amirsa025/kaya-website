@@ -133,7 +133,6 @@ const MainContent: NextPageWithLayout = () => {
                                                 </div>
                                             </div> :
                                             <div id={"scrollableTarget"}>
-
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
                                                     height={650}
@@ -151,7 +150,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 >
                                                     <div className={"flex flex-col"}>
                                                         {
-                                                            messages.flatMap((chat, ChatId) => {
+                                                            messages?.flatMap((chat, ChatId) => {
                                                                 const dates = [new Date(chat?.date)]
                                                                 const formattedDates = dates.flatMap(date => `${date?.getHours()}:${date?.getMinutes()}`);
                                                                 const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth() + 1}-${date?.getDay()}`);
@@ -160,7 +159,7 @@ const MainContent: NextPageWithLayout = () => {
                                                                     <ul ref={itemsRef} key={ChatId}
                                                                         className={`flex  items-center mb-4 justify-end`}>
                                                                         <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
-                                                                            <span>  {chat?.text}</span>
+                                                                            <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{chat?.text}</span>
                                                                             {
                                                                                 isToday(chat?.date) ? <div
                                                                                         className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
@@ -175,13 +174,7 @@ const MainContent: NextPageWithLayout = () => {
                                                     </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                            return (
-                                                                <div>
-                                                                    <MessagesChat key={id} isToday={isToday} page={page?.data}/>
-
-                                                                </div>
-                                                            )
-
+                                                            return (<MessagesChat key={id} isToday={isToday} page={page?.data}/>)
                                                         })
                                                     }
                                                     <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>

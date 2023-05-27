@@ -16,10 +16,8 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                 if(page.messages.length===id+1){
                     return(<ul key={id} className={`flex  ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-2`}>
                         {
-                            // @ts-ignore
-                            massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+                            massage?.is_received ? <li  className=" mt-8 ml-2 py-4 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                     <div>
-                                        {/* @ts-ignore*/}
                                         <article className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.text}</article>
                                         {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                 <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.file_name}</span>
