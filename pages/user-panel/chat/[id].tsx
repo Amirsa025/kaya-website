@@ -133,6 +133,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 </div>
                                             </div> :
                                             <div id={"scrollableTarget"}>
+
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
                                                     height={650}
@@ -140,7 +141,7 @@ const MainContent: NextPageWithLayout = () => {
                                                     style={{
                                                         display: 'flex',
                                                         flexDirection: 'column-reverse',
-                                                        overflow: "scroll"
+                                                        overflow: "scroll",
                                                     }}
                                                     dataLength={pages?.length || 0}
                                                     next={fetchNextPage}
@@ -148,14 +149,43 @@ const MainContent: NextPageWithLayout = () => {
                                                     loader={<div/>}
                                                     inverse={true}
                                                 >
+                                                    <div className={"flex flex-col"}>
+                                                        {
+                                                            messages.flatMap((chat, ChatId) => {
+                                                                const dates = [new Date(chat?.date)]
+                                                                const formattedDates = dates.flatMap(date => `${date?.getHours()}:${date?.getMinutes()}`);
+                                                                const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth() + 1}-${date?.getDay()}`);
+                                                                return (
+                                                                    // @ts-ignore
+                                                                    <ul ref={itemsRef} key={ChatId}
+                                                                        className={`flex  items-center mb-4 justify-end`}>
+                                                                        <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
+                                                                            <span>  {chat?.text}</span>
+                                                                            {
+                                                                                isToday(chat?.date) ? <div
+                                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
+                                                                                    <div
+                                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                                            }
+                                                                        </li>
+                                                                    </ul>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                            return <MessagesChat key={id} isToday={isToday} page={page?.data}/>
+                                                            return (
+                                                                <div>
+                                                                    <MessagesChat key={id} isToday={isToday} page={page?.data}/>
+
+                                                                </div>
+                                                            )
 
                                                         })
                                                     }
-                                                    <div
-                                                        className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
+                                                    <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
+
                                                         <button ref={ref}>
                                                             {isFetchingNextPage ?
                                                                 <div
@@ -170,34 +200,10 @@ const MainContent: NextPageWithLayout = () => {
                                                         </button>
                                                     </div>
                                                 </InfiniteScroll>
-
                                             </div>
                                     }
                                     {/*post massages*/}
-                                    <div>
-                                        {
-                                            messages.flatMap((chat, ChatId) => {
-                                                const dates = [new Date(chat?.date)]
-                                                const formattedDates = dates.flatMap(date => `${date?.getHours()}:${date?.getMinutes()}`);
-                                                const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth() + 1}-${date?.getDay()}`);
-                                                return (
-                                                    // @ts-ignore
-                                                    <ul ref={itemsRef} key={ChatId}
-                                                        className={`flex  items-center mb-4 justify-end`}>
-                                                        <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
-                                                            <span>  {chat?.text}</span>
-                                                            {
-                                                                isToday(chat?.date) ? <div
-                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
-                                                                    <div
-                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
-                                                            }
-                                                        </li>
-                                                    </ul>
-                                                )
-                                            })
-                                        }
-                                    </div>
+
                                 </div>
                                 {/*send Message*/}
                                 <ChatForm onSendMessage={handleSendMessage}/>
