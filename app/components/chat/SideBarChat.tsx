@@ -90,7 +90,7 @@ const SideBarChat = () => {
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
                         </div>
                     ) : (
-                        <ul className={"hidden lg:block overflow-y-scroll lg:h-[40rem]  2xl:h-[43rem] flex flex-col gap-4 items-start px-4 pt-8"}>
+                        <ul className={"hidden lg:block overflow-y-scroll lg:h-[40rem]  2xl:h-[41rem] flex flex-col gap-4 items-start px-4 pt-8"}>
                             {/*get and map data in load more*/}
                             {
                                 chatList?.pages?.map((page, id) => {
@@ -125,7 +125,7 @@ const SideBarChat = () => {
                     <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
                             pages?.length ?
-                                <ul className={" overflow-y-scroll h-[44rem] flex flex-col gap-4 items-start px-4"}>
+                                <ul className={" overflow-y-scroll h-[41rem] flex flex-col gap-4 items-start px-4"}>
                                     {pages?.map((page,id) =>{
                                             return(
                                                 <React.Fragment key={id}>

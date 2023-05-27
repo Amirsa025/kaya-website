@@ -14,7 +14,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                     const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
                     const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
                 if(page.messages.length===id+1){
-                    return(<ul key={id}   className={`flex  ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-4`}>
+                    return(<ul key={id} className={`flex  ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-2`}>
                         {
                             // @ts-ignore
                             massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
