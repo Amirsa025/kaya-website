@@ -7,48 +7,23 @@ import ChatForm from "@/app/shared/form/chat-form/formChat";
 import SubChatLayout from "@/app/components/layout/SubChatlayout";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import {QueryCache, useInfiniteQuery} from "@tanstack/react-query";
+import {QueryCache, useInfiniteQuery, useIsFetching} from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
-
+import {useGetmesaage} from "@/app/hooks/SendmessagesToServer";
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
     const userId = router.query.id;
     const ChatId = typeof userId === "string" ? userId : "";
-    const cookie = new Cookies();
     const LIMIT = 10;
-    const {ref, inView} = useInView()
     //state
     const [messages, setMessages] = useState<Message[]>([]);
-
     const itemsRef = useRef<HTMLDivElement>();
+    const {ref, inView} = useInView()
     //function
-    const handleSendMessage = async (formPayload: any) => {
-        try {
-            const res = await callApi().post(`/threads/threads/${userId}/messages`, {
-                text: formPayload.message
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
-                }
-            })
-            if (res.data) {
-                setMessages([...messages, res.data]);
-            }
-
-        } catch (err) {
-            console.log(err)
-        }
-    };
-    const isToday = (date: any) => {
-        const now = new Date();
-        if (date > now) return false;
-        return (+new Date() - +date) < 24 * 60 * 60 * 1000;
-    };
-    //query
     const fetchChatList = async (chatId: string | (string[] & string), pageParam: number) => {
         const cookie = new Cookies()
         try {
@@ -68,13 +43,19 @@ const MainContent: NextPageWithLayout = () => {
             }
         }
     }
-    const {
-        data: GetMessage,
-        isLoading,
-        fetchNextPage,
-        isFetchingNextPage,
-        hasNextPage
-    } = useInfiniteQuery(
+    const handleSendMessage = async (formPayload: any) => {
+        if (formPayload) {
+            setMessages([...messages, formPayload]);
+        }
+
+    };
+    const isToday = (date: any) => {
+        const now = new Date();
+        if (date > now) return false;
+        return (+new Date() - +date) < 24 * 60 * 60 * 1000;
+    };
+    //set Query for get message
+    const {data: GetMessage, isLoading, fetchNextPage,hasNextPage} = useInfiniteQuery(
         ["getMassage", ChatId],
         ({pageParam = 0}) => fetchChatList(ChatId, pageParam),
         {
@@ -83,9 +64,9 @@ const MainContent: NextPageWithLayout = () => {
 
                 return lastPage?.data?.messages?.length === LIMIT ? all.length : undefined
             },
-            staleTime: Infinity,
+            staleTime:Infinity,
             cacheTime:1000,
-            retry: 10,
+            refetchInterval:3000,
         }
     );
     const queryCache = new QueryCache({
@@ -99,8 +80,11 @@ const MainContent: NextPageWithLayout = () => {
             console.log(data, error)
         },
     })
+    const isFetchingPosts = useIsFetching({ queryKey: ['getMassage'] })
     queryCache.find(['getMassage'])
-// Fetch the next page if the last item is in view and there are more pages to fetch
+    const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
+    //effect side
+    // Fetch the next page if the last item is in view and there are more pages to fetch
     useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
@@ -111,18 +95,17 @@ const MainContent: NextPageWithLayout = () => {
         // @ts-ignore
         itemsRef?.current?.lastChild?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
-    //concat data infinite scroll
-    const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
     if (!router.isReady) {
         return <div>loading...</div>
     }
+
     return (
         <div>
             {
                 <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
                     <div>
-                        <div className="flex  flex-row  min-h-[65vh] justify-evenly ">
+                        <div className="flex flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
                                 <div className="min-h-[70vh] md:min-h-[65vh] ">
@@ -131,6 +114,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 <div
                                                     className={`px-6 py-1 text-[12px] bg-blue-600 text-white border rounded-full ${isLoading ? 'animate__animated animate__fadeInUp' : 'animate__animated animate__fadeInDown'} `}>updating
                                                 </div>
+                                                {/*post massages*/}
                                             </div> :
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
@@ -149,28 +133,6 @@ const MainContent: NextPageWithLayout = () => {
                                                     inverse={true}
                                                 >
                                                     <div className={"flex flex-col"}>
-                                                        {
-                                                            messages?.flatMap((chat, ChatId) => {
-                                                                const dates = [new Date(chat?.date)]
-                                                                const formattedDates = dates.flatMap(date => `${date?.getHours()}:${date?.getMinutes()}`);
-                                                                const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth() + 1}-${date?.getDay()}`);
-                                                                return (
-                                                                    // @ts-ignore
-                                                                    <ul ref={itemsRef} key={ChatId}
-                                                                        className={`flex  items-center mb-4 justify-end`}>
-                                                                        <li className={"flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"}>
-                                                                            <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{chat?.text}</span>
-                                                                            {
-                                                                                isToday(chat?.date) ? <div
-                                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div> :
-                                                                                    <div
-                                                                                        className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
-                                                                            }
-                                                                        </li>
-                                                                    </ul>
-                                                                )
-                                                            })
-                                                        }
                                                     </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
@@ -178,9 +140,8 @@ const MainContent: NextPageWithLayout = () => {
                                                         })
                                                     }
                                                     <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
-
                                                         <button ref={ref}>
-                                                            {isFetchingNextPage ?
+                                                            {isFetchingPosts ?
                                                                 <div
                                                                     className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating conversion</div> : hasNextPage ?
                                                                     <div
@@ -195,7 +156,6 @@ const MainContent: NextPageWithLayout = () => {
                                                 </InfiniteScroll>
                                             </div>
                                     }
-                                    {/*post massages*/}
 
                                 </div>
                                 {/*send Message*/}
@@ -206,8 +166,12 @@ const MainContent: NextPageWithLayout = () => {
                 </ChatLayout>
             }
         </div>
-
     );
 };
+
+//layout
 MainContent.getLayout = (page) => <SubChatLayout>{page}</SubChatLayout>
 export default MainContent;
+
+
+

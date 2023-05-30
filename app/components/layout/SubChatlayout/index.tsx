@@ -38,11 +38,11 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
             </div>
         </div>
     }
-
     if (!cookie.get('token') && !cookie.get('signUp')) {
             Router.replace('/').then()
         return <></>
     }
+
     return (
         <div className={"w-full "}>
             {loading ? <LinearProgress color="inherit"/> : null}
@@ -62,8 +62,7 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
                             </section>
                         </a>
                         <div className="md:hidden">
-                            <button className="open"
-                                    onClick={() => setState(!state)}
+                            <button className="open" onClick={() => setState(!state)}
                             >
                                 {
                                     state ? (
@@ -90,7 +89,7 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
                                         </a>
                                     </Link>
                                 </li>
-                                  <li  onClick={handleNavigate} >
+                                <li onClick={handleNavigate} >
                                     <a className={"flex gap-2 border px-4 py-2 border rounded-md hover:bg-[#eaebff] hover:border-indigo-600 hover:text-indigo-600 cursor-pointer "}>
                                       <span>بازگشت</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

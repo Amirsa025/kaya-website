@@ -2,6 +2,7 @@ import Cookies from 'universal-cookie';
 import {useMutation} from "@tanstack/react-query";
 import callApi from "@/app/helper/callApi";
 import axios from "axios";
+import {useRouter} from "next/router";
  const storeToken = (token:string,tokenName:string)=>{
      const cookies = new Cookies();
      cookies.set(`${tokenName}`,token,{
@@ -12,7 +13,6 @@ import axios from "axios";
      })
 
  }
-
 export const storeLoginToken = async (token : string , tokenName:string) => {
     await fetch('/api/token' , {
         method : 'POST',
@@ -22,7 +22,6 @@ export const storeLoginToken = async (token : string , tokenName:string) => {
         body : JSON.stringify({ token })
     })
 }
-
  const useLogin = () => {
     return useMutation((formPayload: void) => {
         return axios.post('https://apitest.kayadev.ir/api/v2/users/sign_in', {
@@ -33,6 +32,7 @@ export const storeLoginToken = async (token : string , tokenName:string) => {
         })
     });
 };
+
 const useSginUp = () => {
     return useMutation((formPayload: void) => {
         return callApi().post('/users/sign_up', {

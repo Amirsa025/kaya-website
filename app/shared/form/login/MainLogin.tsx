@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Link from "next/link";
 import {useFormik} from "formik";
 import Router from "next/router";
-import {storeLoginToken, storeToken, useLogin} from "@/app/helper/auth";
+import { storeToken, useLogin} from "@/app/helper/auth";
 import {NextPageWithLayout} from "@/pages/_app";
 import {toast} from "react-toastify";
 import {ClipLoader} from "react-spinners";
@@ -20,13 +20,12 @@ const MainLogin: NextPageWithLayout = () => {
             password: ''
         },
         validationSchema: SginINSchema,
-        onSubmit:
-            async (values: any) => {
+        onSubmit: async (values: any) => {
                 mutate(values, {
-                    onSuccess: (res) => {
-                        if (res.status === 200 && res.data.phone_verified === true) {
+                    onSuccess: (response) => {
+                        if (response.status === 200 && response.data.phone_verified === true) {
                             setDisable(true)
-                            setTimeout(async () => await Router.replace('/user-panel'), 3000)
+                            setTimeout(async () => await Router.replace('/user-panel'), 2000)
                             toast.success('شما باموفقیت  وارد شدید', {
                                 className:"toast-success-container",
                                 position: "top-center",
@@ -39,13 +38,12 @@ const MainLogin: NextPageWithLayout = () => {
                                 progress: undefined,
                                 theme: "colored",
                             });
-                            storeToken(res?.data?.token,'token')
-                            // storeLoginToken(res?.data?.token,'token')
+                            storeToken(response?.data?.token,'token')
                                 cookies.remove('signUp')
                         }
                     },
                     onError: async (response:any) => {
-                        toast.error(`${response.message}`, {
+                        toast.error(`${response.message?'خطا در برقراری ارتباط  ':null} `, {
                             position: "top-right",
                             autoClose: 3000,
                             hideProgressBar: false,

@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {useInfiniteQuery} from "@tanstack/react-query";
+import {QueryCache, useInfiniteQuery, useIsFetching} from "@tanstack/react-query";
 import {useInView} from 'react-intersection-observer'
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
-import {BeatLoader, ScaleLoader} from "react-spinners";
+import {ScaleLoader} from "react-spinners";
 import ChatList from "@/app/components/chat/Chatlist";
 import Link from 'next/link';
 import {useRouter} from "next/router";
 //variable
 const cookie = new Cookies()
 const LIMIT = 6;
-
 //function
 const fetchChatList = async (pageParam: number) => {
 
@@ -24,7 +23,6 @@ const fetchChatList = async (pageParam: number) => {
         console.log(err)
     }
 }
-
 const isToday = (date:any) => {
     const now = new Date();
     if (date > now) return false;
@@ -46,19 +44,36 @@ const SideBarChat = () => {
         queryFn: ({pageParam = 0}) => fetchChatList(pageParam),
         getNextPageParam: (lastPage,allPages) => {
             // @ts-ignore
-            return lastPage?.data.threads.length === LIMIT ? allPages[0].data.threads.length  : undefined
-        }
-        , cacheTime: 1000,
+            const all = allPages.flatMap((item) => item?.data.threads)
+            return lastPage?.data.threads.length === LIMIT ? all.length  : undefined
+        },
+        staleTime:Infinity,
+        cacheTime:1000,
+        refetchInterval:1000,
     })
+    const queryCache = new QueryCache({
+        onError: (error) => {
+            console.log(error)
+        },
+        onSuccess: (data) => {
+            console.log(data)
+        },
+        onSettled: (data, error) => {
+            console.log(data, error)
+        },
+    })
+    queryCache.find(['ChatList'])
+    const isFetchingPosts = useIsFetching({ queryKey: ['ChatList'] })
     //effect side
     useEffect( () => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
         }
     }, [inView, fetchNextPage, hasNextPage]);
-    const pages = chatList?.pages.map((group: any) => group?.data)
+    const pages = chatList?.pages.flatMap((group: any) => group?.data)
     const router = useRouter()
 
+    // @ts-ignore
     return (
         <>
             <section className={"border-r  lg:w-1/2 xl:w-1/4  w-full"}>
@@ -73,9 +88,7 @@ const SideBarChat = () => {
                     status === 'loading' ? (
                         <div className={"min-h-[70vh] flex items-center justify-center flex-col"}>
                             <ScaleLoader
-                                color="#4B6677"
-                                height={70}
-                                width={10}
+                                color="#4A6576"
                             />
                         </div>
                     ) : status === 'error' ? (
@@ -93,7 +106,7 @@ const SideBarChat = () => {
                         <ul className={"hidden lg:block overflow-y-scroll lg:h-[40rem]  2xl:h-[41rem] flex flex-col gap-4 items-start px-4 pt-8"}>
                             {/*get and map data in load more*/}
                             {
-                                chatList?.pages?.map((page, id) => {
+                                chatList?.pages?.flatMap((page, id) => {
                                     return (
                                         <ChatList key={id} page={page?.data} isToday={isToday}/>
                                     )
@@ -105,14 +118,15 @@ const SideBarChat = () => {
                                     onClick={() => fetchNextPage()}
                                     disabled={!hasNextPage || isFetchingNextPage}
                                 >
-                                    {isFetchingNextPage
+                                    {isFetchingPosts
                                         ? <div className={"animate__animated animate__fadeInDown text-[10px]"}>
-                                            <BeatLoader
+                                            <ScaleLoader
                                                 color="#4A6576"
-                                                size={10}
-                                            /> </div>
+                                            />
+                                    </div>
                                         : hasNextPage
-                                            ?    <div className={" w-7 h-7 shadow rounded-full"}>
+                                            ?
+                                            <div className={" w-7 h-7 shadow rounded-full"}>
                                                 <i className="flex items-center justify-center block text-3xl ri-arrow-drop-down-line"></i>
                                             </div>
                                             : null}
@@ -126,11 +140,11 @@ const SideBarChat = () => {
                         {
                             pages?.length ?
                                 <ul className={" overflow-y-scroll h-[41rem] flex flex-col gap-4 items-start px-4"}>
-                                    {pages?.map((page,id) =>{
+                                    {pages?.flatMap((page,id) =>{
                                             return(
                                                 <React.Fragment key={id}>
                                                     {
-                                                        page?.threads.map((chat:any,id:number)=>{
+                                                        page?.threads.flatMap((chat:any,id:number)=>{
                                                             const dateRes= chat?.date*1000
                                                             const dates = [new Date(dateRes)]
                                                             const formattedDates = dates.map(date => `${date?.getHours()}:${date?.getMinutes()}`);
@@ -211,8 +225,7 @@ const SideBarChat = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
                                     </svg>
-                                    <span
-                                        className={"font-bold txt-8 "}> you are not exist chat </span>
+                                    <span className={"font-bold txt-8 "}> you are not exist chat </span>
                                 </div>)
                         }
                     </div>

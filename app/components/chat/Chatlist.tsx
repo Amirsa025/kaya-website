@@ -17,7 +17,7 @@ const ChatList:React.FC<IChatProps> = ({page,isToday}) => {
                     const GetDate = dates.map(date => ` ${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
                     if(page?.threads.length===id+1){
                         return (
-                            <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={chat?.thread_id} >
+                            <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
                                 <a className={"sendMassageButton text-white hover:text-black  mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100"}>
                                     <span></span>
                                     <div  className={"w-full"}>

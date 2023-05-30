@@ -1,20 +1,41 @@
 import React from 'react';
 import {useFormik} from "formik";
 import {massageSchema} from "@/app/shared/form/chat-form/validation";
-
+import {toast} from "react-toastify";
+import { useGetmesaage } from '@/app/hooks/SendmessagesToServer';
+import {useQueryClient} from "@tanstack/react-query";
 interface ChatInputProps {
     onSendMessage: (message: string) => void;
 }
-
 const ChatForm: React.FC<ChatInputProps> = ({onSendMessage}) => {
+    const queryClient = useQueryClient()
+    const {mutate} = useGetmesaage();
     const sendMassage = useFormik({
         initialValues: {
             message: '',
         },
         validationSchema: massageSchema,
-        onSubmit: (formPayload: any, {resetForm}) => {
-            onSendMessage(formPayload)
-            resetForm()
+        onSubmit: (values: any, {resetForm}) => {
+            mutate(values,
+                {
+                onSuccess: (response) => {
+                    onSendMessage(response?.data)
+                    resetForm()
+                },
+                onError: async (response:any) => {
+                    toast.error(`${response.message?'خطا در برقراری ارتباط  ':null} `, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                }
+            }
+            );
         }
     });
     return (

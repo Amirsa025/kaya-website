@@ -4,7 +4,6 @@ interface IMessagesProps {
     isToday:any
 }
 const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
-
     return (
         <div className={"flex flex-col-reverse"}>
             {
@@ -49,6 +48,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                             massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                     <div>
                                         <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.text}</span>
+
                                         {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                 <span className={"text-sm "}>{massage?.file_name}</span>
                                                 <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
@@ -62,6 +62,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                                 <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                     <div>
                                         <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.text}</span>
+
                                         {
                                             isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
                                         }
@@ -71,7 +72,6 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                                 </li>
                         }
 
-                        {/*//@ts-ignore*/}
                     </ul>)
                 })
             }
