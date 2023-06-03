@@ -28,9 +28,9 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                                         }
                                     </div>
                                 </li>:
-                                <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white ">
                                     <div>
-                                        <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.text}</span>
+                                        <span className={"text-sm md:text-[10px] lg:text-[13px] "}>{massage?.text}</span>
                                         {
                                             isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
                                         }
@@ -39,8 +39,6 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
 
                                 </li>
                         }
-
-                        {/*//@ts-ignore*/}
                     </ul>)
                 }
                     return(<ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-3`}>
@@ -59,6 +57,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                                         }
                                     </div>
                                 </li>:
+                                //send massage
                                 <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#3D5A6C] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                                     <div>
                                         <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.text}</span>

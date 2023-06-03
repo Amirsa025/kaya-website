@@ -12,17 +12,20 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
-import {useGetmesaage} from "@/app/hooks/SendmessagesToServer";
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
     const userId = router.query.id;
     const ChatId = typeof userId === "string" ? userId : "";
-    const LIMIT = 10;
+    const LIMIT = 7;
     //state
     const [messages, setMessages] = useState<Message[]>([]);
     const itemsRef = useRef<HTMLDivElement>();
     const {ref, inView} = useInView()
+    const matches = useMediaQuery('(max-width:1366px)');
+
     //function
     const fetchChatList = async (chatId: string | (string[] & string), pageParam: number) => {
         const cookie = new Cookies()
@@ -37,10 +40,8 @@ const MainContent: NextPageWithLayout = () => {
             if (error?.code === 'ECONNRESET') {
                 console.log('Connection was reset.');
                 // You can retry the request here by calling the function again after a short delay.
-            } else {
-                // @ts-ignore
-                console.log('Error occurred:', error);
             }
+
         }
     }
     const handleSendMessage = async (formPayload: any) => {
@@ -66,7 +67,7 @@ const MainContent: NextPageWithLayout = () => {
             },
             staleTime:Infinity,
             cacheTime:1000,
-            refetchInterval:3000,
+            refetchInterval:7000,
         }
     );
     const queryCache = new QueryCache({
@@ -119,7 +120,7 @@ const MainContent: NextPageWithLayout = () => {
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
-                                                    height={650}
+                                                    height={matches?500:700}
                                                     scrollableTarget={"scrollableTarget"}
                                                     style={{
                                                         display: 'flex',

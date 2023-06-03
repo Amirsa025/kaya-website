@@ -9,18 +9,24 @@ import Link from 'next/link';
 import {useRouter} from "next/router";
 //variable
 const cookie = new Cookies()
-const LIMIT = 6;
+const LIMIT = 9;
 //function
 const fetchChatList = async (pageParam: number) => {
-
     try {
-        return await callApi().get(`/threads/threads?limit=${LIMIT}&offset=${pageParam}`, {
+        const response = await callApi().get(`/threads/threads?limit=${LIMIT}&offset=${pageParam}`, {
             headers: {
                 'Authorization': `Bearer ${cookie.get('signUp') || cookie.get('token')}`
             }
         })
-    } catch (err) {
-        console.log(err)
+
+        if (response.status === 200) {
+            return response // or do something else with the data
+        } else {
+            throw new Error(response.statusText)
+        }
+    } catch (err:any) {
+        throw new Error('Failed to fetch chat list: ' + err.message)
+
     }
 }
 const isToday = (date:any) => {
@@ -49,7 +55,7 @@ const SideBarChat = () => {
         },
         staleTime:Infinity,
         cacheTime:1000,
-        refetchInterval:1000,
+        refetchInterval:7000,
     })
     const queryCache = new QueryCache({
         onError: (error) => {
@@ -73,25 +79,17 @@ const SideBarChat = () => {
     const pages = chatList?.pages.flatMap((group: any) => group?.data)
     const router = useRouter()
 
-    // @ts-ignore
     return (
         <>
             <section className={"border-r  lg:w-1/2 xl:w-1/4  w-full"}>
                 <div className={"flex items-center justify-start px-4 pt-2"}>
-
                     <svg   onClick={() => setIsOpen(!isOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 lg:hidden ri-chat-1-fill text-gray-400 hover:text-gray-600 text-2xl  cursor-pointer block">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                     </svg>
 
                 </div>
                 {
-                    status === 'loading' ? (
-                        <div className={"min-h-[70vh] flex items-center justify-center flex-col"}>
-                            <ScaleLoader
-                                color="#4A6576"
-                            />
-                        </div>
-                    ) : status === 'error' ? (
+                    status === 'error' ? (
                         <div
                             className={"text-yellow-900 text-center flex h-full items-center gap-2 justify-center min-h-[70vh]"}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -103,12 +101,15 @@ const SideBarChat = () => {
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
                         </div>
                     ) : (
-                        <ul className={"hidden lg:block overflow-y-scroll lg:h-[40rem]  2xl:h-[41rem] flex flex-col gap-4 items-start px-4 pt-8"}>
+                        <ul className={"hidden lg:block overflow-y-scroll lg:h-[40rem]  2xl:h-[40rem] flex flex-col items-start px-4 "}>
                             {/*get and map data in load more*/}
                             {
                                 chatList?.pages?.flatMap((page, id) => {
                                     return (
-                                        <ChatList key={id} page={page?.data} isToday={isToday}/>
+                                        <React.Fragment key={id}>
+
+                                            <ChatList  page={page?.data} isToday={isToday}/>
+                                        </React.Fragment>
                                     )
                                 })
                             }
@@ -139,7 +140,7 @@ const SideBarChat = () => {
                     <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
                             pages?.length ?
-                                <ul className={" overflow-y-scroll h-[41rem] flex flex-col gap-4 items-start px-4"}>
+                                <ul className={" overflow-y-scroll h-[43rem] lg:h-[37rem] flex flex-col gap-4 items-start px-4"}>
                                     {pages?.flatMap((page,id) =>{
                                             return(
                                                 <React.Fragment key={id}>

@@ -3,12 +3,12 @@ import {useFormik} from "formik";
 import {massageSchema} from "@/app/shared/form/chat-form/validation";
 import {toast} from "react-toastify";
 import { useGetmesaage } from '@/app/hooks/SendmessagesToServer';
-import {useQueryClient} from "@tanstack/react-query";
 interface ChatInputProps {
     onSendMessage: (message: string) => void;
 }
+
 const ChatForm: React.FC<ChatInputProps> = ({onSendMessage}) => {
-    const queryClient = useQueryClient()
+
     const {mutate} = useGetmesaage();
     const sendMassage = useFormik({
         initialValues: {
@@ -36,18 +36,17 @@ const ChatForm: React.FC<ChatInputProps> = ({onSendMessage}) => {
                 }
             }
             );
-        }
+        } 
     });
     return (
         <>
             <form className="flex relative z-10  my-4 w-full  bg-gray-100  rounded-xl lg:mt-[1rem]"
                   onSubmit={sendMassage.handleSubmit}>
-                <input className="flex-1 bg-gray-100 focus:outline-blue-gray-400 py-3 text-[12px] focus:bg-[#10515c] focus:text-white px-2 "
-                    type="text"
-                    name={"message"}
-                    value={sendMassage.values.message}
-                    onChange={sendMassage.handleChange}
-                    placeholder="type your message here..."
+                <textarea autoComplete="false" className="flex-1 bg-gray-100  focus:outline-blue-gray-400 pt-6 text-[12px] focus:bg-[#10515c] focus:text-white px-2 "
+                          name={"message"}
+                          value={sendMassage.values.message}
+                          onChange={sendMassage.handleChange}
+                          placeholder="type your message here..."
                 />
                 <button type={"submit"} className={"sendMassageButton bg-[#3D5A6C] my-2 text-white px-4 mx-2  rounded-xl "}>
                     <span></span>
