@@ -13,7 +13,6 @@ import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
 import useMediaQuery from '@mui/material/useMediaQuery';
-
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
@@ -25,7 +24,6 @@ const MainContent: NextPageWithLayout = () => {
     const itemsRef = useRef<HTMLDivElement>();
     const {ref, inView} = useInView()
     const matches = useMediaQuery('(max-width:1366px)');
-
     //function
     const fetchChatList = async (chatId: string | (string[] & string), pageParam: number) => {
         const cookie = new Cookies()
@@ -99,7 +97,6 @@ const MainContent: NextPageWithLayout = () => {
     if (!router.isReady) {
         return <div>loading...</div>
     }
-
     return (
         <div>
             {
@@ -137,6 +134,7 @@ const MainContent: NextPageWithLayout = () => {
                                                     </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
+
                                                             return (<MessagesChat key={id} isToday={isToday} page={page?.data}/>)
                                                         })
                                                     }
@@ -147,11 +145,10 @@ const MainContent: NextPageWithLayout = () => {
                                                                     className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating conversion</div> : hasNextPage ?
                                                                     <div
                                                                         className={"w-5  h-5 shadow rounded-full"}
-                                                                        onClick={() => fetchNextPage()}>
+                                                                        onClick={() =>fetchNextPage()}>
                                                                         <i className="ri-add-circle-line text-[20px]"></i>
                                                                     </div>
-                                                                    : <div
-                                                                        className={"animate__fadeInUp"}></div>}
+                                                                    : <div className={"animate__fadeInUp"}></div>}
                                                         </button>
                                                     </div>
                                                 </InfiniteScroll>

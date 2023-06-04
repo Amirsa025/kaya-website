@@ -1,6 +1,6 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import Heading from "@/app/shared/HeadingTitle";
-import {DotLoader, ScaleLoader} from "react-spinners";
+import {ScaleLoader} from "react-spinners";
 import Cookies from "universal-cookie";
 import Router from "next/router";
 import AsidePanel from "@/app/shared/Aside-Panel";
@@ -38,7 +38,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             {loading ? <LinearProgress color="inherit"/> : null}
             <Heading page={"پنل کاربر"} titlesite={" کایا"}/>
             <Header/>
-            <div className={" flex lg:pt-10 pt-32 flex-col lg:flex-row space-y-6 space-x-3.5 "}>
+            <div className={" flex  flex-col lg:flex-row space-y-6 space-x-3.5 "}>
                   <AsidePanel/>
                     <div className={"pb-[7rem] sm:pb-0 md:pb-[1rem] w-full   md:px-0 "}>
                     {children}

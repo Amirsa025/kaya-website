@@ -7,6 +7,12 @@ module.exports = withMT({
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'mobile': '400px',
+      'tablet': '768px',
+      'laptop': '1024px',
+      'desktop': '1440px',
+    },
     extend: {
       fontFamily: {
         'IRANSans': ['IRANSans', 'sans-serif']
