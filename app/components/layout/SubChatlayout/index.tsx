@@ -2,11 +2,10 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import Heading from "@/app/shared/HeadingTitle";
 import {ScaleLoader} from "react-spinners";
 import Cookies from "universal-cookie";
-import Router, {useRouter} from "next/router";
-
 import LinearProgress from "@mui/material/LinearProgress";
 import Link from "next/link";
-
+import Router from "next/router";
+import {useRouter} from "next/navigation";
 interface IPropsAdmin {
     children: ReactNode
 }
@@ -18,9 +17,9 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
     const [state, setState] = useState(false)
     const handleNavigate = ()=>{
         if(cookie.get('signUp') ||  cookie.get('token')){
-            router.replace('/user-panel/chat').then()
+            router.replace('/user-panel/chat')
         }else {
-            router.replace('/login').then()
+            router.replace('/login')
         }
     }
     useEffect(() => {
@@ -124,7 +123,7 @@ const SubChatLayout: React.FC<IPropsAdmin> = ({children}) => {
                     </div>
                 </div>
             </nav>
-            <div className={" flex  pt-[5rem] xl:pt-[3.5rem] flex-col lg:flex-row  "}>
+            <div className={" flex   flex-col lg:flex-row  "}>
                 <div className={" sm:pb-0 md:pb-[1rem] w-full   md:px-0 "}>
                     {children}
                 </div>

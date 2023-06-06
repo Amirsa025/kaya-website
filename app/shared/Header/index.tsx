@@ -80,7 +80,7 @@ const Header = () => {
         </div>
     }
     return (
-        <nav className="container-app bg-white w-full fixed z-[1000] md:relative border-b-2 md:border-0">
+        <nav className="container-app bg-white w-full fixed z-[1000] md:relative  md:border-0">
             <div className="md:flex items-center justify-between px-4">
                 <div className=" flex items-center justify-between py-2 md:py-5 md:flex ">
                     <a href="#">

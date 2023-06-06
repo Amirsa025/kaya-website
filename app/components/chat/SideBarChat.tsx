@@ -10,7 +10,7 @@ import {useRouter} from "next/router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 //variable
 const cookie = new Cookies()
-const LIMIT = 9;
+const LIMIT = 8;
 //function
 const fetchChatList = async (pageParam: number) => {
     try {
@@ -102,7 +102,7 @@ const SideBarChat = () => {
                             <span className={"font-bold txt-8 "}>you are not exist chat </span>
                         </div>
                     ) : (
-                        <ul className={`hidden lg:block overflow-y-scroll h-[40rem] xl:h-[35rem] desktop:h-[45rem]  flex flex-col items-start px-4 `}>
+                        <ul className={`hidden lg:block overflow-y-scroll h-[40rem] xl:h-[30rem] desktop:h-[46rem]  flex flex-col items-start px-4 `}>
                             {/*get and map data in load more*/}
                             {
                                 chatList?.pages?.flatMap((page, id) => {
@@ -141,7 +141,7 @@ const SideBarChat = () => {
                     <div className={`absolute  bg-white top-0 left-0 w-full lg:w-auto lg:static lg:block lg:justify-start ${isOpen ? "block animate__fadeInDown openListChats" : "  hidden"}`}>
                         {
                             pages?.length ?
-                                <ul className={" overflow-y-scroll h-[43rem] lg:h-[37rem] flex flex-col gap-4 items-start px-4"}>
+                                <ul className={" overflow-y-scroll h-[45rem] lg:h-[37rem] flex flex-col gap-4 items-start px-4"}>
                                     {pages?.flatMap((page,id) =>{
                                             return(
                                                 <React.Fragment key={id}>

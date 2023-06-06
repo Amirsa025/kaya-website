@@ -2,7 +2,7 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import Heading from "@/app/shared/HeadingTitle";
 import {ScaleLoader} from "react-spinners";
 import Cookies from "universal-cookie";
-import Router from "next/router";
+import {useRouter} from "next/navigation";
 import AsidePanel from "@/app/shared/Aside-Panel";
 import Header from "@/app/shared/Header";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -14,6 +14,7 @@ interface IPropsAdmin {
 const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     const [loading, setLoading] = useState(true)
     const cookie = new Cookies()
+    const router = useRouter()
     useEffect(() => {
         setTimeout(() => setLoading(false), 100)
     }, [])
@@ -30,7 +31,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
     }
 
     if (!cookie.get('token') && !cookie.get('signUp')) {
-            Router.replace('/').then()
+        router.replace('/')
         return <></>
     }
     return (
@@ -38,7 +39,7 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             {loading ? <LinearProgress color="inherit"/> : null}
             <Heading page={"پنل کاربر"} titlesite={" کایا"}/>
             <Header/>
-            <div className={" flex  flex-col lg:flex-row space-y-6 space-x-3.5 "}>
+            <div className={" flex  flex-col lg:flex-row "}>
                   <AsidePanel/>
                     <div className={"pb-[7rem] sm:pb-0 md:pb-[1rem] w-full   md:px-0 "}>
                     {children}

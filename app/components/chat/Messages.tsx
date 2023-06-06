@@ -1,9 +1,10 @@
 import React from 'react';
 interface IMessagesProps {
     page:any,
-    isToday:any
+    isToday:any,
+    isFetching:boolean
 }
-const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
+const MessagesChat:React.FC<IMessagesProps> = ({page,isToday,isFetching}) => {
     return (
         <div className={"flex flex-col-reverse"}>
             {
@@ -20,7 +21,7 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                                         <article className={"text-sm md:text-[10px] lg:text-[13px] flex flex-col"}>{massage?.text}</article>
                                         {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
                                                 <span className={"text-sm md:text-[10px] lg:text-[13px]"}>{massage?.file_name}</span>
-                                                <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
+                                                    <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
                                             </div>
                                             :null}
                                         {
@@ -43,41 +44,48 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday}) => {
                         }
                     </ul>)
                 }
-                    return(<ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-3`}>
-                        {
-                            massage?.is_received ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                                    <div>
+                    return(
+                        <>
+
+                            <ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-3`}>
+                                {
+                                    massage?.is_received  ? <li  className=" ml-2 py-3 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+                                            <div>
                                         <span className={"text-sm md:text-[10px] lg:text-[13px] flex flex-col"}>    {massage?.text?.split('\n').map((line:string, id:number) => (
                                             <div key={id} className={"leading-10"}>{line}</div>
                                         ))}</span>
 
-                                        {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
-                                                <span className={"text-sm "}>{massage?.file_name}</span>
-                                                <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
+                                                {massage?.is_attachment ? <div className={"text-bold flex items-center gap-4"}>
+                                                        <span className={"text-sm "}>{massage?.file_name}</span>
+                                                        <i className="ri-attachment-line rotate-45 text-[1rem] font-semibold"></i>
+                                                    </div>
+                                                    :null}
+                                                {
+                                                    isToday(resDate)?<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                }
                                             </div>
-                                            :null}
-                                        {
-                                            isToday(resDate)?<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:<div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
-                                        }
-                                    </div>
-                                </li>:
-                                //send massage
-                                <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#10515c] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
-                                    <div>
+                                        </li>:
+                                        //Receive  send massage
+                                        <li  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#10515c] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                            <div>
                                         <span className={" text-sm md:text-[10px] lg:text-[13px]"}> {massage?.text?.split('\n').map((line:string, id:number) => (
-                                            <div key={id}  className={"flex-col flex"}>{line}</div>
+                                            <div key={id} className={"flex-col flex leading-8 direction-rtl text-[10px] md:text-[12px]"}>
+                                                {line}
+                                            </div>
                                         ))}</span>
 
-                                        {
-                                            isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
-                                        }
-                                        {massage?.is_attachment ? <div className={"text-red-400"}>attach</div>:null}
-                                    </div>
+                                                {
+                                                    isToday(resDate) ?  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{formattedDates}</div>:  <div className={"text-[8px] text-gray-300 pl-3 text-right pt-2"}>{GetDate}</div>
+                                                }
+                                                {massage?.is_attachment ? <div className={"text-red-400"}>attach</div>:null}
+                                            </div>
 
-                                </li>
-                        }
+                                        </li>
+                                }
+                            </ul>
 
-                    </ul>)
+                        </>
+                    )
                 })
             }
         </div>

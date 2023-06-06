@@ -48,7 +48,7 @@ const ChatList:React.FC<IChatProps> = ({page,isToday}) => {
 
                     }else {
                         return (
-                            <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={chat?.thread_id} >
+                            <Link href={`/user-panel/chat/${chat?.thread_id}`} legacyBehavior shallow={true} key={id} >
                                 <div className={"sendMassageButton text-white hover:text-black  mt-4 flex items-center my-2 py-4 w-full border  px-2 gap-4 cursor-pointer  rounded-xl hover:bg-gray-100 text-sm flex"}>
                                     <span></span>
                                     <div  className={"w-full"}>

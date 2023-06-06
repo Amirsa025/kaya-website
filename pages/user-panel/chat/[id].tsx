@@ -13,6 +13,7 @@ import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
@@ -54,13 +55,12 @@ const MainContent: NextPageWithLayout = () => {
         return (+new Date() - +date) < 24 * 60 * 60 * 1000;
     };
     //set Query for get message
-    const {data: GetMessage, isLoading, fetchNextPage,hasNextPage} = useInfiniteQuery(
+    const {data: GetMessage, isLoading, fetchNextPage,hasNextPage,isFetching,} = useInfiniteQuery(
         ["getMassage", ChatId],
         ({pageParam = 0}) => fetchChatList(ChatId, pageParam),
         {
             getNextPageParam: (lastPage, allPages) => {
                 const all = allPages.flatMap((item) => item?.data.messages)
-
                 return lastPage?.data?.messages?.length === LIMIT ? all.length : undefined
             },
             staleTime:Infinity,
@@ -106,7 +106,7 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex flex-row  min-h-[65vh] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div className="min-h-[70vh] md:min-h-[65vh] ">
+                                <div className="min-h-[60vh] ">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <div
@@ -117,7 +117,7 @@ const MainContent: NextPageWithLayout = () => {
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
-                                                    height={matches?500:700}
+                                                    height={matches? 400 :700}
                                                     scrollableTarget={"scrollableTarget"}
                                                     style={{
                                                         display: 'flex',
@@ -131,13 +131,18 @@ const MainContent: NextPageWithLayout = () => {
                                                     inverse={true}
                                                 >
                                                     <div className={"flex flex-col"}>
+                                                        {/*{*/}
+                                                        {/*    messages.flatMap((item,id)=>{*/}
+                                                        {/*        return <div key={id}>{item.text}</div>*/}
+                                                        {/*    })*/}
+                                                        {/*}*/}
                                                     </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
-
-                                                            return (<MessagesChat key={id} isToday={isToday} page={page?.data}/>)
+                                                            return (<MessagesChat key={id} isToday={isToday} page={page?.data}   isFetching={isFetching}/>)
                                                         })
                                                     }
+
                                                     <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
                                                         <button ref={ref}>
                                                             {isFetchingPosts ?
@@ -168,7 +173,7 @@ const MainContent: NextPageWithLayout = () => {
 };
 
 //layout
-MainContent.getLayout = (page) => <SubChatLayout>{page}</SubChatLayout>
+MainContent.getLayout = (page) => <UserPanelAdmin>{page}</UserPanelAdmin>
 export default MainContent;
 
 
