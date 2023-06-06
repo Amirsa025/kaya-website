@@ -117,7 +117,7 @@ const MainContent: NextPageWithLayout = () => {
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
-                                                    height={matches? 320 :700}
+                                                    height={matches? 300 :700}
                                                     scrollableTarget={"scrollableTarget"}
                                                     style={{
                                                         display: 'flex',
