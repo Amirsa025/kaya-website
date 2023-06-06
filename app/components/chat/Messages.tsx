@@ -13,8 +13,10 @@ const MessagesChat:React.FC<IMessagesProps> = ({page,isToday,isFetching}) => {
                     const dates = [new Date(resDate)]
                     const formattedDates = dates.map(date =>`${date?.getHours()}:${date?.getMinutes()}`);
                     const GetDate = dates.map(date => `${date?.getFullYear()}-${date?.getMonth()+1}-${date?.getDay()}`);
+
                 if(page.messages.length===id+1){
-                    return(<ul key={id} className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-2`}>
+
+                    return(<ul  className={`flex ${massage?.is_received?'justify-start ':'justify-end'} items-center mb-2`}>
                         {
                             massage?.is_received ? <li  className=" mt-8 ml-2 py-4 px-4 bg-blue-600 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                     <div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {Fragment, useEffect, useRef, useState} from 'react';
 import {NextPageWithLayout} from "@/pages/_app";
 import {useRouter} from "next/router";
 import ChatLayout from "@/app/components/chat/Chant-Content";
@@ -106,7 +106,7 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex flex-row  min-h-[70%] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div className="md:min-h-[60vh] min-h-[50vh]  ">
+                                <div className="md:min-h-[60vh] min-h-[38vh]  ">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <div
@@ -139,7 +139,11 @@ const MainContent: NextPageWithLayout = () => {
                                                     </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
-                                                            return (<MessagesChat key={id} isToday={isToday} page={page?.data}   isFetching={isFetching}/>)
+                                                            return (
+                                                                <Fragment key={id} >
+                                                                    <MessagesChat isToday={isToday} page={page?.data}   isFetching={isFetching}/>
+                                                                </Fragment>
+                                                            )
                                                         })
                                                     }
 
