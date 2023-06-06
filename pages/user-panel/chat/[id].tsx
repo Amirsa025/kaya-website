@@ -103,10 +103,10 @@ const MainContent: NextPageWithLayout = () => {
                 <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
                     <div>
-                        <div className="flex flex-row  min-h-[65vh] justify-evenly ">
+                        <div className="flex flex-row  min-h-[70%] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div className="min-h-[60vh] ">
+                                <div className="md:min-h-[60vh] min-h-[50vh]  ">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <div
@@ -117,7 +117,7 @@ const MainContent: NextPageWithLayout = () => {
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
-                                                    height={matches? 400 :700}
+                                                    height={matches? 330 :700}
                                                     scrollableTarget={"scrollableTarget"}
                                                     style={{
                                                         display: 'flex',

@@ -6,7 +6,7 @@ import SideBarChat from "@/app/components/chat/SideBarChat";
 const ChatLayout = ({children}: any) => {
     return (
         <div className={"px-4 sm:container-app w-full  direction-ltr  "}>
-            <div className={"flex flex-col lg:flex-row   rounded-lg border bg-white mt-[7rem] md:mt-0"}>
+            <div className={"flex flex-col lg:flex-row   rounded-lg border bg-white mt-[7rem] sm:mt-[6.4rem] md:mt-0"}>
                 {/*start chat list*/}
                 <SideBarChat/>
                 {/*End  chat list*/}
