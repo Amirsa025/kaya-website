@@ -24,7 +24,7 @@ const MainContent: NextPageWithLayout = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const itemsRef = useRef<HTMLDivElement>();
     const {ref, inView} = useInView()
-    const matches = useMediaQuery('(max-width:1366px)');
+    const matches = useMediaQuery('(min-width:1360px)');
     //function
     const fetchChatList = async (chatId: string | (string[] & string), pageParam: number) => {
         const cookie = new Cookies()
@@ -106,7 +106,7 @@ const MainContent: NextPageWithLayout = () => {
                         <div className="flex flex-row  min-h-[70%] justify-evenly ">
                             <div className="  w-full px-5 flex flex-col justify-evenly">
                                 {/*show message*/}
-                                <div className="md:min-h-[60vh] min-h-[38vh]  ">
+                                <div className="md:min-h-[60vh] min-h-[30vh]  ">
                                     {
                                         isLoading ? <div className={"center-item"}>
                                                 <div
@@ -117,13 +117,8 @@ const MainContent: NextPageWithLayout = () => {
                                             <div id={"scrollableTarget"}>
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
-                                                    height={matches? 300 :700}
                                                     scrollableTarget={"scrollableTarget"}
-                                                    style={{
-                                                        display: 'flex',
-                                                        flexDirection: 'column-reverse',
-                                                        overflow: "scroll",
-                                                    }}
+                                                    className={"flex flex-col-reverse overflow-scroll !h-[19rem]  mobile:!h-[30rem] laptop:!min-h-[25rem] desktop:!h-[40rem]"}
                                                     dataLength={pages?.length || 0}
                                                     next={fetchNextPage}
                                                     hasMore={!!hasNextPage}
