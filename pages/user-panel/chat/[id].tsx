@@ -118,7 +118,7 @@ const MainContent: NextPageWithLayout = () => {
                                                 <InfiniteScroll
                                                     scrollThreshold={0.75}
                                                     scrollableTarget={"scrollableTarget"}
-                                                    className={"flex flex-col-reverse overflow-scroll !h-[19rem]  mobile:!h-[30rem] laptop:!min-h-[25rem] desktop:!h-[40rem]"}
+                                                    className={"flex flex-col-reverse overflow-scroll !h-[19rem]  mobile:!h-[28rem] laptop:!min-h-[25rem] desktop:!h-[40rem]"}
                                                     dataLength={pages?.length || 0}
                                                     next={fetchNextPage}
                                                     hasMore={!!hasNextPage}
