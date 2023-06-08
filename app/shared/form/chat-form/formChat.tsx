@@ -15,11 +15,9 @@ const ChatForm: React.FC<ChatInputProps> = ({onSendMessage}) => {
         },
         validationSchema: massageSchema,
         onSubmit: (values: any, {resetForm}) => {
-
             mutate(values,
                 {
                 onSuccess: (response) => {
-
                     onSendMessage(response?.data)
                     resetForm()
                 },

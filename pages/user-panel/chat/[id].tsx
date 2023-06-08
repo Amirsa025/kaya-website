@@ -4,7 +4,6 @@ import {useRouter} from "next/router";
 import ChatLayout from "@/app/components/chat/Chant-Content";
 import Heading from "@/app/shared/HeadingTitle";
 import ChatForm from "@/app/shared/form/chat-form/formChat";
-import SubChatLayout from "@/app/components/layout/SubChatlayout";
 import callApi from "@/app/helper/callApi";
 import Cookies from "universal-cookie";
 import {QueryCache, useInfiniteQuery, useIsFetching} from "@tanstack/react-query";
@@ -12,8 +11,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
-import useMediaQuery from '@mui/material/useMediaQuery';
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
+
 const MainContent: NextPageWithLayout = () => {
     //variable
     const router = useRouter();
@@ -22,9 +21,9 @@ const MainContent: NextPageWithLayout = () => {
     const LIMIT = 7;
     //state
     const [messages, setMessages] = useState<Message[]>([]);
+    const [message, setMessage] = useState();
     const itemsRef = useRef<HTMLDivElement>();
     const {ref, inView} = useInView()
-    const matches = useMediaQuery('(min-width:1360px)');
     //function
     const fetchChatList = async (chatId: string | (string[] & string), pageParam: number) => {
         const cookie = new Cookies()
@@ -46,6 +45,8 @@ const MainContent: NextPageWithLayout = () => {
     const handleSendMessage = async (formPayload: any) => {
         if (formPayload) {
             setMessages([...messages, formPayload]);
+            setMessage(formPayload);
+
         }
 
     };
@@ -54,8 +55,16 @@ const MainContent: NextPageWithLayout = () => {
         if (date > now) return false;
         return (+new Date() - +date) < 24 * 60 * 60 * 1000;
     };
+
     //set Query for get message
-    const {data: GetMessage, isLoading, fetchNextPage,hasNextPage,isFetching,} = useInfiniteQuery(
+    const {
+        data: GetMessage,
+        isLoading,
+        fetchNextPage,
+        hasNextPage,
+        isFetching,
+        isFetchingNextPage
+    } = useInfiniteQuery(
         ["getMassage", ChatId],
         ({pageParam = 0}) => fetchChatList(ChatId, pageParam),
         {
@@ -63,9 +72,9 @@ const MainContent: NextPageWithLayout = () => {
                 const all = allPages.flatMap((item) => item?.data.messages)
                 return lastPage?.data?.messages?.length === LIMIT ? all.length : undefined
             },
-            staleTime:Infinity,
-            cacheTime:1000,
-            refetchInterval:7000,
+            staleTime: Infinity,
+            cacheTime: 1000,
+            refetchInterval: 7000,
         }
     );
     const queryCache = new QueryCache({
@@ -79,7 +88,7 @@ const MainContent: NextPageWithLayout = () => {
             console.log(data, error)
         },
     })
-    const isFetchingPosts = useIsFetching({ queryKey: ['getMassage'] })
+    const isFetchingPosts = useIsFetching({queryKey: ['getMassage']})
     queryCache.find(['getMassage'])
     const pages = GetMessage?.pages?.flatMap((group: any) => group?.data)
     //effect side
@@ -97,8 +106,11 @@ const MainContent: NextPageWithLayout = () => {
     if (!router.isReady) {
         return <div>loading...</div>
     }
+
+    //
+
     return (
-        <div>
+        <section>
             {
                 <ChatLayout>
                     <Heading titlesite={"گفتگو"} page={"کایا"}/>
@@ -125,34 +137,43 @@ const MainContent: NextPageWithLayout = () => {
                                                     loader={<div/>}
                                                     inverse={true}
                                                 >
-                                                    <div className={"flex flex-col"}>
-                                                        {/*{*/}
-                                                        {/*    messages.flatMap((item,id)=>{*/}
-                                                        {/*        return <div key={id}>{item.text}</div>*/}
-                                                        {/*    })*/}
-                                                        {/*}*/}
+                                                    <div
+                                                        className={"flex flex-col justify-end w-full text-end  "}>
+                                                        <div
+                                                            className={"flex justify-end "}>{isLoading && !isFetchingNextPage ?
+                                                            <div  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#10515c] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white ">
+
+                                                                {
+                                                                    // @ts-ignore
+                                                                    !message?.text?.length ?<div className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>please wait...</div>:<span  className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>{message?.text}</span>
+                                                                }
+                                                            </div> :
+                                                            <div></div>}
+                                                        </div>
                                                     </div>
                                                     {
                                                         GetMessage?.pages?.flatMap((page: any, id: number) => {
                                                             return (
-                                                                <Fragment key={id} >
-                                                                    <MessagesChat isToday={isToday} page={page?.data}   isFetching={isFetching}/>
-                                                                </Fragment>
+                                                                <div key={id}>
+                                                                    <MessagesChat isToday={isToday} page={page?.data} />
+                                                                </div>
                                                             )
                                                         })
                                                     }
-
-                                                    <div className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
+                                                    <div
+                                                        className={"flex items-center justify-center py-4 xl:py-1 text-gray-700"}>
                                                         <button ref={ref}>
                                                             {isFetchingPosts ?
                                                                 <div
-                                                                    className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating conversion</div> : hasNextPage ?
+                                                                    className={`px-6 py-1 text-[10px] bg-blue-600 text-white border rounded-full  `}>updating
+                                                                    conversion</div> : hasNextPage ?
                                                                     <div
                                                                         className={"w-5  h-5 shadow rounded-full"}
-                                                                        onClick={() =>fetchNextPage()}>
+                                                                        onClick={() => fetchNextPage()}>
                                                                         <i className="ri-add-circle-line text-[20px]"></i>
                                                                     </div>
-                                                                    : <div className={"animate__fadeInUp"}></div>}
+                                                                    : <div
+                                                                        className={"animate__fadeInUp"}></div>}
                                                         </button>
                                                     </div>
                                                 </InfiniteScroll>
@@ -167,7 +188,7 @@ const MainContent: NextPageWithLayout = () => {
                     </div>
                 </ChatLayout>
             }
-        </div>
+        </section>
     );
 };
 

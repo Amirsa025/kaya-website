@@ -45,7 +45,9 @@ const SideBarChat = () => {
         data: chatList,
         fetchNextPage,
         isFetchingNextPage,
-        hasNextPage
+        hasNextPage,
+        isFetched,
+
     } = useInfiniteQuery({
         queryKey: ['ChatList'],
         queryFn: ({pageParam = 0}) => fetchChatList(pageParam),

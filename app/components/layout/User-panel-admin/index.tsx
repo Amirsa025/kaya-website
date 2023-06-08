@@ -29,7 +29,6 @@ const UserPanelAdmin: React.FC<IPropsAdmin> = ({children}) => {
             </div>
         </div>
     }
-
     if (!cookie.get('token') && !cookie.get('signUp')) {
         router.replace('/')
         return <></>
