@@ -12,6 +12,7 @@ import {useInView} from "react-intersection-observer";
 import {Message} from "@/app/models/model";
 import MessagesChat from "@/app/components/chat/Messages";
 import UserPanelAdmin from "@/app/components/layout/User-panel-admin";
+import {BarLoader} from "react-spinners";
 
 const MainContent: NextPageWithLayout = () => {
     //variable
@@ -55,6 +56,11 @@ const MainContent: NextPageWithLayout = () => {
         if (date > now) return false;
         return (+new Date() - +date) < 24 * 60 * 60 * 1000;
     };
+    const clearTextAfterDelay=(state:any, setState:any, delay:number)=> {
+        setTimeout(function() {
+            setState(null); // جایگزینی مقدار "text" در "state" با رشته‌ی خالی
+        }, delay);
+    }
 
     //set Query for get message
     const {
@@ -96,17 +102,22 @@ const MainContent: NextPageWithLayout = () => {
     useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
+
         }
     }, [fetchNextPage, hasNextPage, inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
+
         itemsRef?.current?.lastChild?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
     if (!router.isReady) {
         return <div>loading...</div>
     }
-
+    useEffect(() => {
+        // فراخوانی تابع clearTextAfterDelay() با ورودی "myState" و زمان تأخیر 7000
+        clearTextAfterDelay(message, setMessage, 7000);
+    }, [message]);
     //
 
     return (
@@ -140,12 +151,18 @@ const MainContent: NextPageWithLayout = () => {
                                                     <div
                                                         className={"flex flex-col justify-end w-full text-end  "}>
                                                         <div
-                                                            className={"flex justify-end "}>{isLoading && !isFetchingNextPage ?
-                                                            <div  className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#10515c] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white ">
+                                                            className={"flex justify-end "}>{isFetching && !isFetchingNextPage ?
+                                                            <div  >
 
                                                                 {
                                                                     // @ts-ignore
-                                                                    !message?.text?.length ?<div className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>please wait...</div>:<span  className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>{message?.text}</span>
+                                                                    !message?.text?.length ?<div className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>
+
+                                                                        </div>:
+                                                                        <div className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#10515c] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white ">
+                                                                            {/*// @ts-ignore*/}
+                                                                            <span  className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>{message?.text}</span>
+                                                                        </div>
                                                                 }
                                                             </div> :
                                                             <div></div>}
