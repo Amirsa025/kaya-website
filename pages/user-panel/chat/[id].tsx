@@ -56,11 +56,7 @@ const MainContent: NextPageWithLayout = () => {
         if (date > now) return false;
         return (+new Date() - +date) < 24 * 60 * 60 * 1000;
     };
-    const clearTextAfterDelay=(state:any, setState:any, delay:number)=> {
-        setTimeout(function() {
-            setState(null); // جایگزینی مقدار "text" در "state" با رشته‌ی خالی
-        }, delay);
-    }
+
 
     //set Query for get message
     const {
@@ -111,14 +107,20 @@ const MainContent: NextPageWithLayout = () => {
 
         itemsRef?.current?.lastChild?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
-    if (!router.isReady) {
-        return <div>loading...</div>
-    }
     useEffect(() => {
         // فراخوانی تابع clearTextAfterDelay() با ورودی "myState" و زمان تأخیر 7000
         clearTextAfterDelay(message, setMessage, 7000);
     }, [message]);
-    //
+    const clearTextAfterDelay=(state:any, setState:any, delay:number)=> {
+        setTimeout(function() {
+            setState(null); // جایگزینی مقدار "text" در "state" با رشته‌ی خالی
+        }, delay);
+    }
+    //router event
+    if (!router.isReady) {
+        return <div>loading...</div>
+    }
+
 
     return (
         <section>
