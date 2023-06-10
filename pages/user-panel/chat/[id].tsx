@@ -159,11 +159,11 @@ const MainContent: NextPageWithLayout = () => {
                                                                 {
                                                                     // @ts-ignore
                                                                     !message?.text?.length ?<div className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>
-
                                                                         </div>:
                                                                         <div className="flex items-center  gap-5  mr-2 py-3 px-4 bg-[#10515c] rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white ">
                                                                             {/*// @ts-ignore*/}
                                                                             <span  className={"flex-col flex text-sm !text-[10px] !lg:text-[13px]"}>{message?.text}</span>
+                                                                            <i className="ri-time-line"></i>
                                                                         </div>
                                                                 }
                                                             </div> :
