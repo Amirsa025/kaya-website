@@ -23,6 +23,7 @@ const MainContent: NextPageWithLayout = () => {
     //state
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState();
+    const [isFetch, setIsFetch] = useState(false);
     const itemsRef = useRef<HTMLDivElement>();
     const {ref, inView} = useInView()
     //function
@@ -64,7 +65,6 @@ const MainContent: NextPageWithLayout = () => {
         isLoading,
         fetchNextPage,
         hasNextPage,
-        isFetching,
         isFetchingNextPage
     } = useInfiniteQuery(
         ["getMassage", ChatId],
@@ -109,11 +109,12 @@ const MainContent: NextPageWithLayout = () => {
     }, [messages]);
     useEffect(() => {
         // فراخوانی تابع clearTextAfterDelay() با ورودی "myState" و زمان تأخیر 7000
-        clearTextAfterDelay(message, setMessage, 5000);
+        clearTextAfterDelay(message, setMessage, 7000);
     }, [message]);
     const clearTextAfterDelay=(state:any, setState:any, delay:number)=> {
         setTimeout(function() {
             setState(null); // جایگزینی مقدار "text" در "state" با رشته‌ی خالی
+            setIsFetch(true)
         }, delay);
     }
     //router event
@@ -121,7 +122,7 @@ const MainContent: NextPageWithLayout = () => {
         return <div>loading...</div>
     }
 
-
+    console.log(isFetch)
     return (
         <section>
             {
@@ -153,7 +154,7 @@ const MainContent: NextPageWithLayout = () => {
                                                     <div
                                                         className={"flex flex-col justify-end w-full text-end  "}>
                                                         <div
-                                                            className={"flex justify-end "}>{isFetching && !isFetchingNextPage ?
+                                                            className={"flex justify-end "}>{isFetch && !isFetchingNextPage ?
                                                             <div  >
 
                                                                 {
