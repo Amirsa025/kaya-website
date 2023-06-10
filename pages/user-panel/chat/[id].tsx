@@ -76,7 +76,7 @@ const MainContent: NextPageWithLayout = () => {
             },
             staleTime: Infinity,
             cacheTime: 1000,
-            refetchInterval: 7000,
+            refetchInterval:2000,
         }
     );
     const queryCache = new QueryCache({
