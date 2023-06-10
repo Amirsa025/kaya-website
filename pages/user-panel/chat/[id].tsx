@@ -76,7 +76,7 @@ const MainContent: NextPageWithLayout = () => {
             },
             staleTime: Infinity,
             cacheTime: 1000,
-            refetchInterval:2000,
+            refetchInterval:7000,
         }
     );
     const queryCache = new QueryCache({
@@ -109,7 +109,7 @@ const MainContent: NextPageWithLayout = () => {
     }, [messages]);
     useEffect(() => {
         // فراخوانی تابع clearTextAfterDelay() با ورودی "myState" و زمان تأخیر 7000
-        clearTextAfterDelay(message, setMessage, 7000);
+        clearTextAfterDelay(message, setMessage, 5000);
     }, [message]);
     const clearTextAfterDelay=(state:any, setState:any, delay:number)=> {
         setTimeout(function() {
