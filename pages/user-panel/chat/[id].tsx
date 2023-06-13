@@ -57,8 +57,6 @@ const MainContent: NextPageWithLayout = () => {
         if (date > now) return false;
         return (+new Date() - +date) < 24 * 60 * 60 * 1000;
     };
-
-
     //set Query for get message
     const {
         data: GetMessage,
@@ -98,31 +96,31 @@ const MainContent: NextPageWithLayout = () => {
     useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage().then();
-
         }
     }, [fetchNextPage, hasNextPage, inView]);
     useEffect(() => {
         // Scroll to the last item when items change
         // @ts-ignore
-
         itemsRef?.current?.lastChild?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
     useEffect(() => {
         // فراخوانی تابع clearTextAfterDelay() با ورودی "myState" و زمان تأخیر 7000
-        clearTextAfterDelay(message, setMessage, 7000);
+        clearTextAfterDelay(message, setMessage, 3000);
+
     }, [message]);
     const clearTextAfterDelay=(state:any, setState:any, delay:number)=> {
-        setTimeout(function() {
+     const timer= setTimeout(function() {
             setState(null); // جایگزینی مقدار "text" در "state" با رشته‌ی خالی
             setIsFetch(true)
         }, delay);
+        return () => {
+            clearTimeout(timer)
+        }
     }
     //router event
     if (!router.isReady) {
         return <div>loading...</div>
     }
-
-    console.log(isFetch)
     return (
         <section>
             {

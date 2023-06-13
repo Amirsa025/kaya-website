@@ -9,6 +9,7 @@ interface ChatInputProps {
 
 const ChatForm: React.FC<ChatInputProps> = ({onSendMessage}) => {
     const {mutate} = useGetmesaage();
+
     const sendMassage = useFormik({
         initialValues: {
             message: '',
